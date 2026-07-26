@@ -1,0 +1,12 @@
+.services { padding: 120px 0; background: #f7f9fc; }
+.services-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 70px; padding: 46px; border: 1px solid var(--line); border-radius: 30px; background: rgba(255,255,255,.9); box-shadow: 0 26px 76px rgba(15,23,42,.08); }
+.services-intro { display: grid; align-content: start; gap: 22px; }
+.services-intro h2 { margin: 0; font-size: clamp(38px, 4vw, 60px); line-height: 1.1; letter-spacing: -0.045em; }
+.services-intro p { margin: 0; color: var(--muted); font-size: 17px; line-height: 1.78; }
+.services-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+.services-grid article { min-height: 210px; padding: 24px; border: 1px solid rgba(15,23,42,.08); border-radius: 20px; background: #fff; }
+.services-grid article > span { color: #2563eb; font-size: 12px; font-weight: 800; }
+.services-grid h3 { margin: 28px 0 10px; font-size: 20px; letter-spacing: -0.03em; }
+.services-grid p { margin: 0; color: #667085; font-size: 14px; line-height: 1.7; }
+@media (max-width: 900px) { .services-layout { grid-template-columns: 1fr; padding: 30px; } }
+@media (max-width: 620px) { .services-grid { grid-template-columns: 1fr; } .services-layout { padding: 22px; } }

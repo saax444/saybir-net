@@ -1,0 +1,130 @@
+.applications {
+  position: relative;
+  padding: 118px 0 132px;
+  background: #ffffff;
+}
+
+.applications::before {
+  content: "";
+  position: absolute;
+  inset: 8% 0 auto;
+  height: 440px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.06), transparent 66%);
+  pointer-events: none;
+}
+
+.applications-head {
+  margin-inline: auto;
+  text-align: center;
+  justify-items: center;
+}
+
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.app-card {
+  --rx: 0deg;
+  --ry: 0deg;
+  --mx: 50%;
+  --my: 50%;
+
+  position: relative;
+  min-height: 205px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 23px 16px;
+  overflow: hidden;
+  border: 1px solid rgba(var(--accent), 0.17);
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.99), rgba(248, 250, 255, 0.96));
+  box-shadow:
+    0 18px 44px rgba(15, 23, 42, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));
+  transform-style: preserve-3d;
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+  animation: cardRise 0.7s both;
+  animation-delay: var(--delay);
+}
+
+.app-card:hover {
+  border-color: rgba(var(--accent), 0.42);
+  box-shadow:
+    0 28px 64px rgba(15, 23, 42, 0.12),
+    0 0 30px rgba(var(--accent), 0.08);
+}
+
+.app-card-glow {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: radial-gradient(circle at var(--mx) var(--my), rgba(var(--accent), 0.12), transparent 44%);
+  transition: opacity 220ms ease;
+}
+
+.app-card:hover .app-card-glow {
+  opacity: 1;
+}
+
+.app-card img {
+  position: relative;
+  z-index: 2;
+  width: 108px;
+  height: 108px;
+  object-fit: cover;
+  border-radius: 27px;
+  box-shadow:
+    0 16px 34px rgba(15, 23, 42, 0.16),
+    0 0 24px rgba(var(--accent), 0.1);
+  transform: translateZ(28px);
+}
+
+.app-card h3 {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  color: #0f172a;
+  font-size: 16px;
+  font-weight: 760;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+@keyframes cardRise {
+  from {
+    opacity: 0;
+    transform: perspective(900px) translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(900px) translateY(0);
+  }
+}
+
+@media (max-width: 1180px) {
+  .apps-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 780px) {
+  .apps-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 460px) {
+  .apps-grid {
+    grid-template-columns: 1fr;
+  }
+}
