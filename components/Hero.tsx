@@ -4,13 +4,15 @@ import { CSSProperties } from "react";
 import "./Hero.css";
 
 const floatingApps = [
+  { name: "VibeLens", image: "/apps/vibelens.png", className: "floating-app floating-app-eight" },
+  { name: "HiLock", image: "/apps/hilock.png", className: "floating-app floating-app-nine" },
   { name: "Susadım", image: "/apps/susadim.png", className: "floating-app floating-app-one" },
   { name: "Ezan Vakti", image: "/apps/ezan-vakti.png", className: "floating-app floating-app-two" },
   { name: "Üşenme Yap", image: "/apps/usenme-yap.png", className: "floating-app floating-app-three" },
   { name: "Ödüyorum", image: "/apps/oduyorum.png", className: "floating-app floating-app-four" },
   { name: "Ref!Ref!Ref!", image: "/apps/refrefref.png", className: "floating-app floating-app-five" },
   { name: "TarTarot", image: "/apps/tartarot.png", className: "floating-app floating-app-six" },
-  { name: "Kedilik", image: "/apps/kedilik.png", className: "floating-app floating-app-seven" },
+  { name: "Kedilik", image: "/apps/kedilik.png", className: "floating-app floating-app-seven" }
 ];
 
 export default function Hero() {

@@ -281,6 +281,8 @@
 .floating-app-five { right: 2%; bottom: 16%; --float-x: -27px; --float-y: -25px; --float-rotate: 6deg; }
 .floating-app-six { left: 7%; bottom: 8%; --float-x: 23px; --float-y: -26px; --float-rotate: -6deg; }
 .floating-app-seven { left: 42%; bottom: -1%; --float-x: -20px; --float-y: -23px; --float-rotate: 4deg; }
+.floating-app-eight { top: 30%; right: 30%; --float-x: 18px; --float-y: -26px; --float-rotate: -3deg; }
+.floating-app-nine { left: 29%; bottom: 22%; --float-x: -22px; --float-y: 20px; --float-rotate: 5deg; }
 
 @keyframes slowDrift {
   0% {
