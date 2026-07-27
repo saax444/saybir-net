@@ -32,9 +32,7 @@ export default function Hero() {
           </h1>
 
           <p>
-            Kullanıcı odaklı iOS uygulamaları geliştiriyor;
-            tasarım, geliştirme, test ve App Store yayın süreçlerini uçtan uca
-            beraber yönetelim.
+            Kullanıcı odaklı iOS uygulamaları geliştirme; tasarım, test ve App Store yayın süreçlerini uçtan uca beraber yönetelim.
           </p>
 
           <div className="hero-actions">
