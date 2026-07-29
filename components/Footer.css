@@ -2,6 +2,10 @@
 .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .footer strong, .footer span { display: block; }
 .footer span { margin-top: 6px; color: #7a8699; font-size: 12px; }
-.footer-links { display: flex; gap: 22px; }
+.footer-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 14px 22px; }
 .footer-links a { color: #667085; font-size: 13px; text-decoration: none; }
-@media (max-width: 620px) { .footer-inner { align-items: flex-start; flex-direction: column; } }
+.footer-links a:hover { color: var(--text); }
+@media (max-width: 620px) {
+  .footer-inner { align-items: flex-start; flex-direction: column; }
+  .footer-links { justify-content: flex-start; }
+}

@@ -13,6 +13,20 @@ export default function Footer() {
           <a href="#uygulamalar">Uygulamalar</a>
           <a href="#hizmetler">Hizmetler</a>
           <a href="#iletisim">İletişim</a>
+          <a
+            href="https://www.linkedin.com/in/azizahmetsaybir/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
+          <a
+            href="https://wa.me/905358462450"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            WhatsApp
+          </a>
         </div>
       </div>
     </footer>
