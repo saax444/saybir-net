@@ -6,7 +6,8 @@ import "./Hero.css";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activePage, setActivePage] = useState(0);
+  const pageCount = Math.ceil(apps.length / 4);
 
   useEffect(() => {
     let frame = 0;
@@ -17,7 +18,7 @@ export default function Hero() {
       const rect = section.getBoundingClientRect();
       const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
       const progress = Math.min(1, Math.max(0, -rect.top / travel));
-      setActiveIndex(Math.min(apps.length - 1, Math.round(progress * (apps.length - 1))));
+      setActivePage(Math.min(pageCount - 1, Math.round(progress * (pageCount - 1))));
     };
 
     const onScroll = () => {
@@ -33,9 +34,9 @@ export default function Hero() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [pageCount]);
 
-  const activeApp = apps[activeIndex];
+  const visibleApps = apps.slice(activePage * 4, activePage * 4 + 4);
 
   return (
     <section ref={sectionRef} className="hero" id="top">
@@ -58,16 +59,18 @@ export default function Hero() {
 
           <div className="hero-showcase" aria-live="polite">
             <div className="showcase-disc" aria-hidden="true" />
-            <a className="showcase-app" href={`/apps/${activeApp.slug}`} key={activeApp.slug}>
-              <img src={activeApp.image} alt={`${activeApp.name} uygulama ikonu`} />
-              <span className="showcase-category">{activeApp.category}</span>
-              <strong>{activeApp.name}</strong>
-              <small>Uygulamayı görüntüle&nbsp; ↗</small>
-            </a>
-            <div className="showcase-progress" aria-label={`${activeIndex + 1} / ${apps.length}`}>
-              <span>{String(activeIndex + 1).padStart(2, "0")}</span>
-              <div><i style={{ width: `${((activeIndex + 1) / apps.length) * 100}%` }} /></div>
-              <span>{String(apps.length).padStart(2, "0")}</span>
+            <div className="showcase-app-grid" key={activePage}>
+              {visibleApps.map((app) => (
+                <a className="showcase-app" href={`/apps/${app.slug}`} key={app.slug}>
+                  <img src={app.image} alt={`${app.name} uygulama ikonu`} />
+                  <strong>{app.name}</strong>
+                </a>
+              ))}
+            </div>
+            <div className="showcase-progress" aria-label={`${activePage + 1} / ${pageCount}`}>
+              <span>{String(activePage + 1).padStart(2, "0")}</span>
+              <div><i style={{ width: `${((activePage + 1) / pageCount) * 100}%` }} /></div>
+              <span>{String(pageCount).padStart(2, "0")}</span>
             </div>
             <p className="showcase-hint">Uygulamalar arasında ilerlemek için kaydırın</p>
           </div>
