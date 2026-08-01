@@ -2,9 +2,9 @@
 
 .hero {
   position: relative;
-  min-height: 900px;
+  min-height: 1500px;
   display: grid;
-  align-items: center;
+  align-items: start;
   overflow: hidden;
   padding: 146px 0 92px;
   background: linear-gradient(180deg, #ffffff 0%, #fbfcff 54%, #f7f9fd 100%);
@@ -54,11 +54,14 @@
   z-index: 2;
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(500px, 0.92fr);
-  align-items: center;
+  min-height: 1260px;
+  align-items: start;
   gap: 66px;
 }
 
 .hero-copy {
+  position: sticky;
+  top: 124px;
   display: grid;
   align-content: center;
   justify-items: start;
@@ -188,11 +191,11 @@
 }
 
 .hero-app-stage {
-  --scroll-turn: 0deg;
   position: relative;
+  position: sticky;
+  top: 94px;
   min-height: 630px;
-  transform: translateZ(0) rotate(var(--scroll-turn));
-  transition: transform 80ms linear;
+  transform: translateZ(0);
 }
 
 .stage-ring {
@@ -221,21 +224,18 @@
 }
 
 .floating-app {
-  --float-x: 0px;
-  --float-y: 0px;
-  --float-scale: 1;
-  --float-rotate: 0deg;
-
   position: absolute;
   display: grid;
   justify-items: center;
   gap: 11px;
-  animation:
-    slowDrift 22s ease-in-out infinite alternate,
-    gentleLight 28s ease-in-out infinite alternate;
-  animation-delay: calc(var(--app-index) * -3.1s);
-  will-change: transform;
+  animation: appSwap 480ms cubic-bezier(.2,.75,.25,1) both;
+  animation-delay: calc(var(--app-index) * 45ms);
   text-decoration: none;
+  transition: transform 220ms ease;
+}
+
+.floating-app:hover {
+  transform: translateY(-5px);
 }
 
 .floating-app img {
@@ -277,40 +277,22 @@
   transform: translateX(-50%);
 }
 
-.floating-app-one { top: 8%; left: 36%; --float-x: 24px; --float-y: 25px; --float-rotate: 4deg; }
-.floating-app-two { top: 25%; left: 5%; --float-x: -18px; --float-y: 30px; --float-rotate: -5deg; }
-.floating-app-three { top: 43%; left: 36%; --float-x: 28px; --float-y: -22px; --float-rotate: 5deg; }
-.floating-app-four { top: 11%; right: 1%; --float-x: -22px; --float-y: 28px; --float-rotate: -4deg; }
-.floating-app-five { right: 2%; bottom: 16%; --float-x: -27px; --float-y: -25px; --float-rotate: 6deg; }
-.floating-app-six { left: 7%; bottom: 8%; --float-x: 23px; --float-y: -26px; --float-rotate: -6deg; }
-.floating-app-seven { left: 42%; bottom: -1%; --float-x: -20px; --float-y: -23px; --float-rotate: 4deg; }
-.floating-app-eight { top: 30%; right: 30%; --float-x: 18px; --float-y: -26px; --float-rotate: -3deg; }
-.floating-app-nine { left: 29%; bottom: 22%; --float-x: -22px; --float-y: 20px; --float-rotate: 5deg; }
-.floating-app-ten { top: 2%; left: 7%; --float-x: 18px; --float-y: 18px; --float-rotate: -4deg; }
-.floating-app-eleven { right: 25%; bottom: 2%; --float-x: -18px; --float-y: -20px; --float-rotate: 4deg; }
+.floating-app-one { top: 5%; left: 39%; }
+.floating-app-two { top: 33%; left: 5%; }
+.floating-app-three { top: 33%; right: 5%; }
+.floating-app-four { left: 20%; bottom: 5%; }
+.floating-app-five { right: 18%; bottom: 5%; }
 
-@keyframes slowDrift {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(calc(var(--float-rotate) * -0.45));
-  }
-  50% {
-    transform: translate3d(calc(var(--float-x) * 0.55), calc(var(--float-y) * -0.7), 0) rotate(0deg);
-  }
-  100% {
-    transform: translate3d(var(--float-x), var(--float-y), 0) rotate(var(--float-rotate));
-  }
-}
-
-@keyframes gentleLight {
-  0%, 100% { filter: saturate(1) brightness(1); }
-  50% { filter: saturate(1.04) brightness(1.025); }
+@keyframes appSwap {
+  from { opacity: 0; transform: translateY(18px) scale(.92); filter: blur(5px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 }
 
 @media (max-width: 1080px) {
   .hero { min-height: auto; padding-top: 142px; }
-  .hero-layout { grid-template-columns: 1fr; gap: 48px; }
-  .hero-copy { max-width: 850px; margin: 0 auto; justify-items: center; text-align: center; }
-  .hero-app-stage { width: min(100%, 700px); min-height: 620px; margin: 0 auto; }
+  .hero-layout { min-height: auto; grid-template-columns: 1fr; gap: 48px; }
+  .hero-copy { position: relative; top: auto; max-width: 850px; margin: 0 auto; justify-items: center; text-align: center; }
+  .hero-app-stage { position: relative; top: auto; width: min(100%, 700px); min-height: 620px; margin: 0 auto; }
 }
 
 @media (max-width: 720px) {
@@ -349,7 +331,7 @@
   .hero-app-stage {
     min-height: 520px;
     margin-top: -12px;
-    transform: scale(0.86) rotate(var(--scroll-turn));
+    transform: scale(0.86);
   }
 
   .floating-app img {
@@ -368,7 +350,7 @@
     width: 620px;
     left: 50%;
     margin-left: -310px;
-    transform: scale(0.64) rotate(var(--scroll-turn));
+    transform: scale(0.64);
     transform-origin: center top;
     margin-bottom: -150px;
   }
@@ -376,6 +358,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .floating-app { animation: none; }
-  .hero-app-stage { --scroll-turn: 0deg; transition: none; }
   .hero-button { transition: none; }
 }

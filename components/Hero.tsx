@@ -1,43 +1,27 @@
 "use client";
 
-import { CSSProperties, useEffect, useRef } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 import { apps } from "@/data/apps";
 import "./Hero.css";
 
-const positions = ["eight", "nine", "one", "two", "three", "four", "five", "six", "seven", "ten", "eleven"];
-const floatingApps = apps.map((app, index) => ({
-  name: app.name,
-  image: app.image,
-  slug: app.slug,
-  className: `floating-app floating-app-${positions[index]}`
-}));
-
-/*
-  { name: "Susadım", image: "/apps/susadim.png", className: "floating-app floating-app-one" },
-  { name: "Ezan Vakti", image: "/apps/ezan-vakti.png", className: "floating-app floating-app-two" },
-  { name: "Üşenme Yap", image: "/apps/usenme-yap.png", className: "floating-app floating-app-three" },
-  { name: "Ödüyorum", image: "/apps/oduyorum.png", className: "floating-app floating-app-four" },
-  { name: "Ref!Ref!Ref!", image: "/apps/refrefref.png", className: "floating-app floating-app-five" },
-  { name: "TarTarot", image: "/apps/tartarot.png", className: "floating-app floating-app-six" },
-  { name: "Kedilik", image: "/apps/kedilik.png", className: "floating-app floating-app-seven" }
-*/
+const positions = ["one", "two", "three", "four", "five"];
 
 export default function Hero() {
-  const stageRef = useRef<HTMLDivElement>(null);
+  const [startIndex, setStartIndex] = useState(0);
 
   useEffect(() => {
     let frame = 0;
     const update = () => {
-      const stage = stageRef.current;
-      if (!stage) return;
-      const turn = Math.max(-38, Math.min(38, window.scrollY * 0.035));
-      stage.style.setProperty("--scroll-turn", `${turn}deg`);
+      const nextIndex = Math.min(apps.length - positions.length, Math.floor(window.scrollY / 120));
+      setStartIndex(Math.max(0, nextIndex));
     };
     const onScroll = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(update); };
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => { cancelAnimationFrame(frame); window.removeEventListener("scroll", onScroll); };
   }, []);
+
+  const visibleApps = apps.slice(startIndex, startIndex + positions.length);
 
   return (
     <section className="hero" id="top">
@@ -96,16 +80,16 @@ export default function Hero() {
           </div>
         </div>
 
-        <div ref={stageRef} className="hero-app-stage" aria-label="Geliştirilen iOS uygulamaları">
+        <div className="hero-app-stage" aria-label="Geliştirilen iOS uygulamaları">
           <div className="stage-ring stage-ring-large" aria-hidden="true" />
           <div className="stage-ring stage-ring-medium" aria-hidden="true" />
           <div className="stage-ring stage-ring-small" aria-hidden="true" />
           <div className="stage-center-glow" aria-hidden="true" />
 
-          {floatingApps.map((app, index) => (
+          {visibleApps.map((app, index) => (
             <a
-              className={app.className}
-              key={app.name}
+              className={`floating-app floating-app-${positions[index]}`}
+              key={`${app.slug}-${startIndex}`}
               href={`/apps/${app.slug}`}
               style={{ "--app-index": index } as CSSProperties}
             >

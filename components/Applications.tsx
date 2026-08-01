@@ -43,7 +43,6 @@ function AppCard({ app, index }: { app: AppInfo; index: number }) {
       <div className="app-card-glow" />
       <div className="app-card-topline">
         <span className="app-category">{app.category}</span>
-        <span className="app-status">{app.status}</span>
       </div>
       <img className="app-icon" src={app.image} alt={`${app.name} uygulama ikonu`} />
       <div className="app-card-copy">
