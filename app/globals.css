@@ -35,7 +35,7 @@ body::before {
 a { color: inherit; }
 button, input, textarea { font: inherit; }
 img { display: block; max-width: 100%; }
-main { overflow: hidden; }
+main { overflow: clip; }
 .container { width: min(1240px, calc(100% - 40px)); margin: 0 auto; }
 .section-head { display: grid; gap: 20px; max-width: 760px; margin-bottom: 54px; }
 .section-kicker {
