@@ -36,6 +36,7 @@ export default function Header() {
         <nav className={open ? "nav nav-open" : "nav"}>
           <a href="#top" onClick={() => setOpen(false)}>Ana Sayfa</a>
           <a href="#uygulamalar" onClick={() => setOpen(false)}>Uygulamalar</a>
+          <a href="#github" onClick={() => setOpen(false)}>GitHub</a>
           <a href="#hizmetler" onClick={() => setOpen(false)}>Hizmetler</a>
           <a href="#surec" onClick={() => setOpen(false)}>Çalışma Süreci</a>
           <a className="nav-cta" href="#iletisim" onClick={() => setOpen(false)}>İletişime Geç</a>

@@ -162,6 +162,17 @@
   transition: background 200ms ease, transform 200ms ease;
 }
 
+.app-link::after {
+  content: "";
+  position: absolute;
+  inset: auto;
+  width: 1000px;
+  height: 1000px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .app-link:not(.app-link-muted):hover {
   background: rgba(var(--accent), 0.13);
   transform: translateY(-1px);

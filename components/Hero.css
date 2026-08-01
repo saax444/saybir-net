@@ -188,9 +188,11 @@
 }
 
 .hero-app-stage {
+  --scroll-turn: 0deg;
   position: relative;
   min-height: 630px;
-  transform: translateZ(0);
+  transform: translateZ(0) rotate(var(--scroll-turn));
+  transition: transform 80ms linear;
 }
 
 .stage-ring {
@@ -233,6 +235,7 @@
     gentleLight 28s ease-in-out infinite alternate;
   animation-delay: calc(var(--app-index) * -3.1s);
   will-change: transform;
+  text-decoration: none;
 }
 
 .floating-app img {
@@ -283,6 +286,8 @@
 .floating-app-seven { left: 42%; bottom: -1%; --float-x: -20px; --float-y: -23px; --float-rotate: 4deg; }
 .floating-app-eight { top: 30%; right: 30%; --float-x: 18px; --float-y: -26px; --float-rotate: -3deg; }
 .floating-app-nine { left: 29%; bottom: 22%; --float-x: -22px; --float-y: 20px; --float-rotate: 5deg; }
+.floating-app-ten { top: 2%; left: 7%; --float-x: 18px; --float-y: 18px; --float-rotate: -4deg; }
+.floating-app-eleven { right: 25%; bottom: 2%; --float-x: -18px; --float-y: -20px; --float-rotate: 4deg; }
 
 @keyframes slowDrift {
   0% {
@@ -344,7 +349,7 @@
   .hero-app-stage {
     min-height: 520px;
     margin-top: -12px;
-    transform: scale(0.86);
+    transform: scale(0.86) rotate(var(--scroll-turn));
   }
 
   .floating-app img {
@@ -363,7 +368,7 @@
     width: 620px;
     left: 50%;
     margin-left: -310px;
-    transform: scale(0.64);
+    transform: scale(0.64) rotate(var(--scroll-turn));
     transform-origin: center top;
     margin-bottom: -150px;
   }
@@ -371,5 +376,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .floating-app { animation: none; }
+  .hero-app-stage { --scroll-turn: 0deg; transition: none; }
   .hero-button { transition: none; }
 }

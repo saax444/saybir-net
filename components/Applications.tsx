@@ -1,88 +1,11 @@
 "use client";
 
 import { CSSProperties, PointerEvent, useRef } from "react";
+import Link from "next/link";
+import { apps, type AppInfo } from "@/data/apps";
 import "./Applications.css";
 
-const apps = [
-  {
-    name: "VibeLens",
-    image: "/apps/vibelens.png",
-    accent: "116 91 255",
-    category: "Yaşam",
-    description: "Sohbet ekran görüntülerindeki iletişim sinyallerini gizlilik odaklı analiz edin.",
-    status: "App Store’da"
-  },
-  {
-    name: "HiLock",
-    image: "/apps/hilock.png",
-    accent: "60 118 255",
-    category: "Verimlilik",
-    description: "Uygulamalarınızı PIN ve biyometrik doğrulamayla koruyun, odağınızı güçlendirin.",
-    status: "App Store’da"
-  },
-  {
-    name: "Ödüyorum",
-    image: "/apps/oduyorum.png",
-    accent: "37 161 255",
-    category: "Finans",
-    description: "Gelir, gider, fatura ve hedeflerinizi tek bir sade finans merkezinde yönetin.",
-    status: "App Store’da",
-    url: "https://apps.apple.com/tr/app/%C3%B6d%C3%BCyorum/id6793859068"
-  },
-  {
-    name: "Ref!Ref!Ref!",
-    image: "/apps/refrefref.png",
-    accent: "255 52 190",
-    category: "Oyun",
-    description: "Reflekslerinizi 50 neon şehir ve binlerce el yapımı bölümde sınayın.",
-    status: "App Store’da",
-    url: "https://apps.apple.com/tr/app/ref-ref-ref/id6788466051"
-  },
-  {
-    name: "Kedilik",
-    image: "/apps/kedilik.png",
-    accent: "255 123 90",
-    category: "Yaşam",
-    description: "Kedinizin sağlık, bakım ve önemli kayıtlarını düzenli biçimde takip edin.",
-    status: "App Store’da",
-    url: "https://apps.apple.com/tr/app/kedilik/id6792054901"
-  },
-  {
-    name: "Ezan Vakti",
-    image: "/apps/ezan-vakti.png",
-    accent: "229 184 71",
-    category: "Araçlar",
-    description: "Namaz vakitleri, kıble, dualar ve günlük ibadet araçlarına kolayca ulaşın.",
-    status: "App Store’da",
-    url: "https://apps.apple.com/tr/app/ezan-vakti-namaz-ve-k%C4%B1ble/id6790400156"
-  },
-  {
-    name: "Üşenme Yap",
-    image: "/apps/usenme-yap.png",
-    accent: "139 83 255",
-    category: "Verimlilik",
-    description: "Ertelemeyi bırakın, küçük adımlarla görevlerinizi harekete dönüştürün.",
-    status: "App Store’da"
-  },
-  {
-    name: "TarTarot",
-    image: "/apps/tartarot.png",
-    accent: "218 180 79",
-    category: "Yaşam",
-    description: "Modern bir tarot deneyimiyle kartları keşfedin ve yorumlarınıza odaklanın.",
-    status: "App Store’da"
-  },
-  {
-    name: "Susadım",
-    image: "/apps/susadim.png",
-    accent: "38 219 255",
-    category: "Sağlık",
-    description: "Günlük su hedefinizi takip edin ve düzenli içme alışkanlığı oluşturun.",
-    status: "App Store’da"
-  }
-];
-
-function AppCard({ app, index }: { app: typeof apps[number]; index: number }) {
+function AppCard({ app, index }: { app: AppInfo; index: number }) {
   const ref = useRef<HTMLElement>(null);
 
   const move = (event: PointerEvent<HTMLElement>) => {
@@ -127,12 +50,10 @@ function AppCard({ app, index }: { app: typeof apps[number]; index: number }) {
         <h3>{app.name}</h3>
         <p>{app.description}</p>
       </div>
-      {"url" in app && (
-        <a className="app-link" href={app.url} target="_blank" rel="noreferrer">
-          App Store’da Gör
-          <span aria-hidden="true">↗</span>
-        </a>
-      )}
+      <Link className="app-link" href={`/apps/${app.slug}`}>
+        Uygulama sayfası
+        <span aria-hidden="true">→</span>
+      </Link>
     </article>
   );
 }

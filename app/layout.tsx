@@ -13,7 +13,8 @@ export const metadata: Metadata = {
     url: "https://saybir.net",
     siteName: "saybir.net",
     locale: "tr_TR",
-    type: "website"
+    type: "website",
+    images: ["/icon.png"]
   }
 };
 

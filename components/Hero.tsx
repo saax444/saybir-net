@@ -1,11 +1,18 @@
 "use client";
 
-import { CSSProperties } from "react";
+import { CSSProperties, useEffect, useRef } from "react";
+import { apps } from "@/data/apps";
 import "./Hero.css";
 
-const floatingApps = [
-  { name: "VibeLens", image: "/apps/vibelens.png", className: "floating-app floating-app-eight" },
-  { name: "HiLock", image: "/apps/hilock.png", className: "floating-app floating-app-nine" },
+const positions = ["eight", "nine", "one", "two", "three", "four", "five", "six", "seven", "ten", "eleven"];
+const floatingApps = apps.map((app, index) => ({
+  name: app.name,
+  image: app.image,
+  slug: app.slug,
+  className: `floating-app floating-app-${positions[index]}`
+}));
+
+/*
   { name: "Susadım", image: "/apps/susadim.png", className: "floating-app floating-app-one" },
   { name: "Ezan Vakti", image: "/apps/ezan-vakti.png", className: "floating-app floating-app-two" },
   { name: "Üşenme Yap", image: "/apps/usenme-yap.png", className: "floating-app floating-app-three" },
@@ -13,9 +20,25 @@ const floatingApps = [
   { name: "Ref!Ref!Ref!", image: "/apps/refrefref.png", className: "floating-app floating-app-five" },
   { name: "TarTarot", image: "/apps/tartarot.png", className: "floating-app floating-app-six" },
   { name: "Kedilik", image: "/apps/kedilik.png", className: "floating-app floating-app-seven" }
-];
+*/
 
 export default function Hero() {
+  const stageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      const stage = stageRef.current;
+      if (!stage) return;
+      const turn = Math.max(-38, Math.min(38, window.scrollY * 0.035));
+      stage.style.setProperty("--scroll-turn", `${turn}deg`);
+    };
+    const onScroll = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(update); };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => { cancelAnimationFrame(frame); window.removeEventListener("scroll", onScroll); };
+  }, []);
+
   return (
     <section className="hero" id="top">
       <div className="hero-background" aria-hidden="true">
@@ -73,22 +96,23 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="hero-app-stage" aria-label="Geliştirilen iOS uygulamaları">
+        <div ref={stageRef} className="hero-app-stage" aria-label="Geliştirilen iOS uygulamaları">
           <div className="stage-ring stage-ring-large" aria-hidden="true" />
           <div className="stage-ring stage-ring-medium" aria-hidden="true" />
           <div className="stage-ring stage-ring-small" aria-hidden="true" />
           <div className="stage-center-glow" aria-hidden="true" />
 
           {floatingApps.map((app, index) => (
-            <div
+            <a
               className={app.className}
               key={app.name}
+              href={`/apps/${app.slug}`}
               style={{ "--app-index": index } as CSSProperties}
             >
               <div className="floating-app-shadow" aria-hidden="true" />
               <img src={app.image} alt={`${app.name} uygulama ikonu`} />
               <span>{app.name}</span>
-            </div>
+            </a>
           ))}
         </div>
       </div>
