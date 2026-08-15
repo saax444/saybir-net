@@ -15,6 +15,7 @@ export default async function PrivacyPage({
   }
 
   const isEzanVakti = app.slug === "ezan-vakti";
+  const isSusadim = app.slug === "susadim";
 
   return (
     <div className={styles.page}>
@@ -110,6 +111,112 @@ export default async function PrivacyPage({
               <h3>İletişim</h3>
               <p>
                 Ezan Vakti gizlilik politikasıyla ilgili sorularınızı{" "}
+                <a href="mailto:hello@saybir.net">hello@saybir.net</a>{" "}
+                adresine iletebilirsiniz.
+              </p>
+            </>
+          ) : isSusadim ? (
+            <>
+              <h3>Genel</h3>
+              <p>
+                Susadım, günlük su tüketiminizi takip etmenize yardımcı olan
+                bir iOS uygulamasıdır. Uygulama yalnızca özelliklerin çalışması
+                için gerekli olan verileri ve izinleri kullanır.
+              </p>
+
+              <h3>Su Tüketimi Kayıtları</h3>
+              <p>
+                Günlük su tüketimi, hedefler ve ilgili kullanım kayıtları
+                uygulamanın takip özelliklerini sağlamak amacıyla işlenebilir.
+                Bu veriler temel olarak cihazınızda saklanır.
+              </p>
+
+              <h3>Bildirim Tercihleri</h3>
+              <p>
+                Kullanıcı izin verdiğinde Susadım, su içme hatırlatmaları ve
+                ilgili bildirimleri gönderebilir.
+              </p>
+
+              <p>
+                Bildirim izinleri iOS tarafından yönetilir ve kullanıcı
+                istediği zaman iPhone Ayarlar bölümünden değiştirilebilir veya
+                kapatılabilir.
+              </p>
+
+              <h3>Dil ve Uygulama Tercihleri</h3>
+              <p>
+                Uygulama deneyimini kişiselleştirmek amacıyla dil ayarı ve
+                uygulama içindeki bazı tercihler cihaz üzerinde saklanabilir.
+              </p>
+
+              <h3>Apple Health</h3>
+              <p>
+                Susadım, desteklenen özelliklerde Apple Health ile entegrasyon
+                sağlayabilir.
+              </p>
+
+              <p>
+                Apple Health verilerine yalnızca kullanıcının açık izniyle
+                erişilir. İzin verildiğinde uygulama, desteklenen sağlık
+                verilerini okuyabilir veya yazabilir.
+              </p>
+
+              <p>
+                Apple Health üzerinden erişilen sağlık verileri reklam amacıyla
+                kullanılmaz, satılmaz ve reklam sağlayıcılarıyla paylaşılmaz.
+              </p>
+
+              <p>
+                Kullanıcı Apple Health izinlerini istediği zaman iPhone Sağlık
+                uygulaması veya iOS Ayarlar bölümünden yönetebilir.
+              </p>
+
+              <h3>Premium Abonelik</h3>
+              <p>
+                Premium abonelik durumu, uygulamadaki ücretli özelliklere
+                erişimi belirlemek amacıyla kullanılabilir.
+              </p>
+
+              <p>
+                Abonelik satın alma, yenileme ve ödeme işlemleri Apple App
+                Store üzerinden gerçekleştirilir. Geliştirici kredi kartı veya
+                banka kartı bilgilerinize erişmez.
+              </p>
+
+              <h3>Reklamlar ve Google AdMob</h3>
+              <p>
+                Susadım uygulamasının ücretsiz sürümü reklam göstermek amacıyla
+                Google AdMob hizmetini kullanabilir.
+              </p>
+
+              <p>
+                Google ve reklam iş ortakları; cihaz bilgileri, reklam
+                etkileşimleri ve benzeri teknik bilgileri kendi gizlilik
+                politikaları doğrultusunda işleyebilir.
+              </p>
+
+              <p>
+                Apple Health üzerinden elde edilen sağlık verileri reklam
+                hedefleme veya reklam profili oluşturma amacıyla kullanılmaz.
+              </p>
+
+              <h3>Veri Güvenliği</h3>
+              <p>
+                Uygulama içindeki kullanım verileri mümkün olduğu ölçüde cihaz
+                üzerinde saklanır. Desteklenen özelliklerde Apple tarafından
+                sağlanan sistem servisleri kullanılabilir.
+              </p>
+
+              <h3>Üçüncü Taraf Hizmetler</h3>
+              <p>
+                Uygulamada kullanılan üçüncü taraf hizmetlerin kendi gizlilik
+                politikaları bulunabilir. Bu hizmetlerin işlediği bilgiler
+                ilgili hizmet sağlayıcının kendi koşullarına tabidir.
+              </p>
+
+              <h3>İletişim</h3>
+              <p>
+                Susadım gizlilik politikasıyla ilgili sorularınızı{" "}
                 <a href="mailto:hello@saybir.net">hello@saybir.net</a>{" "}
                 adresine iletebilirsiniz.
               </p>
