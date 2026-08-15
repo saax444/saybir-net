@@ -15,6 +15,7 @@ export default async function SupportPage({
   }
 
   const isEzanVakti = app.slug === "ezan-vakti";
+  const isSusadim = app.slug === "susadim";
 
   return (
     <div className={styles.page}>
@@ -104,6 +105,108 @@ export default async function SupportPage({
 
               <p>
                 Ezan Vakti gizlilik politikası için{" "}
+                <Link href={`/apps/${app.slug}/privacy`}>
+                  Gizlilik Politikası
+                </Link>{" "}
+                sayfasını ziyaret edebilirsiniz.
+              </p>
+            </>
+          ) : isSusadim ? (
+            <>
+              <p>
+                Susadım uygulamasıyla ilgili teknik sorunlar, öneriler,
+                geri bildirimler, abonelik veya kullanım soruları için
+                aşağıdaki iletişim adresinden destek alabilirsiniz.
+              </p>
+
+              <h3>Destek Konuları</h3>
+
+              <ul>
+                <li>Su tüketimi kayıtları</li>
+                <li>Günlük su hedefi</li>
+                <li>Su içme hatırlatmaları ve bildirimler</li>
+                <li>Apple Health entegrasyonu</li>
+                <li>Premium abonelik</li>
+                <li>Satın alma geri yükleme</li>
+                <li>Reklamlarla ilgili sorunlar</li>
+                <li>Uygulama içindeki diğer teknik sorunlar</li>
+              </ul>
+
+              <h3>Su Verileri</h3>
+
+              <p>
+                Su tüketimi kayıtlarınız uygulamanın takip özelliklerini
+                sağlamak amacıyla kullanılır. Kayıtlarınızla ilgili beklenmeyen
+                bir durum yaşarsanız destek talebinizde uygulama sürümünü ve
+                sorunun ne zaman oluştuğunu belirtin.
+              </p>
+
+              <h3>Bildirim Sorunları</h3>
+
+              <p>
+                Su içme hatırlatmalarını alamıyorsanız iPhone Ayarlar →
+                Bildirimler bölümünden Susadım için bildirim izninin açık
+                olduğundan emin olun.
+              </p>
+
+              <h3>Apple Health</h3>
+
+              <p>
+                Susadım, desteklenen özelliklerde Apple Health ile
+                senkronizasyon sağlayabilir. Health erişimi yalnızca
+                kullanıcının açık izniyle gerçekleşir.
+              </p>
+
+              <p>
+                Apple Health bağlantısıyla ilgili sorun yaşıyorsanız Sağlık
+                uygulamasındaki izinleri ve Susadım için verilen veri erişim
+                izinlerini kontrol edin.
+              </p>
+
+              <h3>Premium Abonelik</h3>
+
+              <p>
+                Premium abonelik işlemleri Apple App Store üzerinden
+                gerçekleştirilir. Aboneliklerinizi iPhone Ayarlar → Apple
+                Hesabı → Abonelikler bölümünden görüntüleyebilir veya
+                yönetebilirsiniz.
+              </p>
+
+              <p>
+                Daha önce satın aldığınız Premium erişim görünmüyorsa
+                uygulamadaki satın alma geri yükleme seçeneğini kullanın.
+              </p>
+
+              <h3>Destek ile İletişim</h3>
+
+              <p>
+                Destek talebinizi aşağıdaki e-posta adresine gönderebilirsiniz.
+              </p>
+
+              <div className={styles.actions}>
+                <a
+                  href={`mailto:hello@saybir.net?subject=${encodeURIComponent(
+                    "Susadım Destek"
+                  )}`}
+                >
+                  hello@saybir.net
+                </a>
+              </div>
+
+              <h3>Mesajınıza Ekleyin</h3>
+
+              <ul>
+                <li>Kullandığınız iPhone veya iPad modeli</li>
+                <li>iOS veya iPadOS sürümü</li>
+                <li>Susadım uygulama sürümü</li>
+                <li>Sorunun kısa açıklaması</li>
+                <li>Mümkünse ekran görüntüsü</li>
+              </ul>
+
+              <h3>Gizlilik</h3>
+
+              <p>
+                Susadım gizlilik politikası için{" "}
                 <Link href={`/apps/${app.slug}/privacy`}>
                   Gizlilik Politikası
                 </Link>{" "}
