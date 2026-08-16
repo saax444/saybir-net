@@ -16,6 +16,7 @@ export default async function PrivacyPage({
 
   const isEzanVakti = app.slug === "ezan-vakti";
   const isSusadim = app.slug === "susadim";
+  const isOduyorum = app.slug === "oduyorum";
 
   return (
     <div className={styles.page}>
@@ -217,6 +218,126 @@ export default async function PrivacyPage({
               <h3>İletişim</h3>
               <p>
                 Susadım gizlilik politikasıyla ilgili sorularınızı{" "}
+                <a href="mailto:hello@saybir.net">hello@saybir.net</a>{" "}
+                adresine iletebilirsiniz.
+              </p>
+            </>
+          ) : isOduyorum ? (
+            <>
+              <h3>Genel</h3>
+              <p>
+                Ödüyorum, gelir, gider, fatura, abonelik ve diğer finansal
+                kayıtlarınızı takip etmenize yardımcı olan bir iOS
+                uygulamasıdır.
+              </p>
+
+              <p>
+                Uygulamaya girdiğiniz finansal kayıtlar temel olarak cihazınızda
+                saklanır ve uygulamanın temel özelliklerini sunmak amacıyla
+                cihaz üzerinde işlenir.
+              </p>
+
+              <h3>Finansal Kayıtlar</h3>
+              <p>
+                Gelir, gider, fatura, abonelik, varlık ve diğer finansal
+                bilgileriniz uygulamanın yerel veri alanında saklanabilir.
+              </p>
+
+              <p>
+                Ödüyorum geliştiricisi bu finansal kayıtları kendi sunucularına
+                aktarmak amacıyla toplamaz.
+              </p>
+
+              <h3>Bildirimler</h3>
+              <p>
+                Kullanıcı bildirimlere izin verdiğinde fatura, abonelik ve
+                ilgili ödeme hatırlatmaları iOS bildirim sistemi kullanılarak
+                cihaz üzerinde planlanabilir.
+              </p>
+
+              <p>
+                Bildirim izinlerini istediğiniz zaman iPhone Ayarlar bölümünden
+                değiştirebilir veya kapatabilirsiniz.
+              </p>
+
+              <h3>Reklamlar ve Google AdMob</h3>
+              <p>
+                Ödüyorum uygulamasının ücretsiz sürümü reklam göstermek amacıyla
+                Google AdMob hizmetini kullanabilir.
+              </p>
+
+              <p>
+                Google ve reklam iş ortakları; reklam sunma, reklam
+                performansını ölçme, sahtekârlığı önleme ve kullanıcının izin
+                verdiği durumlarda kişiselleştirme amacıyla cihaz bilgileri,
+                reklam etkileşimleri, yaklaşık konum ve benzeri teknik verileri
+                kendi politikaları doğrultusunda işleyebilir.
+              </p>
+
+              <h3>Finansal Verilerin Reklam Amaçlı Kullanımı</h3>
+              <p>
+                Ödüyorum içerisine girdiğiniz gelir, gider, fatura, abonelik ve
+                diğer finansal kayıtlar reklam hedefleme amacıyla kullanılmaz
+                ve reklam sağlayıcılarıyla paylaşılmaz.
+              </p>
+
+              <h3>Veri Paylaşımı</h3>
+              <p>
+                Kullanıcının uygulamaya girdiği finansal kayıtlar geliştirici
+                tarafından üçüncü taraflara satılmaz.
+              </p>
+
+              <p>
+                Reklam sağlayıcılarının kendi sistemleri üzerinden topladığı
+                teknik veya reklam verileri ilgili hizmet sağlayıcının kendi
+                gizlilik politikalarına tabidir.
+              </p>
+
+              <h3>Verilerin Silinmesi</h3>
+              <p>
+                Ödüyorum uygulamasındaki desteklenen veri silme seçeneklerini
+                kullanarak finansal kayıtlarınızı cihazınızdan
+                kaldırabilirsiniz.
+              </p>
+
+              <p>
+                Uygulamadaki Ayarlar ve veri yönetimi seçeneklerinden yerel
+                kayıtlarınızı silebilirsiniz. Uygulamanın cihazdan kaldırılması
+                da uygulamanın yerel verilerinin kaldırılmasına neden olabilir.
+              </p>
+
+              <h3>Veri Güvenliği</h3>
+              <p>
+                Finansal kayıtlar mümkün olduğu ölçüde cihazın yerel uygulama
+                alanında tutulur. iOS tarafından sağlanan sistem güvenliği ve
+                veri koruma mekanizmaları kullanılabilir.
+              </p>
+
+              <h3>Çocukların Gizliliği</h3>
+              <p>
+                Ödüyorum özellikle çocuklara yönelik bir uygulama değildir.
+                Geliştirici bilerek çocuklardan kişisel veya finansal bilgi
+                toplamaz.
+              </p>
+
+              <h3>Üçüncü Taraf Hizmetler</h3>
+              <p>
+                Uygulamada kullanılan üçüncü taraf hizmetlerin kendi gizlilik
+                politikaları ve veri işleme uygulamaları bulunabilir. Bu
+                hizmetlerin işlediği bilgiler ilgili hizmet sağlayıcının kendi
+                koşullarına tabidir.
+              </p>
+
+              <h3>Politika Değişiklikleri</h3>
+              <p>
+                Bu gizlilik politikası uygulama özellikleri, kullanılan
+                hizmetler veya yasal gereklilikler değiştiğinde
+                güncellenebilir. Güncel politika bu sayfada yayımlanır.
+              </p>
+
+              <h3>İletişim</h3>
+              <p>
+                Ödüyorum gizlilik politikasıyla ilgili sorularınızı{" "}
                 <a href="mailto:hello@saybir.net">hello@saybir.net</a>{" "}
                 adresine iletebilirsiniz.
               </p>
