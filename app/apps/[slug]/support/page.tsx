@@ -19,6 +19,7 @@ export default async function SupportPage({
   const isOduyorum = app.slug === "oduyorum";
   const isHiLock = app.slug === "hilock";
   const isCarSave = app.slug === "carsave-ai";
+  const isYemekolay = app.slug === "yemekolay";
 
   return (
     <div className={styles.page}>
@@ -613,6 +614,135 @@ export default async function SupportPage({
 
               <p>
                 CarSave AI gizlilik politikası için{" "}
+                <Link href={`/apps/${app.slug}/privacy`}>
+                  Gizlilik Politikası
+                </Link>{" "}
+                sayfasını ziyaret edebilirsiniz.
+              </p>
+            </>
+          ) : isYemekolay ? (
+            <>
+              <p>
+                Yemekolay uygulamasıyla ilgili teknik sorunlar, öneri sistemi,
+                Premium abonelik, reklamlar veya kullanım soruları için
+                aşağıdaki iletişim adresinden destek alabilirsiniz.
+              </p>
+
+              <h3>Destek Konuları</h3>
+
+              <ul>
+                <li>Malzemeye göre yemek önerileri</li>
+                <li>Bugün ne pişirsem önerileri</li>
+                <li>Ne sipariş etsem önerileri</li>
+                <li>Önerilerin yüklenmemesi veya hatalı görünmesi</li>
+                <li>Günlük kullanım hakkı</li>
+                <li>Ödüllü reklam ile ek kullanım hakkı</li>
+                <li>Premium abonelik</li>
+                <li>Satın alma geri yükleme</li>
+                <li>Bildirimler</li>
+                <li>Reklamlarla ilgili sorunlar</li>
+                <li>Uygulama içindeki diğer teknik sorunlar</li>
+              </ul>
+
+              <h3>Öneriler Çalışmıyorsa</h3>
+
+              <p>
+                Malzemeye göre yemek önerisi veya diğer öneri ekranlarında
+                sonuç alamıyorsanız internet bağlantınızı kontrol edin ve
+                uygulamanın güncel sürümünü kullandığınızdan emin olun.
+              </p>
+
+              <p>
+                Sorun devam ediyorsa hangi öneri türünde sorun yaşadığınızı,
+                hangi malzemeleri veya seçenekleri kullandığınızı ve ekranda
+                görünen hata mesajını destek talebinizde belirtin.
+              </p>
+
+              <h3>Günlük Kullanım ve Ödüllü Reklam</h3>
+
+              <p>
+                Ücretsiz kullanım hakkınızın yenilenmediğini veya ödüllü reklam
+                izledikten sonra ek kullanım hakkının tanımlanmadığını
+                düşünüyorsanız uygulamayı tamamen kapatıp tekrar açmayı deneyin.
+              </p>
+
+              <p>
+                Ödüllü reklam yüklenmiyorsa internet bağlantınızı kontrol edin.
+                Reklam kullanılabilirliği bölgeye, reklam sağlayıcısına ve o
+                andaki reklam envanterine göre değişebilir.
+              </p>
+
+              <h3>Premium Abonelik</h3>
+
+              <p>
+                Premium abonelik işlemleri Apple App Store üzerinden
+                gerçekleştirilir. Aboneliklerinizi iPhone Ayarlar → Apple
+                Hesabı → Abonelikler bölümünden görüntüleyebilir veya
+                yönetebilirsiniz.
+              </p>
+
+              <p>
+                Daha önce satın aldığınız Premium erişim görünmüyorsa
+                uygulamadaki satın alma geri yükleme seçeneğini kullanın.
+              </p>
+
+              <h3>Bildirim Sorunları</h3>
+
+              <p>
+                Yemekolay bildirimlerini alamıyorsanız iPhone Ayarlar →
+                Bildirimler bölümünden Yemekolay için bildirim izninin açık
+                olduğundan emin olun.
+              </p>
+
+              <h3>Reklam Sorunları</h3>
+
+              <p>
+                Reklamların görüntülenmesi, ödüllü reklamlar veya reklam
+                gizlilik seçenekleriyle ilgili sorun yaşıyorsanız cihaz
+                modelinizi, iOS sürümünüzü ve Yemekolay uygulama sürümünü
+                destek mesajınızda belirtin.
+              </p>
+
+              <h3>Gizlilik</h3>
+
+              <p>
+                Destek talebi gönderirken kişisel, finansal veya hassas
+                bilgilerinizi paylaşmayın. Öneri sistemiyle ilgili destek
+                taleplerinde sorunu anlamamız için yalnızca gerekli bilgileri
+                iletin.
+              </p>
+
+              <h3>Destek ile İletişim</h3>
+
+              <p>
+                Destek talebinizi aşağıdaki e-posta adresine gönderebilirsiniz.
+              </p>
+
+              <div className={styles.actions}>
+                <a
+                  href={`mailto:hello@saybir.net?subject=${encodeURIComponent(
+                    "Yemekolay Destek"
+                  )}`}
+                >
+                  hello@saybir.net
+                </a>
+              </div>
+
+              <h3>Mesajınıza Ekleyin</h3>
+
+              <ul>
+                <li>Kullandığınız iPhone veya iPad modeli</li>
+                <li>iOS veya iPadOS sürümü</li>
+                <li>Yemekolay uygulama sürümü</li>
+                <li>Sorunun hangi ekranda meydana geldiği</li>
+                <li>Sorunu tekrar oluşturma adımları</li>
+                <li>Mümkünse hassas bilgi içermeyen ekran görüntüsü</li>
+              </ul>
+
+              <h3>Gizlilik Politikası</h3>
+
+              <p>
+                Yemekolay gizlilik politikası için{" "}
                 <Link href={`/apps/${app.slug}/privacy`}>
                   Gizlilik Politikası
                 </Link>{" "}
