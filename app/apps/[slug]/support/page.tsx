@@ -16,6 +16,7 @@ export default async function SupportPage({
 
   const isEzanVakti = app.slug === "ezan-vakti";
   const isSusadim = app.slug === "susadim";
+  const isOduyorum = app.slug === "oduyorum";
 
   return (
     <div className={styles.page}>
@@ -207,6 +208,116 @@ export default async function SupportPage({
 
               <p>
                 Susadım gizlilik politikası için{" "}
+                <Link href={`/apps/${app.slug}/privacy`}>
+                  Gizlilik Politikası
+                </Link>{" "}
+                sayfasını ziyaret edebilirsiniz.
+              </p>
+            </>
+          ) : isOduyorum ? (
+            <>
+              <p>
+                Ödüyorum uygulamasıyla ilgili teknik sorunlar, öneriler,
+                geri bildirimler veya kullanım soruları için aşağıdaki
+                iletişim adresinden destek alabilirsiniz.
+              </p>
+
+              <h3>Destek Konuları</h3>
+
+              <ul>
+                <li>Gelir ve gider kayıtları</li>
+                <li>Fatura ve abonelik takibi</li>
+                <li>Ödeme ve hatırlatma bildirimleri</li>
+                <li>Finansal kayıtların görüntülenmesi</li>
+                <li>Veri silme ve gizlilik seçenekleri</li>
+                <li>Reklamlarla ilgili sorunlar</li>
+                <li>Uygulama içindeki diğer teknik sorunlar</li>
+              </ul>
+
+              <h3>Finansal Kayıtlar</h3>
+
+              <p>
+                Ödüyorum içerisindeki gelir, gider, fatura, abonelik ve diğer
+                finansal kayıtlar uygulamanın temel özelliklerini sağlamak
+                amacıyla cihazınızda tutulabilir.
+              </p>
+
+              <p>
+                Bir kayıt görünmüyor, yanlış hesaplanıyor veya beklenmedik bir
+                davranış oluşuyorsa destek mesajınızda sorunun hangi ekranda
+                meydana geldiğini belirtin.
+              </p>
+
+              <h3>Bildirim Sorunları</h3>
+
+              <p>
+                Fatura veya ödeme hatırlatmalarını alamıyorsanız iPhone Ayarlar
+                → Bildirimler bölümünden Ödüyorum için bildirim izninin açık
+                olduğundan emin olun.
+              </p>
+
+              <h3>Verilerin Silinmesi</h3>
+
+              <p>
+                Uygulamada desteklenen veri yönetimi seçeneklerini kullanarak
+                finansal kayıtlarınızı cihazınızdan silebilirsiniz.
+              </p>
+
+              <p>
+                Veri silme işlemiyle ilgili sorun yaşıyorsanız hangi kayıtların
+                silinemediğini açıkça belirtin. Destek talebinize kişisel veya
+                finansal bilgi içeren ekran görüntüleri eklememenizi öneririz.
+              </p>
+
+              <h3>Gizlilik ve Finansal Bilgiler</h3>
+
+              <p>
+                Destek talebi gönderirken banka bilgileri, kart numaraları,
+                hesap numaraları, kişisel finansal tutarlar veya diğer hassas
+                finansal bilgileri e-posta mesajınıza eklemeyin.
+              </p>
+
+              <h3>Reklam Sorunları</h3>
+
+              <p>
+                Reklamların görüntülenmesi veya gizlilik seçenekleriyle ilgili
+                teknik bir sorun yaşıyorsanız kullandığınız cihazı, iOS
+                sürümünü ve Ödüyorum uygulama sürümünü belirtin.
+              </p>
+
+              <h3>Destek ile İletişim</h3>
+
+              <p>
+                Destek talebinizi aşağıdaki e-posta adresine gönderebilirsiniz.
+              </p>
+
+              <div className={styles.actions}>
+                <a
+                  href={`mailto:hello@saybir.net?subject=${encodeURIComponent(
+                    "Ödüyorum Destek"
+                  )}`}
+                >
+                  hello@saybir.net
+                </a>
+              </div>
+
+              <h3>Mesajınıza Ekleyin</h3>
+
+              <ul>
+                <li>Kullandığınız iPhone veya iPad modeli</li>
+                <li>iOS veya iPadOS sürümü</li>
+                <li>Ödüyorum uygulama sürümü</li>
+                <li>Sorunun hangi ekranda meydana geldiği</li>
+                <li>Sorunu tekrar oluşturma adımları</li>
+                <li>
+                  Mümkünse kişisel veya finansal bilgi içermeyen ekran görüntüsü
+                </li>
+              </ul>
+
+              <h3>Gizlilik</h3>
+
+              <p>
+                Ödüyorum gizlilik politikası için{" "}
                 <Link href={`/apps/${app.slug}/privacy`}>
                   Gizlilik Politikası
                 </Link>{" "}
