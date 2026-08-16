@@ -20,6 +20,7 @@ export default async function SupportPage({
   const isHiLock = app.slug === "hilock";
   const isCarSave = app.slug === "carsave-ai";
   const isYemekolay = app.slug === "yemekolay";
+  const isNeSecsem = app.slug === "ne-secsem";
 
   return (
     <div className={styles.page}>
@@ -743,6 +744,143 @@ export default async function SupportPage({
 
               <p>
                 Yemekolay gizlilik politikası için{" "}
+                <Link href={`/apps/${app.slug}/privacy`}>
+                  Gizlilik Politikası
+                </Link>{" "}
+                sayfasını ziyaret edebilirsiniz.
+              </p>
+            </>
+          ) : isNeSecsem ? (
+            <>
+              <p>
+                Ne Seçsem? uygulamasıyla ilgili teknik sorunlar, öneri sistemi,
+                Premium abonelik, reklamlar veya kullanım soruları için
+                aşağıdaki iletişim adresinden destek alabilirsiniz.
+              </p>
+
+              <h3>Destek Konuları</h3>
+
+              <ul>
+                <li>Film, dizi ve kitap önerileri</li>
+                <li>Ruh hâline göre öneriler</li>
+                <li>Süre ve ülke filtreleri</li>
+                <li>Kararsızım özelliği</li>
+                <li>Favoriler</li>
+                <li>İzledim / Okudum kayıtları</li>
+                <li>Günlük öneri bildirimleri</li>
+                <li>Ödüllü reklam ile ek kullanım hakkı</li>
+                <li>Premium abonelik</li>
+                <li>Satın alma geri yükleme</li>
+                <li>Reklamlarla ilgili sorunlar</li>
+                <li>Uygulama içindeki diğer teknik sorunlar</li>
+              </ul>
+
+              <h3>Öneriler Çalışmıyorsa</h3>
+
+              <p>
+                Film, dizi veya kitap önerileri yüklenmiyorsa internet
+                bağlantınızı kontrol edin ve Ne Seçsem?'in güncel sürümünü
+                kullandığınızdan emin olun.
+              </p>
+
+              <p>
+                Sorun devam ediyorsa hangi içerik türünde sorun yaşadığınızı,
+                kullandığınız filtreleri ve ekranda görünen hata mesajını
+                destek talebinizde belirtin.
+              </p>
+
+              <h3>Favoriler ve İzledim / Okudum Kayıtları</h3>
+
+              <p>
+                Favorileriniz veya izledim / okudum kayıtlarınız beklediğiniz
+                şekilde görünmüyorsa sorunun hangi içerikte oluştuğunu ve
+                hangi işlemi yaptıktan sonra fark ettiğinizi belirtin.
+              </p>
+
+              <h3>Günlük Kullanım ve Ödüllü Reklam</h3>
+
+              <p>
+                Ücretsiz kullanım hakkınız yenilenmediyse veya ödüllü reklam
+                izledikten sonra ek kullanım hakkı tanımlanmadıysa uygulamayı
+                tamamen kapatıp tekrar açmayı deneyin.
+              </p>
+
+              <p>
+                Ödüllü reklam yüklenmiyorsa internet bağlantınızı kontrol edin.
+                Reklam kullanılabilirliği bölgeye, reklam sağlayıcısına ve
+                mevcut reklam envanterine göre değişebilir.
+              </p>
+
+              <h3>Premium Abonelik</h3>
+
+              <p>
+                Premium abonelik işlemleri Apple App Store üzerinden
+                gerçekleştirilir. Aboneliklerinizi iPhone Ayarlar → Apple
+                Hesabı → Abonelikler bölümünden görüntüleyebilir veya
+                yönetebilirsiniz.
+              </p>
+
+              <p>
+                Daha önce satın aldığınız Premium erişim görünmüyorsa
+                uygulamadaki satın alma geri yükleme seçeneğini kullanın.
+              </p>
+
+              <h3>Bildirim Sorunları</h3>
+
+              <p>
+                Günlük öneri bildirimlerini alamıyorsanız iPhone Ayarlar →
+                Bildirimler bölümünden Ne Seçsem? için bildirim izninin açık
+                olduğundan emin olun.
+              </p>
+
+              <h3>Reklam Sorunları</h3>
+
+              <p>
+                Reklamların görüntülenmesi, ödüllü reklamlar veya reklam
+                gizlilik seçenekleriyle ilgili sorun yaşıyorsanız cihaz
+                modelinizi, iOS sürümünüzü ve Ne Seçsem? uygulama sürümünü
+                destek mesajınızda belirtin.
+              </p>
+
+              <h3>Gizlilik</h3>
+
+              <p>
+                Destek talebi gönderirken kişisel, finansal veya hassas
+                bilgilerinizi paylaşmayın. Sorunun anlaşılması için yalnızca
+                gerekli teknik bilgileri iletin.
+              </p>
+
+              <h3>Destek ile İletişim</h3>
+
+              <p>
+                Destek talebinizi aşağıdaki e-posta adresine gönderebilirsiniz.
+              </p>
+
+              <div className={styles.actions}>
+                <a
+                  href={`mailto:hello@saybir.net?subject=${encodeURIComponent(
+                    "Ne Seçsem? Destek"
+                  )}`}
+                >
+                  hello@saybir.net
+                </a>
+              </div>
+
+              <h3>Mesajınıza Ekleyin</h3>
+
+              <ul>
+                <li>Kullandığınız iPhone veya iPad modeli</li>
+                <li>iOS veya iPadOS sürümü</li>
+                <li>Ne Seçsem? uygulama sürümü</li>
+                <li>Sorunun hangi ekranda meydana geldiği</li>
+                <li>Sorunu tekrar oluşturma adımları</li>
+                <li>Mümkünse hassas bilgi içermeyen ekran görüntüsü</li>
+              </ul>
+
+              <h3>Gizlilik Politikası</h3>
+
+              <p>
+                Ne Seçsem? gizlilik politikası için{" "}
                 <Link href={`/apps/${app.slug}/privacy`}>
                   Gizlilik Politikası
                 </Link>{" "}
