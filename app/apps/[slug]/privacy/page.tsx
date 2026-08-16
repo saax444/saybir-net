@@ -17,6 +17,7 @@ export default async function PrivacyPage({
   const isEzanVakti = app.slug === "ezan-vakti";
   const isSusadim = app.slug === "susadim";
   const isOduyorum = app.slug === "oduyorum";
+  const isHiLock = app.slug === "hilock";
 
   return (
     <div className={styles.page}>
@@ -342,6 +343,132 @@ export default async function PrivacyPage({
                 adresine iletebilirsiniz.
               </p>
             </>
+          ) : isHiLock ? (
+            <>
+              <h3>Genel</h3>
+              <p>
+                HiLock, seçtiğiniz uygulamalara erişimi yönetmenize ve cihaz
+                kullanımınızı daha kontrollü hale getirmenize yardımcı olan bir
+                iOS uygulamasıdır.
+              </p>
+
+              <p>
+                HiLock mümkün olan verileri cihaz üzerinde tutacak şekilde
+                tasarlanmıştır.
+              </p>
+
+              <h3>PIN ve Güvenlik Bilgileri</h3>
+              <p>
+                HiLock, uygulama güvenliği için belirlediğiniz PIN kodunun açık
+                halini saklamaz.
+              </p>
+
+              <p>
+                PIN doğrulaması için kullanılan tek yönlü özet gibi gerekli
+                güvenlik bilgileri Apple Keychain içerisinde saklanabilir.
+              </p>
+
+              <p>
+                HiLock üçüncü taraf uygulamalardaki hesaplarınıza,
+                parolalarınıza veya uygulama içeriklerinize erişmez.
+              </p>
+
+              <h3>Güvenlik Ayarları ve Olay Günlüğü</h3>
+              <p>
+                Uygulamadaki güvenlik tercihleri, seçilen koruma politikaları ve
+                desteklenen güvenlik olayları cihazınızda saklanabilir.
+              </p>
+
+              <p>
+                Bu bilgiler HiLock'un uygulama koruma ve güvenlik özelliklerini
+                sağlayabilmesi amacıyla kullanılır.
+              </p>
+
+              <h3>Family Controls ve Managed Settings</h3>
+              <p>
+                HiLock, uygulama erişim kontrollerini sağlamak için Apple
+                tarafından sunulan Family Controls, Managed Settings ve ilgili
+                Screen Time teknolojilerini kullanabilir.
+              </p>
+
+              <p>
+                Bu özelliklerin kullanılması kullanıcı izni gerektirir.
+                Uygulama seçimleri Apple'ın gizlilik korumalı sistemleri ve
+                belirteçleri üzerinden yönetilebilir.
+              </p>
+
+              <p>
+                HiLock, koruma amacıyla seçtiğiniz üçüncü taraf uygulamaların
+                hesap bilgilerine veya içeriklerine erişmez.
+              </p>
+
+              <h3>Reklamlar ve Google AdMob</h3>
+              <p>
+                HiLock'un reklam destekli sürümü reklam göstermek amacıyla
+                Google AdMob hizmetini kullanabilir.
+              </p>
+
+              <p>
+                Google ve reklam iş ortakları; cihaz bilgileri, reklam
+                etkileşimleri ve benzeri teknik bilgileri kendi gizlilik
+                politikaları doğrultusunda işleyebilir.
+              </p>
+
+              <p>
+                Gerekli olduğu bölgelerde reklam kişiselleştirme ve ilgili
+                işlemler için kullanıcı rızası istenebilir.
+              </p>
+
+              <h3>Screen Time Verilerinin Reklam Amaçlı Kullanımı</h3>
+              <p>
+                HiLock'un Family Controls, Managed Settings veya diğer Apple
+                Screen Time teknolojileri üzerinden kullandığı koruma
+                bilgileri reklam hedefleme amacıyla kullanılmaz.
+              </p>
+
+              <h3>Verilerin Silinmesi</h3>
+              <p>
+                Uygulama tarafından desteklenen güvenlik günlüğü ve yerel
+                kayıtlar HiLock içerisindeki ilgili ayarlardan temizlenebilir.
+              </p>
+
+              <p>
+                Uygulamanın cihazdan kaldırılması uygulamanın yerel verilerini
+                kaldırabilir. Apple Keychain içerisinde tutulan verilerin
+                saklanması ve silinmesi Apple'ın platform davranışlarına
+                tabidir.
+              </p>
+
+              <h3>Veri Güvenliği</h3>
+              <p>
+                HiLock, güvenlikle ilgili bilgileri mümkün olduğu ölçüde
+                cihazınızda tutar ve desteklenen durumlarda iOS tarafından
+                sağlanan Keychain ve diğer sistem güvenliği mekanizmalarını
+                kullanır.
+              </p>
+
+              <h3>Üçüncü Taraf Hizmetler</h3>
+              <p>
+                Uygulamada kullanılan üçüncü taraf hizmetlerin kendi gizlilik
+                politikaları ve veri işleme uygulamaları bulunabilir. Bu
+                hizmetlerin işlediği bilgiler ilgili hizmet sağlayıcının kendi
+                politikalarına tabidir.
+              </p>
+
+              <h3>Politika Değişiklikleri</h3>
+              <p>
+                Bu gizlilik politikası uygulamanın özellikleri, kullanılan
+                hizmetler veya yasal gereklilikler değiştiğinde
+                güncellenebilir. Güncel sürüm bu sayfada yayımlanır.
+              </p>
+
+              <h3>İletişim</h3>
+              <p>
+                HiLock gizlilik politikasıyla ilgili sorularınızı{" "}
+                <a href="mailto:hello@saybir.net">hello@saybir.net</a>{" "}
+                adresine iletebilirsiniz.
+              </p>
+            </>
           ) : (
             <>
               <h3>Verilerin kullanımı</h3>
@@ -356,7 +483,7 @@ export default async function PrivacyPage({
 
               <p>
                 App Store dağıtımı, uygulama içi satın alma ve abonelik
-                işlemleri ilgili olduğunda Apple’ın sistemleri üzerinden
+                işlemleri ilgili olduğunda Apple'ın sistemleri üzerinden
                 yürütülür.
               </p>
 
