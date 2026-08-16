@@ -3,6 +3,309 @@ import { notFound } from "next/navigation";
 import { getApp } from "@/data/apps";
 import styles from "../app-page.module.css";
 
+type SupportConfig = {
+  intro: string;
+  topics: string[];
+  checks?: { title: string; text: string }[];
+};
+
+function appKey(name: string) {
+  const value = name.toLocaleLowerCase("tr-TR");
+
+  if (value.includes("ne seçsem")) return "ne-secsem";
+  if (value.includes("yemekolay")) return "yemekolay";
+  if (value.includes("carsave")) return "carsave";
+  if (value.includes("hilock")) return "hilock";
+  if (value.includes("ödüyorum")) return "oduyorum";
+  if (value.includes("susadım")) return "susadim";
+  if (value.includes("ezan vakti")) return "ezan-vakti";
+  if (value.includes("melody map")) return "melody-map";
+  if (value.includes("history")) return "history";
+  if (value.includes("velomate")) return "velomate";
+  if (value.includes("tartarot")) return "tartarot";
+  if (value.includes("vibelens")) return "vibelens";
+  if (value.includes("ref!ref!ref!") || value.includes("ref ref ref")) return "refrefref";
+  if (value.includes("bold block arcade")) return "bold-block-arcade";
+  if (value.includes("üşenme yap")) return "usenme-yap";
+  if (value.includes("kedilik")) return "kedilik";
+
+  return "generic";
+}
+
+const configs: Record<string, SupportConfig> = {
+  "ne-secsem": {
+    intro:
+      "Ne Seçsem? uygulamasıyla ilgili teknik sorunlar, öneri sistemi, Premium abonelik, reklamlar veya kullanım soruları için destek alabilirsiniz.",
+    topics: [
+      "Film, dizi ve kitap önerileri",
+      "Ruh hâline göre öneriler",
+      "Filtreler ve Kararsızım özelliği",
+      "Favoriler ve İzledim / Okudum kayıtları",
+      "Günlük öneri bildirimleri",
+      "Ödüllü reklamlar",
+      "Premium abonelik ve satın alma geri yükleme",
+    ],
+    checks: [
+      {
+        title: "Öneriler Çalışmıyorsa",
+        text: "İnternet bağlantınızı ve uygulamanın güncel sürümünü kontrol edin. Sorun devam ederse içerik türünü, kullandığınız filtreleri ve ekranda görünen hata mesajını destek talebinize ekleyin.",
+      },
+    ],
+  },
+
+  yemekolay: {
+    intro:
+      "Yemekolay ile ilgili teknik sorunlar, öneriler, Premium abonelik, ödüllü reklamlar veya kullanım sorunları için destek alabilirsiniz.",
+    topics: [
+      "Malzemeye göre yemek önerileri",
+      "Bugün ne pişirsem / ne sipariş etsem",
+      "6.000 tarif arşivi",
+      "Günlük kullanım hakkı",
+      "Ödüllü reklamlar",
+      "Premium abonelik ve satın alma geri yükleme",
+      "Bildirimler",
+    ],
+    checks: [
+      {
+        title: "Öneriler Çalışmıyorsa",
+        text: "İnternet bağlantınızı ve uygulamanın güncel sürümünü kontrol edin. Sorun devam ederse kullandığınız malzemeleri veya seçeneği ve hata mesajını belirtin.",
+      },
+    ],
+  },
+
+  carsave: {
+    intro:
+      "CarSave AI ile ilgili araç kayıtları, yolculuk, konum, bildirim, hesap, Premium veya reklam sorunları için destek alabilirsiniz.",
+    topics: [
+      "Araç ekleme ve düzenleme",
+      "Yakıt ve şarj kayıtları",
+      "Bakım ve servis kayıtları",
+      "Sigorta, muayene ve vergi hatırlatmaları",
+      "Konum ve harita",
+      "Yolculuk ve hareket takibi",
+      "Apple / Google ile Giriş",
+      "Premium ve satın alma geri yükleme",
+    ],
+    checks: [
+      {
+        title: "Konum veya Yolculuk Sorunları",
+        text: "iPhone Ayarlar bölümünden CarSave AI için gerekli konum ve hareket izinlerini kontrol edin.",
+      },
+    ],
+  },
+
+  hilock: {
+    intro:
+      "HiLock ile ilgili uygulama koruma, PIN, Face ID, Screen Time, Family Controls veya Mac koruması sorunları için destek alabilirsiniz.",
+    topics: [
+      "Uygulama kilitleme ve koruma",
+      "Family Controls ve Managed Settings",
+      "Screen Time izinleri",
+      "PIN ve Face ID",
+      "Korunan uygulama seçimi",
+      "Native macOS koruması",
+      "Reklam sorunları",
+    ],
+    checks: [
+      {
+        title: "Güvenlik Bilgileri",
+        text: "Destek talebinde PIN kodunuzu, Apple Hesabı parolanızı veya doğrulama kodlarınızı paylaşmayın.",
+      },
+    ],
+  },
+
+  oduyorum: {
+    intro:
+      "Ödüyorum ile ilgili finansal kayıtlar, faturalar, abonelikler, bildirimler veya reklam sorunları için destek alabilirsiniz.",
+    topics: [
+      "Gelir ve gider kayıtları",
+      "Fatura ve abonelik takibi",
+      "Hatırlatma bildirimleri",
+      "Finansal kayıtların görüntülenmesi",
+      "Veri silme",
+      "Reklam sorunları",
+    ],
+    checks: [
+      {
+        title: "Finansal Gizlilik",
+        text: "Destek mesajınıza kart numarası, banka hesabı bilgisi, parola veya gereksiz hassas finansal bilgi eklemeyin.",
+      },
+    ],
+  },
+
+  susadim: {
+    intro:
+      "Susadım ile ilgili su kayıtları, hatırlatmalar, Apple Health, Premium veya reklam sorunları için destek alabilirsiniz.",
+    topics: [
+      "Su tüketimi kayıtları",
+      "Günlük su hedefi",
+      "Su içme bildirimleri",
+      "Apple Health",
+      "Premium abonelik",
+      "Satın alma geri yükleme",
+      "Reklam sorunları",
+    ],
+    checks: [
+      {
+        title: "Bildirim Sorunları",
+        text: "iPhone Ayarlar → Bildirimler bölümünden Susadım için bildirim izninin açık olduğunu kontrol edin.",
+      },
+    ],
+  },
+
+  "ezan-vakti": {
+    intro:
+      "Ezan Vakti: Namaz ve Kıble ile ilgili teknik sorunlar ve kullanım soruları için destek alabilirsiniz.",
+    topics: [
+      "Namaz vakitleri",
+      "Konum ve şehir belirleme",
+      "Kıble pusulası",
+      "Namaz vakti bildirimleri",
+      "Yakındaki camiler",
+      "Hicri takvim",
+      "Ramazan ve imsakiye",
+      "Günün ayeti ve hadisi",
+    ],
+    checks: [
+      {
+        title: "Konum ve Bildirimler",
+        text: "Konum veya bildirim özellikleri çalışmıyorsa iPhone Ayarlar bölümünden Ezan Vakti izinlerini kontrol edin.",
+      },
+    ],
+  },
+
+  "melody-map": {
+    intro:
+      "Melody Map ile ilgili müzik keşfi, Spotify bağlantısı veya diğer teknik sorunlar için destek alabilirsiniz.",
+    topics: [
+      "Spotify bağlantısı",
+      "Müzik içeriklerinin yüklenmesi",
+      "Favoriler ve tercihler",
+      "Yetkilendirme sorunları",
+      "Uygulama içindeki diğer teknik sorunlar",
+    ],
+    checks: [
+      {
+        title: "Spotify Bağlantısı",
+        text: "Bağlantı sorunu yaşarsanız internet bağlantınızı kontrol edin ve gerekirse Spotify yetkilendirmesini yeniden gerçekleştirin. Parolanızı destek mesajında paylaşmayın.",
+      },
+    ],
+  },
+
+  history: {
+    intro:
+      "HiStory ile ilgili günlük bilgiler, ilgi alanları, ülke seçimi, Premium, reklamlar veya bildirimler için destek alabilirsiniz.",
+    topics: [
+      "Günlük bilgiler",
+      "İlgi alanları ve ülke seçimi",
+      "Ödüllü reklamlar",
+      "Premium abonelik",
+      "Bildirimler",
+      "Dil ve uygulama tercihleri",
+    ],
+  },
+
+  velomate: {
+    intro:
+      "VeloMate ile ilgili teknik sorunlar, cihaz izinleri, reklam veya uygulama özellikleri için destek alabilirsiniz.",
+    topics: [
+      "Uygulamanın temel özellikleri",
+      "Cihaz izinleri",
+      "Reklam ve gizlilik seçenekleri",
+      "Bildirimler",
+      "Diğer teknik sorunlar",
+    ],
+  },
+
+  tartarot: {
+    intro:
+      "TarTarot ile ilgili tarot açılımları, günlük kartlar, Premium veya bildirim sorunları için destek alabilirsiniz.",
+    topics: [
+      "Günlük tarot",
+      "3 kart açılımı",
+      "Evet / Hayır özelliği",
+      "Kart yorumları",
+      "Favoriler veya günlük kayıtları",
+      "Premium abonelik",
+      "Bildirimler",
+    ],
+    checks: [
+      {
+        title: "Not",
+        text: "Tarot içerikleri eğlence amaçlıdır. Teknik destek talebinizde yalnızca sorunu çözmek için gerekli bilgileri paylaşın.",
+      },
+    ],
+  },
+
+  vibelens: {
+    intro:
+      "VibeLens ile ilgili analiz özellikleri, Premium abonelik veya diğer teknik sorunlar için destek alabilirsiniz.",
+    topics: [
+      "Uygulama analiz özellikleri",
+      "Kullanıcı girdileri",
+      "Premium abonelik",
+      "Satın alma geri yükleme",
+      "Diğer teknik sorunlar",
+    ],
+  },
+
+  refrefref: {
+    intro:
+      "Ref!Ref!Ref! ile ilgili oyun, skor, reklam veya satın alma sorunları için destek alabilirsiniz.",
+    topics: [
+      "Oyun kontrolleri",
+      "Skor ve ilerleme",
+      "Tema veya oyun ayarları",
+      "Reklamlar",
+      "Reklam kaldırma satın alması",
+      "Ses ve titreşim",
+    ],
+  },
+
+  "bold-block-arcade": {
+    intro:
+      "Bold Block Arcade ile ilgili oyun performansı, skor, reklam veya diğer teknik sorunlar için destek alabilirsiniz.",
+    topics: [
+      "Oyun kontrolleri",
+      "Skor ve ilerleme",
+      "Performans",
+      "Reklamlar",
+      "Uygulama içi satın almalar",
+    ],
+  },
+
+  "usenme-yap": {
+    intro:
+      "Üşenme Yap ile ilgili görevler, motivasyon özellikleri, hesap, reklam veya Premium sorunları için destek alabilirsiniz.",
+    topics: [
+      "Görev ve alışkanlık özellikleri",
+      "Bildirimler",
+      "Google / Firebase giriş",
+      "Reklamlar",
+      "Premium abonelik",
+      "Satın alma geri yükleme",
+    ],
+  },
+
+  kedilik: {
+    intro:
+      "Kedilik ile ilgili içerikler, uygulama tercihleri, bildirimler veya diğer teknik sorunlar için destek alabilirsiniz.",
+    topics: [
+      "Uygulama içerikleri",
+      "Favoriler ve tercihler",
+      "Bildirimler",
+      "Reklamlar",
+      "Diğer teknik sorunlar",
+    ],
+  },
+
+  generic: {
+    intro:
+      "Uygulamayla ilgili teknik sorun, geri bildirim veya kullanım soruları için destek alabilirsiniz.",
+    topics: ["Teknik sorunlar", "Geri bildirim", "Uygulama özellikleri"],
+  },
+};
+
 export default async function SupportPage({
   params,
 }: {
@@ -14,13 +317,7 @@ export default async function SupportPage({
     notFound();
   }
 
-  const isEzanVakti = app.slug === "ezan-vakti";
-  const isSusadim = app.slug === "susadim";
-  const isOduyorum = app.slug === "oduyorum";
-  const isHiLock = app.slug === "hilock";
-  const isCarSave = app.slug === "carsave-ai";
-  const isYemekolay = app.slug === "yemekolay";
-  const isNeSecsem = app.slug === "ne-secsem";
+  const config = configs[appKey(app.name)] ?? configs.generic;
 
   return (
     <div className={styles.page}>
@@ -39,880 +336,55 @@ export default async function SupportPage({
       <main className={styles.main}>
         <section className={styles.content}>
           <span className={styles.kicker}>Destek</span>
-
           <h1>{app.name} Destek</h1>
 
-          {isEzanVakti ? (
-            <>
-              <p>
-                Ezan Vakti uygulamasıyla ilgili teknik sorunlar, öneriler,
-                geri bildirimler veya kullanım soruları için bu sayfadaki
-                iletişim adresinden bize ulaşabilirsiniz.
-              </p>
-
-              <h3>Destek Konuları</h3>
-
-              <ul>
-                <li>Namaz vakitlerinin görüntülenmesi</li>
-                <li>Konum ve şehir belirleme sorunları</li>
-                <li>Kıble pusulası</li>
-                <li>Namaz vakti bildirimleri</li>
-                <li>Yakındaki camiler</li>
-                <li>Hicri takvim</li>
-                <li>Ramazan ve imsakiye özellikleri</li>
-                <li>Günün ayeti ve hadisi</li>
-                <li>Uygulama içindeki diğer teknik sorunlar</li>
-              </ul>
-
-              <h3>Konum Sorunları</h3>
-
-              <p>
-                Namaz vakitleri, kıble yönü ve yakındaki camiler için konum
-                izni gerekebilir. Konum iznini iPhone Ayarlar bölümünden
-                kontrol edebilirsiniz.
-              </p>
-
-              <h3>Bildirim Sorunları</h3>
-
-              <p>
-                Namaz vakti bildirimlerini alamıyorsanız iPhone Ayarlar →
-                Bildirimler bölümünden Ezan Vakti için bildirim izninin açık
-                olduğundan emin olun.
-              </p>
-
-              <h3>Destek ile İletişim</h3>
-
-              <p>
-                Destek talebinizi aşağıdaki e-posta adresine gönderebilirsiniz.
-              </p>
-
-              <div className={styles.actions}>
-                <a
-                  href={`mailto:hello@saybir.net?subject=${encodeURIComponent(
-                    "Ezan Vakti Destek"
-                  )}`}
-                >
-                  hello@saybir.net
-                </a>
-              </div>
-
-              <h3>Mesajınıza Ekleyin</h3>
-
-              <ul>
-                <li>Kullandığınız iPhone veya iPad modeli</li>
-                <li>iOS veya iPadOS sürümü</li>
-                <li>Ezan Vakti uygulama sürümü</li>
-                <li>Sorunun kısa açıklaması</li>
-                <li>Mümkünse ekran görüntüsü</li>
-              </ul>
-
-              <h3>Gizlilik</h3>
-
-              <p>
-                Ezan Vakti gizlilik politikası için{" "}
-                <Link href={`/apps/${app.slug}/privacy`}>
-                  Gizlilik Politikası
-                </Link>{" "}
-                sayfasını ziyaret edebilirsiniz.
-              </p>
-            </>
-          ) : isSusadim ? (
-            <>
-              <p>
-                Susadım uygulamasıyla ilgili teknik sorunlar, öneriler,
-                geri bildirimler, abonelik veya kullanım soruları için
-                aşağıdaki iletişim adresinden destek alabilirsiniz.
-              </p>
-
-              <h3>Destek Konuları</h3>
-
-              <ul>
-                <li>Su tüketimi kayıtları</li>
-                <li>Günlük su hedefi</li>
-                <li>Su içme hatırlatmaları ve bildirimler</li>
-                <li>Apple Health entegrasyonu</li>
-                <li>Premium abonelik</li>
-                <li>Satın alma geri yükleme</li>
-                <li>Reklamlarla ilgili sorunlar</li>
-                <li>Uygulama içindeki diğer teknik sorunlar</li>
-              </ul>
-
-              <h3>Su Verileri</h3>
-
-              <p>
-                Su tüketimi kayıtlarınız uygulamanın takip özelliklerini
-                sağlamak amacıyla kullanılır. Kayıtlarınızla ilgili beklenmeyen
-                bir durum yaşarsanız destek talebinizde uygulama sürümünü ve
-                sorunun ne zaman oluştuğunu belirtin.
-              </p>
-
-              <h3>Bildirim Sorunları</h3>
-
-              <p>
-                Su içme hatırlatmalarını alamıyorsanız iPhone Ayarlar →
-                Bildirimler bölümünden Susadım için bildirim izninin açık
-                olduğundan emin olun.
-              </p>
-
-              <h3>Apple Health</h3>
-
-              <p>
-                Susadım, desteklenen özelliklerde Apple Health ile
-                senkronizasyon sağlayabilir. Health erişimi yalnızca
-                kullanıcının açık izniyle gerçekleşir.
-              </p>
-
-              <p>
-                Apple Health bağlantısıyla ilgili sorun yaşıyorsanız Sağlık
-                uygulamasındaki izinleri ve Susadım için verilen veri erişim
-                izinlerini kontrol edin.
-              </p>
-
-              <h3>Premium Abonelik</h3>
-
-              <p>
-                Premium abonelik işlemleri Apple App Store üzerinden
-                gerçekleştirilir. Aboneliklerinizi iPhone Ayarlar → Apple
-                Hesabı → Abonelikler bölümünden görüntüleyebilir veya
-                yönetebilirsiniz.
-              </p>
-
-              <p>
-                Daha önce satın aldığınız Premium erişim görünmüyorsa
-                uygulamadaki satın alma geri yükleme seçeneğini kullanın.
-              </p>
-
-              <h3>Destek ile İletişim</h3>
-
-              <p>
-                Destek talebinizi aşağıdaki e-posta adresine gönderebilirsiniz.
-              </p>
-
-              <div className={styles.actions}>
-                <a
-                  href={`mailto:hello@saybir.net?subject=${encodeURIComponent(
-                    "Susadım Destek"
-                  )}`}
-                >
-                  hello@saybir.net
-                </a>
-              </div>
-
-              <h3>Mesajınıza Ekleyin</h3>
-
-              <ul>
-                <li>Kullandığınız iPhone veya iPad modeli</li>
-                <li>iOS veya iPadOS sürümü</li>
-                <li>Susadım uygulama sürümü</li>
-                <li>Sorunun kısa açıklaması</li>
-                <li>Mümkünse ekran görüntüsü</li>
-              </ul>
-
-              <h3>Gizlilik</h3>
-
-              <p>
-                Susadım gizlilik politikası için{" "}
-                <Link href={`/apps/${app.slug}/privacy`}>
-                  Gizlilik Politikası
-                </Link>{" "}
-                sayfasını ziyaret edebilirsiniz.
-              </p>
-            </>
-          ) : isOduyorum ? (
-            <>
-              <p>
-                Ödüyorum uygulamasıyla ilgili teknik sorunlar, öneriler,
-                geri bildirimler veya kullanım soruları için aşağıdaki
-                iletişim adresinden destek alabilirsiniz.
-              </p>
-
-              <h3>Destek Konuları</h3>
-
-              <ul>
-                <li>Gelir ve gider kayıtları</li>
-                <li>Fatura ve abonelik takibi</li>
-                <li>Ödeme ve hatırlatma bildirimleri</li>
-                <li>Finansal kayıtların görüntülenmesi</li>
-                <li>Veri silme ve gizlilik seçenekleri</li>
-                <li>Reklamlarla ilgili sorunlar</li>
-                <li>Uygulama içindeki diğer teknik sorunlar</li>
-              </ul>
-
-              <h3>Finansal Kayıtlar</h3>
-
-              <p>
-                Ödüyorum içerisindeki gelir, gider, fatura, abonelik ve diğer
-                finansal kayıtlar uygulamanın temel özelliklerini sağlamak
-                amacıyla cihazınızda tutulabilir.
-              </p>
-
-              <p>
-                Bir kayıt görünmüyor, yanlış hesaplanıyor veya beklenmedik bir
-                davranış oluşuyorsa destek mesajınızda sorunun hangi ekranda
-                meydana geldiğini belirtin.
-              </p>
-
-              <h3>Bildirim Sorunları</h3>
-
-              <p>
-                Fatura veya ödeme hatırlatmalarını alamıyorsanız iPhone Ayarlar
-                → Bildirimler bölümünden Ödüyorum için bildirim izninin açık
-                olduğundan emin olun.
-              </p>
-
-              <h3>Verilerin Silinmesi</h3>
-
-              <p>
-                Uygulamada desteklenen veri yönetimi seçeneklerini kullanarak
-                finansal kayıtlarınızı cihazınızdan silebilirsiniz.
-              </p>
-
-              <p>
-                Veri silme işlemiyle ilgili sorun yaşıyorsanız hangi kayıtların
-                silinemediğini açıkça belirtin. Destek talebinize kişisel veya
-                finansal bilgi içeren ekran görüntüleri eklememenizi öneririz.
-              </p>
-
-              <h3>Gizlilik ve Finansal Bilgiler</h3>
-
-              <p>
-                Destek talebi gönderirken banka bilgileri, kart numaraları,
-                hesap numaraları, kişisel finansal tutarlar veya diğer hassas
-                finansal bilgileri e-posta mesajınıza eklemeyin.
-              </p>
-
-              <h3>Reklam Sorunları</h3>
-
-              <p>
-                Reklamların görüntülenmesi veya gizlilik seçenekleriyle ilgili
-                teknik bir sorun yaşıyorsanız kullandığınız cihazı, iOS
-                sürümünü ve Ödüyorum uygulama sürümünü belirtin.
-              </p>
-
-              <h3>Destek ile İletişim</h3>
-
-              <p>
-                Destek talebinizi aşağıdaki e-posta adresine gönderebilirsiniz.
-              </p>
-
-              <div className={styles.actions}>
-                <a
-                  href={`mailto:hello@saybir.net?subject=${encodeURIComponent(
-                    "Ödüyorum Destek"
-                  )}`}
-                >
-                  hello@saybir.net
-                </a>
-              </div>
-
-              <h3>Mesajınıza Ekleyin</h3>
-
-              <ul>
-                <li>Kullandığınız iPhone veya iPad modeli</li>
-                <li>iOS veya iPadOS sürümü</li>
-                <li>Ödüyorum uygulama sürümü</li>
-                <li>Sorunun hangi ekranda meydana geldiği</li>
-                <li>Sorunu tekrar oluşturma adımları</li>
-                <li>
-                  Mümkünse kişisel veya finansal bilgi içermeyen ekran görüntüsü
-                </li>
-              </ul>
-
-              <h3>Gizlilik</h3>
-
-              <p>
-                Ödüyorum gizlilik politikası için{" "}
-                <Link href={`/apps/${app.slug}/privacy`}>
-                  Gizlilik Politikası
-                </Link>{" "}
-                sayfasını ziyaret edebilirsiniz.
-              </p>
-            </>
-          ) : isHiLock ? (
-            <>
-              <p>
-                HiLock uygulamasıyla ilgili teknik sorunlar, uygulama koruma
-                özellikleri, Screen Time izinleri veya diğer kullanım
-                sorularınız için aşağıdaki iletişim adresinden destek
-                alabilirsiniz.
-              </p>
-
-              <h3>Destek Konuları</h3>
-
-              <ul>
-                <li>Uygulama kilitleme ve koruma sorunları</li>
-                <li>Family Controls izinleri</li>
-                <li>Screen Time ve Managed Settings</li>
-                <li>PIN ve uygulama güvenliği</li>
-                <li>Face ID ile ilgili sorunlar</li>
-                <li>Korunan uygulamaların seçimi</li>
-                <li>Reklamlarla ilgili sorunlar</li>
-                <li>Uygulama içindeki diğer teknik sorunlar</li>
-              </ul>
-
-              <h3>Önce Bunları Kontrol Edin</h3>
-
-              <p>
-                Teknik bir sorun yaşıyorsanız öncelikle App Store üzerinden
-                HiLock'un güncel sürümünü kullandığınızdan emin olun.
-              </p>
-
-              <p>
-                Sorun devam ediyorsa HiLock'u tamamen kapatıp tekrar açmayı ve
-                gerekirse iPhone veya iPad'inizi yeniden başlatmayı deneyin.
-              </p>
-
-              <h3>Screen Time ve Family Controls</h3>
-
-              <p>
-                HiLock'un uygulama koruma özellikleri Apple tarafından sağlanan
-                Family Controls, Managed Settings ve Screen Time
-                teknolojilerine bağlı olabilir.
-              </p>
-
-              <p>
-                Koruma özellikleri çalışmıyorsa iPhone Ayarlar bölümündeki
-                Ekran Süresi ve HiLock için verilen ilgili izinleri kontrol
-                edin.
-              </p>
-
-              <p>
-                Gerekli sistem izni kaldırılmışsa HiLock'un koruma
-                özelliklerinin yeniden etkinleştirilmesi gerekebilir.
-              </p>
-
-              <h3>PIN ve Face ID Sorunları</h3>
-
-              <p>
-                PIN veya Face ID ile ilgili sorun yaşıyorsanız destek
-                mesajınızda PIN kodunuzu paylaşmayın.
-              </p>
-
-              <p>
-                Face ID kullanımının cihazınızda etkin olduğundan ve HiLock
-                için gerekli sistem izinlerinin açık olduğundan emin olun.
-              </p>
-
-              <h3>Uygulama Koruması Çalışmıyorsa</h3>
-
-              <p>
-                Korunan bir uygulama beklediğiniz şekilde engellenmiyorsa
-                HiLock içerisindeki uygulama seçimini ve koruma ayarlarını
-                kontrol edin.
-              </p>
-
-              <p>
-                Sorun devam ediyorsa hangi uygulamada sorun yaşandığını ve
-                sorunu tekrar oluşturmak için izlediğiniz adımları destek
-                mesajınızda belirtin.
-              </p>
-
-              <h3>Gizlilik ve Güvenlik</h3>
-
-              <p>
-                Destek talebi gönderirken PIN kodunuzu, Apple Hesabı
-                parolanızı, doğrulama kodlarınızı veya diğer hassas güvenlik
-                bilgilerinizi paylaşmayın.
-              </p>
-
-              <p>
-                HiLock desteği sizden e-posta üzerinden Apple Hesabı parolası
-                veya PIN kodu göndermenizi istemez.
-              </p>
-
-              <h3>Destek ile İletişim</h3>
-
-              <p>
-                Destek talebinizi aşağıdaki e-posta adresine gönderebilirsiniz.
-              </p>
-
-              <div className={styles.actions}>
-                <a
-                  href={`mailto:hello@saybir.net?subject=${encodeURIComponent(
-                    "HiLock Destek"
-                  )}`}
-                >
-                  hello@saybir.net
-                </a>
-              </div>
-
-              <h3>Mesajınıza Ekleyin</h3>
-
-              <ul>
-                <li>Kullandığınız iPhone veya iPad modeli</li>
-                <li>iOS veya iPadOS sürümü</li>
-                <li>HiLock uygulama sürümü</li>
-                <li>Sorunun hangi ekranda meydana geldiği</li>
-                <li>Sorunu tekrar oluşturma adımları</li>
-                <li>
-                  Mümkünse hassas bilgi içermeyen ekran görüntüsü veya ekran
-                  kaydı
-                </li>
-              </ul>
-
-              <h3>Gizlilik</h3>
-
-              <p>
-                HiLock gizlilik politikası için{" "}
-                <Link href={`/apps/${app.slug}/privacy`}>
-                  Gizlilik Politikası
-                </Link>{" "}
-                sayfasını ziyaret edebilirsiniz.
-              </p>
-            </>
-          ) : isCarSave ? (
-            <>
-              <p>
-                CarSave AI uygulamasıyla ilgili teknik sorunlar, araç kayıtları,
-                yolculuk takibi, konum izinleri, bildirimler, reklamlar veya
-                hesap işlemleri için aşağıdaki iletişim adresinden destek
-                alabilirsiniz.
-              </p>
-
-              <h3>Destek Konuları</h3>
-
-              <ul>
-                <li>Araç ekleme ve araç bilgileri</li>
-                <li>Yakıt ve şarj kayıtları</li>
-                <li>Bakım ve servis kayıtları</li>
-                <li>Sigorta, muayene ve vergi hatırlatmaları</li>
-                <li>Konum ve harita özellikleri</li>
-                <li>Yolculuk ve hareket takibi</li>
-                <li>Bildirimler</li>
-                <li>Apple ile Giriş ve Google ile Giriş</li>
-                <li>Premium abonelik ve satın alma işlemleri</li>
-                <li>Reklamlarla ilgili sorunlar</li>
-                <li>Uygulama içindeki diğer teknik sorunlar</li>
-              </ul>
-
-              <h3>Araç Kayıtları</h3>
-
-              <p>
-                Araç, kilometre, yakıt, bakım, servis, sigorta ve muayene
-                kayıtlarınızla ilgili bir sorun yaşıyorsanız hangi araçta ve
-                hangi kayıt türünde sorun oluştuğunu destek mesajınızda
-                belirtin.
-              </p>
-
-              <p>
-                Destek talebinde plaka, şasi numarası veya başka hassas araç
-                bilgilerini paylaşmanız gerekmiyorsa bu bilgileri mesajınıza
-                eklemeyin.
-              </p>
-
-              <h3>Konum ve Harita Sorunları</h3>
-
-              <p>
-                Konuma bağlı özellikler çalışmıyorsa iPhone Ayarlar →
-                Gizlilik ve Güvenlik → Konum Servisleri bölümünden CarSave AI
-                için konum iznini kontrol edin.
-              </p>
-
-              <p>
-                Konum iznini değiştirdikten sonra uygulamayı yeniden açmanız
-                gerekebilir.
-              </p>
-
-              <h3>Yolculuk ve Hareket Takibi</h3>
-
-              <p>
-                Yolculuk algılama veya hareket özellikleri çalışmıyorsa
-                CarSave AI için gerekli hareket ve konum izinlerinin açık
-                olduğundan emin olun.
-              </p>
-
-              <p>
-                Sorun devam ediyorsa yolculuk takibinin başlamadığı veya
-                durmadığı durumu ve kullandığınız cihaz modelini destek
-                mesajınızda belirtin.
-              </p>
-
-              <h3>Bildirim Sorunları</h3>
-
-              <p>
-                Bakım, sigorta, muayene, vergi veya diğer araç hatırlatmalarını
-                alamıyorsanız iPhone Ayarlar → Bildirimler bölümünden CarSave
-                AI için bildirim izninin açık olduğundan emin olun.
-              </p>
-
-              <h3>Hesap ve Giriş Sorunları</h3>
-
-              <p>
-                Apple ile Giriş veya Google ile Giriş sırasında sorun
-                yaşıyorsanız kullandığınız giriş yöntemini ve ekranda görünen
-                hata mesajını destek talebinizde belirtin.
-              </p>
-
-              <p>
-                Apple Hesabı parolanızı, Google hesabı parolanızı, doğrulama
-                kodlarınızı veya diğer hassas hesap bilgilerini bizimle
-                paylaşmayın.
-              </p>
-
-              <h3>Premium ve Satın Alma</h3>
-
-              <p>
-                Premium abonelik ve satın alma işlemleri Apple App Store
-                üzerinden yürütülür. Aboneliklerinizi iPhone Ayarlar → Apple
-                Hesabı → Abonelikler bölümünden görüntüleyebilir ve
-                yönetebilirsiniz.
-              </p>
-
-              <p>
-                Daha önce satın aldığınız Premium erişim görünmüyorsa
-                uygulamadaki satın alma geri yükleme seçeneğini kullanın.
-              </p>
-
-              <h3>Reklam Sorunları</h3>
-
-              <p>
-                Reklamların görüntülenmesi, reklam rızası veya gizlilik
-                seçenekleriyle ilgili bir sorun yaşıyorsanız cihaz modelinizi,
-                iOS sürümünüzü ve CarSave AI uygulama sürümünü belirtin.
-              </p>
-
-              <h3>Veri ve Gizlilik</h3>
-
-              <p>
-                Araç veya uygulama verilerinizin silinmesiyle ilgili bir sorun
-                yaşıyorsanız hangi veri türünü kaldırmak istediğinizi destek
-                mesajınızda belirtin.
-              </p>
-
-              <p>
-                Destek mesajınıza gereksiz kişisel bilgi, hesap parolası,
-                ödeme bilgisi veya hassas araç bilgisi eklemeyin.
-              </p>
-
-              <h3>Destek ile İletişim</h3>
-
-              <p>
-                Destek talebinizi aşağıdaki e-posta adresine gönderebilirsiniz.
-              </p>
-
-              <div className={styles.actions}>
-                <a
-                  href={`mailto:hello@saybir.net?subject=${encodeURIComponent(
-                    "CarSave AI Destek"
-                  )}`}
-                >
-                  hello@saybir.net
-                </a>
-              </div>
-
-              <h3>Mesajınıza Ekleyin</h3>
-
-              <ul>
-                <li>Kullandığınız iPhone veya iPad modeli</li>
-                <li>iOS veya iPadOS sürümü</li>
-                <li>CarSave AI uygulama sürümü</li>
-                <li>Sorunun hangi ekranda meydana geldiği</li>
-                <li>Sorunu tekrar oluşturma adımları</li>
-                <li>Mümkünse hassas bilgi içermeyen ekran görüntüsü</li>
-              </ul>
-
-              <h3>Gizlilik</h3>
-
-              <p>
-                CarSave AI gizlilik politikası için{" "}
-                <Link href={`/apps/${app.slug}/privacy`}>
-                  Gizlilik Politikası
-                </Link>{" "}
-                sayfasını ziyaret edebilirsiniz.
-              </p>
-            </>
-          ) : isYemekolay ? (
-            <>
-              <p>
-                Yemekolay uygulamasıyla ilgili teknik sorunlar, öneri sistemi,
-                Premium abonelik, reklamlar veya kullanım soruları için
-                aşağıdaki iletişim adresinden destek alabilirsiniz.
-              </p>
-
-              <h3>Destek Konuları</h3>
-
-              <ul>
-                <li>Malzemeye göre yemek önerileri</li>
-                <li>Bugün ne pişirsem önerileri</li>
-                <li>Ne sipariş etsem önerileri</li>
-                <li>Önerilerin yüklenmemesi veya hatalı görünmesi</li>
-                <li>Günlük kullanım hakkı</li>
-                <li>Ödüllü reklam ile ek kullanım hakkı</li>
-                <li>Premium abonelik</li>
-                <li>Satın alma geri yükleme</li>
-                <li>Bildirimler</li>
-                <li>Reklamlarla ilgili sorunlar</li>
-                <li>Uygulama içindeki diğer teknik sorunlar</li>
-              </ul>
-
-              <h3>Öneriler Çalışmıyorsa</h3>
-
-              <p>
-                Malzemeye göre yemek önerisi veya diğer öneri ekranlarında
-                sonuç alamıyorsanız internet bağlantınızı kontrol edin ve
-                uygulamanın güncel sürümünü kullandığınızdan emin olun.
-              </p>
-
-              <p>
-                Sorun devam ediyorsa hangi öneri türünde sorun yaşadığınızı,
-                hangi malzemeleri veya seçenekleri kullandığınızı ve ekranda
-                görünen hata mesajını destek talebinizde belirtin.
-              </p>
-
-              <h3>Günlük Kullanım ve Ödüllü Reklam</h3>
-
-              <p>
-                Ücretsiz kullanım hakkınızın yenilenmediğini veya ödüllü reklam
-                izledikten sonra ek kullanım hakkının tanımlanmadığını
-                düşünüyorsanız uygulamayı tamamen kapatıp tekrar açmayı deneyin.
-              </p>
-
-              <p>
-                Ödüllü reklam yüklenmiyorsa internet bağlantınızı kontrol edin.
-                Reklam kullanılabilirliği bölgeye, reklam sağlayıcısına ve o
-                andaki reklam envanterine göre değişebilir.
-              </p>
-
-              <h3>Premium Abonelik</h3>
-
-              <p>
-                Premium abonelik işlemleri Apple App Store üzerinden
-                gerçekleştirilir. Aboneliklerinizi iPhone Ayarlar → Apple
-                Hesabı → Abonelikler bölümünden görüntüleyebilir veya
-                yönetebilirsiniz.
-              </p>
-
-              <p>
-                Daha önce satın aldığınız Premium erişim görünmüyorsa
-                uygulamadaki satın alma geri yükleme seçeneğini kullanın.
-              </p>
-
-              <h3>Bildirim Sorunları</h3>
-
-              <p>
-                Yemekolay bildirimlerini alamıyorsanız iPhone Ayarlar →
-                Bildirimler bölümünden Yemekolay için bildirim izninin açık
-                olduğundan emin olun.
-              </p>
-
-              <h3>Reklam Sorunları</h3>
-
-              <p>
-                Reklamların görüntülenmesi, ödüllü reklamlar veya reklam
-                gizlilik seçenekleriyle ilgili sorun yaşıyorsanız cihaz
-                modelinizi, iOS sürümünüzü ve Yemekolay uygulama sürümünü
-                destek mesajınızda belirtin.
-              </p>
-
-              <h3>Gizlilik</h3>
-
-              <p>
-                Destek talebi gönderirken kişisel, finansal veya hassas
-                bilgilerinizi paylaşmayın. Öneri sistemiyle ilgili destek
-                taleplerinde sorunu anlamamız için yalnızca gerekli bilgileri
-                iletin.
-              </p>
-
-              <h3>Destek ile İletişim</h3>
-
-              <p>
-                Destek talebinizi aşağıdaki e-posta adresine gönderebilirsiniz.
-              </p>
-
-              <div className={styles.actions}>
-                <a
-                  href={`mailto:hello@saybir.net?subject=${encodeURIComponent(
-                    "Yemekolay Destek"
-                  )}`}
-                >
-                  hello@saybir.net
-                </a>
-              </div>
-
-              <h3>Mesajınıza Ekleyin</h3>
-
-              <ul>
-                <li>Kullandığınız iPhone veya iPad modeli</li>
-                <li>iOS veya iPadOS sürümü</li>
-                <li>Yemekolay uygulama sürümü</li>
-                <li>Sorunun hangi ekranda meydana geldiği</li>
-                <li>Sorunu tekrar oluşturma adımları</li>
-                <li>Mümkünse hassas bilgi içermeyen ekran görüntüsü</li>
-              </ul>
-
-              <h3>Gizlilik Politikası</h3>
-
-              <p>
-                Yemekolay gizlilik politikası için{" "}
-                <Link href={`/apps/${app.slug}/privacy`}>
-                  Gizlilik Politikası
-                </Link>{" "}
-                sayfasını ziyaret edebilirsiniz.
-              </p>
-            </>
-          ) : isNeSecsem ? (
-            <>
-              <p>
-                Ne Seçsem? uygulamasıyla ilgili teknik sorunlar, öneri sistemi,
-                Premium abonelik, reklamlar veya kullanım soruları için
-                aşağıdaki iletişim adresinden destek alabilirsiniz.
-              </p>
-
-              <h3>Destek Konuları</h3>
-
-              <ul>
-                <li>Film, dizi ve kitap önerileri</li>
-                <li>Ruh hâline göre öneriler</li>
-                <li>Süre ve ülke filtreleri</li>
-                <li>Kararsızım özelliği</li>
-                <li>Favoriler</li>
-                <li>İzledim / Okudum kayıtları</li>
-                <li>Günlük öneri bildirimleri</li>
-                <li>Ödüllü reklam ile ek kullanım hakkı</li>
-                <li>Premium abonelik</li>
-                <li>Satın alma geri yükleme</li>
-                <li>Reklamlarla ilgili sorunlar</li>
-                <li>Uygulama içindeki diğer teknik sorunlar</li>
-              </ul>
-
-              <h3>Öneriler Çalışmıyorsa</h3>
-
-              <p>
-                Film, dizi veya kitap önerileri yüklenmiyorsa internet
-                bağlantınızı kontrol edin ve Ne Seçsem?'in güncel sürümünü
-                kullandığınızdan emin olun.
-              </p>
-
-              <p>
-                Sorun devam ediyorsa hangi içerik türünde sorun yaşadığınızı,
-                kullandığınız filtreleri ve ekranda görünen hata mesajını
-                destek talebinizde belirtin.
-              </p>
-
-              <h3>Favoriler ve İzledim / Okudum Kayıtları</h3>
-
-              <p>
-                Favorileriniz veya izledim / okudum kayıtlarınız beklediğiniz
-                şekilde görünmüyorsa sorunun hangi içerikte oluştuğunu ve
-                hangi işlemi yaptıktan sonra fark ettiğinizi belirtin.
-              </p>
-
-              <h3>Günlük Kullanım ve Ödüllü Reklam</h3>
-
-              <p>
-                Ücretsiz kullanım hakkınız yenilenmediyse veya ödüllü reklam
-                izledikten sonra ek kullanım hakkı tanımlanmadıysa uygulamayı
-                tamamen kapatıp tekrar açmayı deneyin.
-              </p>
-
-              <p>
-                Ödüllü reklam yüklenmiyorsa internet bağlantınızı kontrol edin.
-                Reklam kullanılabilirliği bölgeye, reklam sağlayıcısına ve
-                mevcut reklam envanterine göre değişebilir.
-              </p>
-
-              <h3>Premium Abonelik</h3>
-
-              <p>
-                Premium abonelik işlemleri Apple App Store üzerinden
-                gerçekleştirilir. Aboneliklerinizi iPhone Ayarlar → Apple
-                Hesabı → Abonelikler bölümünden görüntüleyebilir veya
-                yönetebilirsiniz.
-              </p>
-
-              <p>
-                Daha önce satın aldığınız Premium erişim görünmüyorsa
-                uygulamadaki satın alma geri yükleme seçeneğini kullanın.
-              </p>
-
-              <h3>Bildirim Sorunları</h3>
-
-              <p>
-                Günlük öneri bildirimlerini alamıyorsanız iPhone Ayarlar →
-                Bildirimler bölümünden Ne Seçsem? için bildirim izninin açık
-                olduğundan emin olun.
-              </p>
-
-              <h3>Reklam Sorunları</h3>
-
-              <p>
-                Reklamların görüntülenmesi, ödüllü reklamlar veya reklam
-                gizlilik seçenekleriyle ilgili sorun yaşıyorsanız cihaz
-                modelinizi, iOS sürümünüzü ve Ne Seçsem? uygulama sürümünü
-                destek mesajınızda belirtin.
-              </p>
-
-              <h3>Gizlilik</h3>
-
-              <p>
-                Destek talebi gönderirken kişisel, finansal veya hassas
-                bilgilerinizi paylaşmayın. Sorunun anlaşılması için yalnızca
-                gerekli teknik bilgileri iletin.
-              </p>
-
-              <h3>Destek ile İletişim</h3>
-
-              <p>
-                Destek talebinizi aşağıdaki e-posta adresine gönderebilirsiniz.
-              </p>
-
-              <div className={styles.actions}>
-                <a
-                  href={`mailto:hello@saybir.net?subject=${encodeURIComponent(
-                    "Ne Seçsem? Destek"
-                  )}`}
-                >
-                  hello@saybir.net
-                </a>
-              </div>
-
-              <h3>Mesajınıza Ekleyin</h3>
-
-              <ul>
-                <li>Kullandığınız iPhone veya iPad modeli</li>
-                <li>iOS veya iPadOS sürümü</li>
-                <li>Ne Seçsem? uygulama sürümü</li>
-                <li>Sorunun hangi ekranda meydana geldiği</li>
-                <li>Sorunu tekrar oluşturma adımları</li>
-                <li>Mümkünse hassas bilgi içermeyen ekran görüntüsü</li>
-              </ul>
-
-              <h3>Gizlilik Politikası</h3>
-
-              <p>
-                Ne Seçsem? gizlilik politikası için{" "}
-                <Link href={`/apps/${app.slug}/privacy`}>
-                  Gizlilik Politikası
-                </Link>{" "}
-                sayfasını ziyaret edebilirsiniz.
-              </p>
-            </>
-          ) : (
-            <>
-              <p>
-                Uygulamayla ilgili teknik sorun, geri bildirim veya destek
-                talebiniz için aşağıdaki adresten iletişime geçebilirsiniz.
-              </p>
-
-              <div className={styles.actions}>
-                <a
-                  href={`mailto:hello@saybir.net?subject=${encodeURIComponent(
-                    app.name + " Destek"
-                  )}`}
-                >
-                  hello@saybir.net
-                </a>
-              </div>
-
-              <h3>Mesajınıza ekleyin</h3>
-
-              <ul>
-                <li>Kullandığınız cihaz ve iOS sürümü</li>
-                <li>Uygulama sürümü</li>
-                <li>Sorunun kısa açıklaması ve mümkünse ekran görüntüsü</li>
-              </ul>
-            </>
-          )}
+          <p>{config.intro}</p>
+
+          <h3>Destek Konuları</h3>
+          <ul>
+            {config.topics.map((topic) => (
+              <li key={topic}>{topic}</li>
+            ))}
+          </ul>
+
+          {config.checks?.map((item) => (
+            <section key={item.title}>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </section>
+          ))}
+
+          <h3>Destek ile İletişim</h3>
+          <p>Destek talebinizi aşağıdaki e-posta adresine gönderebilirsiniz.</p>
+
+          <div className={styles.actions}>
+            <a
+              href={`mailto:hello@saybir.net?subject=${encodeURIComponent(
+                app.name + " Destek"
+              )}`}
+            >
+              hello@saybir.net
+            </a>
+          </div>
+
+          <h3>Mesajınıza Ekleyin</h3>
+          <ul>
+            <li>Kullandığınız iPhone veya iPad modeli</li>
+            <li>iOS veya iPadOS sürümü</li>
+            <li>{app.name} uygulama sürümü</li>
+            <li>Sorunun hangi ekranda meydana geldiği</li>
+            <li>Sorunu tekrar oluşturma adımları</li>
+            <li>Mümkünse hassas bilgi içermeyen ekran görüntüsü</li>
+          </ul>
+
+          <h3>Gizlilik Politikası</h3>
+          <p>
+            {app.name} gizlilik politikası için{" "}
+            <Link href={`/apps/${app.slug}/privacy`}>
+              Gizlilik Politikası
+            </Link>{" "}
+            sayfasını ziyaret edebilirsiniz.
+          </p>
         </section>
       </main>
     </div>
