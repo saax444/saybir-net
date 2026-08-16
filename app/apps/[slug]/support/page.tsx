@@ -3,306 +3,181 @@ import { notFound } from "next/navigation";
 import { getApp } from "@/data/apps";
 import styles from "../app-page.module.css";
 
-type SupportConfig = {
-  intro: string;
-  topics: string[];
-  checks?: { title: string; text: string }[];
-};
+type SupportConfig = { intro: string; topics: string[] };
 
-function appKey(name: string) {
-  const value = name.toLocaleLowerCase("tr-TR");
-
-  if (value.includes("ne seçsem")) return "ne-secsem";
-  if (value.includes("yemekolay")) return "yemekolay";
-  if (value.includes("carsave")) return "carsave";
-  if (value.includes("hilock")) return "hilock";
-  if (value.includes("ödüyorum")) return "oduyorum";
-  if (value.includes("susadım")) return "susadim";
-  if (value.includes("ezan vakti")) return "ezan-vakti";
-  if (value.includes("melody map")) return "melody-map";
-  if (value.includes("history")) return "history";
-  if (value.includes("velomate")) return "velomate";
-  if (value.includes("tartarot")) return "tartarot";
-  if (value.includes("vibelens")) return "vibelens";
-  if (value.includes("ref!ref!ref!") || value.includes("ref ref ref")) return "refrefref";
-  if (value.includes("bold block arcade")) return "bold-block-arcade";
-  if (value.includes("üşenme yap")) return "usenme-yap";
-  if (value.includes("kedilik")) return "kedilik";
-
-  return "generic";
-}
-
-const configs: Record<string, SupportConfig> = {
+const supportBySlug: Record<string, SupportConfig> = {
   "ne-secsem": {
-    intro:
-      "Ne Seçsem? uygulamasıyla ilgili teknik sorunlar, öneri sistemi, Premium abonelik, reklamlar veya kullanım soruları için destek alabilirsiniz.",
+    intro: "Ne Seçsem? için teknik destek, kullanım soruları ve geri bildirimler bu sayfa üzerinden yönetilir.",
     topics: [
       "Film, dizi ve kitap önerileri",
-      "Ruh hâline göre öneriler",
-      "Filtreler ve Kararsızım özelliği",
-      "Favoriler ve İzledim / Okudum kayıtları",
+      "Ruh hâli ve filtreler",
+      "Favoriler / İzledim / Okudum",
+      "Ödüllü reklam",
+      "Premium ve satın alma geri yükleme",
       "Günlük öneri bildirimleri",
-      "Ödüllü reklamlar",
-      "Premium abonelik ve satın alma geri yükleme",
-    ],
-    checks: [
-      {
-        title: "Öneriler Çalışmıyorsa",
-        text: "İnternet bağlantınızı ve uygulamanın güncel sürümünü kontrol edin. Sorun devam ederse içerik türünü, kullandığınız filtreleri ve ekranda görünen hata mesajını destek talebinize ekleyin.",
-      },
-    ],
+        ],
   },
-
-  yemekolay: {
-    intro:
-      "Yemekolay ile ilgili teknik sorunlar, öneriler, Premium abonelik, ödüllü reklamlar veya kullanım sorunları için destek alabilirsiniz.",
+  "yemekolay": {
+    intro: "Yemekolay için teknik destek, kullanım soruları ve geri bildirimler bu sayfa üzerinden yönetilir.",
     topics: [
-      "Malzemeye göre yemek önerileri",
+      "Malzemeye göre tarif",
       "Bugün ne pişirsem / ne sipariş etsem",
-      "6.000 tarif arşivi",
-      "Günlük kullanım hakkı",
-      "Ödüllü reklamlar",
-      "Premium abonelik ve satın alma geri yükleme",
+      "Tarif sonuçları",
+      "Ödüllü kullanım hakkı",
+      "Premium ve satın alma geri yükleme",
       "Bildirimler",
-    ],
-    checks: [
-      {
-        title: "Öneriler Çalışmıyorsa",
-        text: "İnternet bağlantınızı ve uygulamanın güncel sürümünü kontrol edin. Sorun devam ederse kullandığınız malzemeleri veya seçeneği ve hata mesajını belirtin.",
-      },
-    ],
+        ],
   },
-
-  carsave: {
-    intro:
-      "CarSave AI ile ilgili araç kayıtları, yolculuk, konum, bildirim, hesap, Premium veya reklam sorunları için destek alabilirsiniz.",
+  "carsave-ai": {
+    intro: "CarSave AI için teknik destek, kullanım soruları ve geri bildirimler bu sayfa üzerinden yönetilir.",
     topics: [
       "Araç ekleme ve düzenleme",
-      "Yakıt ve şarj kayıtları",
-      "Bakım ve servis kayıtları",
-      "Sigorta, muayene ve vergi hatırlatmaları",
+      "Yakıt/şarj kayıtları",
+      "Bakım, servis ve masraflar",
       "Konum ve harita",
-      "Yolculuk ve hareket takibi",
-      "Apple / Google ile Giriş",
-      "Premium ve satın alma geri yükleme",
-    ],
-    checks: [
-      {
-        title: "Konum veya Yolculuk Sorunları",
-        text: "iPhone Ayarlar bölümünden CarSave AI için gerekli konum ve hareket izinlerini kontrol edin.",
-      },
-    ],
+      "Hatırlatmalar",
+      "Hesap ve giriş",
+      "Premium / reklamlar",
+        ],
   },
-
-  hilock: {
-    intro:
-      "HiLock ile ilgili uygulama koruma, PIN, Face ID, Screen Time, Family Controls veya Mac koruması sorunları için destek alabilirsiniz.",
+  "hilock": {
+    intro: "HiLock için teknik destek, kullanım soruları ve geri bildirimler bu sayfa üzerinden yönetilir.",
     topics: [
-      "Uygulama kilitleme ve koruma",
-      "Family Controls ve Managed Settings",
-      "Screen Time izinleri",
+      "Family Controls ve Screen Time izni",
+      "Uygulama koruma",
       "PIN ve Face ID",
-      "Korunan uygulama seçimi",
-      "Native macOS koruması",
-      "Reklam sorunları",
-    ],
-    checks: [
-      {
-        title: "Güvenlik Bilgileri",
-        text: "Destek talebinde PIN kodunuzu, Apple Hesabı parolanızı veya doğrulama kodlarınızı paylaşmayın.",
-      },
-    ],
+      "Managed Settings",
+      "macOS izinleri",
+      "Reklamlar",
+        ],
   },
-
-  oduyorum: {
-    intro:
-      "Ödüyorum ile ilgili finansal kayıtlar, faturalar, abonelikler, bildirimler veya reklam sorunları için destek alabilirsiniz.",
+  "oduyorum": {
+    intro: "Ödüyorum için teknik destek, kullanım soruları ve geri bildirimler bu sayfa üzerinden yönetilir.",
     topics: [
-      "Gelir ve gider kayıtları",
-      "Fatura ve abonelik takibi",
-      "Hatırlatma bildirimleri",
-      "Finansal kayıtların görüntülenmesi",
+      "Gelir/gider kayıtları",
+      "Fatura ve abonelikler",
+      "Hatırlatmalar",
       "Veri silme",
-      "Reklam sorunları",
-    ],
-    checks: [
-      {
-        title: "Finansal Gizlilik",
-        text: "Destek mesajınıza kart numarası, banka hesabı bilgisi, parola veya gereksiz hassas finansal bilgi eklemeyin.",
-      },
-    ],
+      "Reklamlar",
+        ],
   },
-
-  susadim: {
-    intro:
-      "Susadım ile ilgili su kayıtları, hatırlatmalar, Apple Health, Premium veya reklam sorunları için destek alabilirsiniz.",
+  "susadim": {
+    intro: "Susadım için teknik destek, kullanım soruları ve geri bildirimler bu sayfa üzerinden yönetilir.",
     topics: [
-      "Su tüketimi kayıtları",
-      "Günlük su hedefi",
-      "Su içme bildirimleri",
-      "Apple Health",
-      "Premium abonelik",
+      "Su tüketimi ve hedef",
+      "Hatırlatmalar",
+      "Apple Health izinleri",
+      "Premium",
       "Satın alma geri yükleme",
-      "Reklam sorunları",
-    ],
-    checks: [
-      {
-        title: "Bildirim Sorunları",
-        text: "iPhone Ayarlar → Bildirimler bölümünden Susadım için bildirim izninin açık olduğunu kontrol edin.",
-      },
-    ],
+      "Reklamlar",
+        ],
   },
-
   "ezan-vakti": {
-    intro:
-      "Ezan Vakti: Namaz ve Kıble ile ilgili teknik sorunlar ve kullanım soruları için destek alabilirsiniz.",
+    intro: "Ezan Vakti: Namaz ve Kıble için teknik destek, kullanım soruları ve geri bildirimler bu sayfa üzerinden yönetilir.",
     topics: [
       "Namaz vakitleri",
-      "Konum ve şehir belirleme",
-      "Kıble pusulası",
-      "Namaz vakti bildirimleri",
+      "Konum/şehir",
+      "Kıble",
+      "Bildirimler",
       "Yakındaki camiler",
       "Hicri takvim",
-      "Ramazan ve imsakiye",
-      "Günün ayeti ve hadisi",
-    ],
-    checks: [
-      {
-        title: "Konum ve Bildirimler",
-        text: "Konum veya bildirim özellikleri çalışmıyorsa iPhone Ayarlar bölümünden Ezan Vakti izinlerini kontrol edin.",
-      },
-    ],
+      "Ramazan/imsakiye",
+      "Ayet ve hadis",
+        ],
   },
-
   "melody-map": {
-    intro:
-      "Melody Map ile ilgili müzik keşfi, Spotify bağlantısı veya diğer teknik sorunlar için destek alabilirsiniz.",
+    intro: "Melody Map için teknik destek, kullanım soruları ve geri bildirimler bu sayfa üzerinden yönetilir.",
     topics: [
-      "Spotify bağlantısı",
       "Müzik içeriklerinin yüklenmesi",
+      "Harici müzik hizmeti bağlantıları",
       "Favoriler ve tercihler",
-      "Yetkilendirme sorunları",
-      "Uygulama içindeki diğer teknik sorunlar",
-    ],
-    checks: [
-      {
-        title: "Spotify Bağlantısı",
-        text: "Bağlantı sorunu yaşarsanız internet bağlantınızı kontrol edin ve gerekirse Spotify yetkilendirmesini yeniden gerçekleştirin. Parolanızı destek mesajında paylaşmayın.",
-      },
-    ],
+      "Yetkilendirme",
+      "Ağ bağlantısı",
+        ],
   },
-
-  history: {
-    intro:
-      "HiStory ile ilgili günlük bilgiler, ilgi alanları, ülke seçimi, Premium, reklamlar veya bildirimler için destek alabilirsiniz.",
+  "history": {
+    intro: "HiStory için teknik destek, kullanım soruları ve geri bildirimler bu sayfa üzerinden yönetilir.",
     topics: [
       "Günlük bilgiler",
-      "İlgi alanları ve ülke seçimi",
-      "Ödüllü reklamlar",
-      "Premium abonelik",
+      "İlgi alanları",
+      "Ülke/dil seçimi",
+      "Ödüllü reklam",
+      "Premium",
       "Bildirimler",
-      "Dil ve uygulama tercihleri",
-    ],
+        ],
   },
-
-  velomate: {
-    intro:
-      "VeloMate ile ilgili teknik sorunlar, cihaz izinleri, reklam veya uygulama özellikleri için destek alabilirsiniz.",
+  "velomate": {
+    intro: "VeloMate için teknik destek, kullanım soruları ve geri bildirimler bu sayfa üzerinden yönetilir.",
     topics: [
-      "Uygulamanın temel özellikleri",
+      "Temel uygulama özellikleri",
       "Cihaz izinleri",
-      "Reklam ve gizlilik seçenekleri",
       "Bildirimler",
-      "Diğer teknik sorunlar",
-    ],
+      "Ağ bağlantısı",
+      "Reklam/gizlilik seçenekleri",
+        ],
   },
-
-  tartarot: {
-    intro:
-      "TarTarot ile ilgili tarot açılımları, günlük kartlar, Premium veya bildirim sorunları için destek alabilirsiniz.",
+  "tartarot": {
+    intro: "TarTarot için teknik destek, kullanım soruları ve geri bildirimler bu sayfa üzerinden yönetilir.",
     topics: [
       "Günlük tarot",
-      "3 kart açılımı",
-      "Evet / Hayır özelliği",
+      "Üç kart açılımı",
+      "Evet/Hayır",
       "Kart yorumları",
-      "Favoriler veya günlük kayıtları",
-      "Premium abonelik",
+      "Premium",
       "Bildirimler",
-    ],
-    checks: [
-      {
-        title: "Not",
-        text: "Tarot içerikleri eğlence amaçlıdır. Teknik destek talebinizde yalnızca sorunu çözmek için gerekli bilgileri paylaşın.",
-      },
-    ],
+        ],
   },
-
-  vibelens: {
-    intro:
-      "VibeLens ile ilgili analiz özellikleri, Premium abonelik veya diğer teknik sorunlar için destek alabilirsiniz.",
+  "vibelens": {
+    intro: "VibeLens için teknik destek, kullanım soruları ve geri bildirimler bu sayfa üzerinden yönetilir.",
     topics: [
-      "Uygulama analiz özellikleri",
+      "Analiz özellikleri",
       "Kullanıcı girdileri",
-      "Premium abonelik",
-      "Satın alma geri yükleme",
-      "Diğer teknik sorunlar",
-    ],
+      "Yerel geçmiş/tercihler",
+      "Premium",
+      "Harici hizmet bağlantısı",
+        ],
   },
-
-  refrefref: {
-    intro:
-      "Ref!Ref!Ref! ile ilgili oyun, skor, reklam veya satın alma sorunları için destek alabilirsiniz.",
+  "refrefref": {
+    intro: "Ref!Ref!Ref! için teknik destek, kullanım soruları ve geri bildirimler bu sayfa üzerinden yönetilir.",
     topics: [
       "Oyun kontrolleri",
       "Skor ve ilerleme",
-      "Tema veya oyun ayarları",
+      "Tema/şehir kilitleri",
       "Reklamlar",
       "Reklam kaldırma satın alması",
-      "Ses ve titreşim",
-    ],
+      "Ses ve haptik",
+        ],
   },
-
   "bold-block-arcade": {
-    intro:
-      "Bold Block Arcade ile ilgili oyun performansı, skor, reklam veya diğer teknik sorunlar için destek alabilirsiniz.",
+    intro: "Bold Block Arcade için teknik destek, kullanım soruları ve geri bildirimler bu sayfa üzerinden yönetilir.",
     topics: [
       "Oyun kontrolleri",
-      "Skor ve ilerleme",
+      "Skor/ilerleme",
       "Performans",
       "Reklamlar",
       "Uygulama içi satın almalar",
-    ],
+        ],
   },
-
   "usenme-yap": {
-    intro:
-      "Üşenme Yap ile ilgili görevler, motivasyon özellikleri, hesap, reklam veya Premium sorunları için destek alabilirsiniz.",
+    intro: "Üşenme Yap için teknik destek, kullanım soruları ve geri bildirimler bu sayfa üzerinden yönetilir.",
     topics: [
-      "Görev ve alışkanlık özellikleri",
+      "Görevlar ve alışkanlıklar",
       "Bildirimler",
-      "Google / Firebase giriş",
-      "Reklamlar",
-      "Premium abonelik",
+      "Google/Firebase giriş",
+      "Premium",
       "Satın alma geri yükleme",
-    ],
+      "Reklamlar",
+        ],
   },
-
-  kedilik: {
-    intro:
-      "Kedilik ile ilgili içerikler, uygulama tercihleri, bildirimler veya diğer teknik sorunlar için destek alabilirsiniz.",
+  "kedilik": {
+    intro: "Kedilik için teknik destek, kullanım soruları ve geri bildirimler bu sayfa üzerinden yönetilir.",
     topics: [
       "Uygulama içerikleri",
       "Favoriler ve tercihler",
+      "Cihaz izinleri",
       "Bildirimler",
       "Reklamlar",
-      "Diğer teknik sorunlar",
-    ],
-  },
-
-  generic: {
-    intro:
-      "Uygulamayla ilgili teknik sorun, geri bildirim veya kullanım soruları için destek alabilirsiniz.",
-    topics: ["Teknik sorunlar", "Geri bildirim", "Uygulama özellikleri"],
+        ],
   },
 };
 
@@ -312,24 +187,19 @@ export default async function SupportPage({
   params: Promise<{ slug: string }>;
 }) {
   const app = getApp((await params).slug);
+  if (!app) notFound();
 
-  if (!app) {
-    notFound();
-  }
-
-  const config = configs[appKey(app.name)] ?? configs.generic;
+  const config = supportBySlug[app.slug] ?? {
+    intro: `${app.name} için teknik destek ve geri bildirim.`,
+    topics: ["Teknik sorunlar", "Uygulama özellikleri", "Geri bildirim"],
+  };
 
   return (
     <div className={styles.page}>
       <nav className={styles.nav}>
         <div className={styles.navInner}>
-          <Link className={styles.brand} href="/">
-            Aziz Ahmet Saybir
-          </Link>
-
-          <Link className={styles.back} href={`/apps/${app.slug}`}>
-            ← {app.name}
-          </Link>
+          <Link className={styles.brand} href="/">Aziz Ahmet Saybir</Link>
+          <Link className={styles.back} href={`/apps/${app.slug}`}>← {app.name}</Link>
         </div>
       </nav>
 
@@ -337,54 +207,99 @@ export default async function SupportPage({
         <section className={styles.content}>
           <span className={styles.kicker}>Destek</span>
           <h1>{app.name} Destek</h1>
-
           <p>{config.intro}</p>
+          <p>
+            Bir sorun yaşıyorsanız aşağıdaki adımları uygulayın. Sorun devam ederse
+            sayfanın altındaki e-posta bağlantısıyla ayrıntıları gönderin.
+          </p>
 
-          <h3>Destek Konuları</h3>
+          <h3>Destek Verilen Konular</h3>
           <ul>
-            {config.topics.map((topic) => (
-              <li key={topic}>{topic}</li>
-            ))}
+            {config.topics.map((topic) => <li key={topic}>{topic}</li>)}
+            <li>Uygulamanın açılmaması, donması veya beklenmeyen şekilde kapanması</li>
+            <li>Uygulama sürümüyle ilgili diğer teknik sorunlar</li>
           </ul>
 
-          {config.checks?.map((item) => (
-            <section key={item.title}>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </section>
-          ))}
+          <h3>Önce Bunları Kontrol Edin</h3>
+          <ul>
+            <li>App Store üzerinden uygulamanın en güncel sürümünün kurulu olduğundan emin olun.</li>
+            <li>İnternet gerektiren özelliklerde Wi-Fi veya mobil veri bağlantısını kontrol edin.</li>
+            <li>Uygulamayı tamamen kapatıp yeniden açın.</li>
+            <li>Gerekirse cihazı yeniden başlatın.</li>
+            <li>Özellik bir sistem izni gerektiriyorsa iPhone/iPad Ayarlar bölümünden uygulama izinlarını kontrol edin.</li>
+          </ul>
 
-          <h3>Destek ile İletişim</h3>
-          <p>Destek talebinizi aşağıdaki e-posta adresine gönderebilirsiniz.</p>
+          <h3>Bildirimler Çalışmıyorsa</h3>
+          <p>
+            Ayarlar → Bildirimler → {app.name} bölümünden bildirim iznini kontrol edin.
+            Odak modu, Sessiz Mod veya sistem bildirim ayarlarının teslimatı etkileyebileceğini
+            unutmayın. Uygulama içindeki bildirim anahtarları varsa onların da etkin olduğundan
+            emin olun.
+          </p>
+
+          <h3>Premium veya Satın Alma Sorunları</h3>
+          <p>
+            Uygulama Premium abonelik veya uygulama içi satın alma sunuyorsa işlemler Apple
+            App Store üzerinden gerçekleştirilir. Satın alma tamamlandığı hâlde özellik
+            açılmadıysa uygulamadaki “Satın Almaları Geri Yükle” seçeneğini kullanın.
+            Aboneliklerinizi iPhone/iPad Ayarlar → Apple Hesabı → Abonelikler bölümünden
+            yönetebilirsiniz.
+          </p>
+          <p>
+            Destek ekibine Apple Hesabı parolanızı, doğrulama kodunuzu veya ödeme kartı
+            bilgilerinizi hiçbir zaman göndermeyin.
+          </p>
+
+          <h3>Reklamlar veya Ödüllü Reklamlar</h3>
+          <p>
+            Reklam destekli özelliklerde reklam bulunabilirliği ülkeye, bağlantıya, reklam
+            sağlayıcısına ve mevcut reklam envanterine göre değişebilir. Ödüllü reklam
+            tamamlandığı hâlde hak tanımlanmadıysa uygulamayı yeniden açın ve sorun devam
+            ederse yaklaşık zamanı ve yaptığınız işlemi destek mesajına ekleyin.
+          </p>
+
+          <h3>İzin Sorunları</h3>
+          <p>
+            Konum, bildirim, Health, Screen Time, kamera, fotoğraf veya diğer sistem izinleri
+            yalnızca ilgili özelliği kullanan uygulamalarda gereklidir. İzinler Apple'ın
+            Ayarlar/Sistem Ayarları ekranından değiştirilebilir. Bir izin kapalıysa yalnızca
+            o izne bağlı özellik çalışmayabilir.
+          </p>
+
+          <h3>Veri ve Gizlilik Talepleri</h3>
+          <p>
+            Gizlilik, veri silme veya uygulamanın veri kullanımına ilişkin bir talebiniz
+            varsa e-posta konu satırına “{app.name} - Gizlilik Talebi” yazın. Talebin
+            anlaşılması için gerekli olmayan hassas bilgileri mesajınıza eklemeyin.
+          </p>
+
+          <h3>Destek Mesajına Neleri Eklemelisiniz?</h3>
+          <ul>
+            <li>iPhone/iPad/Mac modeli</li>
+            <li>iOS, iPadOS veya macOS sürümü</li>
+            <li>{app.name} uygulama sürümü ve mümkünse build numarası</li>
+            <li>Sorunun hangi ekranda oluştuğu</li>
+            <li>Sorunu tekrar oluşturmak için izlenen adımlar</li>
+            <li>Ekranda görünen hata mesajının tam metni</li>
+            <li>Mümkünse kişisel bilgi içermeyen ekran görüntüsü</li>
+          </ul>
+
+          <h3>İletişim</h3>
+          <p>
+            Destek talepleri için{" "}
+            <a href={`mailto:hello@saybir.net?subject=${encodeURIComponent(app.name + " Destek")}`}>
+              hello@saybir.net
+            </a>{" "}
+            adresini kullanabilirsiniz.
+          </p>
 
           <div className={styles.actions}>
-            <a
-              href={`mailto:hello@saybir.net?subject=${encodeURIComponent(
-                app.name + " Destek"
-              )}`}
-            >
-              hello@saybir.net
+            <Link href={`/apps/${app.slug}/privacy`}>Gizlilik Politikası</Link>
+            <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">
+              Apple Standart EULA
             </a>
+            <Link href={`/apps/${app.slug}`}>Resmî Uygulama Sayfası</Link>
           </div>
-
-          <h3>Mesajınıza Ekleyin</h3>
-          <ul>
-            <li>Kullandığınız iPhone veya iPad modeli</li>
-            <li>iOS veya iPadOS sürümü</li>
-            <li>{app.name} uygulama sürümü</li>
-            <li>Sorunun hangi ekranda meydana geldiği</li>
-            <li>Sorunu tekrar oluşturma adımları</li>
-            <li>Mümkünse hassas bilgi içermeyen ekran görüntüsü</li>
-          </ul>
-
-          <h3>Gizlilik Politikası</h3>
-          <p>
-            {app.name} gizlilik politikası için{" "}
-            <Link href={`/apps/${app.slug}/privacy`}>
-              Gizlilik Politikası
-            </Link>{" "}
-            sayfasını ziyaret edebilirsiniz.
-          </p>
         </section>
       </main>
     </div>
