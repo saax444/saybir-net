@@ -18,6 +18,7 @@ export default async function PrivacyPage({
   const isSusadim = app.slug === "susadim";
   const isOduyorum = app.slug === "oduyorum";
   const isHiLock = app.slug === "hilock";
+  const isCarSave = app.slug === "carsave-ai";
 
   return (
     <div className={styles.page}>
@@ -465,6 +466,175 @@ export default async function PrivacyPage({
               <h3>İletişim</h3>
               <p>
                 HiLock gizlilik politikasıyla ilgili sorularınızı{" "}
+                <a href="mailto:hello@saybir.net">hello@saybir.net</a>{" "}
+                adresine iletebilirsiniz.
+              </p>
+            </>
+          ) : isCarSave ? (
+            <>
+              <h3>Genel</h3>
+              <p>
+                CarSave AI, araç bilgilerinizi, bakım kayıtlarınızı, yakıt
+                işlemlerinizi, önemli tarihleri ve araçla ilgili diğer
+                bilgileri düzenlemenize yardımcı olan bir iOS uygulamasıdır.
+              </p>
+
+              <h3>Hesap ve Kimlik Doğrulama</h3>
+              <p>
+                CarSave AI, desteklenen durumlarda Apple ile Giriş ve Google
+                ile Giriş seçeneklerini kullanabilir. Kimlik doğrulama
+                işlemlerinde Firebase Authentication gibi hizmetler
+                kullanılabilir.
+              </p>
+
+              <p>
+                Bu işlemler sırasında hesabın doğrulanması için gerekli hesap
+                kimliği ve temel hesap bilgileri ilgili hizmet sağlayıcılar
+                tarafından işlenebilir.
+              </p>
+
+              <h3>Araç Bilgileri</h3>
+              <p>
+                Kullanıcı tarafından eklenen araç bilgileri; marka, model,
+                kilometre, yakıt türü, bakım bilgileri, sigorta, muayene ve
+                benzeri araç kayıtlarını içerebilir.
+              </p>
+
+              <p>
+                Bu bilgiler CarSave AI'nin araç yönetimi ve hatırlatma
+                özelliklerini sağlamak amacıyla kullanılır.
+              </p>
+
+              <h3>Yakıt, Bakım ve Harcama Kayıtları</h3>
+              <p>
+                Yakıt veya şarj kayıtları, bakım ve servis işlemleri, kilometre
+                bilgileri ve kullanıcı tarafından girilen ilgili maliyetler
+                uygulama içindeki takip ve istatistik özelliklerini sağlamak
+                amacıyla işlenebilir.
+              </p>
+
+              <p>
+                Kullanıcının girdiği araç ve maliyet kayıtları reklam hedefleme
+                amacıyla kullanılmaz.
+              </p>
+
+              <h3>Konum Bilgisi</h3>
+              <p>
+                CarSave AI, yalnızca kullanıcı izin verdiğinde cihazın konum
+                bilgisine erişebilir.
+              </p>
+
+              <p>
+                Konum bilgisi; yolculuk özellikleri, yakın çevredeki araçla
+                ilgili hizmet noktalarının gösterilmesi veya konuma bağlı
+                özelliklerin sağlanması amacıyla kullanılabilir.
+              </p>
+
+              <p>
+                Konum izni iOS tarafından yönetilir ve kullanıcı istediği zaman
+                iPhone Ayarlar bölümünden bu izni değiştirebilir veya
+                kapatabilir.
+              </p>
+
+              <h3>Hareket ve Yolculuk Bilgileri</h3>
+              <p>
+                Kullanıcı izin verdiğinde CarSave AI, desteklenen yolculuk veya
+                sürüş özelliklerini sağlamak amacıyla cihazın hareket
+                sensörlerinden gelen bilgileri kullanabilir.
+              </p>
+
+              <p>
+                Hareket bilgileri yalnızca ilgili uygulama özelliklerini
+                sağlamak amacıyla kullanılır.
+              </p>
+
+              <h3>Bildirimler</h3>
+              <p>
+                Kullanıcı izin verdiğinde CarSave AI; bakım, sigorta, muayene,
+                vergi ve kullanıcı tarafından oluşturulan diğer araç
+                hatırlatmaları için bildirim gönderebilir.
+              </p>
+
+              <p>
+                Bildirim izinleri iOS tarafından yönetilir ve kullanıcı
+                tarafından istenildiği zaman değiştirilebilir.
+              </p>
+
+              <h3>Reklamlar ve Google AdMob</h3>
+              <p>
+                CarSave AI reklam göstermek amacıyla Google AdMob hizmetini
+                kullanabilir.
+              </p>
+
+              <p>
+                Google ve reklam iş ortakları; reklam sunma, performans ölçümü,
+                sahtekârlığı önleme ve kullanıcının izin verdiği durumlarda
+                kişiselleştirme amacıyla cihaz bilgileri, reklam etkileşimleri
+                ve benzeri teknik bilgileri kendi politikaları doğrultusunda
+                işleyebilir.
+              </p>
+
+              <h3>Uygulama Takibi Şeffaflığı</h3>
+              <p>
+                iOS tarafından gerekli görüldüğü durumlarda CarSave AI, reklam
+                veya ölçüm amaçlı cihaz tanımlayıcılarının kullanılabilmesi için
+                App Tracking Transparency izni isteyebilir.
+              </p>
+
+              <p>
+                Kullanıcının bu izni vermesi zorunlu değildir ve tercih iOS
+                Ayarlar bölümünden değiştirilebilir.
+              </p>
+
+              <h3>Araç Verilerinin Reklam Amaçlı Kullanımı</h3>
+              <p>
+                Kullanıcının CarSave AI içerisine girdiği araç, kilometre,
+                yakıt, bakım, servis, sigorta, muayene ve maliyet kayıtları
+                reklam hedefleme amacıyla kullanılmaz.
+              </p>
+
+              <h3>Üçüncü Taraf Hizmetler</h3>
+              <p>
+                CarSave AI; Apple hizmetleri, Google hizmetleri, Firebase ve
+                Google AdMob gibi üçüncü taraf teknolojileri kullanabilir.
+              </p>
+
+              <p>
+                Bu hizmetlerin kendi gizlilik politikaları ve veri işleme
+                uygulamaları bulunur. İlgili hizmetlerin kendi sistemleri
+                üzerinden işlediği bilgiler kendi politikalarına tabidir.
+              </p>
+
+              <h3>Verilerin Silinmesi</h3>
+              <p>
+                Uygulamada desteklenen veri yönetimi seçenekleri kullanılarak
+                araç ve ilgili yerel kayıtlar silinebilir.
+              </p>
+
+              <p>
+                Hesap veya veri silme işlemleriyle ilgili destek için{" "}
+                <a href="mailto:hello@saybir.net">hello@saybir.net</a>{" "}
+                adresinden iletişime geçebilirsiniz.
+              </p>
+
+              <h3>Veri Güvenliği</h3>
+              <p>
+                CarSave AI, uygulama verilerini yalnızca özelliklerin
+                sağlanması için gerekli olduğu ölçüde kullanmayı ve
+                desteklenen verileri iOS tarafından sağlanan güvenlik
+                mekanizmalarıyla korumayı amaçlar.
+              </p>
+
+              <h3>Politika Değişiklikleri</h3>
+              <p>
+                Bu gizlilik politikası uygulamanın özellikleri, kullanılan
+                hizmetler veya yasal gereklilikler değiştiğinde
+                güncellenebilir. Güncel sürüm bu sayfada yayımlanır.
+              </p>
+
+              <h3>İletişim</h3>
+              <p>
+                CarSave AI gizlilik politikasıyla ilgili sorularınızı{" "}
                 <a href="mailto:hello@saybir.net">hello@saybir.net</a>{" "}
                 adresine iletebilirsiniz.
               </p>
