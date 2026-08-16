@@ -18,6 +18,7 @@ export default async function SupportPage({
   const isSusadim = app.slug === "susadim";
   const isOduyorum = app.slug === "oduyorum";
   const isHiLock = app.slug === "hilock";
+  const isCarSave = app.slug === "carsave-ai";
 
   return (
     <div className={styles.page}>
@@ -451,6 +452,167 @@ export default async function SupportPage({
 
               <p>
                 HiLock gizlilik politikası için{" "}
+                <Link href={`/apps/${app.slug}/privacy`}>
+                  Gizlilik Politikası
+                </Link>{" "}
+                sayfasını ziyaret edebilirsiniz.
+              </p>
+            </>
+          ) : isCarSave ? (
+            <>
+              <p>
+                CarSave AI uygulamasıyla ilgili teknik sorunlar, araç kayıtları,
+                yolculuk takibi, konum izinleri, bildirimler, reklamlar veya
+                hesap işlemleri için aşağıdaki iletişim adresinden destek
+                alabilirsiniz.
+              </p>
+
+              <h3>Destek Konuları</h3>
+
+              <ul>
+                <li>Araç ekleme ve araç bilgileri</li>
+                <li>Yakıt ve şarj kayıtları</li>
+                <li>Bakım ve servis kayıtları</li>
+                <li>Sigorta, muayene ve vergi hatırlatmaları</li>
+                <li>Konum ve harita özellikleri</li>
+                <li>Yolculuk ve hareket takibi</li>
+                <li>Bildirimler</li>
+                <li>Apple ile Giriş ve Google ile Giriş</li>
+                <li>Premium abonelik ve satın alma işlemleri</li>
+                <li>Reklamlarla ilgili sorunlar</li>
+                <li>Uygulama içindeki diğer teknik sorunlar</li>
+              </ul>
+
+              <h3>Araç Kayıtları</h3>
+
+              <p>
+                Araç, kilometre, yakıt, bakım, servis, sigorta ve muayene
+                kayıtlarınızla ilgili bir sorun yaşıyorsanız hangi araçta ve
+                hangi kayıt türünde sorun oluştuğunu destek mesajınızda
+                belirtin.
+              </p>
+
+              <p>
+                Destek talebinde plaka, şasi numarası veya başka hassas araç
+                bilgilerini paylaşmanız gerekmiyorsa bu bilgileri mesajınıza
+                eklemeyin.
+              </p>
+
+              <h3>Konum ve Harita Sorunları</h3>
+
+              <p>
+                Konuma bağlı özellikler çalışmıyorsa iPhone Ayarlar →
+                Gizlilik ve Güvenlik → Konum Servisleri bölümünden CarSave AI
+                için konum iznini kontrol edin.
+              </p>
+
+              <p>
+                Konum iznini değiştirdikten sonra uygulamayı yeniden açmanız
+                gerekebilir.
+              </p>
+
+              <h3>Yolculuk ve Hareket Takibi</h3>
+
+              <p>
+                Yolculuk algılama veya hareket özellikleri çalışmıyorsa
+                CarSave AI için gerekli hareket ve konum izinlerinin açık
+                olduğundan emin olun.
+              </p>
+
+              <p>
+                Sorun devam ediyorsa yolculuk takibinin başlamadığı veya
+                durmadığı durumu ve kullandığınız cihaz modelini destek
+                mesajınızda belirtin.
+              </p>
+
+              <h3>Bildirim Sorunları</h3>
+
+              <p>
+                Bakım, sigorta, muayene, vergi veya diğer araç hatırlatmalarını
+                alamıyorsanız iPhone Ayarlar → Bildirimler bölümünden CarSave
+                AI için bildirim izninin açık olduğundan emin olun.
+              </p>
+
+              <h3>Hesap ve Giriş Sorunları</h3>
+
+              <p>
+                Apple ile Giriş veya Google ile Giriş sırasında sorun
+                yaşıyorsanız kullandığınız giriş yöntemini ve ekranda görünen
+                hata mesajını destek talebinizde belirtin.
+              </p>
+
+              <p>
+                Apple Hesabı parolanızı, Google hesabı parolanızı, doğrulama
+                kodlarınızı veya diğer hassas hesap bilgilerini bizimle
+                paylaşmayın.
+              </p>
+
+              <h3>Premium ve Satın Alma</h3>
+
+              <p>
+                Premium abonelik ve satın alma işlemleri Apple App Store
+                üzerinden yürütülür. Aboneliklerinizi iPhone Ayarlar → Apple
+                Hesabı → Abonelikler bölümünden görüntüleyebilir ve
+                yönetebilirsiniz.
+              </p>
+
+              <p>
+                Daha önce satın aldığınız Premium erişim görünmüyorsa
+                uygulamadaki satın alma geri yükleme seçeneğini kullanın.
+              </p>
+
+              <h3>Reklam Sorunları</h3>
+
+              <p>
+                Reklamların görüntülenmesi, reklam rızası veya gizlilik
+                seçenekleriyle ilgili bir sorun yaşıyorsanız cihaz modelinizi,
+                iOS sürümünüzü ve CarSave AI uygulama sürümünü belirtin.
+              </p>
+
+              <h3>Veri ve Gizlilik</h3>
+
+              <p>
+                Araç veya uygulama verilerinizin silinmesiyle ilgili bir sorun
+                yaşıyorsanız hangi veri türünü kaldırmak istediğinizi destek
+                mesajınızda belirtin.
+              </p>
+
+              <p>
+                Destek mesajınıza gereksiz kişisel bilgi, hesap parolası,
+                ödeme bilgisi veya hassas araç bilgisi eklemeyin.
+              </p>
+
+              <h3>Destek ile İletişim</h3>
+
+              <p>
+                Destek talebinizi aşağıdaki e-posta adresine gönderebilirsiniz.
+              </p>
+
+              <div className={styles.actions}>
+                <a
+                  href={`mailto:hello@saybir.net?subject=${encodeURIComponent(
+                    "CarSave AI Destek"
+                  )}`}
+                >
+                  hello@saybir.net
+                </a>
+              </div>
+
+              <h3>Mesajınıza Ekleyin</h3>
+
+              <ul>
+                <li>Kullandığınız iPhone veya iPad modeli</li>
+                <li>iOS veya iPadOS sürümü</li>
+                <li>CarSave AI uygulama sürümü</li>
+                <li>Sorunun hangi ekranda meydana geldiği</li>
+                <li>Sorunu tekrar oluşturma adımları</li>
+                <li>Mümkünse hassas bilgi içermeyen ekran görüntüsü</li>
+              </ul>
+
+              <h3>Gizlilik</h3>
+
+              <p>
+                CarSave AI gizlilik politikası için{" "}
                 <Link href={`/apps/${app.slug}/privacy`}>
                   Gizlilik Politikası
                 </Link>{" "}
