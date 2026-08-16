@@ -3,580 +3,538 @@ import { notFound } from "next/navigation";
 import { getApp } from "@/data/apps";
 import styles from "../app-page.module.css";
 
-type Section = {
-  title: string;
-  paragraphs?: string[];
-  bullets?: string[];
+type PrivacySection = { title: string; paragraphs: string[] };
+type PrivacyConfig = {
+  name: string;
+  summary: string;
+  sections: PrivacySection[];
 };
 
-function appKey(name: string) {
-  const value = name.toLocaleLowerCase("tr-TR");
-
-  if (value.includes("ne seçsem")) return "ne-secsem";
-  if (value.includes("yemekolay")) return "yemekolay";
-  if (value.includes("carsave")) return "carsave";
-  if (value.includes("hilock")) return "hilock";
-  if (value.includes("ödüyorum")) return "oduyorum";
-  if (value.includes("susadım")) return "susadim";
-  if (value.includes("ezan vakti")) return "ezan-vakti";
-  if (value.includes("melody map")) return "melody-map";
-  if (value.includes("history")) return "history";
-  if (value.includes("velomate")) return "velomate";
-  if (value.includes("tartarot")) return "tartarot";
-  if (value.includes("vibelens")) return "vibelens";
-  if (value.includes("ref!ref!ref!") || value.includes("ref ref ref")) return "refrefref";
-  if (value.includes("bold block arcade")) return "bold-block-arcade";
-  if (value.includes("üşenme yap")) return "usenme-yap";
-  if (value.includes("kedilik")) return "kedilik";
-
-  return "generic";
-}
-
-const commonContact: Section = {
-  title: "İletişim",
-  paragraphs: [
-    "Gizlilik politikasıyla ilgili sorularınızı hello@saybir.net adresine iletebilirsiniz.",
-  ],
-};
-
-const policies: Record<string, Section[]> = {
-  "ne-secsem": [
-    {
-      title: "Genel",
-      paragraphs: [
-        "Ne Seçsem?, film, dizi ve kitap önerileri sunarak kullanıcıların ne izleyeceğine veya ne okuyacağına karar vermesine yardımcı olan bir iOS uygulamasıdır.",
-      ],
-    },
-    {
-      title: "Tercihler ve Öneri Bilgileri",
-      paragraphs: [
-        "İçerik türü, ruh hâli, süre, ülke ve benzeri filtre tercihleri öneri özelliklerini sağlamak amacıyla işlenebilir veya cihaz üzerinde saklanabilir.",
-        "Bu tercihler reklam hedefleme amacıyla kullanılmaz.",
-      ],
-    },
-    {
-      title: "Favoriler ve İzledim / Okudum Kayıtları",
-      paragraphs: [
-        "Favoriler ile izledim veya okudum olarak işaretlenen içerikler, uygulamanın takip özelliklerini sağlamak amacıyla cihaz üzerinde saklanabilir.",
-      ],
-    },
-    {
-      title: "Premium ve Apple Hizmetleri",
-      paragraphs: [
-        "Premium abonelik satın alma, yenileme ve ödeme işlemleri Apple App Store üzerinden yürütülür. Geliştirici kredi kartı veya banka kartı bilgilerinize erişmez.",
-      ],
-    },
-    {
-      title: "Reklamlar ve Google AdMob",
-      paragraphs: [
-        "Ücretsiz sürüm reklam veya ödüllü reklam göstermek amacıyla Google AdMob kullanabilir. Google ve reklam iş ortakları cihaz bilgileri, reklam etkileşimleri ve benzeri teknik bilgileri kendi politikaları doğrultusunda işleyebilir.",
-      ],
-    },
-    {
-      title: "Bildirimler",
-      paragraphs: [
-        "Kullanıcı izin verdiğinde günlük öneriler ve ilgili hatırlatmalar için bildirimler gönderilebilir. Bildirim izinleri iOS Ayarlar bölümünden değiştirilebilir.",
-      ],
-    },
-    commonContact,
-  ],
-
-  yemekolay: [
-    {
-      title: "Genel",
-      paragraphs: [
-        "Yemekolay, malzemelere göre yemek önerileri sunan ve kullanıcıların ne pişireceğine veya ne sipariş edeceğine karar vermesine yardımcı olan bir iOS uygulamasıdır.",
-      ],
-    },
-    {
-      title: "Malzemeler ve Tercihler",
-      paragraphs: [
-        "Kullanıcının girdiği malzemeler ve yemek tercihleri öneri özelliklerini sağlamak amacıyla işlenebilir. Bu bilgiler reklam hedefleme amacıyla kullanılmaz.",
-      ],
-    },
-    {
-      title: "Öneri Özellikleri",
-      paragraphs: [
-        "Desteklenen öneri özelliklerinde üçüncü taraf veya yapay zekâ tabanlı hizmetlerden yararlanılabilir. Kullanıcıların bu alanlara kişisel, finansal veya hassas bilgi girmemesi önerilir.",
-      ],
-    },
-    {
-      title: "Premium ve Apple Hizmetleri",
-      paragraphs: [
-        "Premium abonelik işlemleri Apple App Store üzerinden gerçekleştirilir. Geliştirici ödeme kartı bilgilerinize erişmez.",
-      ],
-    },
-    {
-      title: "Reklamlar ve Google AdMob",
-      paragraphs: [
-        "Ücretsiz kullanım ve ödüllü reklam özellikleri için Google AdMob kullanılabilir. Reklam sağlayıcıları kendi politikaları kapsamında teknik ve reklam etkileşim verilerini işleyebilir.",
-      ],
-    },
-    {
-      title: "Bildirimler",
-      paragraphs: [
-        "Kullanıcı izin verdiğinde öneriler veya uygulama hatırlatmaları için bildirim gönderilebilir.",
-      ],
-    },
-    commonContact,
-  ],
-
-  carsave: [
-    {
-      title: "Genel",
-      paragraphs: [
-        "CarSave AI; araç, kilometre, yakıt, bakım, servis, sigorta, muayene ve araçla ilgili diğer kayıtların yönetilmesine yardımcı olur.",
-      ],
-    },
-    {
-      title: "Hesap ve Kimlik Doğrulama",
-      paragraphs: [
-        "Desteklenen sürümlerde Apple ile Giriş, Google ile Giriş ve Firebase Authentication kullanılabilir. Kimlik doğrulama için gerekli temel hesap bilgileri ilgili hizmet sağlayıcılar tarafından işlenebilir.",
-      ],
-    },
-    {
-      title: "Araç ve Harcama Kayıtları",
-      paragraphs: [
-        "Kullanıcının eklediği araç, kilometre, yakıt, bakım, servis ve maliyet bilgileri uygulamanın takip özellikleri için kullanılır. Bu kayıtlar reklam hedefleme amacıyla kullanılmaz.",
-      ],
-    },
-    {
-      title: "Konum ve Hareket Bilgileri",
-      paragraphs: [
-        "Kullanıcı izin verdiğinde konum ve desteklenen hareket verileri; harita, yakındaki hizmet noktaları veya yolculuk özellikleri için kullanılabilir. İzinler iOS Ayarlar bölümünden yönetilebilir.",
-      ],
-    },
-    {
-      title: "Reklamlar ve App Tracking Transparency",
-      paragraphs: [
-        "CarSave AI Google AdMob kullanabilir. iOS tarafından gerekli görüldüğünde reklam veya ölçüm amaçlı tanımlayıcılar için App Tracking Transparency izni istenebilir.",
-      ],
-    },
-    {
-      title: "Verilerin Silinmesi",
-      paragraphs: [
-        "Desteklenen veri yönetimi seçenekleri kullanılarak yerel araç ve ilgili kayıtlar silinebilir. Hesap veya veri silme desteği için hello@saybir.net adresine başvurabilirsiniz.",
-      ],
-    },
-    commonContact,
-  ],
-
-  hilock: [
-    {
-      title: "Genel",
-      paragraphs: [
-        "HiLock, seçilen uygulamalara erişimi yönetmeye ve cihaz kullanımını daha kontrollü hâle getirmeye yardımcı olan bir güvenlik uygulamasıdır.",
-      ],
-    },
-    {
-      title: "PIN ve Güvenlik Bilgileri",
-      paragraphs: [
-        "PIN kodunun açık hâli saklanmaz. Doğrulama için gerekli tek yönlü özet gibi güvenlik bilgileri Apple Keychain içinde saklanabilir.",
-      ],
-    },
-    {
-      title: "Family Controls ve Managed Settings",
-      paragraphs: [
-        "iOS ve iPadOS sürümleri, kullanıcı izniyle Apple Family Controls, Managed Settings ve ilgili Screen Time teknolojilerini kullanabilir. HiLock korunan üçüncü taraf uygulamaların hesap içeriğine erişmez.",
-      ],
-    },
-    {
-      title: "macOS",
-      paragraphs: [
-        "Native macOS sürümünde koruma işlevleri macOS tarafından sağlanan uygulama çalışma bildirimleri ve yerel güvenlik mekanizmalarıyla yürütülebilir.",
-      ],
-    },
-    {
-      title: "Reklamlar",
-      paragraphs: [
-        "Reklam destekli sürüm Google AdMob kullanabilir. Screen Time veya uygulama koruma bilgileri reklam hedefleme amacıyla kullanılmaz.",
-      ],
-    },
-    {
-      title: "Verilerin Silinmesi",
-      paragraphs: [
-        "Desteklenen güvenlik günlüğü ve yerel veriler uygulama içinden temizlenebilir. Keychain verilerinin yaşam döngüsü Apple platform davranışlarına tabidir.",
-      ],
-    },
-    commonContact,
-  ],
-
-  oduyorum: [
-    {
-      title: "Genel",
-      paragraphs: [
-        "Ödüyorum; gelir, gider, fatura, abonelik ve diğer finansal kayıtların takip edilmesine yardımcı olur.",
-      ],
-    },
-    {
-      title: "Finansal Kayıtlar",
-      paragraphs: [
-        "Kullanıcının girdiği finansal kayıtlar temel olarak cihaz üzerinde tutulur ve uygulamanın özelliklerini sağlamak için kullanılır. Bu kayıtlar reklam hedefleme amacıyla kullanılmaz veya bu amaçla reklam sağlayıcılarıyla paylaşılmaz.",
-      ],
-    },
-    {
-      title: "Bildirimler",
-      paragraphs: [
-        "Kullanıcı izin verdiğinde fatura, abonelik ve ödeme hatırlatmaları cihaz üzerinde planlanabilir.",
-      ],
-    },
-    {
-      title: "Reklamlar",
-      paragraphs: [
-        "Ücretsiz sürüm Google AdMob kullanabilir. Reklam sağlayıcıları kendi sistemleri üzerinden teknik ve reklam etkileşim verilerini işleyebilir.",
-      ],
-    },
-    {
-      title: "Verilerin Silinmesi",
-      paragraphs: [
-        "Desteklenen veri yönetimi seçenekleriyle yerel finansal kayıtlar silinebilir.",
-      ],
-    },
-    commonContact,
-  ],
-
-  susadim: [
-    {
-      title: "Genel",
-      paragraphs: [
-        "Susadım, günlük su tüketimi ve su içme hedeflerinin takip edilmesine yardımcı olur.",
-      ],
-    },
-    {
-      title: "Su Tüketimi Kayıtları",
-      paragraphs: [
-        "Su tüketimi, günlük hedef ve ilgili kullanım kayıtları temel olarak cihaz üzerinde saklanabilir.",
-      ],
-    },
-    {
-      title: "Apple Health",
-      paragraphs: [
-        "Desteklenen özelliklerde Apple Health entegrasyonu yalnızca kullanıcının açık izniyle kullanılır. Health verileri reklam hedefleme amacıyla kullanılmaz veya reklam sağlayıcılarıyla paylaşılmaz.",
-      ],
-    },
-    {
-      title: "Premium ve Reklamlar",
-      paragraphs: [
-        "Premium satın alma işlemleri Apple App Store üzerinden yürütülür. Ücretsiz sürüm Google AdMob kullanabilir.",
-      ],
-    },
-    {
-      title: "Bildirimler",
-      paragraphs: [
-        "Kullanıcı izin verdiğinde su içme hatırlatmaları gönderilebilir.",
-      ],
-    },
-    commonContact,
-  ],
-
-  "ezan-vakti": [
-    {
-      title: "Genel",
-      paragraphs: [
-        "Ezan Vakti: Namaz ve Kıble, namaz vakitleri, kıble yönü ve ilgili İslami özellikleri sunan bir iOS uygulamasıdır.",
-      ],
-    },
-    {
-      title: "Konum Bilgisi",
-      paragraphs: [
-        "Kullanıcı izin verdiğinde konum; namaz vakitlerini hesaplamak, kıble yönünü belirlemek ve desteklenen yakındaki cami özelliklerini sağlamak amacıyla kullanılabilir.",
-      ],
-    },
-    {
-      title: "Bildirimler",
-      paragraphs: [
-        "Kullanıcı izin verdiğinde namaz vakitleri ve ilgili hatırlatmalar için bildirim gönderilebilir.",
-      ],
-    },
-    {
-      title: "Reklamlar",
-      paragraphs: [
-        "Uygulama Google AdMob kullanabilir. Reklam sağlayıcıları teknik ve reklam etkileşim verilerini kendi politikalarına göre işleyebilir.",
-      ],
-    },
-    {
-      title: "Hesap",
-      paragraphs: [
-        "Uygulamanın temel özelliklerini kullanmak için hesap oluşturulması zorunlu değildir.",
-      ],
-    },
-    commonContact,
-  ],
-
-  "melody-map": [
-    {
-      title: "Genel",
-      paragraphs: [
-        "Melody Map, müzik keşfi ve desteklenen müzik hizmetleriyle bağlantılı özellikler sunan bir iOS uygulamasıdır.",
-      ],
-    },
-    {
-      title: "Müzik Hizmetleri ve Spotify",
-      paragraphs: [
-        "Desteklenen özelliklerde Spotify gibi üçüncü taraf müzik hizmetleri kullanılabilir. Bu hizmetlere erişim, ilgili sağlayıcının yetkilendirme ve gizlilik kurallarına tabidir.",
-        "Melody Map, üçüncü taraf müzik hesabınızın parolasını doğrudan saklamaz.",
-      ],
-    },
-    {
-      title: "Uygulama Tercihleri",
-      paragraphs: [
-        "Favoriler, keşif tercihleri ve uygulama ayarları desteklenen özellikleri sağlamak amacıyla cihaz üzerinde saklanabilir.",
-      ],
-    },
-    {
-      title: "Üçüncü Taraf Hizmetler",
-      paragraphs: [
-        "Spotify, Apple ve uygulamanın kullandığı diğer hizmetlerin kendi gizlilik politikaları geçerlidir.",
-      ],
-    },
-    commonContact,
-  ],
-
-  history: [
-    {
-      title: "Genel",
-      paragraphs: [
-        "HiStory, günlük tarih, kültür ve eğlenceli bilgi içerikleri sunan bir iOS uygulamasıdır.",
-      ],
-    },
-    {
-      title: "İlgi Alanları ve Ülke Tercihi",
-      paragraphs: [
-        "İlgi alanları, ülke tercihi, dil ve benzeri seçimler önerileri kişiselleştirmek amacıyla cihaz üzerinde saklanabilir.",
-      ],
-    },
-    {
-      title: "Premium ve Reklamlar",
-      paragraphs: [
-        "Premium satın alma işlemleri Apple App Store üzerinden yürütülebilir. Ücretsiz kullanıcılar için Google AdMob ve ödüllü reklam özellikleri kullanılabilir.",
-      ],
-    },
-    {
-      title: "Bildirimler",
-      paragraphs: [
-        "Kullanıcı izin verdiğinde günlük bilgi veya içerik hatırlatmaları gönderilebilir.",
-      ],
-    },
-    commonContact,
-  ],
-
-  velomate: [
-    {
-      title: "Genel",
-      paragraphs: [
-        "VeloMate, uygulamanın sunduğu özellikleri kullanabilmek için gerekli kullanıcı tercihlerini ve cihaz izinlerini yalnızca ilgili özellikleri sağlamak amacıyla işler.",
-      ],
-    },
-    {
-      title: "Cihaz İzinleri ve Yerel Veriler",
-      paragraphs: [
-        "Desteklenen özelliklerin gerektirdiği izinler iOS tarafından kullanıcıya açıkça sorulur ve Ayarlar bölümünden yönetilebilir. Uygulama tercihleri cihaz üzerinde saklanabilir.",
-      ],
-    },
-    {
-      title: "Reklamlar ve Takip İzni",
-      paragraphs: [
-        "VeloMate reklam veya ölçüm SDK'ları kullanabilir. iOS tarafından gerekli görüldüğünde App Tracking Transparency izni istenir. Kullanıcının izin vermesi zorunlu değildir.",
-      ],
-    },
-    {
-      title: "Üçüncü Taraf Hizmetler",
-      paragraphs: [
-        "Uygulamada kullanılan üçüncü taraf hizmetlerin kendi gizlilik ve veri işleme politikaları geçerlidir.",
-      ],
-    },
-    commonContact,
-  ],
-
-  tartarot: [
-    {
-      title: "Genel",
-      paragraphs: [
-        "TarTarot; günlük tarot, kart açılımları ve benzeri eğlence amaçlı tarot özellikleri sunar.",
-      ],
-    },
-    {
-      title: "Tarot Tercihleri ve Kayıtlar",
-      paragraphs: [
-        "Seçilen kartlar, favoriler, günlük veya uygulama tercihleri desteklenen özellikleri sağlamak amacıyla cihaz üzerinde saklanabilir.",
-      ],
-    },
-    {
-      title: "Yapay Zekâ Destekli Yorumlar",
-      paragraphs: [
-        "Desteklenen özelliklerde kart yorumlarını geliştirmek için üçüncü taraf veya yapay zekâ tabanlı hizmetler kullanılabilir. Kullanıcıların kişisel veya hassas bilgi paylaşmaması önerilir.",
-      ],
-    },
-    {
-      title: "Premium",
-      paragraphs: [
-        "Premium abonelik ve ödeme işlemleri Apple App Store üzerinden yürütülür.",
-      ],
-    },
-    {
-      title: "Bildirimler",
-      paragraphs: [
-        "Kullanıcı izin verdiğinde günlük tarot veya uygulama hatırlatmaları gönderilebilir.",
-      ],
-    },
-    commonContact,
-  ],
-
-  vibelens: [
-    {
-      title: "Genel",
-      paragraphs: [
-        "VibeLens, uygulama içindeki analiz, içerik veya kişiselleştirme özelliklerini sağlamak için yalnızca gerekli kullanıcı girdilerini ve tercihleri işler.",
-      ],
-    },
-    {
-      title: "Kullanıcı Girdileri ve Tercihler",
-      paragraphs: [
-        "Uygulamaya girilen içerikler ve tercihler ilgili özelliği sağlamak amacıyla işlenebilir. Kullanıcıların hassas kişisel bilgileri gereksiz yere paylaşmaması önerilir.",
-      ],
-    },
-    {
-      title: "Premium",
-      paragraphs: [
-        "Premium abonelik işlemleri Apple App Store üzerinden yürütülür. Geliştirici ödeme kartı bilgilerinize erişmez.",
-      ],
-    },
-    {
-      title: "Üçüncü Taraf Hizmetler",
-      paragraphs: [
-        "Desteklenen özelliklerde kullanılan üçüncü taraf hizmetlerin kendi gizlilik politikaları geçerlidir.",
-      ],
-    },
-    commonContact,
-  ],
-
-  refrefref: [
-    {
-      title: "Genel",
-      paragraphs: [
-        "Ref!Ref!Ref!, refleks ve hız odaklı bir mobil oyundur.",
-      ],
-    },
-    {
-      title: "Oyun Verileri",
-      paragraphs: [
-        "Skorlar, oyun ayarları, açılan temalar ve benzeri ilerleme bilgileri cihaz üzerinde saklanabilir.",
-      ],
-    },
-    {
-      title: "Reklamlar",
-      paragraphs: [
-        "Ücretsiz sürüm Google AdMob kullanabilir. Reklam sağlayıcıları teknik ve reklam etkileşim verilerini kendi politikalarına göre işleyebilir.",
-      ],
-    },
-    {
-      title: "Satın Almalar",
-      paragraphs: [
-        "Reklam kaldırma veya diğer desteklenen uygulama içi satın almalar Apple App Store üzerinden yürütülür.",
-      ],
-    },
-    commonContact,
-  ],
-
-  "bold-block-arcade": [
-    {
-      title: "Genel",
-      paragraphs: [
-        "Bold Block Arcade, mobil oyun deneyimi sunan bir iOS uygulamasıdır.",
-      ],
-    },
-    {
-      title: "Oyun Verileri",
-      paragraphs: [
-        "Skor, ilerleme, oyun tercihleri ve desteklenen diğer yerel veriler cihaz üzerinde saklanabilir.",
-      ],
-    },
-    {
-      title: "Reklamlar ve Satın Almalar",
-      paragraphs: [
-        "Uygulama reklam hizmetleri kullanabilir ve desteklenen uygulama içi satın almaları Apple App Store üzerinden sunabilir.",
-      ],
-    },
-    commonContact,
-  ],
-
-  "usenme-yap": [
-    {
-      title: "Genel",
-      paragraphs: [
-        "Üşenme Yap, görev, alışkanlık, motivasyon ve üretkenlik özellikleri sunan bir iOS uygulamasıdır.",
-      ],
-    },
-    {
-      title: "Hesap ve Kimlik Doğrulama",
-      paragraphs: [
-        "Desteklenen sürümlerde Firebase ve Google ile Giriş gibi kimlik doğrulama hizmetleri kullanılabilir. İlgili hizmetlerin kendi gizlilik politikaları geçerlidir.",
-      ],
-    },
-    {
-      title: "Görev ve Tercih Verileri",
-      paragraphs: [
-        "Kullanıcının oluşturduğu görevlar, tercihler ve uygulama ayarları özellikleri sağlamak amacıyla cihaz üzerinde veya desteklenen hesap hizmetlerinde saklanabilir.",
-      ],
-    },
-    {
-      title: "Reklamlar ve Premium",
-      paragraphs: [
-        "Ücretsiz sürüm reklam hizmetleri kullanabilir. Premium abonelik işlemleri Apple App Store üzerinden yürütülür.",
-      ],
-    },
-    {
-      title: "Bildirimler",
-      paragraphs: [
-        "Kullanıcı izin verdiğinde görev ve motivasyon hatırlatmaları gönderilebilir.",
-      ],
-    },
-    commonContact,
-  ],
-
-  kedilik: [
-    {
-      title: "Genel",
-      paragraphs: [
-        "Kedilik, uygulamanın sunduğu kedi odaklı içerik ve özellikleri sağlamak için gerekli tercihleri ve yerel uygulama verilerini işler.",
-      ],
-    },
-    {
-      title: "Uygulama Verileri",
-      paragraphs: [
-        "Favoriler, tercihler ve desteklenen diğer kayıtlar ilgili özelliklerin çalışması amacıyla cihaz üzerinde saklanabilir.",
-      ],
-    },
-    {
-      title: "Reklamlar ve Üçüncü Taraf Hizmetler",
-      paragraphs: [
-        "Desteklenen sürümlerde reklam veya üçüncü taraf hizmetler kullanılabilir. Bu hizmetlerin kendi gizlilik politikaları geçerlidir.",
-      ],
-    },
-    {
-      title: "Bildirimler",
-      paragraphs: [
-        "Kullanıcı izin verdiğinde uygulamanın ilgili özellikleri için bildirim gönderilebilir.",
-      ],
-    },
-    commonContact,
-  ],
-
-  generic: [
-    {
-      title: "Verilerin Kullanımı",
-      paragraphs: [
-        "Uygulama, yalnızca özelliklerin çalışması için gerekli bilgileri işler. Cihaz izinleri gerektiğinde iOS tarafından açıkça istenir ve kullanıcı tarafından yönetilebilir.",
-      ],
-    },
-    {
-      title: "Apple Hizmetleri",
-      paragraphs: [
-        "App Store dağıtımı, uygulama içi satın alma ve abonelik işlemleri ilgili olduğunda Apple'ın sistemleri üzerinden yürütülür.",
-      ],
-    },
-    commonContact,
-  ],
+const privacyBySlug: Record<string, PrivacyConfig> = {
+  "ne-secsem": {
+    name: "Ne Seçsem?",
+    summary: "film, dizi ve kitap önerileri sunarak karar vermeyi kolaylaştıran bir iOS uygulamasıdır.",
+    sections: [
+      {
+        title: "Öneri ve Tercih Verileri",
+        paragraphs: [
+          "İçerik türü, ruh hâli, süre, ülke, ödül/başarı ölçütleri ve benzeri filtre seçimleri yalnızca ilgili öneriyi oluşturmak ve uygulama deneyimini kişiselleştirmek amacıyla kullanılabilir.",
+          "Favoriler ile İzledim / Okudum kayıtları desteklenen sürümlerde cihaz üzerinde saklanabilir.",
+        ],
+      },
+      {
+        title: "Yapay Zekâ ve Harici İçerik Hizmetleri",
+        paragraphs: [
+          "Desteklenen öneri özellikleri üçüncü taraf içerik veya yapay zekâ hizmetlerinden yararlanabilir. Bir istek bu hizmetlere gönderiliyorsa yalnızca özelliğin çalışması için gerekli içerik aktarılmalıdır; kullanıcıların kişisel, finansal veya hassas bilgi girmemesi önerilir.",
+        ],
+      },
+      {
+        title: "Premium Abonelik",
+        paragraphs: [
+          "Premium erişim, abonelik durumu ve satın alma geri yükleme işlemleri Apple StoreKit/App Store altyapısı üzerinden yürütülür. Geliştirici ödeme kartı bilgilerine erişmez.",
+        ],
+      },
+      {
+        title: "Reklamlar ve Ödüllü Reklamlar",
+        paragraphs: [
+          "Ücretsiz sürüm Google AdMob üzerinden banner, geçiş veya ödüllü reklam gösterebilir. Reklam SDK'ları cihaz ve reklam etkileşimleri gibi teknik verileri kendi politikaları kapsamında işleyebilir.",
+          "iOS tarafından gerekli olduğunda App Tracking Transparency izni istenir; izin vermemek uygulamanın temel özelliklerine erişimi engellemez.",
+        ],
+      },
+      {
+        title: "Bildirimler",
+        paragraphs: [
+          "Kullanıcı izin verdiğinde günlük öneri veya ilgili hatırlatma bildirimleri gönderilebilir. İzin iOS Ayarlar bölümünden her zaman değiştirilebilir.",
+        ],
+      },
+    ],
+  },
+  "yemekolay": {
+    name: "Yemekolay",
+    summary: "malzemelere göre tarif ve yemek önerileri sunan bir iOS uygulamasıdır.",
+    sections: [
+      {
+        title: "Malzemeler, Tarifler ve Tercihler",
+        paragraphs: [
+          "Kullanıcının yazdığı veya seçtiği malzemeler, tarif filtreleri ve yemek tercihleri uygun sonuçları göstermek amacıyla kullanılır.",
+          "Favori veya geçmiş gibi desteklenen kayıtlar cihaz üzerinde saklanabilir.",
+        ],
+      },
+      {
+        title: "Öneri Sistemi",
+        paragraphs: [
+          "“Bugün ne pişirsem?” ve benzeri öneri özellikleri kullanıcının seçimine göre sonuç üretir. Kullanıcının bu alanlara gereksiz kişisel veya hassas bilgi girmemesi önerilir.",
+        ],
+      },
+      {
+        title: "Premium Abonelik",
+        paragraphs: [
+          "Premium erişim ve satın alma geri yükleme işlemleri Apple App Store üzerinden yürütülür. Geliştirici ödeme kartı bilgilerini almaz veya saklamaz.",
+        ],
+      },
+      {
+        title: "Reklamlar ve Ödüllü Kullanım",
+        paragraphs: [
+          "Ücretsiz sürüm Google AdMob kullanabilir. Ödüllü reklam tamamlandığında uygulama ek kullanım hakkı tanımlayabilir. Reklam sağlayıcılarının kendi gizlilik uygulamaları geçerlidir.",
+        ],
+      },
+      {
+        title: "Bildirimler",
+        paragraphs: [
+          "Kullanıcı izin verdiğinde yemek önerileri veya uygulamayla ilgili hatırlatmalar gönderilebilir.",
+        ],
+      },
+    ],
+  },
+  "carsave-ai": {
+    name: "CarSave AI",
+    summary: "araç, yakıt, bakım, servis, masraf ve hatırlatma kayıtlarını yönetmeye yardımcı olan bir araç takip uygulamasıdır.",
+    sections: [
+      {
+        title: "Araç ve Finansal Kayıtlar",
+        paragraphs: [
+          "Araç bilgileri, kilometre, yakıt/şarj, bakım, servis, sigorta, muayene, vergi ve kullanıcı tarafından girilen ilgili maliyet kayıtları uygulama işlevlerini sağlamak için kullanılabilir.",
+          "Bu kayıtlar reklam hedefleme amacıyla kullanılmamalıdır.",
+        ],
+      },
+      {
+        title: "Konum, Harita ve Hareket",
+        paragraphs: [
+          "Kullanıcı izin verdiğinde konum; yakındaki servis, benzinlik veya ilgili harita özellikleri için kullanılabilir. Desteklenen yolculuk özellikleri hareket verilerine ihtiyaç duyabilir. Sistem izinleri iOS Ayarlar bölümünden yönetilebilir.",
+        ],
+      },
+      {
+        title: "Hesap ve Kimlik Doğrulama",
+        paragraphs: [
+          "Desteklenen sürümlerde Apple ile Giriş, Google ile Giriş veya Firebase Authentication kullanılabilir. Kimlik doğrulama verileri ilgili sağlayıcının politikalarına tabidir.",
+        ],
+      },
+      {
+        title: "Bildirimler",
+        paragraphs: [
+          "Bakım, sigorta, muayene, vergi veya diğer araç hatırlatmaları kullanıcı izin verdiğinde gönderilebilir.",
+        ],
+      },
+      {
+        title: "Reklamlar ve Satın Almalar",
+        paragraphs: [
+          "Uygulama Google AdMob ve Apple App Store/StoreKit hizmetlerinden yararlanabilir. Ödeme kartı bilgileri geliştirici tarafından işlenmez.",
+        ],
+      },
+    ],
+  },
+  "hilock": {
+    name: "HiLock",
+    summary: "seçilen uygulamalara erişimi yönetmeye yardımcı olan iOS/iPadOS ve desteklenen sürümlerde macOS güvenlik uygulamasıdır.",
+    sections: [
+      {
+        title: "PIN, Face ID ve Güvenlik Bilgileri",
+        paragraphs: [
+          "PIN doğrulaması için gerekli güvenlik verileri yerel olarak ve desteklenen durumlarda Apple Keychain gibi güvenli sistem alanlarında saklanabilir. Kullanıcının biyometrik verisinin kendisi uygulama tarafından okunmaz; Face ID doğrulamasını işletim sistemi gerçekleştirir.",
+        ],
+      },
+      {
+        title: "Family Controls, Screen Time ve Managed Settings",
+        paragraphs: [
+          "Kullanıcı yetki verdiğinde HiLock, Apple'ın Family Controls/Managed Settings/Device Activity teknolojilerini uygulama koruma işlevi için kullanabilir.",
+          "Seçilen uygulamalara ilişkin sistem belirteçleri koruma işlevi için kullanılır; HiLock korunan uygulamaların içeriğini veya hesap parolalarını okumaz.",
+        ],
+      },
+      {
+        title: "macOS İzinleri",
+        paragraphs: [
+          "macOS sürümünde koruma özelliğinin çalışması için işletim sisteminin sunduğu gerekli izinler istenebilir. Kullanıcı bu izinleri Sistem Ayarları üzerinden yönetebilir.",
+        ],
+      },
+      {
+        title: "Yerel Kayıtlar",
+        paragraphs: [
+          "Koruma tercihleri, kilit ayarları ve desteklenen güvenlik kayıtları cihaz üzerinde saklanabilir.",
+        ],
+      },
+      {
+        title: "Reklamlar",
+        paragraphs: [
+          "Reklam destekli sürüm Google AdMob kullanabilir. Uygulama koruma veya Screen Time seçimleri reklam hedefleme amacıyla kullanılmaz.",
+        ],
+      },
+    ],
+  },
+  "oduyorum": {
+    name: "Ödüyorum",
+    summary: "gelir, gider, fatura, abonelik ve ödeme hatırlatmalarını takip etmeye yardımcı olan kişisel finans uygulamasıdır.",
+    sections: [
+      {
+        title: "Finansal Kayıtlar",
+        paragraphs: [
+          "Kullanıcının girdiği gelir, gider, fatura, abonelik, kategori, tarih ve tutar gibi kayıtlar uygulamanın takip ve raporlama özellikleri için kullanılır.",
+          "Bu bilgiler banka hesabına bağlanmak veya kullanıcı adına ödeme yapmak amacıyla kullanılmaz ve reklam hedefleme amacıyla paylaşılmaz.",
+        ],
+      },
+      {
+        title: "Bildirimler",
+        paragraphs: [
+          "Kullanıcı izin verdiğinde yaklaşan fatura, abonelik veya ödeme tarihleri için yerel bildirimler planlanabilir.",
+        ],
+      },
+      {
+        title: "Yerel Saklama ve Silme",
+        paragraphs: [
+          "Desteklenen kayıtlar cihaz üzerinde tutulabilir ve uygulamanın veri yönetimi seçenekleriyle silinebilir.",
+        ],
+      },
+      {
+        title: "Reklamlar",
+        paragraphs: [
+          "Ücretsiz sürüm Google AdMob kullanabilir. Reklam sağlayıcıları uygulamanın finansal kayıtlarının içeriğine erişmek amacıyla kullanılmaz.",
+        ],
+      },
+    ],
+  },
+  "susadim": {
+    name: "Susadım",
+    summary: "günlük su tüketimini ve su içme hedeflerini takip etmeye yardımcı olan bir iOS uygulamasıdır.",
+    sections: [
+      {
+        title: "Su Tüketimi ve Hedefler",
+        paragraphs: [
+          "İçilen su miktarı, günlük hedef ve ilgili takip kayıtları uygulamanın ilerleme hesaplamaları için cihaz üzerinde saklanabilir.",
+        ],
+      },
+      {
+        title: "Apple Health",
+        paragraphs: [
+          "Kullanıcı açıkça izin verdiğinde desteklenen su verileri Apple Health/HealthKit ile okunabilir veya yazılabilir.",
+          "HealthKit üzerinden erişilen sağlık verileri reklam, pazarlama veya reklam profili oluşturma amacıyla kullanılmaz veya reklam sağlayıcılarına aktarılmaz.",
+        ],
+      },
+      {
+        title: "Bildirimler",
+        paragraphs: [
+          "Kullanıcı izin verdiğinde su içme hatırlatmaları gönderilebilir; zamanlama tercihleri cihaz üzerinde saklanabilir.",
+        ],
+      },
+      {
+        title: "Premium ve Reklamlar",
+        paragraphs: [
+          "Premium işlemleri Apple App Store üzerinden yürütülür. Ücretsiz sürüm Google AdMob kullanabilir. Apple Health verileri reklam hedefleme amacıyla kullanılmaz.",
+        ],
+      },
+    ],
+  },
+  "ezan-vakti": {
+    name: "Ezan Vakti: Namaz ve Kıble",
+    summary: "namaz vakitleri, kıble, Hicri takvim, Ramazan ve ilgili İslami içerikler sunan bir iOS uygulamasıdır.",
+    sections: [
+      {
+        title: "Konum Bilgisi",
+        paragraphs: [
+          "Kullanıcı izin verdiğinde konum; namaz vakitlerini hesaplamak, kıble yönünü belirlemek ve yakındaki cami gibi konuma bağlı özellikleri sağlamak amacıyla kullanılabilir.",
+          "Konum izni iOS Ayarlar bölümünden değiştirilebilir veya kapatılabilir.",
+        ],
+      },
+      {
+        title: "Bildirimler",
+        paragraphs: [
+          "Namaz vakti ve ilgili hatırlatmalar kullanıcı izin verdiğinde cihazda planlanabilir.",
+        ],
+      },
+      {
+        title: "İçerik ve Tercihler",
+        paragraphs: [
+          "Hesaplama yöntemi, mezhep, dil, şehir ve uygulama tercihleri deneyimi kişiselleştirmek amacıyla cihaz üzerinde saklanabilir.",
+        ],
+      },
+      {
+        title: "Reklamlar",
+        paragraphs: [
+          "Uygulama Google AdMob kullanabilir. Reklam sağlayıcılarının işlediği teknik ve reklam etkileşim verileri kendi politikalarına tabidir.",
+        ],
+      },
+      {
+        title: "Hesap",
+        paragraphs: [
+          "Temel uygulama özelliklerini kullanmak için kullanıcı hesabı oluşturulması zorunlu değildir.",
+        ],
+      },
+    ],
+  },
+  "melody-map": {
+    name: "Melody Map",
+    summary: "müzik keşfi ve müzikle ilişkili deneyimler sunan bir iOS uygulamasıdır.",
+    sections: [
+      {
+        title: "Müzik İçeriği ve Tercihler",
+        paragraphs: [
+          "Kullanıcının uygulama içinde yaptığı seçimler, favoriler ve keşif tercihleri ilgili özellikleri sağlamak amacıyla cihaz üzerinde saklanabilir.",
+        ],
+      },
+      {
+        title: "Harici Müzik Hizmetleri",
+        paragraphs: [
+          "Uygulama bir üçüncü taraf müzik hizmetine bağlantı sunuyorsa yetkilendirme ve veri işleme ilgili hizmet sağlayıcının politikalarına tabidir. Uygulama üçüncü taraf hesabın parolasını doğrudan talep etmemelidir.",
+        ],
+      },
+      {
+        title: "Bağlantılar ve Ağ İstekleri",
+        paragraphs: [
+          "Müzik bilgileri veya harici içerikler internet üzerinden alınabilir. Bu sırada hizmet sağlayıcı IP adresi ve standart ağ bilgilerini teknik olarak işleyebilir.",
+        ],
+      },
+      {
+        title: "Bildirimler ve İzinler",
+        paragraphs: [
+          "Bildirim veya başka bir korumalı sistem kaynağı gerektiğinde izin iOS tarafından kullanıcıya sorulur ve Ayarlar bölümünden yönetilebilir.",
+        ],
+      },
+    ],
+  },
+  "history": {
+    name: "HiStory",
+    summary: "günlük tarih, kültür ve eğlenceli bilgi içerikleri sunan bir iOS uygulamasıdır.",
+    sections: [
+      {
+        title: "İlgi Alanları ve Ülke Tercihi",
+        paragraphs: [
+          "Onboarding sırasında seçilen ilgi alanları, ülke ve dil tercihleri gösterilen içerikleri kişiselleştirmek amacıyla cihaz üzerinde saklanabilir.",
+        ],
+      },
+      {
+        title: "İçerik Kullanımı",
+        paragraphs: [
+          "Görüntülenen, favorilenen veya kaydedilen içeriklere ilişkin yerel durum bilgileri uygulama deneyimini sürdürmek için saklanabilir.",
+        ],
+      },
+      {
+        title: "Premium ve Reklamlar",
+        paragraphs: [
+          "Premium satın alma Apple App Store üzerinden yürütülebilir. Ücretsiz kullanımda Google AdMob ve ödüllü reklam özellikleri kullanılabilir.",
+        ],
+      },
+      {
+        title: "Bildirimler",
+        paragraphs: [
+          "Kullanıcı izin verdiğinde günlük bilgi veya içerik hatırlatmaları gönderilebilir.",
+        ],
+      },
+    ],
+  },
+  "velomate": {
+    name: "VeloMate",
+    summary: "kendi uygulama özelliklerini ve kullanıcı tercihlerini sunan bir iOS uygulamasıdır.",
+    sections: [
+      {
+        title: "Uygulama Tercihleri",
+        paragraphs: [
+          "Kullanıcının yaptığı ayarlar ve desteklenen yerel kayıtlar yalnızca ilgili uygulama özelliklerini sağlamak amacıyla cihaz üzerinde saklanabilir.",
+        ],
+      },
+      {
+        title: "Cihaz İzinleri",
+        paragraphs: [
+          "Bir özellik konum, bildirim, fotoğraf, kamera veya başka bir korumalı sistem kaynağı gerektiriyorsa izin iOS tarafından açıkça sorulur. Kullanıcı izinleri Ayarlar bölümünden yönetebilir.",
+        ],
+      },
+      {
+        title: "Ağ ve Üçüncü Taraf Hizmetler",
+        paragraphs: [
+          "Uygulamanın internet tabanlı özellikleri varsa ilgili hizmet sağlayıcıları standart ağ ve teknik bilgileri kendi politikaları kapsamında işleyebilir.",
+        ],
+      },
+      {
+        title: "Reklam ve Ölçüm",
+        paragraphs: [
+          "Uygulama reklam veya ölçüm SDK'sı içeriyorsa iOS tarafından gerekli olduğunda App Tracking Transparency izni istenir. İzin vermemek temel işlevlere erişimi engellememelidir.",
+        ],
+      },
+    ],
+  },
+  "tartarot": {
+    name: "TarTarot",
+    summary: "günlük tarot, üç kart ve Evet/Hayır gibi eğlence amaçlı tarot deneyimleri sunan bir iOS uygulamasıdır.",
+    sections: [
+      {
+        title: "Kart Seçimleri ve Günlük",
+        paragraphs: [
+          "Seçilen kartlar, favoriler, günlük kayıtları ve uygulama tercihleri desteklenen özellikleri sağlamak amacıyla cihaz üzerinde saklanabilir.",
+        ],
+      },
+      {
+        title: "Yapay Zekâ Destekli Yorumlar",
+        paragraphs: [
+          "Desteklenen sürümlerde kart yorumları üçüncü taraf veya yapay zekâ hizmetleriyle oluşturulabilir. Kullanıcıların yorum alanlarına kişisel, finansal, sağlıkla ilgili veya başka hassas bilgiler girmemesi önerilir.",
+        ],
+      },
+      {
+        title: "Premium",
+        paragraphs: [
+          "Premium abonelik satın alma, yenileme ve geri yükleme işlemleri Apple App Store üzerinden yürütülür.",
+        ],
+      },
+      {
+        title: "Bildirimler",
+        paragraphs: [
+          "Kullanıcı izin verdiğinde günlük tarot veya uygulama hatırlatmaları gönderilebilir.",
+        ],
+      },
+      {
+        title: "Eğlence Amaçlı Kullanım",
+        paragraphs: [
+          "Tarot içerikleri eğlence amaçlıdır ve profesyonel sağlık, hukuk, finans veya benzeri uzman tavsiyesinin yerine geçmez.",
+        ],
+      },
+    ],
+  },
+  "vibelens": {
+    name: "VibeLens",
+    summary: "uygulama içindeki analiz ve kişiselleştirme özelliklerini sunan bir iOS uygulamasıdır.",
+    sections: [
+      {
+        title: "Kullanıcı Girdileri",
+        paragraphs: [
+          "Kullanıcının bir analiz veya sonuç üretmek için uygulamaya verdiği girdiler yalnızca ilgili özelliği sağlamak amacıyla işlenmelidir. Kullanıcıların gereksiz kişisel veya hassas veri paylaşmaması önerilir.",
+        ],
+      },
+      {
+        title: "Yerel Tercihler",
+        paragraphs: [
+          "Uygulama ayarları, geçmiş veya favori gibi desteklenen bilgiler cihaz üzerinde saklanabilir.",
+        ],
+      },
+      {
+        title: "Harici İşleme",
+        paragraphs: [
+          "Bir özellik üçüncü taraf sunucu veya yapay zekâ hizmeti kullanıyorsa yalnızca özelliğin çalışması için gerekli veri aktarılmalıdır ve ilgili sağlayıcının gizlilik politikası geçerlidir.",
+        ],
+      },
+      {
+        title: "Premium ve Satın Almalar",
+        paragraphs: [
+          "Desteklenen ücretli özelliklerin satın alma işlemleri Apple App Store üzerinden yürütülür.",
+        ],
+      },
+    ],
+  },
+  "refrefref": {
+    name: "Ref!Ref!Ref!",
+    summary: "refleks, hız ve skor odaklı bir mobil oyundur.",
+    sections: [
+      {
+        title: "Oyun İlerlemesi",
+        paragraphs: [
+          "Skor, can, açılan tema/şehir, oyun ayarları ve benzeri ilerleme bilgileri cihaz üzerinde saklanabilir.",
+        ],
+      },
+      {
+        title: "Reklamlar",
+        paragraphs: [
+          "Ücretsiz sürüm Google AdMob üzerinden reklam gösterebilir. Reklam SDK'larının teknik ve reklam etkileşim verileri kendi politikalarına tabidir.",
+        ],
+      },
+      {
+        title: "Uygulama İçi Satın Almalar",
+        paragraphs: [
+          "Reklam kaldırma gibi desteklenen dijital satın almalar Apple App Store üzerinden yürütülür.",
+        ],
+      },
+      {
+        title: "Ses ve Haptik Tercihleri",
+        paragraphs: [
+          "Ses, titreşim ve benzeri oyun tercihleri cihaz üzerinde saklanabilir.",
+        ],
+      },
+    ],
+  },
+  "bold-block-arcade": {
+    name: "Bold Block Arcade",
+    summary: "blok tabanlı arcade oyun deneyimi sunan bir iOS uygulamasıdır.",
+    sections: [
+      {
+        title: "Oyun Verileri",
+        paragraphs: [
+          "Skor, oyun ilerlemesi, ayarlar ve desteklenen diğer oyun durumu verileri cihaz üzerinde saklanabilir.",
+        ],
+      },
+      {
+        title: "Reklamlar",
+        paragraphs: [
+          "Uygulama reklam destekliyse reklam sağlayıcısı standart cihaz ve reklam etkileşim verilerini kendi politikaları kapsamında işleyebilir.",
+        ],
+      },
+      {
+        title: "Satın Almalar",
+        paragraphs: [
+          "Desteklenen uygulama içi satın almalar Apple App Store üzerinden gerçekleştirilir.",
+        ],
+      },
+      {
+        title: "Tanılama",
+        paragraphs: [
+          "Çökme veya performans verileri bir tanılama hizmeti kullanılıyorsa uygulamanın güvenilirliğini artırmak amacıyla işlenebilir.",
+        ],
+      },
+    ],
+  },
+  "usenme-yap": {
+    name: "Üşenme Yap",
+    summary: "görev, alışkanlık, motivasyon ve üretkenlik özellikleri sunan bir iOS uygulamasıdır.",
+    sections: [
+      {
+        title: "Görev ve Alışkanlık Verileri",
+        paragraphs: [
+          "Kullanıcının oluşturduğu görevlar, hedefler, tamamlanma durumu ve uygulama tercihleri ilgili özellikleri sağlamak amacıyla saklanabilir.",
+        ],
+      },
+      {
+        title: "Hesap ve Kimlik Doğrulama",
+        paragraphs: [
+          "Desteklenen sürümlerde Firebase Authentication ve Google ile Giriş gibi hizmetler kullanılabilir. Kimlik doğrulama verileri ilgili sağlayıcının politikalarına tabidir.",
+        ],
+      },
+      {
+        title: "Bildirimler",
+        paragraphs: [
+          "Kullanıcı izin verdiğinde görev, alışkanlık veya motivasyon hatırlatmaları gönderilebilir.",
+        ],
+      },
+      {
+        title: "Premium ve Reklamlar",
+        paragraphs: [
+          "Premium işlemleri Apple App Store üzerinden yürütülür. Ücretsiz sürüm reklam hizmetleri kullanabilir.",
+        ],
+      },
+    ],
+  },
+  "kedilik": {
+    name: "Kedilik",
+    summary: "kedi odaklı içerik ve uygulama özellikleri sunan bir iOS uygulamasıdır.",
+    sections: [
+      {
+        title: "İçerik ve Tercihler",
+        paragraphs: [
+          "Favoriler, görüntüleme tercihleri ve desteklenen diğer yerel kayıtlar uygulama deneyimini sürdürmek amacıyla cihaz üzerinde saklanabilir.",
+        ],
+      },
+      {
+        title: "Cihaz İzinleri",
+        paragraphs: [
+          "Bir özellik fotoğraf, kamera, bildirim veya başka bir korumalı sistem kaynağı gerektiriyorsa izin iOS tarafından kullanıcıya sorulur ve Ayarlar bölümünden yönetilebilir.",
+        ],
+      },
+      {
+        title: "Harici İçerik ve Ağ",
+        paragraphs: [
+          "İnternet üzerinden sağlanan içerikler varsa ilgili hizmet sağlayıcı standart ağ bilgilerini teknik olarak işleyebilir.",
+        ],
+      },
+      {
+        title: "Reklamlar",
+        paragraphs: [
+          "Uygulama reklam destekliyse reklam sağlayıcılarının kendi gizlilik politikaları ve veri işleme uygulamaları geçerlidir.",
+        ],
+      },
+    ],
+  },
 };
 
 export default async function PrivacyPage({
@@ -585,24 +543,16 @@ export default async function PrivacyPage({
   params: Promise<{ slug: string }>;
 }) {
   const app = getApp((await params).slug);
+  if (!app) notFound();
 
-  if (!app) {
-    notFound();
-  }
-
-  const sections = policies[appKey(app.name)] ?? policies.generic;
+  const config = privacyBySlug[app.slug];
 
   return (
     <div className={styles.page}>
       <nav className={styles.nav}>
         <div className={styles.navInner}>
-          <Link className={styles.brand} href="/">
-            Aziz Ahmet Saybir
-          </Link>
-
-          <Link className={styles.back} href={`/apps/${app.slug}`}>
-            ← {app.name}
-          </Link>
+          <Link className={styles.brand} href="/">Aziz Ahmet Saybir</Link>
+          <Link className={styles.back} href={`/apps/${app.slug}`}>← {app.name}</Link>
         </div>
       </nav>
 
@@ -610,32 +560,89 @@ export default async function PrivacyPage({
         <section className={styles.content}>
           <span className={styles.kicker}>Gizlilik</span>
           <h1>{app.name} Gizlilik Politikası</h1>
-          <p>Son güncelleme: 16 Ağustos 2026</p>
+          <p><strong>Son güncelleme:</strong> 16 Ağustos 2026</p>
 
-          {sections.map((section) => (
+          <h3>1. Genel Bakış</h3>
+          <p>
+            {config
+              ? `${config.name}, ${config.summary}`
+              : `${app.name}, sunduğu özelliklerin çalışması için gerekli verileri ve izinleri kullanır.`}
+          </p>
+          <p>
+            Bu politika, uygulamanın hangi bilgileri kullanabileceğini, bu bilgilerin neden
+            gerekli olduğunu, üçüncü taraf hizmetlerin rolünü ve kullanıcıların gizlilik
+            tercihlerini nasıl yönetebileceğini açıklamak amacıyla hazırlanmıştır.
+          </p>
+
+          {config?.sections.map((section, index) => (
             <section key={section.title}>
-              <h3>{section.title}</h3>
-
-              {section.paragraphs?.map((paragraph) =>
-                paragraph.includes("hello@saybir.net") ? (
-                  <p key={paragraph}>
-                    {paragraph.replace("hello@saybir.net", "")}
-                    <a href="mailto:hello@saybir.net">hello@saybir.net</a>
-                  </p>
-                ) : (
-                  <p key={paragraph}>{paragraph}</p>
-                )
-              )}
-
-              {section.bullets && (
-                <ul>
-                  {section.bullets.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              )}
+              <h3>{index + 2}. {section.title}</h3>
+              {section.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </section>
           ))}
+
+          <h3>{(config?.sections.length ?? 0) + 2}. Üçüncü Taraf Hizmetler</h3>
+          <p>
+            Uygulamanın kullandığı Apple hizmetleri, reklam ağları, kimlik doğrulama
+            sağlayıcıları, içerik servisleri veya diğer üçüncü taraf SDK'ların kendi
+            gizlilik politikaları ve veri işleme uygulamaları bulunabilir. Bu sağlayıcılar
+            üzerinden işlenen bilgiler ilgili sağlayıcının koşullarına tabidir.
+          </p>
+
+          <h3>{(config?.sections.length ?? 0) + 3}. Veri Saklama ve Silme</h3>
+          <p>
+            Yalnızca cihaz üzerinde saklanan uygulama verileri, desteklenen uygulama içi
+            silme seçenekleri kullanılarak veya uygulama cihazdan kaldırılarak silinebilir.
+            Bir özellik sunucu tabanlı hesap veya hizmet kullanıyorsa veri silme talebi
+            için hello@saybir.net adresinden iletişime geçebilirsiniz. Yasal veya güvenlik
+            gerekçeleriyle saklanması zorunlu bilgiler varsa ilgili yükümlülükler uygulanır.
+          </p>
+
+          <h3>{(config?.sections.length ?? 0) + 4}. İzinleri ve Onayı Geri Çekme</h3>
+          <p>
+            Konum, bildirim, kamera, fotoğraf, sağlık, takip veya diğer sistem izinleri
+            iOS/iPadOS/macOS Ayarlar veya Sistem Ayarları üzerinden değiştirilebilir.
+            Bir iznin kapatılması yalnızca o izne ihtiyaç duyan özelliğin çalışmasını
+            etkileyebilir.
+          </p>
+
+          <h3>{(config?.sections.length ?? 0) + 5}. Veri Güvenliği</h3>
+          <p>
+            Uygulama, özelliklerin sağlanması için gerekli veri miktarını sınırlamayı ve
+            Apple platformlarının sunduğu güvenlik mekanizmalarından yararlanmayı amaçlar.
+            İnternet üzerinden veri aktaran üçüncü taraf hizmetlerin güvenliği ayrıca
+            ilgili hizmet sağlayıcıların teknik ve organizasyonel önlemlerine tabidir.
+          </p>
+
+          <h3>{(config?.sections.length ?? 0) + 6}. Çocukların Gizliliği</h3>
+          <p>
+            Uygulama özellikle çocuklardan bilerek kişisel bilgi toplamayı amaçlamaz.
+            Bir ebeveyn veya yasal temsilci, bir çocuğa ait kişisel bilginin uygunsuz
+            şekilde işlendiğini düşünüyorsa bizimle iletişime geçebilir.
+          </p>
+
+          <h3>{(config?.sections.length ?? 0) + 7}. Politika Değişiklikleri</h3>
+          <p>
+            Uygulamanın özellikleri, kullandığı hizmetler veya yasal gereklilikler
+            değiştiğinde bu gizlilik politikası güncellenebilir. Güncel metin her zaman
+            bu sayfada yayımlanır.
+          </p>
+
+          <h3>{(config?.sections.length ?? 0) + 8}. İletişim</h3>
+          <p>
+            Gizlilik, veri silme veya uygulamanın veri kullanımıyla ilgili sorular için{" "}
+            <a href="mailto:hello@saybir.net">hello@saybir.net</a> adresinden iletişime
+            geçebilirsiniz.
+          </p>
+
+          <div className={styles.actions}>
+            <Link href={`/apps/${app.slug}/support`}>Destek Sayfası</Link>
+            <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">
+              Apple Standart EULA
+            </a>
+          </div>
         </section>
       </main>
     </div>
