@@ -17,6 +17,7 @@ export default async function SupportPage({
   const isEzanVakti = app.slug === "ezan-vakti";
   const isSusadim = app.slug === "susadim";
   const isOduyorum = app.slug === "oduyorum";
+  const isHiLock = app.slug === "hilock";
 
   return (
     <div className={styles.page}>
@@ -318,6 +319,138 @@ export default async function SupportPage({
 
               <p>
                 Ödüyorum gizlilik politikası için{" "}
+                <Link href={`/apps/${app.slug}/privacy`}>
+                  Gizlilik Politikası
+                </Link>{" "}
+                sayfasını ziyaret edebilirsiniz.
+              </p>
+            </>
+          ) : isHiLock ? (
+            <>
+              <p>
+                HiLock uygulamasıyla ilgili teknik sorunlar, uygulama koruma
+                özellikleri, Screen Time izinleri veya diğer kullanım
+                sorularınız için aşağıdaki iletişim adresinden destek
+                alabilirsiniz.
+              </p>
+
+              <h3>Destek Konuları</h3>
+
+              <ul>
+                <li>Uygulama kilitleme ve koruma sorunları</li>
+                <li>Family Controls izinleri</li>
+                <li>Screen Time ve Managed Settings</li>
+                <li>PIN ve uygulama güvenliği</li>
+                <li>Face ID ile ilgili sorunlar</li>
+                <li>Korunan uygulamaların seçimi</li>
+                <li>Reklamlarla ilgili sorunlar</li>
+                <li>Uygulama içindeki diğer teknik sorunlar</li>
+              </ul>
+
+              <h3>Önce Bunları Kontrol Edin</h3>
+
+              <p>
+                Teknik bir sorun yaşıyorsanız öncelikle App Store üzerinden
+                HiLock'un güncel sürümünü kullandığınızdan emin olun.
+              </p>
+
+              <p>
+                Sorun devam ediyorsa HiLock'u tamamen kapatıp tekrar açmayı ve
+                gerekirse iPhone veya iPad'inizi yeniden başlatmayı deneyin.
+              </p>
+
+              <h3>Screen Time ve Family Controls</h3>
+
+              <p>
+                HiLock'un uygulama koruma özellikleri Apple tarafından sağlanan
+                Family Controls, Managed Settings ve Screen Time
+                teknolojilerine bağlı olabilir.
+              </p>
+
+              <p>
+                Koruma özellikleri çalışmıyorsa iPhone Ayarlar bölümündeki
+                Ekran Süresi ve HiLock için verilen ilgili izinleri kontrol
+                edin.
+              </p>
+
+              <p>
+                Gerekli sistem izni kaldırılmışsa HiLock'un koruma
+                özelliklerinin yeniden etkinleştirilmesi gerekebilir.
+              </p>
+
+              <h3>PIN ve Face ID Sorunları</h3>
+
+              <p>
+                PIN veya Face ID ile ilgili sorun yaşıyorsanız destek
+                mesajınızda PIN kodunuzu paylaşmayın.
+              </p>
+
+              <p>
+                Face ID kullanımının cihazınızda etkin olduğundan ve HiLock
+                için gerekli sistem izinlerinin açık olduğundan emin olun.
+              </p>
+
+              <h3>Uygulama Koruması Çalışmıyorsa</h3>
+
+              <p>
+                Korunan bir uygulama beklediğiniz şekilde engellenmiyorsa
+                HiLock içerisindeki uygulama seçimini ve koruma ayarlarını
+                kontrol edin.
+              </p>
+
+              <p>
+                Sorun devam ediyorsa hangi uygulamada sorun yaşandığını ve
+                sorunu tekrar oluşturmak için izlediğiniz adımları destek
+                mesajınızda belirtin.
+              </p>
+
+              <h3>Gizlilik ve Güvenlik</h3>
+
+              <p>
+                Destek talebi gönderirken PIN kodunuzu, Apple Hesabı
+                parolanızı, doğrulama kodlarınızı veya diğer hassas güvenlik
+                bilgilerinizi paylaşmayın.
+              </p>
+
+              <p>
+                HiLock desteği sizden e-posta üzerinden Apple Hesabı parolası
+                veya PIN kodu göndermenizi istemez.
+              </p>
+
+              <h3>Destek ile İletişim</h3>
+
+              <p>
+                Destek talebinizi aşağıdaki e-posta adresine gönderebilirsiniz.
+              </p>
+
+              <div className={styles.actions}>
+                <a
+                  href={`mailto:hello@saybir.net?subject=${encodeURIComponent(
+                    "HiLock Destek"
+                  )}`}
+                >
+                  hello@saybir.net
+                </a>
+              </div>
+
+              <h3>Mesajınıza Ekleyin</h3>
+
+              <ul>
+                <li>Kullandığınız iPhone veya iPad modeli</li>
+                <li>iOS veya iPadOS sürümü</li>
+                <li>HiLock uygulama sürümü</li>
+                <li>Sorunun hangi ekranda meydana geldiği</li>
+                <li>Sorunu tekrar oluşturma adımları</li>
+                <li>
+                  Mümkünse hassas bilgi içermeyen ekran görüntüsü veya ekran
+                  kaydı
+                </li>
+              </ul>
+
+              <h3>Gizlilik</h3>
+
+              <p>
+                HiLock gizlilik politikası için{" "}
                 <Link href={`/apps/${app.slug}/privacy`}>
                   Gizlilik Politikası
                 </Link>{" "}
