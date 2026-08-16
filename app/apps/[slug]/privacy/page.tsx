@@ -19,6 +19,7 @@ export default async function PrivacyPage({
   const isOduyorum = app.slug === "oduyorum";
   const isHiLock = app.slug === "hilock";
   const isCarSave = app.slug === "carsave-ai";
+  const isYemekolay = app.slug === "yemekolay";
 
   return (
     <div className={styles.page}>
@@ -635,6 +636,132 @@ export default async function PrivacyPage({
               <h3>İletişim</h3>
               <p>
                 CarSave AI gizlilik politikasıyla ilgili sorularınızı{" "}
+                <a href="mailto:hello@saybir.net">hello@saybir.net</a>{" "}
+                adresine iletebilirsiniz.
+              </p>
+            </>
+          ) : isYemekolay ? (
+            <>
+              <h3>Genel</h3>
+              <p>
+                Yemekolay, kullanıcıların ellerindeki malzemelere göre yemek
+                önerileri almasına, ne pişireceğine veya ne sipariş edeceğine
+                karar vermesine yardımcı olan bir iOS uygulamasıdır.
+              </p>
+
+              <h3>Girilen Malzeme ve Tercihler</h3>
+              <p>
+                Kullanıcı tarafından girilen malzemeler, yemek tercihleri ve
+                ilgili seçimler yalnızca uygulamanın öneri özelliklerini
+                sağlamak amacıyla işlenebilir.
+              </p>
+
+              <p>
+                Bu bilgiler reklam hedefleme amacıyla kullanılmaz ve reklam
+                sağlayıcılarına bu amaçla aktarılmaz.
+              </p>
+
+              <h3>Öneri ve Yapay Zekâ Özellikleri</h3>
+              <p>
+                Yemekolay, kullanıcıya yemek veya sipariş önerileri sunmak için
+                uygulama içindeki öneri sistemlerini ve desteklenen durumlarda
+                yapay zekâ tabanlı hizmetleri kullanabilir.
+              </p>
+
+              <p>
+                Kullanıcı, öneri almak için yazdığı içeriklerde kişisel,
+                finansal veya hassas bilgiler paylaşmamalıdır.
+              </p>
+
+              <h3>Premium Abonelik</h3>
+              <p>
+                Yemekolay, ücretsiz kullanımın yanında Premium abonelik
+                sunabilir. Premium abonelik, reklamsız kullanım ve sınırsız
+                veya genişletilmiş öneri özelliklerine erişim sağlayabilir.
+              </p>
+
+              <p>
+                Abonelik satın alma, yenileme ve ödeme işlemleri Apple App
+                Store üzerinden gerçekleştirilir. Geliştirici kredi kartı veya
+                banka kartı bilgilerinize erişmez.
+              </p>
+
+              <h3>Ödüllü Reklamlar ve Google AdMob</h3>
+              <p>
+                Yemekolay, ücretsiz kullanıcılara ek kullanım hakkı sunmak veya
+                reklam göstermek amacıyla Google AdMob hizmetini kullanabilir.
+              </p>
+
+              <p>
+                Google ve reklam iş ortakları; reklam sunma, performans ölçümü,
+                sahtekârlığı önleme ve kullanıcının izin verdiği durumlarda
+                kişiselleştirme amacıyla cihaz bilgileri, reklam
+                etkileşimleri ve benzeri teknik bilgileri kendi politikaları
+                doğrultusunda işleyebilir.
+              </p>
+
+              <h3>Uygulama Takibi Şeffaflığı</h3>
+              <p>
+                iOS tarafından gerekli görüldüğü durumlarda Yemekolay, reklam
+                veya ölçüm amaçlı cihaz tanımlayıcılarının kullanılabilmesi için
+                App Tracking Transparency izni isteyebilir.
+              </p>
+
+              <p>
+                Kullanıcının bu izni vermesi zorunlu değildir ve tercih iOS
+                Ayarlar bölümünden değiştirilebilir.
+              </p>
+
+              <h3>Bildirimler</h3>
+              <p>
+                Kullanıcı izin verdiğinde Yemekolay, uygulama özellikleri,
+                öneriler veya hatırlatmalarla ilgili bildirimler gönderebilir.
+              </p>
+
+              <p>
+                Bildirim izinleri iOS tarafından yönetilir ve kullanıcı
+                istediği zaman cihaz Ayarları bölümünden değiştirebilir veya
+                kapatabilir.
+              </p>
+
+              <h3>Üçüncü Taraf Hizmetler</h3>
+              <p>
+                Yemekolay; Apple hizmetleri ve Google AdMob gibi üçüncü taraf
+                teknolojileri kullanabilir. Desteklenen özelliklerde başka
+                hizmet sağlayıcılar da kullanılabilir.
+              </p>
+
+              <p>
+                Bu hizmetlerin kendi gizlilik politikaları ve veri işleme
+                uygulamaları bulunur. İlgili hizmetlerin kendi sistemleri
+                üzerinden işlediği bilgiler kendi politikalarına tabidir.
+              </p>
+
+              <h3>Verilerin Silinmesi</h3>
+              <p>
+                Uygulamada yerel olarak tutulan tercihler ve kullanım bilgileri,
+                desteklenen veri yönetimi seçenekleri kullanılarak veya
+                uygulama cihazdan kaldırılarak silinebilir.
+              </p>
+
+              <h3>Veri Güvenliği</h3>
+              <p>
+                Yemekolay, uygulama verilerini yalnızca özelliklerin sağlanması
+                için gerekli olduğu ölçüde kullanmayı ve desteklenen verileri
+                iOS tarafından sağlanan güvenlik mekanizmalarıyla korumayı
+                amaçlar.
+              </p>
+
+              <h3>Politika Değişiklikleri</h3>
+              <p>
+                Bu gizlilik politikası uygulamanın özellikleri, kullanılan
+                hizmetler veya yasal gereklilikler değiştiğinde
+                güncellenebilir. Güncel sürüm bu sayfada yayımlanır.
+              </p>
+
+              <h3>İletişim</h3>
+              <p>
+                Yemekolay gizlilik politikasıyla ilgili sorularınızı{" "}
                 <a href="mailto:hello@saybir.net">hello@saybir.net</a>{" "}
                 adresine iletebilirsiniz.
               </p>
