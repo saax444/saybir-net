@@ -12,6 +12,18 @@ export type AppInfo = {
 
 export const apps: AppInfo[] = [
   {
+    slug: "hushloom",
+    name: "Hushloom",
+    image: "/apps/hushloom.svg",
+    accent: "159 111 219",
+    category: "Sağlık ve Fitness",
+    description:
+      "Yağmur, şömine, rüzgâr, fırtına, okyanus ve doğa seslerini karıştırarak uyku, odaklanma ve rahatlama için kişisel ambiyanslar oluşturun.",
+    status: "İncelemede",
+    version: "1.0",
+  },
+
+  {
     slug: "bold-block-arcade",
     name: "Bold Block Arcade",
     image: "/apps/bold-block-arcade.png",
