@@ -20,8 +20,8 @@ export default async function AppPage({ params }: { params: Promise<{ slug: stri
       <section className={styles.hero}>
         <img className={styles.icon} src={app.image} alt={`${app.name} ikonu`} />
         <div><span className={styles.kicker}>{app.category}</span><h1>{app.name}</h1><p>{app.description}</p>
-          <div className={styles.meta}>{app.version && <span>Sürüm {app.version}</span>}<span>iPhone ve iPad</span></div>
-          <div className={styles.actions}>{app.appStoreUrl && <a href={app.appStoreUrl} target="_blank" rel="noopener noreferrer">App Store’da görüntüle ↗</a>}<Link className={styles.secondary} href={`/apps/${app.slug}/support`}>Destek</Link><Link className={styles.secondary} href={`/apps/${app.slug}/privacy`}>Gizlilik</Link></div>
+          <div className={styles.meta}>{app.version && <span>Sürüm {app.version}</span>}<span>{app.slug === "hushloom" ? "iPhone" : "iPhone ve iPad"}</span></div>
+          <div className={styles.actions}>{app.appStoreUrl && <a href={app.appStoreUrl} target="_blank" rel="noopener noreferrer">App Store’da görüntüle ↗</a>}<Link className={styles.secondary} href={`/apps/${app.slug}/support`}>Destek</Link><Link className={styles.secondary} href={`/apps/${app.slug}/privacy`}>Gizlilik</Link>{app.slug === "hushloom" && <Link className={styles.secondary} href={`/apps/${app.slug}/terms`}>Kullanım Koşulları</Link>}</div>
         </div>
       </section>
       <section className={styles.content}><h2>Resmî uygulama sayfası</h2><p>Bu sayfa {app.name} için ürün bilgileri, App Store bağlantısı, destek ve gizlilik belgelerinin güncel merkezidir.</p></section>

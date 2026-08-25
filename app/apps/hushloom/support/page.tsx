@@ -75,8 +75,8 @@ export default function HushloomSupportPage() {
 
           <h3>Destek Mesajına Ekleyin</h3>
           <ul>
-            <li>iPhone veya iPad modeli</li>
-            <li>iOS/iPadOS sürümü</li>
+            <li>iPhone modeli</li>
+            <li>iOS sürümü</li>
             <li>Hushloom sürümü ve mümkünse build numarası</li>
             <li>Sorunun oluştuğu ekran</li>
             <li>Sorunu tekrar oluşturmak için izlediğiniz adımlar</li>

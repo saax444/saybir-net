@@ -19,7 +19,7 @@ export default function HushloomPage() {
 
       <main className={styles.main}>
         <section className={styles.hero}>
-          <img className={styles.icon} src="/apps/hushloom.svg" alt="Hushloom uygulama ikonu" />
+          <img className={styles.icon} src="/apps/hushloom.png" alt="Hushloom uygulama ikonu" />
           <div>
             <span className={styles.kicker}>Sağlık ve Fitness</span>
             <h1>Hushloom</h1>
@@ -29,7 +29,7 @@ export default function HushloomPage() {
             </p>
             <div className={styles.meta}>
               <span>Sürüm 1.0</span>
-              <span>iPhone ve iPad</span>
+              <span>iPhone</span>
               <span>Free + Premium</span>
             </div>
             <div className={styles.actions}>
@@ -43,8 +43,8 @@ export default function HushloomPage() {
         <section className={styles.content}>
           <h2>Gerçek seslerle kişisel ambiyans</h2>
           <p>
-            Hushloom farklı ortam kayıtlarını aynı anda çalmanıza, her katmanın ses seviyesini
-            ayrı ayrı ayarlamanıza ve bir zamanlayıcıyla uzun süreli ambiyanslar oluşturmanıza
+            Hushloom, 20.012 farklı ses temasını keşfetmenize, ortam kayıtlarını aynı anda
+            çalmanıza, her katmanın ses seviyesini ayrı ayrı ayarlamanıza ve bir zamanlayıcıyla ambiyanslar oluşturmanıza
             yardımcı olur. Ücretsiz sürümde aynı anda en fazla üç ses ve en fazla bir saatlik
             oturum kullanılabilir. Premium sürüm reklamsız kullanım, daha fazla katman ve 24 saate
             kadar zamanlayıcı sunar.

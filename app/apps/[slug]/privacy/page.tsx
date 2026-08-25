@@ -11,6 +11,16 @@ type PrivacyConfig = {
 };
 
 const privacyBySlug: Record<string, PrivacyConfig> = {
+  "hushloom": {
+    name: "Hushloom",
+    summary: "uyku, odaklanma ve rahatlama için ses katmanları ve zamanlanmış oturumlar sunan bir iPhone uygulamasıdır.",
+    sections: [
+      { title: "Cihazda Saklanan Veriler", paragraphs: ["Tercihler, favoriler, kaydedilen karışımlar ve oturum ayarları cihaz üzerinde yerel olarak saklanır. Hushloom hesap gerektirmez ve geliştiriciye ait bir kullanıcı profili veya analiz veritabanı kullanmaz."] },
+      { title: "Reklamlar ve Onay Tercihi", paragraphs: ["Ücretsiz sürüm Google AdMob kullanır. Kullanıcının onayına ve cihaz ayarlarına bağlı olarak Google ve iş ortakları reklam sunmak, ölçmek ve güvenliğini sağlamak amacıyla cihaz tanımlayıcıları, reklam verileri, ürün etkileşimi ve tanılama bilgilerini kendi politikaları kapsamında işleyebilir.", "Gizlilik seçenekleri Hushloom ayarlarından yeniden açılabilir. Premium abonelere reklam gösterilmez."] },
+      { title: "Premium Abonelik", paragraphs: ["Premium abonelik Apple App Store ve StoreKit üzerinden işlenir. Hushloom yalnızca premium özellikleri açmak ve satın alımları geri yüklemek için gereken yetki bilgisini kullanır; ödeme kartı bilgileri geliştiriciye iletilmez."] },
+      { title: "Kullanıcı Seçimleri", paragraphs: ["Reklam onayı uygulama içinden, abonelik Apple Hesabı ayarlarından yönetilebilir. Yerel Hushloom verileri uygulama silinerek kaldırılabilir."] },
+    ],
+  },
   "ne-secsem": {
     name: "Ne Seçsem?",
     summary: "film, dizi ve kitap önerileri sunarak karar vermeyi kolaylaştıran bir iOS uygulamasıdır.",

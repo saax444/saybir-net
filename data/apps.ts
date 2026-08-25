@@ -14,11 +14,11 @@ export const apps: AppInfo[] = [
   {
     slug: "hushloom",
     name: "Hushloom",
-    image: "/apps/hushloom.svg",
-    accent: "159 111 219",
+    image: "/apps/hushloom.png",
+    accent: "216 255 114",
     category: "Sağlık ve Fitness",
     description:
-      "Yağmur, şömine, rüzgâr, fırtına, okyanus ve doğa seslerini karıştırarak uyku, odaklanma ve rahatlama için kişisel ambiyanslar oluşturun.",
+      "Uyku, odaklanma ve sakinlik için doğal ve ambiyans seslerini katmanlayın; 20.012 farklı ses temasını keşfedin.",
     status: "İncelemede",
     version: "1.0",
   },

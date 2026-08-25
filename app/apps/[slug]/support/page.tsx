@@ -6,6 +6,10 @@ import styles from "../app-page.module.css";
 type SupportConfig = { intro: string; topics: string[] };
 
 const supportBySlug: Record<string, SupportConfig> = {
+  "hushloom": {
+    intro: "Hushloom için ses oynatma, reklam izni, Premium abonelik, satın alımları geri yükleme ve gizlilik desteği bu sayfa üzerinden sağlanır.",
+    topics: ["Sesler ve ses katmanları", "Temalar ve favoriler", "Zamanlanmış oturumlar", "Reklam ve gizlilik seçenekleri", "Premium abonelik", "Satın alımları geri yükleme"],
+  },
   "ne-secsem": {
     intro: "Ne Seçsem? için teknik destek, kullanım soruları ve geri bildirimler bu sayfa üzerinden yönetilir.",
     topics: [
