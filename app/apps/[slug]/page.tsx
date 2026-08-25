@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import BrandLogo from "@/components/BrandLogo";
 import { apps, getApp } from "@/data/apps";
 import styles from "./app-page.module.css";
 
@@ -15,7 +16,7 @@ export default async function AppPage({ params }: { params: Promise<{ slug: stri
   const app = getApp((await params).slug);
   if (!app) notFound();
   return <div className={styles.page}>
-    <nav className={styles.nav}><div className={styles.navInner}><Link className={styles.brand} href="/">Aziz Ahmet Saybir</Link><Link className={styles.back} href="/#uygulamalar">← Tüm uygulamalar</Link></div></nav>
+    <nav className={styles.nav}><div className={styles.navInner}><BrandLogo /><Link className={styles.back} href="/#uygulamalar">← Tüm uygulamalar</Link></div></nav>
     <main className={styles.main}>
       <section className={styles.hero}>
         <img className={styles.icon} src={app.image} alt={`${app.name} ikonu`} />

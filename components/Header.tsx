@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
+import BrandLogo from "./BrandLogo";
 import "./Header.css";
 
 export default function Header() {
@@ -10,18 +10,7 @@ export default function Header() {
   return (
     <header className="site-header">
       <div className="container header-inner">
-        <a className="brand" href="#top" aria-label="saybir ana sayfa">
-          <span className="brand-mark">
-            <Image
-              src="/brand/logo-saybir.png"
-              alt=""
-              width={128}
-              height={128}
-              priority
-            />
-          </span>
-          <span>saybir</span>
-        </a>
+        <BrandLogo href="#top" />
 
         <button
           className="menu-toggle"

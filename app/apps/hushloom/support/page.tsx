@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import BrandLogo from "@/components/BrandLogo";
 import styles from "../../[slug]/app-page.module.css";
 
 export const metadata: Metadata = {
@@ -12,7 +13,7 @@ export default function HushloomSupportPage() {
     <div className={styles.page}>
       <nav className={styles.nav}>
         <div className={styles.navInner}>
-          <Link className={styles.brand} href="/">Aziz Ahmet Saybir</Link>
+          <BrandLogo />
           <Link className={styles.back} href="/apps/hushloom">← Hushloom</Link>
         </div>
       </nav>
