@@ -12,18 +12,6 @@ export type AppInfo = {
 
 export const apps: AppInfo[] = [
   {
-    slug: "hushloom",
-    name: "Hushloom",
-    image: "/apps/hushloom.png",
-    accent: "216 255 114",
-    category: "Sağlık ve Fitness",
-    description:
-      "Uyku, odaklanma ve sakinlik için doğal ve ambiyans seslerini katmanlayın; 20.012 farklı ses temasını keşfedin.",
-    status: "İncelemede",
-    version: "1.0",
-  },
-
-  {
     slug: "bold-block-arcade",
     name: "Bold Block Arcade",
     image: "/apps/bold-block-arcade.png",
@@ -31,8 +19,10 @@ export const apps: AppInfo[] = [
     category: "Oyun",
     description:
       "Renkli blokları eşleştirerek bölümleri tamamlayın, skorunuzu geliştirin ve güçlendiricileri kullanın.",
-    status: "İncelemede",
-    version: "1.0",
+    status: "App Store’da",
+    version: "1.0.1",
+    appStoreUrl:
+      "https://apps.apple.com/tr/app/bold-block-arcade/id6797037609",
   },
 
   {
@@ -43,8 +33,10 @@ export const apps: AppInfo[] = [
     category: "Eğitim",
     description:
       "Her gün kısa tarih bilgileri ve akılda kalan hikâyeler keşfedin; ilgi alanlarınıza göre yeni içeriklere ulaşın.",
-    status: "İncelemede",
-    version: "1.0.0",
+    status: "App Store’da",
+    version: "1.0",
+    appStoreUrl:
+      "https://apps.apple.com/tr/app/history/id6799454064",
   },
 
   {
@@ -55,8 +47,10 @@ export const apps: AppInfo[] = [
     category: "Sağlık ve Fitness",
     description:
       "Bisiklet sürüşlerinizi kaydedin, rotalarınızı planlayın, bakım takibini yönetin ve Apple Health ile sürüş verilerinizi tek yerde takip edin.",
-    status: "İncelemede",
+    status: "App Store’da",
     version: "1.0",
+    appStoreUrl:
+      "https://apps.apple.com/tr/app/velomate/id6801481744",
   },
 
   {
@@ -79,8 +73,10 @@ export const apps: AppInfo[] = [
     category: "Eğlence",
     description:
       "Ruh halinize ve tercihlerinize göre film, dizi ve kitap önerileri keşfedin.",
-    status: "İncelemede",
+    status: "App Store’da",
     version: "1.1",
+    appStoreUrl:
+      "https://apps.apple.com/tr/app/ne-se%C3%A7sem/id6799610934",
   },
 
   {
@@ -91,8 +87,10 @@ export const apps: AppInfo[] = [
     category: "Araçlar",
     description:
       "Araç bilgilerini, bakım kayıtlarını ve ilgili belgeleri tek merkezde düzenleyin.",
-    status: "İncelemede",
+    status: "App Store’da",
     version: "1.0",
+    appStoreUrl:
+      "https://apps.apple.com/tr/app/carsave-ai/id6796683831",
   },
 
   {
@@ -104,7 +102,7 @@ export const apps: AppInfo[] = [
     description:
       "Sohbet ekran görüntülerindeki iletişim sinyallerini gizlilik odaklı analiz edin.",
     status: "App Store’da",
-    version: "1.0",
+    version: "1.0.1",
     appStoreUrl:
       "https://apps.apple.com/tr/app/vibelens/id6795049298",
   },
@@ -117,8 +115,8 @@ export const apps: AppInfo[] = [
     category: "Araçlar",
     description:
       "Uygulamalarınızı PIN ve biyometrik doğrulamayla koruyun, odağınızı güçlendirin.",
-    status: "İncelemede",
-    version: "1.0.2",
+    status: "App Store’da",
+    version: "1.0.3",
     appStoreUrl:
       "https://apps.apple.com/tr/app/hilock/id6792282040",
   },
@@ -132,7 +130,7 @@ export const apps: AppInfo[] = [
     description:
       "Günlük yemek kararlarını kolaylaştıran pratik iOS uygulaması.",
     status: "App Store’da",
-    version: "1.0",
+    version: "1.0.1",
     appStoreUrl:
       "https://apps.apple.com/tr/app/yemekolay/id6795879787",
   },
@@ -146,7 +144,7 @@ export const apps: AppInfo[] = [
     description:
       "Gelir, gider, fatura ve hedeflerinizi tek bir sade finans merkezinde yönetin.",
     status: "App Store’da",
-    version: "1.0.2",
+    version: "1.0.3",
     appStoreUrl:
       "https://apps.apple.com/tr/app/%C3%B6d%C3%BCyorum/id6793859068",
   },
@@ -160,7 +158,7 @@ export const apps: AppInfo[] = [
     description:
       "Reflekslerinizi neon şehirlerde hızlı ve akıcı oyun deneyimiyle sınayın.",
     status: "App Store’da",
-    version: "1.4",
+    version: "1.0.7",
     appStoreUrl:
       "https://apps.apple.com/tr/app/ref-ref-ref/id6788466051",
   },
@@ -174,7 +172,7 @@ export const apps: AppInfo[] = [
     description:
       "Kedinizin sağlık, bakım ve önemli kayıtlarını düzenli biçimde takip edin.",
     status: "App Store’da",
-    version: "1.0.1",
+    version: "1.0.2",
     appStoreUrl:
       "https://apps.apple.com/tr/app/kedilik/id6792054901",
   },
@@ -188,7 +186,7 @@ export const apps: AppInfo[] = [
     description:
       "Namaz vakitleri, kıble, dualar ve günlük ibadet araçlarına kolayca ulaşın.",
     status: "App Store’da",
-    version: "1.06",
+    version: "1.07",
     appStoreUrl:
       "https://apps.apple.com/tr/app/ezan-vakti-namaz-ve-k%C4%B1ble/id6790400156",
   },
@@ -202,7 +200,7 @@ export const apps: AppInfo[] = [
     description:
       "Ertelemeyi bırakın, küçük adımlarla görevlerinizi harekete dönüştürün.",
     status: "App Store’da",
-    version: "1.0.1",
+    version: "1.0.2",
     appStoreUrl:
       "https://apps.apple.com/tr/app/%C3%BC%C5%9Fenme-yap/id6792234967",
   },
@@ -228,7 +226,7 @@ export const apps: AppInfo[] = [
     description:
       "Günlük su hedefinizi takip edin ve düzenli içme alışkanlığı oluşturun.",
     status: "App Store’da",
-    version: "1.0",
+    version: "1.0.1",
     appStoreUrl:
       "https://apps.apple.com/tr/app/susad%C4%B1m/id6792691032",
   },

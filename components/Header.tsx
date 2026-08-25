@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <header className="site-header">
       <div className="container header-inner">
-        <a className="brand" href="#top" aria-label="Aziz Ahmet Saybir ana sayfa">
+        <a className="brand" href="#top" aria-label="saybir ana sayfa">
           <span className="brand-mark">
             <Image
               src="/brand/logo-saybir.png"
@@ -20,7 +20,7 @@ export default function Header() {
               priority
             />
           </span>
-          <span>Aziz Ahmet Saybir</span>
+          <span>saybir</span>
         </a>
 
         <button
