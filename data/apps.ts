@@ -20,7 +20,7 @@ export const apps: AppInfo[] = [
     description:
       "Renkli blokları eşleştirerek bölümleri tamamlayın, skorunuzu geliştirin ve güçlendiricileri kullanın.",
     status: "App Store’da",
-    version: "1.0.1",
+    version: "1.3",
     appStoreUrl:
       "https://apps.apple.com/tr/app/bold-block-arcade/id6797037609",
   },
@@ -61,8 +61,10 @@ export const apps: AppInfo[] = [
     category: "Müzik",
     description:
       "Müzik zevkinize göre yeni şarkılar ve kişiselleştirilmiş öneriler keşfedin.",
-    status: "İncelemede",
+    status: "App Store’da",
     version: "1.0",
+    appStoreUrl:
+      "https://apps.apple.com/tr/app/melody-map/id6797370899",
   },
 
   {
@@ -158,7 +160,7 @@ export const apps: AppInfo[] = [
     description:
       "Reflekslerinizi neon şehirlerde hızlı ve akıcı oyun deneyimiyle sınayın.",
     status: "App Store’da",
-    version: "1.0.7",
+    version: "17",
     appStoreUrl:
       "https://apps.apple.com/tr/app/ref-ref-ref/id6788466051",
   },
@@ -213,7 +215,7 @@ export const apps: AppInfo[] = [
     category: "Yaşam",
     description:
       "Modern bir tarot deneyimiyle kartları keşfedin ve yorumlarınıza odaklanın.",
-    status: "İncelemede",
+    status: "App Store’da",
     version: "1.1",
   },
 
