@@ -12,6 +12,12 @@ export type AppInfo = {
 
 export const apps: AppInfo[] = [
   {
+    slug: "retro-snake", name: "Retro Snake", image: "/apps/retro-snake.png",
+    accent: "102 213 154", category: "Oyun", version: "1.0",
+    description: "10 dünya ve 1000 bölüm boyunca yılanına yön ver. Yeni görünümler aç, yemleri topla ve kendi rekorunu geç.",
+    status: "İncelemede",
+  },
+  {
     slug: "bold-block-arcade",
     name: "Bold Block Arcade",
     image: "/apps/bold-block-arcade.png",

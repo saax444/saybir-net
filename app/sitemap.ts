@@ -17,6 +17,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       });
     }
 
+    if (app.slug === "retro-snake") {
+      for (const section of ["terms", "eula", "purchases"]) pages.push({url: `https://saybir.net/apps/retro-snake/${section}`, lastModified: new Date(), priority: 0.6});
+    }
     return pages;
   });
 

@@ -1,0 +1,157 @@
+[
+  {
+    "id": "privacy",
+    "title": "Gizlilik Politikası",
+    "updated": "9 Eylül 2026",
+    "sections": [
+      {
+        "title": "Sorumlu ve kapsam",
+        "body": "Retro Snake, Saybir tarafından sunulan bir iPhone oyunudur. Gizlilik ve veri talepleri için hello@saybir.net adresine yazabilirsiniz. Bu metin Retro Snake 1.0 içindeki veri kullanımını açıklar."
+      },
+      {
+        "title": "Cihazınızdaki oyun kayıtları",
+        "body": "Bölüm ilerlemesi, açılmış bölümler, skor, can sayısı, seçilen yılan ve ses/titreşim tercihleri cihazınızda saklanır. Oyunda hesap oluşturma, sohbet, geliştirici sunucusuna oyun kaydı yükleme veya bulut eşitleme yoktur. Uygulama kamera, mikrofon, kişiler, sağlık verileri veya hassas konum izni istemez."
+      },
+      {
+        "title": "Reklamlar ve Google AdMob",
+        "body": "Ücretsiz sürüm banner ve isteğe bağlı ödüllü reklam kullanır. Google Mobile Ads SDK; IP adresi ve bundan çıkarılan yaklaşık konum, cihaz/uygulama tanımlayıcıları, reklam görüntüleme ve etkileşimleri, çökme ve performans bilgilerini reklam sunumu, ölçüm, güvenlik ve tanılama için işleyebilir. Reklamlar kişiselleştirilmediğinde de sınırlı teknik veri işlenebilir. Google’ın veri kullanımına aşağıdaki bağlantılardan ulaşabilirsiniz."
+      },
+      {
+        "title": "Onay ve gizlilik tercihleri",
+        "body": "Gereken bölgelerde reklam onayı Google UMP üzerinden yönetilir. Uygulama reklam isteğini UMP izin durumuna göre yapar. Onay formu bu bölge için mevcutsa Ayarlar → Yasal ve Gizlilik → Reklam gizlilik seçenekleri yoluyla seçimlerinizi değiştirebilirsiniz. Gizlilik politikasını okumak reklam onayı vermek anlamına gelmez. Bu sürüm iOS takip izni istemez; izin verilmeden IDFA erişimi sağlanmaz."
+      },
+      {
+        "title": "Satın almalar ve destek",
+        "body": "Ödemeyi Apple işler. Uygulama ücretli özellikleri açmak için StoreKit satın alma ve yetki bilgisini kullanır; kart bilgilerinize geliştirici erişmez. Destek için e-posta gönderirseniz adresiniz ve mesajınız talebinizi yanıtlamak için işlenir. Lütfen şifre veya kart bilgisi göndermeyin."
+      },
+      {
+        "title": "Amaç, hukuki dayanak ve saklama",
+        "body": "Yerel kayıtlar oyunun çalışmasını sağlar. Destek yazışmaları talebinizi yerine getirmek ve sorunları çözmek; zorunlu kayıtlar yasal yükümlülükler için işlenir. Onaya bağlı reklam işlemleri için gerekli onay alınır. Destek yazışmaları talebi sonuçlandırmak, bağlantılı sorunları takip etmek ve varsa yasal yükümlülükleri yerine getirmek için gerekli süreyle sınırlı tutulur; süre talebin niteliği ve devam eden uyuşmazlıklara göre belirlenir. Cihaz kayıtları uygulamayı verileriyle birlikte silene kadar kalır; cihaz yedeklerinin ayrıca yönetilmesi gerekebilir. Apple ve Google kendi saklama kurallarını uygular."
+      },
+      {
+        "title": "Sağlayıcılar ve yurt dışı işlemler",
+        "body": "Apple, Google ve destek e-postasının altyapısı, verileri bulunduğunuz ülke dışında işleyebilir. Uygulanabilir aktarım mekanizmaları ve sağlayıcıların işleme açıklamaları kendi gizlilik belgelerinde yer alır. Geliştirici oyun ilerlemenizi reklam sağlayıcısına göndermez ve ayrıca kullanıcı profili veritabanı tutmaz."
+      },
+      {
+        "title": "Haklarınız ve silme",
+        "body": "Uygulanabilir mevzuat kapsamında erişim, düzeltme, silme, kısıtlama, taşınabilirlik, itiraz ve onayı geri çekme talebinde bulunabilirsiniz. Talepler için hello@saybir.net adresini kullanın. EEA/AB’de yetkili veri koruma otoritesine şikâyet hakkınız saklıdır. Apple veya Google’ın bağımsız olarak tuttuğu veriler için ilgili sağlayıcının araçları da kullanılabilir. Oyunu verileriyle birlikte silmek yerel ilerlemeyi kaldırır; Apple satın alma kayıtlarını silmez."
+      },
+      {
+        "title": "Çocuklar ve değişiklikler",
+        "body": "Oyun çocuklara özel bir hizmet olarak sunulmaz. Küçüklerin satın almaları ebeveyn veya yasal temsilci gözetiminde yapılmalıdır. Çocuğa ait verinin uygunsuz işlendiğini düşünüyorsanız bize bildirin. Veri uygulamaları değişirse metin ve tarihi güncellenir; gereken durumlarda yeni onay istenir."
+      }
+    ],
+    "links": [
+      {
+        "title": "Google gizlilik politikası",
+        "url": "https://policies.google.com/privacy"
+      },
+      {
+        "title": "Google reklam verileri",
+        "url": "https://developers.google.com/admob/ios/privacy/data-disclosure"
+      },
+      {
+        "title": "Apple gizlilik politikası",
+        "url": "https://www.apple.com/legal/privacy/"
+      },
+      {
+        "title": "AB veri koruma hakları",
+        "url": "https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en"
+      }
+    ]
+  },
+  {
+    "id": "terms",
+    "title": "Kullanım Koşulları",
+    "updated": "9 Eylül 2026",
+    "sections": [
+      {
+        "title": "Oyun ve lisans",
+        "body": "Retro Snake; 10 dünya, 1000 bölüm ve açılabilir yılan görünümleri sunar. Uygulamanın kullanım lisansı Apple Standart EULA’ya tabidir. Bu oyun koşulları oyun işleyişini açıklar; zorunlu tüketici haklarınızı veya Apple Standart EULA’yı sınırlamaz."
+      },
+      {
+        "title": "Canlar ve ödüller",
+        "body": "Ücretsiz oyunda en fazla 5 can vardır. Çarpışma bir can eksiltir. Kullanıcının seçtiği ödüllü reklamın tamamlandığı sağlayıcı tarafından doğrulandığında can sayısı 5’e tamamlanır; 5’in üzerine çıkmaz. Reklamın yüklenmesi ağ, bölge ve reklam bulunabilirliğine bağlıdır. Yarım kalan veya doğrulanmayan reklam ödül sağlamaz. Oyun içi can ve görünümler para değildir; devredilemez veya nakde çevrilemez."
+      },
+      {
+        "title": "Ücretli sürüm",
+        "body": "Tek seferlik uygulama içi satın alım reklamları kaldırır ve sınırsız can açar. Bu bir abonelik değildir; otomatik yenilenmez. Ödeme onayından önce Apple ekranında gösterilen yerel fiyat ve vergiler geçerlidir. Ayrıntılar Satın Alma ve İade Koşulları bölümündedir."
+      },
+      {
+        "title": "Adil kullanım ve içerik",
+        "body": "Oyunun, Saybir markasının ve oyun varlıklarının izinsiz yeniden dağıtılması veya başkalarına ait hakları ihlal eden kullanımı yasaktır; kanunun tanıdığı istisnalar saklıdır. Reklamları veya satın alma doğrulamasını hileyle manipüle etmeyin. Üçüncü taraf reklamındaki teklifin tarafı reklamverendir; reklam görünmesi Saybir’in o teklifi onayladığı anlamına gelmez."
+      },
+      {
+        "title": "Kayıtlar, güncellemeler ve sorumluluk",
+        "body": "İlerleme cihazda tutulur; silme veya cihaz değiştirme sırasında kaybolabilir. Bölüm dengesi, grafikler ve uyumluluk güncellemelerle değişebilir. Kesintisiz çalışma veya tüm cihazlarla süresiz uyumluluk vaat edilmez. Bu açıklama kanunen vazgeçilemeyen ayıplı dijital içerik, tazmin veya iade haklarını kaldırmaz."
+      },
+      {
+        "title": "EEA/AB ve diğer tüketiciler",
+        "body": "İkamet ettiğiniz yerde uygulanması zorunlu tüketici korumaları, yasal garantiler ve başvuru yolları saklıdır. Dijital içerikte cayma hakkının istisnaları ancak ilgili yasal şartlar sağlandığında uygulanır; bu metin tek başına cayma hakkınızdan feragat sayılmaz. Uyuşmazlıklar bakımından Apple Standart EULA ve zorunlu yerel hukuk dikkate alınır."
+      },
+      {
+        "title": "İletişim",
+        "body": "Oyun desteği, şikâyet veya koşullarla ilgili soru için hello@saybir.net. Güncel belgeler saybir.net/apps/retro-snake adresindedir."
+      }
+    ],
+    "links": []
+  },
+  {
+    "id": "eula",
+    "title": "Son Kullanıcı Lisans Sözleşmesi (EULA)",
+    "updated": "9 Eylül 2026",
+    "sections": [
+      {
+        "title": "Uygulanan lisans",
+        "body": "Retro Snake için Apple’ın Standart Son Kullanıcı Lisans Sözleşmesi (Standard EULA) kullanılır. Özel bir EULA oluşturulmamıştır. Lisansın tam ve güncel metnine aşağıdaki Apple bağlantısından ulaşabilirsiniz."
+      },
+      {
+        "title": "Belgenin kapsamı",
+        "body": "Standart sözleşme uygulamayı kullanma lisansını, kullanım sınırlarını ve tarafların haklarını düzenler. Buradaki açıklama sözleşmenin tam metni veya çevirisi değildir. Oyun kuralları, satın alma koşulları ve gizlilik politikası uygulamanın ilgili bölümlerinde ayrıca açıklanır."
+      },
+      {
+        "title": "Tüketici hakları",
+        "body": "Lisans koşulları, bulunduğunuz yerde kanunen vazgeçilemeyen tüketici haklarınızı ortadan kaldırmaz. Apple Standart EULA’daki bölgesel hükümler geçerlidir."
+      }
+    ],
+    "links": [
+      {
+        "title": "Apple Standart EULA — tam metin",
+        "url": "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
+      }
+    ]
+  },
+  {
+    "id": "purchases",
+    "title": "Satın Alma ve İade Koşulları",
+    "updated": "9 Eylül 2026",
+    "sections": [
+      {
+        "title": "Tek seferlik satın alma",
+        "body": "Reklamsız ve sınırsız canlı sürüm tek seferlik, tüketilemeyen bir uygulama içi üründür. Abonelik veya otomatik yenileme yoktur. Apple ödeme ekranındaki tutar satın alma için geçerlidir; ülke, para birimi ve vergiye göre değişebilir."
+      },
+      {
+        "title": "Teslimat ve geri yükleme",
+        "body": "Özellikler Apple işlemi doğrulandığında açılır. Bekleyen onaylarda işlem tamamlanana kadar erişim açılmayabilir. Aynı Apple Hesabı ile Ayarlar → Satın alımları geri yükle seçeneğini kullanın. İşlem için internet gerekebilir. Oyun ilerlemesi satın alma ile bulutta saklanmaz."
+      },
+      {
+        "title": "İade",
+        "body": "İade talepleri Apple’ın reportaproblem.apple.com hizmetinden gönderilebilir. Uygunluk ve karar Apple’ın sürecine ve uygulanabilir hukuka bağlıdır; tüm taleplerin kabulü garanti edilmez. Satın alma Apple tarafından iptal veya iade edildiğinde ilgili ücretli erişim kaldırılabilir. Zorunlu yasal haklarınız saklıdır."
+      },
+      {
+        "title": "Destek",
+        "body": "Ücret ödendiği hâlde özellik açılmadıysa önce geri yüklemeyi deneyin, ardından hello@saybir.net adresine yazın. Kart bilgisi veya Apple Hesabı şifresi göndermeyin."
+      }
+    ],
+    "links": [
+      {
+        "title": "Apple üzerinden iade talebi",
+        "url": "https://reportaproblem.apple.com/"
+      },
+      {
+        "title": "Apple iade yardımı",
+        "url": "https://support.apple.com/en-us/118223"
+      }
+    ]
+  }
+]
