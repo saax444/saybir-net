@@ -2,7 +2,7 @@
   {
     "id": "privacy",
     "title": "Gizlilik Politikası",
-    "updated": "9 Eylül 2026",
+    "updated": "11 Eylül 2026",
     "sections": [
       {
         "title": "Sorumlu ve kapsam",
@@ -10,11 +10,11 @@
       },
       {
         "title": "Cihazınızdaki oyun kayıtları",
-        "body": "Bölüm ilerlemesi, açılmış bölümler, skor, can sayısı, seçilen yılan ve ses/titreşim tercihleri cihazınızda saklanır. Oyunda hesap oluşturma, sohbet, geliştirici sunucusuna oyun kaydı yükleme veya bulut eşitleme yoktur. Uygulama kamera, mikrofon, kişiler, sağlık verileri veya hassas konum izni istemez."
+        "body": "Bölüm ilerlemesi, açılmış bölümler, skor, can sayısı, seçilen yılan ve ses/titreşim tercihleri cihazınızda saklanır. Oyunda hesap oluşturma, sohbet, geliştirici sunucusuna oyun kaydı yükleme veya bulut eşitleme yoktur. Uygulama kamera, mikrofon, kişiler, sağlık verileri veya hassas konum izni istemez. Günlük görevler, yıldızlar, ustalık mühürleri ve karakter bağları da yerel kayıtlara dahildir. Antrenman ilerleme veya rekor kazandırmaz."
       },
       {
         "title": "Reklamlar ve Google AdMob",
-        "body": "Ücretsiz sürüm banner ve isteğe bağlı ödüllü reklam kullanır. Google Mobile Ads SDK; IP adresi ve bundan çıkarılan yaklaşık konum, cihaz/uygulama tanımlayıcıları, reklam görüntüleme ve etkileşimleri, çökme ve performans bilgilerini reklam sunumu, ölçüm, güvenlik ve tanılama için işleyebilir. Reklamlar kişiselleştirilmediğinde de sınırlı teknik veri işlenebilir. Google’ın veri kullanımına aşağıdaki bağlantılardan ulaşabilirsiniz."
+        "body": "Ücretsiz sürüm yalnızca menülerde banner, tur aralarında kullanıcının açık seçimiyle ödüllü reklam kullanır. Aktif oyun alanında reklam gösterilmez. Bu sürüm kişiselleştirilmemiş reklam ister ve yayıncı birinci taraf kimliğini kapalı tutar. Google Mobile Ads SDK; IP adresi ve bundan çıkarılan yaklaşık konum, cihaz/uygulama tanımlayıcıları, reklam görüntüleme ve etkileşimleri, çökme ve performans bilgilerini reklam sunumu, ölçüm, güvenlik ve tanılama için işleyebilir. Reklamlar kişiselleştirilmediğinde de sınırlı teknik veri işlenebilir. Google’ın veri kullanımına aşağıdaki bağlantılardan ulaşabilirsiniz."
       },
       {
         "title": "Onay ve gizlilik tercihleri",
@@ -63,7 +63,7 @@
   {
     "id": "terms",
     "title": "Kullanım Koşulları",
-    "updated": "9 Eylül 2026",
+    "updated": "11 Eylül 2026",
     "sections": [
       {
         "title": "Oyun ve lisans",
@@ -71,7 +71,11 @@
       },
       {
         "title": "Canlar ve ödüller",
-        "body": "Ücretsiz oyunda en fazla 5 can vardır. Çarpışma bir can eksiltir. Kullanıcının seçtiği ödüllü reklamın tamamlandığı sağlayıcı tarafından doğrulandığında can sayısı 5’e tamamlanır; 5’in üzerine çıkmaz. Reklamın yüklenmesi ağ, bölge ve reklam bulunabilirliğine bağlıdır. Yarım kalan veya doğrulanmayan reklam ödül sağlamaz. Oyun içi can ve görünümler para değildir; devredilemez veya nakde çevrilemez."
+        "body": "Ücretsiz oyunda en fazla 5 can vardır. Normal bölümde çarpışma bir can eksiltir. Serbest antrenman can tüketmez; bölüm, yıldız, görev ve rekor ilerlemesi sağlamaz. Kullanıcının seçtiği ödüllü reklamın tamamlandığı sağlayıcı tarafından doğrulandığında can sayısı 5’e tamamlanır; 5’in üzerine çıkmaz. Reklamın yüklenmesi ağ, bölge ve reklam bulunabilirliğine bağlıdır. Yarım kalan veya doğrulanmayan reklam ödül sağlamaz. Oyun içi can ve görünümler para değildir; devredilemez veya nakde çevrilemez."
+      },
+      {
+        "title": "Kontroller, yemler ve tehlikeler",
+        "body": "Yılan yatay giderken başının üstüne/altına, dikey giderken soluna/sağına dokunmak köşe dönüşü verir. Her yem bölüm hedefine 1 ve skora 10 ekler. Meyve türüne göre yılan 1–3 birim uzar. Acı biber 18 adım boyunca %20 hızlandırır; buz meyvesi 12 adım boyunca %12 yavaşlatır ve 3 birim uzatır. Yeni hız etkisi öncekinin yerini alır. Tek yenilemeyen engel türü taştır. Taşa veya taş duvara temas turu bitirir; normal oyunda bir can eksilir. 11. bölümden itibaren düz taş duvarlar eklenir. Bölüm ilerledikçe duvar sayısı ve uzunluğu, engel yoğunluğu ve temel hız artar. Mor portallar eşleşir; turkuaz akıntı içindeyken yön sağa zorlanır."
       },
       {
         "title": "Ücretli sürüm",
@@ -99,7 +103,7 @@
   {
     "id": "eula",
     "title": "Son Kullanıcı Lisans Sözleşmesi (EULA)",
-    "updated": "9 Eylül 2026",
+    "updated": "11 Eylül 2026",
     "sections": [
       {
         "title": "Uygulanan lisans",
@@ -124,7 +128,7 @@
   {
     "id": "purchases",
     "title": "Satın Alma ve İade Koşulları",
-    "updated": "9 Eylül 2026",
+    "updated": "11 Eylül 2026",
     "sections": [
       {
         "title": "Tek seferlik satın alma",
