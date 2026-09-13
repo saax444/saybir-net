@@ -79,7 +79,7 @@
       },
       {
         "title": "Ücretli sürüm",
-        "body": "Tek seferlik uygulama içi satın alım reklamları kaldırır ve sınırsız can açar. Bu bir abonelik değildir; otomatik yenilenmez. Ödeme onayından önce Apple ekranında gösterilen yerel fiyat ve vergiler geçerlidir. Ayrıntılar Satın Alma ve İade Koşulları bölümündedir."
+        "body": "Retro Snake Premium aylık otomatik yenilenen aboneliktir. Abonelik aktifken reklamlar kaldırılır ve sınırsız can açılır. ABD taban fiyatı aylık 2,99 USD’dir; Apple ödeme ekranındaki yerel fiyat ve vergiler geçerlidir. Abonelik sona erdiğinde ücretsiz sürüm kuralları yeniden uygulanır. Bölüm ilerlemesi ve kazanılmış görünümler korunur."
       },
       {
         "title": "Adil kullanım ve içerik",
@@ -131,12 +131,12 @@
     "updated": "11 Eylül 2026",
     "sections": [
       {
-        "title": "Tek seferlik satın alma",
-        "body": "Reklamsız ve sınırsız canlı sürüm tek seferlik, tüketilemeyen bir uygulama içi üründür. Abonelik veya otomatik yenileme yoktur. Apple ödeme ekranındaki tutar satın alma için geçerlidir; ülke, para birimi ve vergiye göre değişebilir."
+        "title": "Aylık abonelik ve yenileme",
+        "body": "Retro Snake Premium aylık otomatik yenilenen aboneliktir. Aktif abonelik reklamsız oyun ve sınırsız can sağlar. ABD taban fiyatı aylık 2,99 USD’dir; ülke, para birimi ve vergilere göre Apple ödeme ekranındaki yerel fiyat geçerlidir. Ödeme onayda Apple Hesabınızdan alınır. Yenileme mevcut dönem bitmeden en az 24 saat önce kapatılmazsa abonelik otomatik yenilenir. Hesabınız dönem bitiminden önceki 24 saat içinde yenileme için ücretlendirilir."
       },
       {
         "title": "Teslimat ve geri yükleme",
-        "body": "Özellikler Apple işlemi doğrulandığında açılır. Bekleyen onaylarda işlem tamamlanana kadar erişim açılmayabilir. Aynı Apple Hesabı ile Ayarlar → Satın alımları geri yükle seçeneğini kullanın. İşlem için internet gerekebilir. Oyun ilerlemesi satın alma ile bulutta saklanmaz."
+        "body": "Özellikler doğrulanmış aktif Apple aboneliğiyle açılır. Bekleyen işlem onaylanana kadar erişim verilmez. Aynı Apple Hesabı ile Ayarlar → Satın alımları geri yükle kullanılabilir. Ayarlar → Aboneliği yönet / iptal et bağlantısından yenilemeyi kapatabilirsiniz. İptal ödenmiş dönem sonuna kadar erişimi korur. Süre dolunca reklamlar ve normal can kuralları geri gelir; oyun ilerlemeniz korunur. Satın alma oyun ilerlemesini bulutta saklamaz."
       },
       {
         "title": "İade",
@@ -155,6 +155,10 @@
       {
         "title": "Apple iade yardımı",
         "url": "https://support.apple.com/en-us/118223"
+      },
+      {
+        "title": "Apple aboneliklerini yönet ve iptal et",
+        "url": "https://apps.apple.com/account/subscriptions"
       }
     ]
   }
