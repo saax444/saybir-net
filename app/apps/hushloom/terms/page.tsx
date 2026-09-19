@@ -4,7 +4,7 @@ import BrandLogo from "@/components/BrandLogo";
 import styles from "../../[slug]/app-page.module.css";
 
 export const metadata: Metadata = {
-  title: "Hushloom Kullanım Koşulları — saybir.net",
+  title: "Hushloom Kullanım Koşulları — SAYBIR",
   description: "Hushloom kullanım koşulları ve Premium abonelik bilgileri.",
 };
 
@@ -108,7 +108,7 @@ export default function HushloomTermsPage() {
           <h3>İletişim</h3>
           <p>
             Kullanım koşulları veya aboneliklerle ilgili sorular için{" "}
-            <a href="mailto:hello@saybir.net?subject=Hushloom%20Ko%C5%9Fullar">hello@saybir.net</a>
+            <a href="mailto:hello@saybir.net?subject=Hushloom%20Kullanim%20Kosullari">hello@saybir.net</a>
             {" "}adresine e-posta gönderebilirsiniz.
           </p>
 
