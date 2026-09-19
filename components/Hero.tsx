@@ -1,32 +1,12 @@
 "use client";
-
 import { useEffect, useRef } from "react";
 import { apps } from "@/data/apps";
 import "./Hero.css";
-
-export default function Hero() {
-  const stageRef = useRef<HTMLDivElement>(null);
-  const featured = apps.slice(0, 7);
-  useEffect(() => {
-    const stage=stageRef.current; if(!stage) return;
-    const move=(e:PointerEvent)=>{stage.style.setProperty("--mx",`${(e.clientX/window.innerWidth-.5)*24}px`);stage.style.setProperty("--my",`${(e.clientY/window.innerHeight-.5)*18}px`)};
-    window.addEventListener("pointermove",move,{passive:true}); return()=>window.removeEventListener("pointermove",move);
-  },[]);
-  return <section className="hero" id="top">
-    <div className="cinema-vignette"/><div className="cinema-grain"/><div className="cinema-beam"/>
-    <div className="hero-copy container">
-      <div className="hero-kicker"><span>Independent software studio</span><b>Est. 2026</b></div>
-      <h1>Ideas become<br/><em>experiences.</em></h1>
-      <p>iOS, macOS ve Android için tasarım, mühendislik ve ürün düşüncesini tek bir deneyimde buluşturan bağımsız yazılım stüdyosu.</p>
-      <div className="hero-actions"><a href="#uygulamalar">Explore the work <span>↘</span></a><a href="#iletisim">Start a project ↗</a></div>
-    </div>
-    <div className="stage" ref={stageRef}>
-      <div className="stage-halo"/><div className="stage-disc disc-a"/><div className="stage-disc disc-b"/>
-      <div className="device device-back"><div className="device-screen"><span>macOS</span><strong>SAYBIR</strong><small>DESIGNED FOR FOCUS</small></div></div>
-      <div className="device device-front"><div className="phone-island"/><div className="phone-screen"><span className="screen-label">SAYBIR / MOBILE</span><strong>Make<br/>something<br/><i>meaningful.</i></strong><small>iOS · ANDROID</small></div></div>
-      {featured.map((app,i)=><div className={`floating-app fa-${i+1}`} key={app.slug}><img src={app.image} alt=""/></div>)}
-    </div>
-    <div className="hero-platform-strip"><span>Native experiences</span><div>iOS</div><i/><div>macOS</div><i/><div>Android</div></div>
-    <div className="scroll-cue"><span>SCROLL</span><b/></div>
-  </section>;
+export default function Hero(){
+ const hero=useRef<HTMLElement>(null),featured=apps.slice(0,5);
+ useEffect(()=>{let raf=0;const tick=()=>{const el=hero.current;if(!el)return;const r=el.getBoundingClientRect(),p=Math.max(0,Math.min(1,-r.top/(innerHeight*.95)));el.style.setProperty("--hero-scroll",String(p))};const scroll=()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(tick)};tick();addEventListener("scroll",scroll,{passive:true});return()=>{cancelAnimationFrame(raf);removeEventListener("scroll",scroll)}},[]);
+ return <section ref={hero} className="hero" id="top"><div className="hero-film"/><div className="hero-light"/><div className="hero-vignette"/>
+ <div className="container hero-copy"><div className="hero-index"><span>01 / 04</span><i/><b>Independent digital studio</b></div><h1><span>We build</span><br/><em>digital worlds.</em></h1><div className="hero-sub"><p>Native products for Apple and Android ecosystems. Designed with restraint. Engineered for speed.</p><a href="#uygulamalar">View selected work <b>↓</b></a></div></div>
+ <div className="hero-product"><div className="hero-orb"/><div className="hero-mac"><div className="mac-lid"><div className="mac-screen"><span>SAYBIR / 2026</span><strong>Designed<br/>to feel<br/><i>inevitable.</i></strong><small>macOS</small></div></div><div className="mac-base"/></div><div className="hero-phone"><div className="hp-island"/><div className="hp-screen"><small>SAYBIR</small><strong>Build<br/>different.</strong><i>iOS / Android</i></div></div>{featured.map((a,i)=><div className={"hero-app ha"+i} key={a.slug}><img src={a.image} alt=""/></div>)}</div>
+ <div className="hero-foot container"><span>FRANKFURT · ISTANBUL</span><div><b>iOS</b><i/>macOS<i/>Android</div><span>SCROLL TO ENTER</span></div></section>
 }
