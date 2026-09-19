@@ -1,25 +1,81 @@
 "use client";
-import { CSSProperties,useEffect,useRef } from "react";
+
+import { useEffect, useRef, useState } from "react";
 import { apps } from "@/data/apps";
 import "./Hero.css";
 
-export default function Hero(){
- const root=useRef<HTMLElement>(null);
- const featured=apps.slice(0,5);
- useEffect(()=>{let raf=0;const update=()=>{const el=root.current;if(!el)return;const r=el.getBoundingClientRect();const travel=Math.max(el.offsetHeight-innerHeight,1);el.style.setProperty("--sbHeroP",String(Math.max(0,Math.min(1,-r.top/travel))))};const scroll=()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(update)};update();addEventListener("scroll",scroll,{passive:true});return()=>{cancelAnimationFrame(raf);removeEventListener("scroll",scroll)}},[]);
- return <section ref={root} className="sbHero" id="top"><div className="sbHero__sticky">
-   <div className="sbHero__bg"/><div className="sbHero__beam"/>
-   <div className="sbHero__copy container">
-    <div className="sbHero__kicker"><span>INDEPENDENT SOFTWARE STUDIO</span><i/><span>iOS · macOS · Android</span></div>
-    <h1><span>Products with</span><em>presence.</em></h1>
-    <div className="sbHero__deck"><p>We design and engineer independent software from first idea to final release.</p><a href="#uygulamalar">VIEW SELECTED WORK <b>↘</b></a></div>
-   </div>
-   <div className="sbHero__stage" aria-hidden="true">
-    <div className="sbHero__aura"/>
-    <div className="sbHero__slab"><span>SAYBIR</span><small>PRODUCT / DESIGN / ENGINEERING</small></div>
-    <div className="sbHero__phone"><div className="sbHero__island"/><div className="sbHero__screen"><small>SAYBIR / 01</small><strong>Ideas<br/>into<br/><i>products.</i></strong><span>SELECTED WORK</span></div></div>
-    {featured.map((a,i)=><div className={"sbHero__app sbHero__app--"+i} key={a.slug} style={{"--sbAccent":a.accent} as CSSProperties}><img src={a.image} alt=""/></div>)}
-   </div>
-   <div className="sbHero__foot container"><span>01 / OPENING</span><span>SCROLL TO EXPLORE</span></div>
- </div></section>
+export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [activePage, setActivePage] = useState(0);
+  const pageCount = Math.ceil(apps.length / 4);
+
+  useEffect(() => {
+    let frame = 0;
+
+    const update = () => {
+      const section = sectionRef.current;
+      if (!section) return;
+      const rect = section.getBoundingClientRect();
+      const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
+      const progress = Math.min(1, Math.max(0, -rect.top / travel));
+      setActivePage(Math.min(pageCount - 1, Math.round(progress * (pageCount - 1))));
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [pageCount]);
+
+  const visibleApps = apps.slice(activePage * 4, activePage * 4 + 4);
+
+  return (
+    <section ref={sectionRef} className="hero" id="top">
+      <div className="hero-sticky">
+        <div className="container hero-layout">
+          <div className="hero-copy">
+            <span className="hero-badge">iOS Uygulamaları ve Yazılım Geliştirme</span>
+            <h1>
+              Fikirlerinizi kullanılabilir <span>iOS ürünlerine</span> dönüştürün.
+            </h1>
+            <p>
+              Kullanıcı odaklı iOS uygulamaları geliştirme; tasarım, test ve
+              App Store yayın süreçlerini uçtan uca beraber yönetelim.
+            </p>
+            <div className="hero-actions">
+              <a className="hero-button hero-button-primary" href="#uygulamalar">Uygulamaları İncele</a>
+              <a className="hero-button hero-button-secondary" href="#iletisim">İletişim</a>
+            </div>
+          </div>
+
+          <div className="hero-showcase" aria-live="polite">
+            <div className="showcase-disc" aria-hidden="true" />
+            <div className="showcase-app-grid" key={activePage}>
+              {visibleApps.map((app) => (
+                <a className="showcase-app" href={`/apps/${app.slug}`} key={app.slug}>
+                  <img src={app.image} alt={`${app.name} uygulama ikonu`} />
+                  <strong>{app.name}</strong>
+                </a>
+              ))}
+            </div>
+            <div className="showcase-progress" aria-label={`${activePage + 1} / ${pageCount}`}>
+              <span>{String(activePage + 1).padStart(2, "0")}</span>
+              <div><i style={{ width: `${((activePage + 1) / pageCount) * 100}%` }} /></div>
+              <span>{String(pageCount).padStart(2, "0")}</span>
+            </div>
+            <p className="showcase-hint">Uygulamalar arasında ilerlemek için kaydırın</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
