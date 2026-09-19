@@ -9,7 +9,7 @@ export function generateStaticParams() { return apps.map((app) => ({ slug: app.s
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const app = getApp((await params).slug);
-  return app ? { title: `${app.name} — saybir.net`, description: app.description } : {};
+  return app ? { title: `${app.name} — SAYBIR`, description: app.description } : {};
 }
 
 export default async function AppPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -21,7 +21,7 @@ export default async function AppPage({ params }: { params: Promise<{ slug: stri
       <section className={styles.hero} style={{"--accent": app.accent} as React.CSSProperties}>
         <img className={styles.icon} src={app.image} alt={`${app.name} ikonu`} />
         <div><span className={styles.kicker}>{app.category}</span><h1>{app.name}</h1><p>{app.description}</p>
-          <div className={styles.meta}>{app.version && <span>Sürüm {app.version}</span>}<span>{["hushloom", "retro-snake"].includes(app.slug) ? "iPhone" : "iPhone ve iPad"}</span></div>
+          <div className={styles.meta}>{app.version && <span>Sürüm {app.version}</span>}<span>{app.status}</span></div>
           <div className={styles.actions}>{app.appStoreUrl && <a href={app.appStoreUrl} target="_blank" rel="noopener noreferrer">App Store’da görüntüle ↗</a>}<Link className={styles.secondary} href={`/apps/${app.slug}/support`}>Destek</Link><Link className={styles.secondary} href={`/apps/${app.slug}/privacy`}>Gizlilik</Link>{["hushloom", "retro-snake"].includes(app.slug) && <Link className={styles.secondary} href={`/apps/${app.slug}/terms`}>Kullanım Koşulları</Link>}{app.slug === "retro-snake" && <><Link className={styles.secondary} href="/apps/retro-snake/eula">EULA</Link><Link className={styles.secondary} href="/apps/retro-snake/purchases">Satın Alma ve İade</Link></>}</div>
         </div>
       </section>
