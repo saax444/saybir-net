@@ -1,0 +1,7 @@
+"use client";
+import {createContext,useContext,useEffect,useState} from "react";
+type Lang="tr"|"en";type Theme="dark"|"mono";
+const C=createContext({lang:"tr" as Lang,theme:"dark" as Theme,setLang:(_:Lang)=>{},setTheme:(_:Theme)=>{}});
+export function SitePreferences({children}:{children:React.ReactNode}){const[lang,setLang]=useState<Lang>("tr"),[theme,setTheme]=useState<Theme>("dark");useEffect(()=>{const l=localStorage.getItem("saybir-lang") as Lang|null,t=localStorage.getItem("saybir-theme") as Theme|null;if(l)setLang(l);if(t)setTheme(t)},[]);useEffect(()=>{document.documentElement.dataset.lang=lang;document.documentElement.lang=lang;localStorage.setItem("saybir-lang",lang)},[lang]);useEffect(()=>{document.documentElement.dataset.theme=theme;localStorage.setItem("saybir-theme",theme)},[theme]);return <C.Provider value={{lang,theme,setLang,setTheme}}>{children}</C.Provider>}
+export function useSitePreferences(){return useContext(C)}
+export function PreferenceControls(){const{lang,theme,setLang,setTheme}=useSitePreferences();return <div className="pref-controls"><button onClick={()=>setLang(lang==="tr"?"en":"tr")} aria-label="Language">{lang.toUpperCase()}</button><button onClick={()=>setTheme(theme==="dark"?"mono":"dark")} aria-label="Theme">{theme==="dark"?"B/W":"●"}</button></div>}
