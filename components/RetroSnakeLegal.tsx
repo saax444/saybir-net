@@ -1,12 +1,13 @@
 import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
+import { PreferenceControls } from "@/components/SitePreferences";
 import documents from "@/data/retro-snake-legal.json";
 import styles from "@/app/apps/[slug]/app-page.module.css";
 
 export default function RetroSnakeLegal({documentID}:{documentID:string}) {
   const document = documents.find(item => item.id === documentID)!;
   return <div className={styles.page}>
-    <nav className={styles.nav}><div className={styles.navInner}><BrandLogo/><Link className={styles.back} href="/apps/retro-snake">← Retro Snake</Link></div></nav>
+    <nav className={styles.nav}><div className={styles.navInner}><BrandLogo/><PreferenceControls/><Link className={styles.back} href="/apps/retro-snake">← Retro Snake</Link></div></nav>
     <main className={styles.main}><article className={styles.content}>
       <span className={styles.kicker}>Retro Snake · Yasal ve Gizlilik</span>
       <h1>{document.title}</h1><p>Son güncelleme: {document.updated}</p>
