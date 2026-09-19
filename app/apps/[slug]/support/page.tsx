@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import BrandLogo from "@/components/BrandLogo";
+import { PreferenceControls } from "@/components/SitePreferences";
 import { getApp } from "@/data/apps";
 import styles from "../app-page.module.css";
 
@@ -209,7 +210,7 @@ export default async function SupportPage({
     <div className={styles.page}>
       <nav className={styles.nav}>
         <div className={styles.navInner}>
-          <BrandLogo />
+          <BrandLogo /><PreferenceControls/>
           <Link className={styles.back} href={`/apps/${app.slug}`}>← {app.name}</Link>
         </div>
       </nav>
