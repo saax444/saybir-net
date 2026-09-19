@@ -12,9 +12,9 @@ export default function Hero(){
     {reel.map((app,i)=><div className={"opening__plate opening__plate--"+i} key={app.slug} style={{"--tone":app.accent} as CSSProperties}><div className="opening__plateGlow"/><img src={app.image} alt=""/></div>)}
    </div>
    <div className="opening__frame container">
-    <div className="opening__top"><span>SAYBIR®</span><span>INDEPENDENT SOFTWARE STUDIO</span><span>PRODUCTS / EXPERIENCES / SYSTEMS</span></div>
+    <div className="opening__top"><span>SAYBIR</span><span>INDEPENDENT SOFTWARE STUDIO</span><span>PRODUCTS / EXPERIENCES / SYSTEMS</span></div>
     <div className="opening__copy opening__copy--a"><small>01 — OPENING FRAME</small><h1>Software<br/>should feel<br/><em>alive.</em></h1><p>We create independent digital products with a point of view — from first idea to release.</p></div>
-    <div className="opening__copy opening__copy--b"><small>02 — THE WORK</small><h2>Seventeen<br/>products.<br/><em>One studio.</em></h2><a href="#uygulamalar">ENTER THE COLLECTION <b>↓</b></a></div>
+    <div className="opening__copy opening__copy--b"><small>02 — THE WORK</small><h2>Independent<br/>products.<br/><em>One studio.</em></h2><a href="#uygulamalar">ENTER THE COLLECTION <b>↓</b></a></div>
     <div className="opening__side"><span>SCROLL</span><i><b/></i><span>02</span></div>
     <div className="opening__foot"><span>DESIGNED & ENGINEERED BY SAYBIR</span><span>↓ DIRECT THE SEQUENCE</span></div>
    </div>
