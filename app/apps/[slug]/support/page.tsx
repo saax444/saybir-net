@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import BrandLogo from "@/components/BrandLogo";
@@ -142,7 +143,7 @@ const supportBySlug: Record<string, SupportConfig> = {
       "Harici hizmet bağlantısı",
         ],
   },
-  "refrefref": {
+  "ref-ref-ref": {
     intro: "Ref!Ref!Ref! için teknik destek, kullanım soruları ve geri bildirimler bu sayfa üzerinden yönetilir.",
     topics: [
       "Oyun kontrolleri",
@@ -166,7 +167,7 @@ const supportBySlug: Record<string, SupportConfig> = {
   "usenme-yap": {
     intro: "Üşenme Yap için teknik destek, kullanım soruları ve geri bildirimler bu sayfa üzerinden yönetilir.",
     topics: [
-      "Görevlar ve alışkanlıklar",
+      "Görevler ve alışkanlıklar",
       "Bildirimler",
       "Google/Firebase giriş",
       "Premium",
@@ -185,6 +186,11 @@ const supportBySlug: Record<string, SupportConfig> = {
         ],
   },
 };
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const app = getApp((await params).slug);
+  return app ? { title: `${app.name} Destek — SAYBIR`, description: `${app.name} teknik destek, yardım ve iletişim sayfası.` } : {};
+}
 
 export default async function SupportPage({
   params,
@@ -231,7 +237,7 @@ export default async function SupportPage({
             <li>İnternet gerektiren özelliklerde Wi-Fi veya mobil veri bağlantısını kontrol edin.</li>
             <li>Uygulamayı tamamen kapatıp yeniden açın.</li>
             <li>Gerekirse cihazı yeniden başlatın.</li>
-            <li>Özellik bir sistem izni gerektiriyorsa iPhone/iPad Ayarlar bölümünden uygulama izinlarını kontrol edin.</li>
+            <li>Özellik bir sistem izni gerektiriyorsa iPhone/iPad Ayarlar bölümünden uygulama izinlerini kontrol edin.</li>
           </ul>
 
           <h3>Bildirimler Çalışmıyorsa</h3>
