@@ -4,7 +4,7 @@ import BrandLogo from "@/components/BrandLogo";
 import styles from "../[slug]/app-page.module.css";
 
 export const metadata: Metadata = {
-  title: "Hushloom — saybir.net",
+  title: "Hushloom — SAYBIR",
   description: "Yağmur, ateş, rüzgâr, fırtına, orman ve diğer gerçek ambiyansları karıştırarak kişisel uyku ve odak ortamları oluşturun.",
 };
 
@@ -19,7 +19,7 @@ export default function HushloomPage() {
       </nav>
 
       <main className={styles.main}>
-        <section className={styles.hero}>
+        <section className={styles.hero} style={{"--accent":"78 119 255"} as React.CSSProperties}>
           <img className={styles.icon} src="/apps/hushloom.png" alt="Hushloom uygulama ikonu" />
           <div>
             <span className={styles.kicker}>Sağlık ve Fitness</span>
@@ -44,7 +44,7 @@ export default function HushloomPage() {
         <section className={styles.content}>
           <h2>Gerçek seslerle kişisel ambiyans</h2>
           <p>
-            Hushloom, 20.012 farklı ses temasını keşfetmenize, ortam kayıtlarını aynı anda
+            Hushloom, farklı ambiyans seslerini keşfetmenize, ortam kayıtlarını aynı anda
             çalmanıza, her katmanın ses seviyesini ayrı ayrı ayarlamanıza ve bir zamanlayıcıyla ambiyanslar oluşturmanıza
             yardımcı olur. Ücretsiz sürümde aynı anda en fazla üç ses ve en fazla bir saatlik
             oturum kullanılabilir. Premium sürüm reklamsız kullanım, daha fazla katman ve 24 saate
