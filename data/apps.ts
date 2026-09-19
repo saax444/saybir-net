@@ -166,7 +166,7 @@ export const apps: AppInfo[] = [
     description:
       "Reflekslerinizi neon şehirlerde hızlı ve akıcı oyun deneyimiyle sınayın.",
     status: "App Store’da",
-    version: "17",
+    version: "1.0",
     appStoreUrl:
       "https://apps.apple.com/tr/app/ref-ref-ref/id6788466051",
   },
