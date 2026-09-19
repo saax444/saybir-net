@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import BrandLogo from "@/components/BrandLogo";
@@ -426,7 +427,7 @@ const privacyBySlug: Record<string, PrivacyConfig> = {
       },
     ],
   },
-  "refrefref": {
+  "ref-ref-ref": {
     name: "Ref!Ref!Ref!",
     summary: "refleks, hız ve skor odaklı bir mobil oyundur.",
     sections: [
@@ -547,6 +548,11 @@ const privacyBySlug: Record<string, PrivacyConfig> = {
     ],
   },
 };
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const app = getApp((await params).slug);
+  return app ? { title: `${app.name} Gizlilik Politikası — SAYBIR`, description: `${app.name} gizlilik, veri kullanımı ve kullanıcı tercihleri.` } : {};
+}
 
 export default async function PrivacyPage({
   params,
