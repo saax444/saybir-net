@@ -1,29 +1,4 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
-export const metadata: Metadata = {
-  metadataBase: new URL("https://saybir.net"),
-  title: "saybir.net — iOS Uygulamaları ve Yazılım Geliştirme",
-  description:
-    "iOS uygulama geliştirme, kullanıcı deneyimi, ürün tasarımı ve App Store yayın süreçleri.",
-  openGraph: {
-    title: "saybir.net — iOS Uygulamaları ve Yazılım Geliştirme",
-    description:
-      "Modern, hızlı ve sürdürülebilir iOS ürünleri geliştiriyorum.",
-    url: "https://saybir.net",
-    siteName: "saybir.net",
-    locale: "tr_TR",
-    type: "website",
-    images: ["/icon.png"]
-  }
-};
-
-export default function RootLayout({
-  children
-}: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <html lang="tr">
-      <body>{children}</body>
-    </html>
-  );
-}
+export const metadata: Metadata={metadataBase:new URL("https://saybir.net"),title:{default:"SAYBIR — Independent Software Studio",template:"%s | SAYBIR"},description:"Independent software studio creating iOS products and digital experiences.",icons:{icon:"/icon.png",apple:"/icon.png"},openGraph:{title:"SAYBIR — Independent Software Studio",description:"Independent software studio creating iOS products and digital experiences.",url:"https://saybir.net",siteName:"SAYBIR",locale:"tr_TR",type:"website",images:[{url:"/icon.png",width:512,height:512,alt:"SAYBIR"}]},twitter:{card:"summary",title:"SAYBIR — Independent Software Studio",description:"Independent software studio creating iOS products and digital experiences.",images:["/icon.png"]},robots:{index:true,follow:true}};
+export default function RootLayout({children}:Readonly<{children:React.ReactNode}>){return <html lang="tr"><body>{children}</body></html>}
