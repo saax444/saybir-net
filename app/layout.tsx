@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { SitePreferences } from "@/components/SitePreferences";
 export const metadata: Metadata={metadataBase:new URL("https://saybir.net"),title:{default:"SAYBIR — Independent Software Studio",template:"%s | SAYBIR"},description:"Independent software studio creating iOS products and digital experiences.",icons:{icon:"/icon.png",apple:"/icon.png"},openGraph:{title:"SAYBIR — Independent Software Studio",description:"Independent software studio creating iOS products and digital experiences.",url:"https://saybir.net",siteName:"SAYBIR",locale:"tr_TR",type:"website",images:[{url:"/icon.png",width:512,height:512,alt:"SAYBIR"}]},twitter:{card:"summary",title:"SAYBIR — Independent Software Studio",description:"Independent software studio creating iOS products and digital experiences.",images:["/icon.png"]},robots:{index:true,follow:true}};
-export default function RootLayout({children}:Readonly<{children:React.ReactNode}>){return <html lang="tr"><body>{children}</body></html>}
+export default function RootLayout({children}:Readonly<{children:React.ReactNode}>){return <html lang="tr"><body><SitePreferences>{children}</SitePreferences></body></html>}
