@@ -1,81 +1,59 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { apps } from "@/data/apps";
 import "./Hero.css";
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [activePage, setActivePage] = useState(0);
-  const pageCount = Math.ceil(apps.length / 4);
+  const visualRef = useRef<HTMLDivElement>(null);
+  const featured = apps.slice(0, 5);
 
   useEffect(() => {
-    let frame = 0;
-
-    const update = () => {
-      const section = sectionRef.current;
-      if (!section) return;
-      const rect = section.getBoundingClientRect();
-      const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
-      const progress = Math.min(1, Math.max(0, -rect.top / travel));
-      setActivePage(Math.min(pageCount - 1, Math.round(progress * (pageCount - 1))));
+    const visual = visualRef.current;
+    if (!visual) return;
+    const move = (event: PointerEvent) => {
+      const x = (event.clientX / window.innerWidth - 0.5) * 14;
+      const y = (event.clientY / window.innerHeight - 0.5) * 10;
+      visual.style.setProperty("--hero-x", `${x}px`);
+      visual.style.setProperty("--hero-y", `${y}px`);
     };
-
-    const onScroll = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [pageCount]);
-
-  const visibleApps = apps.slice(activePage * 4, activePage * 4 + 4);
+    window.addEventListener("pointermove", move, { passive: true });
+    return () => window.removeEventListener("pointermove", move);
+  }, []);
 
   return (
-    <section ref={sectionRef} className="hero" id="top">
-      <div className="hero-sticky">
-        <div className="container hero-layout">
-          <div className="hero-copy">
-            <span className="hero-badge">iOS Uygulamaları ve Yazılım Geliştirme</span>
-            <h1>
-              Fikirlerinizi kullanılabilir <span>iOS ürünlerine</span> dönüştürün.
-            </h1>
-            <p>
-              Kullanıcı odaklı iOS uygulamaları geliştirme; tasarım, test ve
-              App Store yayın süreçlerini uçtan uca beraber yönetelim.
-            </p>
-            <div className="hero-actions">
-              <a className="hero-button hero-button-primary" href="#uygulamalar">Uygulamaları İncele</a>
-              <a className="hero-button hero-button-secondary" href="#iletisim">İletişim</a>
-            </div>
-          </div>
-
-          <div className="hero-showcase" aria-live="polite">
-            <div className="showcase-disc" aria-hidden="true" />
-            <div className="showcase-app-grid" key={activePage}>
-              {visibleApps.map((app) => (
-                <a className="showcase-app" href={`/apps/${app.slug}`} key={app.slug}>
-                  <img src={app.image} alt={`${app.name} uygulama ikonu`} />
-                  <strong>{app.name}</strong>
-                </a>
-              ))}
-            </div>
-            <div className="showcase-progress" aria-label={`${activePage + 1} / ${pageCount}`}>
-              <span>{String(activePage + 1).padStart(2, "0")}</span>
-              <div><i style={{ width: `${((activePage + 1) / pageCount) * 100}%` }} /></div>
-              <span>{String(pageCount).padStart(2, "0")}</span>
-            </div>
-            <p className="showcase-hint">Uygulamalar arasında ilerlemek için kaydırın</p>
-          </div>
+    <section className="hero" id="top">
+      <div className="hero-aurora hero-aurora-one" />
+      <div className="hero-aurora hero-aurora-two" />
+      <div className="hero-noise" />
+      <div className="container hero-inner">
+        <div className="hero-eyebrow"><i /> Independent software studio <i /></div>
+        <h1><span>SAYBIR</span><br />Digital products,<br /><em>built with intent.</em></h1>
+        <p className="hero-lead">
+          iOS, macOS ve Android için günlük hayatın parçası olan
+          hızlı, sade ve özenli dijital ürünler geliştiriyorum.
+        </p>
+        <div className="hero-platforms">
+          <span>iOS</span><b>·</b><span>macOS</span><b>·</b><span>Android</span>
+        </div>
+        <div className="hero-actions">
+          <a className="hero-primary" href="#uygulamalar">Ürünleri keşfet <span>↘</span></a>
+          <a className="hero-secondary" href="#iletisim">Birlikte çalışalım</a>
         </div>
       </div>
+
+      <div ref={visualRef} className="hero-orbit" aria-hidden="true">
+        <div className="orbit-ring orbit-ring-one" />
+        <div className="orbit-ring orbit-ring-two" />
+        {featured.map((app, index) => (
+          <div className={`orbit-app orbit-app-${index + 1}`} key={app.slug}>
+            <img src={app.image} alt="" />
+          </div>
+        ))}
+        <div className="orbit-core"><span>S</span></div>
+      </div>
+
+      <div className="hero-scroll"><span>Scroll to explore</span><i /></div>
     </section>
   );
 }
