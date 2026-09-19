@@ -5,55 +5,28 @@ import { apps } from "@/data/apps";
 import "./Hero.css";
 
 export default function Hero() {
-  const visualRef = useRef<HTMLDivElement>(null);
-  const featured = apps.slice(0, 5);
-
+  const stageRef = useRef<HTMLDivElement>(null);
+  const featured = apps.slice(0, 7);
   useEffect(() => {
-    const visual = visualRef.current;
-    if (!visual) return;
-    const move = (event: PointerEvent) => {
-      const x = (event.clientX / window.innerWidth - 0.5) * 14;
-      const y = (event.clientY / window.innerHeight - 0.5) * 10;
-      visual.style.setProperty("--hero-x", `${x}px`);
-      visual.style.setProperty("--hero-y", `${y}px`);
-    };
-    window.addEventListener("pointermove", move, { passive: true });
-    return () => window.removeEventListener("pointermove", move);
-  }, []);
-
-  return (
-    <section className="hero" id="top">
-      <div className="hero-aurora hero-aurora-one" />
-      <div className="hero-aurora hero-aurora-two" />
-      <div className="hero-noise" />
-      <div className="container hero-inner">
-        <div className="hero-eyebrow"><i /> Independent software studio <i /></div>
-        <h1><span>SAYBIR</span><br />Digital products,<br /><em>built with intent.</em></h1>
-        <p className="hero-lead">
-          iOS, macOS ve Android için günlük hayatın parçası olan
-          hızlı, sade ve özenli dijital ürünler geliştiriyorum.
-        </p>
-        <div className="hero-platforms">
-          <span>iOS</span><b>·</b><span>macOS</span><b>·</b><span>Android</span>
-        </div>
-        <div className="hero-actions">
-          <a className="hero-primary" href="#uygulamalar">Ürünleri keşfet <span>↘</span></a>
-          <a className="hero-secondary" href="#iletisim">Birlikte çalışalım</a>
-        </div>
-      </div>
-
-      <div ref={visualRef} className="hero-orbit" aria-hidden="true">
-        <div className="orbit-ring orbit-ring-one" />
-        <div className="orbit-ring orbit-ring-two" />
-        {featured.map((app, index) => (
-          <div className={`orbit-app orbit-app-${index + 1}`} key={app.slug}>
-            <img src={app.image} alt="" />
-          </div>
-        ))}
-        <div className="orbit-core"><span>S</span></div>
-      </div>
-
-      <div className="hero-scroll"><span>Scroll to explore</span><i /></div>
-    </section>
-  );
+    const stage=stageRef.current; if(!stage) return;
+    const move=(e:PointerEvent)=>{stage.style.setProperty("--mx",`${(e.clientX/window.innerWidth-.5)*24}px`);stage.style.setProperty("--my",`${(e.clientY/window.innerHeight-.5)*18}px`)};
+    window.addEventListener("pointermove",move,{passive:true}); return()=>window.removeEventListener("pointermove",move);
+  },[]);
+  return <section className="hero" id="top">
+    <div className="cinema-vignette"/><div className="cinema-grain"/><div className="cinema-beam"/>
+    <div className="hero-copy container">
+      <div className="hero-kicker"><span>Independent software studio</span><b>Est. 2026</b></div>
+      <h1>Ideas become<br/><em>experiences.</em></h1>
+      <p>iOS, macOS ve Android için tasarım, mühendislik ve ürün düşüncesini tek bir deneyimde buluşturan bağımsız yazılım stüdyosu.</p>
+      <div className="hero-actions"><a href="#uygulamalar">Explore the work <span>↘</span></a><a href="#iletisim">Start a project ↗</a></div>
+    </div>
+    <div className="stage" ref={stageRef}>
+      <div className="stage-halo"/><div className="stage-disc disc-a"/><div className="stage-disc disc-b"/>
+      <div className="device device-back"><div className="device-screen"><span>macOS</span><strong>SAYBIR</strong><small>DESIGNED FOR FOCUS</small></div></div>
+      <div className="device device-front"><div className="phone-island"/><div className="phone-screen"><span className="screen-label">SAYBIR / MOBILE</span><strong>Make<br/>something<br/><i>meaningful.</i></strong><small>iOS · ANDROID</small></div></div>
+      {featured.map((app,i)=><div className={`floating-app fa-${i+1}`} key={app.slug}><img src={app.image} alt=""/></div>)}
+    </div>
+    <div className="hero-platform-strip"><span>Native experiences</span><div>iOS</div><i/><div>macOS</div><i/><div>Android</div></div>
+    <div className="scroll-cue"><span>SCROLL</span><b/></div>
+  </section>;
 }
