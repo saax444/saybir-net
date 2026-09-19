@@ -30,7 +30,7 @@ export default function HushloomPage() {
             </p>
             <div className={styles.meta}>
               <span>Sürüm 1.0</span>
-              <span>iPhone</span>
+              <span>iOS</span>
               <span>Free + Premium</span>
             </div>
             <div className={styles.actions}>
