@@ -4,7 +4,7 @@ import BrandLogo from "@/components/BrandLogo";
 import styles from "../../[slug]/app-page.module.css";
 
 export const metadata: Metadata = {
-  title: "Hushloom Gizlilik Politikası — saybir.net",
+  title: "Hushloom Gizlilik Politikası — SAYBIR",
   description: "Hushloom uygulamasının gizlilik politikası.",
 };
 
