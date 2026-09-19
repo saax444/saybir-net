@@ -1,21 +1,29 @@
 "use client";
-import { useEffect,useRef } from "react";
+import { CSSProperties,useEffect,useRef } from "react";
+import { apps } from "@/data/apps";
 import "./Hero.css";
 
 export default function Hero(){
- const hero=useRef<HTMLElement>(null);
- useEffect(()=>{let raf=0;const update=()=>{const el=hero.current;if(!el)return;const r=el.getBoundingClientRect();const p=Math.max(0,Math.min(1,-r.top/(innerHeight*.85)));el.style.setProperty("--p",String(p))};const onScroll=()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(update)};update();addEventListener("scroll",onScroll,{passive:true});return()=>{cancelAnimationFrame(raf);removeEventListener("scroll",onScroll)}},[]);
- return <section ref={hero} className="hero" id="top">
-   <div className="hero-light hero-light-a"/><div className="hero-light hero-light-b"/><div className="hero-depth"/>
-   <div className="hero-scene container">
-     <div className="hero-meta"><span>INDEPENDENT SOFTWARE STUDIO</span><span>01 — 04</span></div>
-     <div className="hero-lockup">
-       <div className="hero-word" aria-label="SAYBIR"><span>S</span><span>A</span><span>Y</span><span>B</span><span>I</span><span>R</span></div>
-       <div className="hero-rule"/>
-       <div className="hero-statement"><p>We create focused software for the devices people use every day.</p><strong>iOS&nbsp;&nbsp;·&nbsp;&nbsp;macOS&nbsp;&nbsp;·&nbsp;&nbsp;Android</strong></div>
-     </div>
-     <div className="hero-chapter"><span>PRODUCT / DESIGN / ENGINEERING</span><a href="#uygulamalar">ENTER SELECTED WORK <b>↘</b></a></div>
+ const root=useRef<HTMLElement>(null);
+ const featured=apps.slice(0,6);
+ useEffect(()=>{let raf=0;const update=()=>{const el=root.current;if(!el)return;const r=el.getBoundingClientRect();const travel=Math.max(el.offsetHeight-innerHeight,1);el.style.setProperty("--p",String(Math.max(0,Math.min(1,-r.top/travel))))};const scroll=()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(update)};update();addEventListener("scroll",scroll,{passive:true});addEventListener("resize",scroll);return()=>{cancelAnimationFrame(raf);removeEventListener("scroll",scroll);removeEventListener("resize",scroll)}},[]);
+ return <section ref={root} className="hero" id="top"><div className="hero-sticky">
+   <div className="cinema-sky"/><div className="cinema-haze h1"/><div className="cinema-haze h2"/><div className="cinema-floor"><i/><i/><i/><i/><i/></div>
+   <div className="hero-copy container">
+    <div className="hero-kicker"><span>INDEPENDENT SOFTWARE STUDIO</span><i/><span>PRODUCT / DESIGN / ENGINEERING</span></div>
+    <h1><span>Digital products.</span><em>Built to be felt.</em></h1>
+    <div className="hero-deck"><p>Native software across iOS, macOS and Android — designed as experiences, not utilities.</p><a href="#uygulamalar">EXPLORE THE WORK <b>↘</b></a></div>
    </div>
-   <div className="hero-transition"><div className="transition-core"/><div className="transition-ring r1"/><div className="transition-ring r2"/></div>
- </section>
+   <div className="object-stage">
+    <div className="stage-light"/>
+    <div className="hero-device">
+      <div className="device-side"/><div className="device-island"/><div className="device-screen">
+       <div className="screen-sheen"/>
+       <small>SAYBIR / SELECTED</small><strong>Make<br/>software<br/><i>matter.</i></strong><span>01 — 06</span>
+      </div>
+    </div>
+    {featured.map((a,i)=><div key={a.slug} className={"floating-product fp"+i} style={{"--accent":a.accent} as CSSProperties}><img src={a.image} alt=""/></div>)}
+   </div>
+   <div className="hero-index container"><span>01 / OPENING</span><div><i/> SCROLL TO MOVE CAMERA</div><span>2026</span></div>
+ </div></section>
 }
