@@ -97,7 +97,7 @@ test("reduced motion keeps the full catalog accessible without a long film", asy
   for (const scene of await page.locator(".story__stage").all()) {
     expect(await scene.evaluate(el => getComputedStyle(el).position)).toBe("relative");
   }
-  await expect(page.locator(".story")).toHaveCount(3);
+  await expect(page.locator(".story")).toHaveCount(apps.length);
   await expect(page.locator(".catalog-card")).toHaveCount(18);
 });
 
@@ -127,4 +127,17 @@ test("unknown app and unknown page return a translated 404", async ({ page }) =>
     await expect(page.locator("h1")).toHaveText("Page not found");
     await page.getByRole("button", { name: "Türkçeye geç" }).click();
   }
+});
+
+test("every app has a product chapter and the opening stays studio-focused", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator(".opening img")).toHaveCount(0);
+  await expect(page.locator(".opening h1")).toHaveText("SAYBIR");
+  await expect(page.locator(".story")).toHaveCount(apps.length);
+  for (const app of apps) {
+    await expect(page.locator(`#story-${app.slug} h2`)).toHaveText(app.name);
+    await expect(page.locator(`#story-${app.slug} .story__copy a`)).toHaveAttribute("href", `/apps/${app.slug}`);
+    await expect(page.locator(`.product-index a[href="#story-${app.slug}"]`)).toHaveCount(1);
+  }
+  await expect(page.locator('img[src*="landscape"]')).toHaveCount(0);
 });

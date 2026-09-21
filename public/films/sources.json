@@ -29,10 +29,78 @@
       ]
     }
   ],
-  "landscape": {
-    "source": "OpenAI built-in image_gen",
-    "type": "AI-generated artwork, not live footage",
-    "file": "velomate-landscape.webp",
-    "prompt": "Cinematic photographic alpine road at dawn; distant cyclist; charcoal and silver palette; 16:9; dark negative space for typography; no text, logos, grain or UI."
+  "note": "App Store screens for the product chapters; the generated landscape was removed.",
+  "localScreens": {
+    "bold-block-arcade": [
+      "/films/bold-block-arcade-0.webp",
+      "/films/bold-block-arcade-1.webp",
+      "/films/bold-block-arcade-2.webp"
+    ],
+    "history": [
+      "/films/history-0.webp",
+      "/films/history-1.webp",
+      "/films/history-2.webp"
+    ],
+    "velomate": [
+      "/films/velomate-0.webp",
+      "/films/velomate-1.webp",
+      "/films/velomate-2.webp"
+    ],
+    "melodymap": [
+      "/films/melodymap-0.webp",
+      "/films/melodymap-1.webp",
+      "/films/melodymap-2.webp"
+    ],
+    "ne-secsem": [
+      "/films/ne-secsem-0.webp"
+    ],
+    "carsave-ai": [
+      "/films/carsave-ai-0.webp",
+      "/films/carsave-ai-1.webp",
+      "/films/carsave-ai-2.webp"
+    ],
+    "vibelens": [
+      "/films/vibelens-0.webp",
+      "/films/vibelens-1.webp"
+    ],
+    "hilock": [
+      "/films/hilock-0.webp",
+      "/films/hilock-1.webp",
+      "/films/hilock-2.webp"
+    ],
+    "yemekolay": [
+      "/films/yemekolay-0.webp",
+      "/films/yemekolay-1.webp",
+      "/films/yemekolay-2.webp"
+    ],
+    "oduyorum": [
+      "/films/oduyorum-0.webp",
+      "/films/oduyorum-1.webp",
+      "/films/oduyorum-2.webp"
+    ],
+    "ref-ref-ref": [
+      "/films/ref-ref-ref-0.webp",
+      "/films/ref-ref-ref-1.webp",
+      "/films/ref-ref-ref-2.webp"
+    ],
+    "kedilik": [
+      "/films/kedilik-0.webp",
+      "/films/kedilik-1.webp",
+      "/films/kedilik-2.webp"
+    ],
+    "ezan-vakti": [
+      "/films/ezan-vakti-0.webp",
+      "/films/ezan-vakti-1.webp",
+      "/films/ezan-vakti-2.webp"
+    ],
+    "usenme-yap": [
+      "/films/usenme-yap-0.webp",
+      "/films/usenme-yap-1.webp"
+    ],
+    "susadim": [
+      "/films/susadim-0.webp",
+      "/films/susadim-1.webp",
+      "/films/susadim-2.webp"
+    ]
   }
 }
