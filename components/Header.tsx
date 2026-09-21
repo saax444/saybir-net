@@ -29,7 +29,7 @@ export default function Header() {
       <PreferenceControls />
       <button ref={toggle} type="button" className="menu-toggle" aria-label={tr ? (open ? "Menüyü kapat" : "Menüyü aç") : (open ? "Close menu" : "Open menu")} aria-expanded={open} aria-controls="site-navigation" onClick={() => setOpen(!open)}><span /><span /></button>
       <nav id="site-navigation" aria-label={tr ? "Ana menü" : "Main navigation"} className={open ? "nav nav-open" : "nav"} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget as Node)) setOpen(false); }}>
-        <a href="#koleksiyon" onClick={() => setOpen(false)}>{tr ? "Uygulamalar" : "Apps"}</a>
+        <a href="#uygulamalar" onClick={() => setOpen(false)}>{tr ? "Uygulamalar" : "Apps"}</a>
         <a href="#platformlar" onClick={() => setOpen(false)}>{tr ? "Platformlar" : "Platforms"}</a>
         <a href="#hizmetler" onClick={() => setOpen(false)}>{tr ? "Stüdyo" : "Studio"}</a>
         <a className="nav-cta" href="#iletisim" onClick={() => setOpen(false)}>{tr ? "İletişim" : "Contact"} <span>↗</span></a>

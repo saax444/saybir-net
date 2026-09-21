@@ -94,10 +94,7 @@ test("mobile menu, catalog access and keyboard dismissal", async ({ page }) => {
 test("reduced motion keeps the full catalog accessible without a long film", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  for (const scene of await page.locator(".story__stage").all()) {
-    expect(await scene.evaluate(el => getComputedStyle(el).position)).toBe("relative");
-  }
-  await expect(page.locator(".story")).toHaveCount(apps.length);
+  expect(await page.locator(".work-stage").evaluate(el => getComputedStyle(el).position)).toBe("relative");
   await expect(page.locator(".catalog-card")).toHaveCount(18);
 });
 
@@ -129,27 +126,50 @@ test("unknown app and unknown page return a translated 404", async ({ page }) =>
   }
 });
 
-test("every app has a product chapter and the opening stays studio-focused", async ({ page }) => {
-  await page.goto("/");
+test("every product is selectable in the 3D theatre", async ({ page }) => {
+  test.setTimeout(90_000);
+  await page.goto("/#uygulamalar");
   await expect(page.locator(".opening img")).toHaveCount(0);
-  await expect(page.locator(".opening h1")).toContainText("Fikirden");
-  await expect(page.locator(".story")).toHaveCount(apps.length);
+  await expect(page.locator(".opening h1")).toContainText("Dijital fikirler.");
   for (const app of apps) {
-    await expect(page.locator(`#story-${app.slug} h2`)).toHaveText(app.name);
-    await expect(page.locator(`#story-${app.slug} .story__copy a`)).toHaveAttribute("href", `/apps/${app.slug}`);
-    await expect(page.locator(`.product-index a[href="#story-${app.slug}"]`)).toHaveCount(1);
+    await page.locator(".work-toolbar").getByRole("button", { name: "Tüm uygulamalar" }).click();
+    await expect(page.getByRole("dialog", { name: "Uygulama seç" })).toBeVisible();
+    await page.locator(".work-index-grid").getByRole("button", { name: new RegExp(app.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) }).click();
+    await expect(page.locator(".work-caption h2")).toHaveText(app.name);
+    await expect(page.locator(".work-actions a")).toHaveAttribute("href", `/apps/${app.slug}`);
+    await expect(page.locator(".product-world")).toHaveAttribute("data-world", app.slug);
+    await expect(page.locator(".product-world canvas")).toHaveCount(1);
+    await expect(page.locator(".product-world")).toHaveAttribute("data-rendered", "true");
+    await page.screenshot({ path: `../../outputs/world-${app.slug}.png`, animations: "disabled" });
+    await expect(page.locator(".world-fallback")).toHaveCount(0);
   }
-  await expect(page.locator('img[src*="landscape"]')).toHaveCount(0);
 });
 
-test("product entrance reveals the product details and can be followed", async ({ page }) => {
+test("product screens, keyboard dismissal, pause and product navigation work", async ({ page }) => {
   await page.goto("/#story-bold-block-arcade");
-  const scene = page.locator("#story-bold-block-arcade");
-  await expect(scene.locator(".story__copy")).toBeHidden();
-  await scene.getByRole("button", { name: "İÇERİ GİR" }).click();
-  await expect(scene.locator(".story__copy")).toBeVisible();
-  await expect(scene.locator(".story__opening")).toBeHidden();
-  await scene.getByRole("link", { name: "Ürünü keşfet" }).click();
+  await expect(page.locator(".work-caption h2")).toHaveText("Bold Block Arcade");
+  await page.getByRole("button", { name: "Hareketi durdur" }).click();
+  await expect(page.getByRole("button", { name: "Hareketi başlat" })).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("button", { name: "Uygulama ekranları", exact: false }).click();
+  const dialog=page.getByRole("dialog", { name: "Uygulama ekranları" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.locator("img")).toHaveCount(3);
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+  await page.getByRole("link", { name: "Ürünü keşfet" }).click();
   await expect(page).toHaveURL(/\/apps\/bold-block-arcade$/);
-  await expect(page.locator("h1")).toHaveText("Bold Block Arcade");
+});
+
+test("product information remains usable without WebGL", async ({ page }) => {
+  await page.addInitScript(() => {
+    const original=HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext=function(this: HTMLCanvasElement, type: string, ...args: unknown[]) {
+      if(type.includes("webgl")) return null;
+      return original.apply(this,[type,...args] as Parameters<typeof original>);
+    } as typeof original;
+  });
+  await page.goto("/#story-retro-snake");
+  await expect(page.locator(".world-fallback")).toBeVisible();
+  await expect(page.locator(".work-caption h2")).toHaveText("Retro Snake");
+  await expect(page.locator(".work-actions a")).toHaveAttribute("href", "/apps/retro-snake");
 });
