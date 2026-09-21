@@ -23,9 +23,12 @@ function makeProduct(slug: string, m: Palette) {
   function coin(r:number,h:number,x:number,y:number,z:number,material:THREE.Material=m.silver){return mesh(new THREE.CylinderGeometry(r,r,h,64),material,x,y,z);}
   switch(slug) {
     case "studio": {
-      const ribbon=mesh(new THREE.TorusKnotGeometry(1.15,.24,240,32,2,3),m.silver,0,.2,0);
-      ribbon.rotation.set(.4,.2,-.4);
-      animations.push(t=>{ribbon.rotation.y=.2+t*.085;ribbon.rotation.z=-.4+Math.sin(t*.18)*.12;ribbon.position.y=.2+Math.sin(t*.6)*.09});
+      const outline=new THREE.Shape();
+      const points=[[-1.2,1.6],[1.2,1.6],[1.2,1],[-.6,1],[-.6,.3],[1.2,.3],[1.2,-1.6],[-1.2,-1.6],[-1.2,-1],[.6,-1],[.6,-.3],[-1.2,-.3]];
+      points.forEach(([x,y],i)=>i===0?outline.moveTo(x,y):outline.lineTo(x,y));outline.closePath();
+      const monogram=mesh(new THREE.ExtrudeGeometry(outline,{depth:.38,bevelEnabled:true,bevelSegments:5,steps:1,bevelSize:.055,bevelThickness:.055}),m.silver,0,.45,-.19);
+      monogram.rotation.set(0,-.25,-.08);monogram.scale.setScalar(.88);
+      animations.push(t=>{monogram.rotation.y=-.25+Math.sin(t*.22)*.18;monogram.position.y=.45+Math.sin(t*.5)*.045});
       break;
     }
     case "retro-snake": {

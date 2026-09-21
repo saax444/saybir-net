@@ -9,3 +9,10 @@
 .opening h1 span{color:#b6b8be}.opening__label{color:#b6b8be}.opening__lower{display:block;max-width:390px}.opening__lower p{color:#a2a6ad}.opening__lower a{min-width:0;max-width:270px;margin-top:25px}.opening__motion{position:absolute;right:7vw;bottom:105px;background:none;border:0;color:var(--muted);font:inherit;font-size:10px;min-height:44px;cursor:pointer;display:flex;align-items:center;gap:18px}.opening__motion span{font-size:15px}.opening__footer{bottom:30px}
 html[data-theme="light"] .opening{background:#e9e7e1}html[data-theme="light"] .opening__halo{background:linear-gradient(90deg,#e9e7e1 1%,#e9e7e1dd 25%,transparent 65%),linear-gradient(0deg,#e9e7e1,transparent 26%)}html[data-theme="light"] .opening h1 span,html[data-theme="light"] .opening__label,html[data-theme="light"] .opening__lower p{color:#555b63}
 @media(max-width:700px){.opening{height:auto;min-height:900px;padding:410px 6vw 105px;justify-content:flex-start}.opening-world{left:-15%;right:-15%;top:60px;bottom:auto;height:430px;mask-image:linear-gradient(0deg,transparent,#000 25%)}.opening__halo{background:linear-gradient(0deg,#080a0c 38%,transparent 65%)}.opening h1{font-size:10.7vw;margin:24px 0}.opening__lower p{max-width:310px}.opening__lower a{margin-top:20px;max-width:260px}.opening__motion{right:6vw;bottom:77px;font-size:9px}.opening__footer{bottom:25px}.opening__label{font-size:8px}html[data-theme="light"] .opening__halo{background:linear-gradient(0deg,#e9e7e1 38%,transparent 65%)}}
+
+/* A quieter, architectural opening built around the studio monogram. */
+.opening h1{font-size:clamp(48px,5.3vw,84px);font-weight:420;line-height:1.08;letter-spacing:-.055em}
+.opening-world{left:40%;right:-3%;top:8%;bottom:5%}
+.opening__lower a{border-bottom:1px solid var(--text);transition:gap .3s,color .3s}.opening__lower a:hover{gap:75px}
+.opening__label{letter-spacing:.2em}.opening__footer{padding-top:24px}
+@media(max-width:700px){.opening-world{left:-8%;right:-8%;top:75px;bottom:auto;height:365px}.opening{padding-top:400px;min-height:880px}.opening h1{font-size:10.4vw}.opening__label{letter-spacing:.13em}}
