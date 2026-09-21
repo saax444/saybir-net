@@ -94,7 +94,10 @@ test("mobile menu, catalog access and keyboard dismissal", async ({ page }) => {
 test("reduced motion keeps the full catalog accessible without a long film", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  expect(await page.locator(".productFilm").evaluate(el => el.getBoundingClientRect().height)).toBeLessThan(1200);
+  for (const scene of await page.locator(".story__stage").all()) {
+    expect(await scene.evaluate(el => getComputedStyle(el).position)).toBe("relative");
+  }
+  await expect(page.locator(".story")).toHaveCount(3);
   await expect(page.locator(".catalog-card")).toHaveCount(18);
 });
 

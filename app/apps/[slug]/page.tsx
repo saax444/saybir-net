@@ -1,3 +1,4 @@
+import ProductGallery from "@/components/ProductGallery";
 import PageTitle from "@/components/PageTitle";
 import Text from "@/components/Text";
 import type { Metadata } from "next";
@@ -28,7 +29,7 @@ export default async function AppPage({ params }: { params: Promise<{ slug: stri
           <div className={styles.actions}>{app.appStoreUrl && <a href={app.appStoreUrl} target="_blank" rel="noopener noreferrer"><Text>{"App Store’da görüntüle ↗"}</Text></a>}<Link className={styles.secondary} href={`/apps/${app.slug}/support`}><Text>{"Destek"}</Text></Link><Link className={styles.secondary} href={`/apps/${app.slug}/privacy`}><Text>{"Gizlilik"}</Text></Link>{["hushloom", "retro-snake"].includes(app.slug) && <Link className={styles.secondary} href={`/apps/${app.slug}/terms`}><Text>{"Kullanım Koşulları"}</Text></Link>}{app.slug === "retro-snake" && <><Link className={styles.secondary} href="/apps/retro-snake/eula"><Text>{"EULA"}</Text></Link><Link className={styles.secondary} href="/apps/retro-snake/purchases"><Text>{"Satın Alma ve İade"}</Text></Link></>}</div>
         </div>
       </section>
-      <section className={styles.content}><span className={styles.kicker}><Text>{"SAYBIR / PRODUCT FILE"}</Text></span><h2><Text>{"Resmî uygulama sayfası"}</Text></h2><p><Text>{"Bu sayfa "}</Text><Text>{app.name}</Text><Text>{" için ürün bilgileri, App Store bağlantısı, destek ve gizlilik belgelerinin güncel merkezidir."}</Text></p></section>
+      <ProductGallery slug={app.slug} name={app.name}/><section className={styles.content}><span className={styles.kicker}><Text>{"SAYBIR / PRODUCT FILE"}</Text></span><h2><Text>{"Resmî uygulama sayfası"}</Text></h2><p><Text>{"Bu sayfa "}</Text><Text>{app.name}</Text><Text>{" için ürün bilgileri, App Store bağlantısı, destek ve gizlilik belgelerinin güncel merkezidir."}</Text></p></section>
     </main>
   </div>;
 }

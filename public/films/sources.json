@@ -1,0 +1,38 @@
+{
+  "retrieved": "2026-09-21",
+  "screenshots": [
+    {
+      "app": "VeloMate",
+      "store": "https://apps.apple.com/tr/app/velomate/id6801481744?uo=4",
+      "screenshots": [
+        "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/17/12/42/17124241-02f5-92f0-1ee0-a00857e64719/iPhone-Home.png/320x480bb.jpg",
+        "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/17/8c/ff/178cff97-05d5-0d1c-25aa-7c9022841ef2/Simulator_Screenshot_-_iPhone_14_Plus_-_2026-08-16_at_14.52.57.png/320x480bb.jpg",
+        "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/13/40/04/134004a6-6212-d762-acbd-1e9b008712df/Simulator_Screenshot_-_iPhone_14_Plus_-_2026-08-16_at_14.53.03.png/320x480bb.jpg"
+      ]
+    },
+    {
+      "app": "HiStory",
+      "store": "https://apps.apple.com/tr/app/history/id6799454064?uo=4",
+      "screenshots": [
+        "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/ad/69/97/ad69971a-7408-30b9-6b30-754592b42ba2/Simulator_Screenshot_-_iPhone_14_Plus_-_2026-08-16_at_14.36.14.png/320x480bb.jpg",
+        "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/a7/54/4a/a7544aca-e067-48da-3de3-1083699637cb/Simulator_Screenshot_-_iPhone_14_Plus_-_2026-08-16_at_14.36.21.png/320x480bb.jpg",
+        "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/dc/aa/97/dcaa9765-6380-da3b-ed1b-705ab02f13fb/Simulator_Screenshot_-_iPhone_14_Plus_-_2026-08-16_at_14.36.33.png/320x480bb.jpg"
+      ]
+    },
+    {
+      "app": "Melody Map",
+      "store": "https://apps.apple.com/tr/app/melody-map/id6797370899?uo=4",
+      "screenshots": [
+        "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/90/d1/fa/90d1fa66-bd00-b8ba-a764-534fc085144b/MelodyMap-build11-01-discover.png/320x480bb.jpg",
+        "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/97/e0/8c/97e08cc5-4169-b657-8c99-c9ea875febd9/MelodyMap-build11-04-catalog-access.png/320x480bb.jpg",
+        "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/54/e2/50/54e25063-85c4-6d64-8752-eb37c9325e74/MelodyMap-build11-02-playlists.png/320x480bb.jpg"
+      ]
+    }
+  ],
+  "landscape": {
+    "source": "OpenAI built-in image_gen",
+    "type": "AI-generated artwork, not live footage",
+    "file": "velomate-landscape.webp",
+    "prompt": "Cinematic photographic alpine road at dawn; distant cyclist; charcoal and silver palette; 16:9; dark negative space for typography; no text, logos, grain or UI."
+  }
+}
