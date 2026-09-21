@@ -1,33 +1,3 @@
-import Text from "@/components/Text";
-import "./Process.css";
-
-const steps = [
-  ["01", "Keşif ve Analiz", "İhtiyaçları, hedefleri ve ürün kapsamını netleştiririm."],
-  ["02", "Tasarım ve Planlama", "Kullanıcı deneyimini merkeze alan akışlar oluştururum."],
-  ["03", "Geliştirme", "Modern, güvenli ve hızlı kod altyapısını kurarım."],
-  ["04", "Test ve Yayın", "Test eder, optimize eder ve App Store sürecini yönetirim."]
-];
-
-export default function Process() {
-  return (
-    <section className="process" id="surec">
-      <div className="container">
-        <div className="section-head">
-          <span className="section-kicker"><Text>{"Çalışma Süreci"}</Text></span>
-          <h2 className="section-title"><Text>{"Şeffaf, ölçülebilir ve sonuç odaklı ilerleyiş."}</Text></h2>
-          <p className="section-copy"><Text>{"Her projede kapsamı netleştirir, doğru planı çıkarır ve ürünü kontrollü biçimde yayına alırım."}</Text></p>
-        </div>
-
-        <div className="process-grid">
-          {steps.map(([number, title, text]) => (
-            <article key={number}>
-              <span>{number}</span>
-              <h3><Text>{title}</Text></h3>
-              <p><Text>{text}</Text></p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+"use client";import Text from "@/components/Text";import{useSitePreferences}from"./SitePreferences";import"./Process.css";
+const copy={tr:{k:"SÜREÇ / 04 SAHNE",h:"Bir ürün, kontrollü bir sekans.",p:"Her aşama bir sonrakini besler. Gereksiz katman yok; fikirden çalışan ürüne net bir akış.",steps:[["Keşif","Problemi, kullanıcıyı ve ürünün neden var olması gerektiğini netleştir."],["Yön","Görsel dili, etkileşimi ve teknik mimariyi tek sistemde kur."],["İnşa","Ürünü performans, erişilebilirlik ve sürdürülebilirlik odağında geliştir."],["Yayın","Test et, optimize et, mağaza sürecini tamamla ve ürünü yaşat."]]},en:{k:"PROCESS / 04 SCENES",h:"One product. A controlled sequence.",p:"Every stage feeds the next. No unnecessary layers — a clear path from idea to working product.",steps:[["Discover","Define the problem, the audience and the reason the product should exist."],["Direct","Shape visual language, interaction and technical architecture as one system."],["Build","Engineer for performance, accessibility and long-term maintainability."],["Release","Test, refine, ship and keep the product moving."]]}} as const;
+export default function Process(){const{lang}=useSitePreferences(),x=copy[lang];return <section className="process" id="surec"><div className="container"><div className="section-head"><span className="section-kicker"><Text>{x.k}</Text></span><h2 className="section-title"><Text>{x.h}</Text></h2><p className="section-copy"><Text>{x.p}</Text></p></div><div className="process-grid">{x.steps.map((it,i)=><article key={it[0]}><span>0{i+1}</span><div className="process-line"/><h3><Text>{it[0]}</Text></h3><p><Text>{it[1]}</Text></p></article>)}</div></div></section>}
