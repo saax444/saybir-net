@@ -1,3 +1,4 @@
+import Text from "@/components/Text";
 import "./Contact.css";
 
 const socialLinks = [
@@ -36,19 +37,15 @@ export default function Contact() {
     <section className="contact" id="iletisim">
       <div className="container contact-panel">
         <div>
-          <span className="section-kicker">İletişim</span>
-          <h2>Birlikte güçlü bir ürün geliştirelim.</h2>
-          <p>
-            Projenizi, hedefinizi ve mevcut aşamanızı paylaşın. Uygun kapsamı birlikte belirleyelim.
-          </p>
+          <span className="section-kicker"><Text>{"İletişim"}</Text></span>
+          <h2><Text>{"Birlikte güçlü bir ürün geliştirelim."}</Text></h2>
+          <p><Text>{"Projenizi, hedefinizi ve mevcut aşamanızı paylaşın. Uygun kapsamı birlikte belirleyelim."}</Text></p>
         </div>
 
         <div className="contact-actions">
-          <a className="contact-email" href="mailto:hello@saybir.net">
-            hello@saybir.net
-          </a>
+          <a className="contact-email" href="mailto:hello@saybir.net"><Text>{"hello@saybir.net"}</Text></a>
 
-          <div className="contact-socials" aria-label="Sosyal bağlantılar">
+          <div className="contact-socials" >
             {socialLinks.map((link) => (
               <a
                 key={link.label}
@@ -60,8 +57,8 @@ export default function Contact() {
                   <SocialIcon name={link.icon} />
                 </span>
                 <span className="contact-social-copy">
-                  <strong>{link.label}</strong>
-                  <small>{link.detail}</small>
+                  <strong><Text>{link.label}</Text></strong>
+                  <small><Text>{link.detail}</Text></small>
                 </span>
               </a>
             ))}

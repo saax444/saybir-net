@@ -5,7 +5,7 @@ export type AppInfo = {
   accent: string;
   category: string;
   description: string;
-  status: "App Store’da" | "İncelemede";
+  status: "App Store’da" | "İncelemede" | "Ücretsiz + Premium";
   appStoreUrl?: string;
   version?: string;
 };
@@ -237,6 +237,12 @@ export const apps: AppInfo[] = [
     version: "1.0.1",
     appStoreUrl:
       "https://apps.apple.com/tr/app/susad%C4%B1m/id6792691032",
+  },
+  {
+    slug: "hushloom", name: "Hushloom", image: "/apps/hushloom.png",
+    accent: "78 119 255", category: "Sağlık ve Fitness", version: "1.0",
+    description: "Yağmur, ateş, rüzgâr, fırtına, orman ve diğer gerçek ambiyansları karıştırarak kişisel uyku ve odak ortamları oluşturun.",
+    status: "Ücretsiz + Premium",
   },
 ];
 

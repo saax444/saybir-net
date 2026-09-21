@@ -1,3 +1,5 @@
+import PageTitle from "@/components/PageTitle";
+import Text from "@/components/Text";
 import type { Metadata } from "next";
 import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
@@ -15,87 +17,67 @@ export default function HushloomSupportPage() {
       <nav className={styles.nav}>
         <div className={styles.navInner}>
           <BrandLogo /><PreferenceControls/>
-          <Link className={styles.back} href="/apps/hushloom">← Hushloom</Link>
+          <Link className={styles.back} href="/apps/hushloom"><Text>{"← Hushloom"}</Text></Link>
         </div>
       </nav>
 
-      <main className={styles.main}>
+      <PageTitle name="Hushloom" title="Destek"/><main className={styles.main}>
         <section className={styles.content}>
-          <span className={styles.kicker}>Destek</span>
-          <h1>Hushloom Destek</h1>
-          <p>
-            Hushloom ile ilgili teknik sorunlar, Premium, reklamlar, ses oynatma ve geri bildirimler
-            için bu sayfayı kullanabilirsiniz.
-          </p>
+          <span className={styles.kicker}><Text>{"Destek"}</Text></span>
+          <h1><Text>{"Hushloom Destek"}</Text></h1>
+          <p><Text>{"Hushloom ile ilgili teknik sorunlar, Premium, reklamlar, ses oynatma ve geri bildirimler için bu sayfayı kullanabilirsiniz."}</Text></p>
 
-          <h3>Destek Verilen Konular</h3>
+          <h3><Text>{"Destek Verilen Konular"}</Text></h3>
           <ul>
-            <li>Yağmur, ateş, rüzgâr, orman, okyanus ve diğer ambiyans sesleri</li>
-            <li>Birden fazla sesi aynı anda karıştırma ve ses seviyeleri</li>
-            <li>Zamanlayıcı ve arka planda ses oynatma</li>
-            <li>Hazır sahneler, favoriler ve kayıtlı karışımlar</li>
-            <li>Free sürümde 3 ses / 1 saat sınırı</li>
-            <li>Premium, 24 saate kadar zamanlayıcı ve reklamsız kullanım</li>
-            <li>Satın almaları geri yükleme</li>
-            <li>Banner ve geçiş reklamları</li>
-            <li>Dil ve açık/koyu tema ayarları</li>
+            <li><Text>{"Yağmur, ateş, rüzgâr, orman, okyanus ve diğer ambiyans sesleri"}</Text></li>
+            <li><Text>{"Birden fazla sesi aynı anda karıştırma ve ses seviyeleri"}</Text></li>
+            <li><Text>{"Zamanlayıcı ve arka planda ses oynatma"}</Text></li>
+            <li><Text>{"Hazır sahneler, favoriler ve kayıtlı karışımlar"}</Text></li>
+            <li><Text>{"Free sürümde 3 ses / 1 saat sınırı"}</Text></li>
+            <li><Text>{"Premium, 24 saate kadar zamanlayıcı ve reklamsız kullanım"}</Text></li>
+            <li><Text>{"Satın almaları geri yükleme"}</Text></li>
+            <li><Text>{"Banner ve geçiş reklamları"}</Text></li>
+            <li><Text>{"Dil ve açık/koyu tema ayarları"}</Text></li>
           </ul>
 
-          <h3>Ses Çalmıyorsa</h3>
+          <h3><Text>{"Ses Çalmıyorsa"}</Text></h3>
           <ul>
-            <li>Cihazın medya ses seviyesini kontrol edin.</li>
-            <li>Bluetooth veya AirPlay çıkışının başka bir cihaza yönlenmediğinden emin olun.</li>
-            <li>Aktif karışımda en az bir sesin seçili ve ses seviyesinin sıfırdan yüksek olduğunu kontrol edin.</li>
-            <li>Uygulamayı tamamen kapatıp yeniden açın.</li>
-            <li>Sorun devam ederse iPhone veya iPad'i yeniden başlatın.</li>
+            <li><Text>{"Cihazın medya ses seviyesini kontrol edin."}</Text></li>
+            <li><Text>{"Bluetooth veya AirPlay çıkışının başka bir cihaza yönlenmediğinden emin olun."}</Text></li>
+            <li><Text>{"Aktif karışımda en az bir sesin seçili ve ses seviyesinin sıfırdan yüksek olduğunu kontrol edin."}</Text></li>
+            <li><Text>{"Uygulamayı tamamen kapatıp yeniden açın."}</Text></li>
+            <li><Text>{"Sorun devam ederse iPhone veya iPad'i yeniden başlatın."}</Text></li>
           </ul>
 
-          <h3>Arka Planda Ses Duruyorsa</h3>
-          <p>
-            Ambiyansı Hushloom içinden başlattıktan sonra ekranı kilitleyin. Başka bir medya uygulaması
-            ses oturumunu devralırsa iOS, Hushloom sesini duraklatabilir. Böyle bir durumda Hushloom'a
-            dönüp oturumu yeniden başlatın.
-          </p>
+          <h3><Text>{"Arka Planda Ses Duruyorsa"}</Text></h3>
+          <p><Text>{"Ambiyansı Hushloom içinden başlattıktan sonra ekranı kilitleyin. Başka bir medya uygulaması ses oturumunu devralırsa iOS, Hushloom sesini duraklatabilir. Böyle bir durumda Hushloom'a dönüp oturumu yeniden başlatın."}</Text></p>
 
-          <h3>Premium veya Satın Alma Sorunları</h3>
-          <p>
-            Premium işlemleri Apple App Store üzerinden yapılır. Ödeme tamamlandığı hâlde Premium
-            açılmadıysa uygulamadaki “Satın Almaları Geri Yükle” seçeneğini kullanın. Aboneliklerinizi
-            iPhone/iPad Ayarlar → Apple Hesabı → Abonelikler bölümünden yönetebilirsiniz.
-          </p>
-          <p>
-            Destek mesajlarında Apple Hesabı parolanızı, doğrulama kodunuzu veya kart bilgilerinizi
-            hiçbir zaman paylaşmayın.
-          </p>
+          <h3><Text>{"Premium veya Satın Alma Sorunları"}</Text></h3>
+          <p><Text>{"Premium işlemleri Apple App Store üzerinden yapılır. Ödeme tamamlandığı hâlde Premium açılmadıysa uygulamadaki “Satın Almaları Geri Yükle” seçeneğini kullanın. Aboneliklerinizi iPhone/iPad Ayarlar → Apple Hesabı → Abonelikler bölümünden yönetebilirsiniz."}</Text></p>
+          <p><Text>{"Destek mesajlarında Apple Hesabı parolanızı, doğrulama kodunuzu veya kart bilgilerinizi hiçbir zaman paylaşmayın."}</Text></p>
 
-          <h3>Reklam Sorunları</h3>
-          <p>
-            Free sürümde reklam bulunabilirliği ülke, bağlantı ve mevcut reklam envanterine göre
-            değişebilir. Premium aktif olduğu hâlde reklam görüyorsanız satın almaları geri yüklemeyi
-            deneyin ve sorun devam ederse uygulama sürümünüzle birlikte bize bildirin.
-          </p>
+          <h3><Text>{"Reklam Sorunları"}</Text></h3>
+          <p><Text>{"Free sürümde reklam bulunabilirliği ülke, bağlantı ve mevcut reklam envanterine göre değişebilir. Premium aktif olduğu hâlde reklam görüyorsanız satın almaları geri yüklemeyi deneyin ve sorun devam ederse uygulama sürümünüzle birlikte bize bildirin."}</Text></p>
 
-          <h3>Destek Mesajına Ekleyin</h3>
+          <h3><Text>{"Destek Mesajına Ekleyin"}</Text></h3>
           <ul>
-            <li>iPhone modeli</li>
-            <li>iOS sürümü</li>
-            <li>Hushloom sürümü ve mümkünse build numarası</li>
-            <li>Sorunun oluştuğu ekran</li>
-            <li>Sorunu tekrar oluşturmak için izlediğiniz adımlar</li>
-            <li>Varsa hata mesajının tam metni</li>
+            <li><Text>{"iPhone modeli"}</Text></li>
+            <li><Text>{"iOS sürümü"}</Text></li>
+            <li><Text>{"Hushloom sürümü ve mümkünse build numarası"}</Text></li>
+            <li><Text>{"Sorunun oluştuğu ekran"}</Text></li>
+            <li><Text>{"Sorunu tekrar oluşturmak için izlediğiniz adımlar"}</Text></li>
+            <li><Text>{"Varsa hata mesajının tam metni"}</Text></li>
           </ul>
 
-          <h3>İletişim</h3>
-          <p>
-            Destek talepleri için{" "}
-            <a href="mailto:hello@saybir.net?subject=Hushloom%20Destek">hello@saybir.net</a>
-            {" "}adresine e-posta gönderebilirsiniz.
-          </p>
+          <h3><Text>{"İletişim"}</Text></h3>
+          <p><Text>{"Destek talepleri için"}</Text>{" "}
+            <a href="mailto:hello@saybir.net?subject=Hushloom%20Destek"><Text>{"hello@saybir.net"}</Text></a>
+            {" "}<Text>{"adresine e-posta gönderebilirsiniz."}</Text></p>
 
           <div className={styles.actions}>
-            <Link href="/apps/hushloom/privacy">Gizlilik Politikası</Link>
-            <Link href="/apps/hushloom/terms">Kullanım Koşulları</Link>
-            <Link href="/apps/hushloom">Hushloom</Link>
+            <Link href="/apps/hushloom/privacy"><Text>{"Gizlilik Politikası"}</Text></Link>
+            <Link href="/apps/hushloom/terms"><Text>{"Kullanım Koşulları"}</Text></Link>
+            <Link href="/apps/hushloom"><Text>{"Hushloom"}</Text></Link>
           </div>
         </section>
       </main>

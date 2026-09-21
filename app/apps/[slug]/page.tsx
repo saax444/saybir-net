@@ -1,3 +1,5 @@
+import PageTitle from "@/components/PageTitle";
+import Text from "@/components/Text";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -17,16 +19,16 @@ export default async function AppPage({ params }: { params: Promise<{ slug: stri
   const app = getApp((await params).slug);
   if (!app) notFound();
   return <div className={styles.page}>
-    <nav className={styles.nav}><div className={styles.navInner}><BrandLogo /><PreferenceControls/><Link className={styles.back} href="/#uygulamalar">← Tüm uygulamalar</Link></div></nav>
-    <main className={styles.main}>
+    <nav className={styles.nav}><div className={styles.navInner}><BrandLogo /><PreferenceControls/><Link className={styles.back} href="/#koleksiyon"><Text>{"← Tüm uygulamalar"}</Text></Link></div></nav>
+    <PageTitle title={app.name}/><main className={styles.main}>
       <section className={styles.hero} style={{"--accent": app.accent} as React.CSSProperties}>
-        <img className={styles.icon} src={app.image} alt={`${app.name} ikonu`} />
-        <div><span className={styles.kicker}>{app.category}</span><h1>{app.name}</h1><p>{app.description}</p>
-          <div className={styles.meta}>{app.version && <span>Sürüm {app.version}</span>}<span>{app.status}</span></div>
-          <div className={styles.actions}>{app.appStoreUrl && <a href={app.appStoreUrl} target="_blank" rel="noopener noreferrer">App Store’da görüntüle ↗</a>}<Link className={styles.secondary} href={`/apps/${app.slug}/support`}>Destek</Link><Link className={styles.secondary} href={`/apps/${app.slug}/privacy`}>Gizlilik</Link>{["hushloom", "retro-snake"].includes(app.slug) && <Link className={styles.secondary} href={`/apps/${app.slug}/terms`}>Kullanım Koşulları</Link>}{app.slug === "retro-snake" && <><Link className={styles.secondary} href="/apps/retro-snake/eula">EULA</Link><Link className={styles.secondary} href="/apps/retro-snake/purchases">Satın Alma ve İade</Link></>}</div>
+        <img className={styles.icon} src={app.image} alt={app.name} />
+        <div><span className={styles.kicker}><Text>{app.category}</Text></span><h1><Text>{app.name}</Text></h1><p><Text>{app.description}</Text></p>
+          <div className={styles.meta}>{app.version && <span><Text>{"Sürüm "}</Text><Text>{app.version}</Text></span>}<span><Text>{app.status}</Text></span></div>
+          <div className={styles.actions}>{app.appStoreUrl && <a href={app.appStoreUrl} target="_blank" rel="noopener noreferrer"><Text>{"App Store’da görüntüle ↗"}</Text></a>}<Link className={styles.secondary} href={`/apps/${app.slug}/support`}><Text>{"Destek"}</Text></Link><Link className={styles.secondary} href={`/apps/${app.slug}/privacy`}><Text>{"Gizlilik"}</Text></Link>{["hushloom", "retro-snake"].includes(app.slug) && <Link className={styles.secondary} href={`/apps/${app.slug}/terms`}><Text>{"Kullanım Koşulları"}</Text></Link>}{app.slug === "retro-snake" && <><Link className={styles.secondary} href="/apps/retro-snake/eula"><Text>{"EULA"}</Text></Link><Link className={styles.secondary} href="/apps/retro-snake/purchases"><Text>{"Satın Alma ve İade"}</Text></Link></>}</div>
         </div>
       </section>
-      <section className={styles.content}><span className={styles.kicker}>SAYBIR / PRODUCT FILE</span><h2>Resmî uygulama sayfası</h2><p>Bu sayfa {app.name} için ürün bilgileri, App Store bağlantısı, destek ve gizlilik belgelerinin güncel merkezidir.</p></section>
+      <section className={styles.content}><span className={styles.kicker}><Text>{"SAYBIR / PRODUCT FILE"}</Text></span><h2><Text>{"Resmî uygulama sayfası"}</Text></h2><p><Text>{"Bu sayfa "}</Text><Text>{app.name}</Text><Text>{" için ürün bilgileri, App Store bağlantısı, destek ve gizlilik belgelerinin güncel merkezidir."}</Text></p></section>
     </main>
   </div>;
 }

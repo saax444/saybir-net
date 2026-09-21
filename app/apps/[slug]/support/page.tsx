@@ -1,3 +1,5 @@
+import PageTitle from "@/components/PageTitle";
+import Text from "@/components/Text";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -92,7 +94,7 @@ const supportBySlug: Record<string, SupportConfig> = {
       "Ayet ve hadis",
         ],
   },
-  "melody-map": {
+  "melodymap": {
     intro: "Melody Map için teknik destek, kullanım soruları ve geri bildirimler bu sayfa üzerinden yönetilir.",
     topics: [
       "Müzik içeriklerinin yüklenmesi",
@@ -211,106 +213,68 @@ export default async function SupportPage({
       <nav className={styles.nav}>
         <div className={styles.navInner}>
           <BrandLogo /><PreferenceControls/>
-          <Link className={styles.back} href={`/apps/${app.slug}`}>← {app.name}</Link>
+          <Link className={styles.back} href={`/apps/${app.slug}`}>← <Text>{app.name}</Text></Link>
         </div>
       </nav>
 
-      <main className={styles.main}>
+      <PageTitle name={app.name} title="Destek"/><main className={styles.main}>
         <section className={styles.content}>
-          <span className={styles.kicker}>Destek</span>
-          <h1>{app.name} Destek</h1>
-          <p>{config.intro}</p>
-          <p>
-            Bir sorun yaşıyorsanız aşağıdaki adımları uygulayın. Sorun devam ederse
-            sayfanın altındaki e-posta bağlantısıyla ayrıntıları gönderin.
-          </p>
+          <span className={styles.kicker}><Text>{"Destek"}</Text></span>
+          <h1><Text>{app.name}</Text><Text>{" Destek"}</Text></h1>
+          <p><Text>{config.intro}</Text></p>
+          <p><Text>{"Bir sorun yaşıyorsanız aşağıdaki adımları uygulayın. Sorun devam ederse sayfanın altındaki e-posta bağlantısıyla ayrıntıları gönderin."}</Text></p>
 
-          <h3>Destek Verilen Konular</h3>
+          <h3><Text>{"Destek Verilen Konular"}</Text></h3>
           <ul>
-            {config.topics.map((topic) => <li key={topic}>{topic}</li>)}
-            <li>Uygulamanın açılmaması, donması veya beklenmeyen şekilde kapanması</li>
-            <li>Uygulama sürümüyle ilgili diğer teknik sorunlar</li>
+            {config.topics.map((topic) => <li key={topic}><Text>{topic}</Text></li>)}
+            <li><Text>{"Uygulamanın açılmaması, donması veya beklenmeyen şekilde kapanması"}</Text></li>
+            <li><Text>{"Uygulama sürümüyle ilgili diğer teknik sorunlar"}</Text></li>
           </ul>
 
-          <h3>Önce Bunları Kontrol Edin</h3>
+          <h3><Text>{"Önce Bunları Kontrol Edin"}</Text></h3>
           <ul>
-            <li>App Store üzerinden uygulamanın en güncel sürümünün kurulu olduğundan emin olun.</li>
-            <li>İnternet gerektiren özelliklerde Wi-Fi veya mobil veri bağlantısını kontrol edin.</li>
-            <li>Uygulamayı tamamen kapatıp yeniden açın.</li>
-            <li>Gerekirse cihazı yeniden başlatın.</li>
-            <li>Özellik bir sistem izni gerektiriyorsa iPhone/iPad Ayarlar bölümünden uygulama izinlerini kontrol edin.</li>
+            <li><Text>{"App Store üzerinden uygulamanın en güncel sürümünün kurulu olduğundan emin olun."}</Text></li>
+            <li><Text>{"İnternet gerektiren özelliklerde Wi-Fi veya mobil veri bağlantısını kontrol edin."}</Text></li>
+            <li><Text>{"Uygulamayı tamamen kapatıp yeniden açın."}</Text></li>
+            <li><Text>{"Gerekirse cihazı yeniden başlatın."}</Text></li>
+            <li><Text>{"Özellik bir sistem izni gerektiriyorsa iPhone/iPad Ayarlar bölümünden uygulama izinlerini kontrol edin."}</Text></li>
           </ul>
 
-          <h3>Bildirimler Çalışmıyorsa</h3>
-          <p>
-            Ayarlar → Bildirimler → {app.name} bölümünden bildirim iznini kontrol edin.
-            Odak modu, Sessiz Mod veya sistem bildirim ayarlarının teslimatı etkileyebileceğini
-            unutmayın. Uygulama içindeki bildirim anahtarları varsa onların da etkin olduğundan
-            emin olun.
-          </p>
+          <h3><Text>{"Bildirimler Çalışmıyorsa"}</Text></h3>
+          <p><Text>{"Ayarlar → Bildirimler → "}</Text><Text>{app.name}</Text><Text>{" bölümünden bildirim iznini kontrol edin. Odak modu, Sessiz Mod veya sistem bildirim ayarlarının teslimatı etkileyebileceğini unutmayın. Uygulama içindeki bildirim anahtarları varsa onların da etkin olduğundan emin olun."}</Text></p>
 
-          <h3>Premium veya Satın Alma Sorunları</h3>
-          <p>
-            Uygulama Premium abonelik veya uygulama içi satın alma sunuyorsa işlemler Apple
-            App Store üzerinden gerçekleştirilir. Satın alma tamamlandığı hâlde özellik
-            açılmadıysa uygulamadaki “Satın Almaları Geri Yükle” seçeneğini kullanın.
-            Aboneliklerinizi iPhone/iPad Ayarlar → Apple Hesabı → Abonelikler bölümünden
-            yönetebilirsiniz.
-          </p>
-          <p>
-            Destek ekibine Apple Hesabı parolanızı, doğrulama kodunuzu veya ödeme kartı
-            bilgilerinizi hiçbir zaman göndermeyin.
-          </p>
+          <h3><Text>{"Premium veya Satın Alma Sorunları"}</Text></h3>
+          <p><Text>{"Uygulama Premium abonelik veya uygulama içi satın alma sunuyorsa işlemler Apple App Store üzerinden gerçekleştirilir. Satın alma tamamlandığı hâlde özellik açılmadıysa uygulamadaki “Satın Almaları Geri Yükle” seçeneğini kullanın. Aboneliklerinizi iPhone/iPad Ayarlar → Apple Hesabı → Abonelikler bölümünden yönetebilirsiniz."}</Text></p>
+          <p><Text>{"Destek ekibine Apple Hesabı parolanızı, doğrulama kodunuzu veya ödeme kartı bilgilerinizi hiçbir zaman göndermeyin."}</Text></p>
 
-          <h3>Reklamlar veya Ödüllü Reklamlar</h3>
-          <p>
-            Reklam destekli özelliklerde reklam bulunabilirliği ülkeye, bağlantıya, reklam
-            sağlayıcısına ve mevcut reklam envanterine göre değişebilir. Ödüllü reklam
-            tamamlandığı hâlde hak tanımlanmadıysa uygulamayı yeniden açın ve sorun devam
-            ederse yaklaşık zamanı ve yaptığınız işlemi destek mesajına ekleyin.
-          </p>
+          <h3><Text>{"Reklamlar veya Ödüllü Reklamlar"}</Text></h3>
+          <p><Text>{"Reklam destekli özelliklerde reklam bulunabilirliği ülkeye, bağlantıya, reklam sağlayıcısına ve mevcut reklam envanterine göre değişebilir. Ödüllü reklam tamamlandığı hâlde hak tanımlanmadıysa uygulamayı yeniden açın ve sorun devam ederse yaklaşık zamanı ve yaptığınız işlemi destek mesajına ekleyin."}</Text></p>
 
-          <h3>İzin Sorunları</h3>
-          <p>
-            Konum, bildirim, Health, Screen Time, kamera, fotoğraf veya diğer sistem izinleri
-            yalnızca ilgili özelliği kullanan uygulamalarda gereklidir. İzinler Apple'ın
-            Ayarlar/Sistem Ayarları ekranından değiştirilebilir. Bir izin kapalıysa yalnızca
-            o izne bağlı özellik çalışmayabilir.
-          </p>
+          <h3><Text>{"İzin Sorunları"}</Text></h3>
+          <p><Text>{"Konum, bildirim, Health, Screen Time, kamera, fotoğraf veya diğer sistem izinleri yalnızca ilgili özelliği kullanan uygulamalarda gereklidir. İzinler Apple'ın Ayarlar/Sistem Ayarları ekranından değiştirilebilir. Bir izin kapalıysa yalnızca o izne bağlı özellik çalışmayabilir."}</Text></p>
 
-          <h3>Veri ve Gizlilik Talepleri</h3>
-          <p>
-            Gizlilik, veri silme veya uygulamanın veri kullanımına ilişkin bir talebiniz
-            varsa e-posta konu satırına “{app.name} - Gizlilik Talebi” yazın. Talebin
-            anlaşılması için gerekli olmayan hassas bilgileri mesajınıza eklemeyin.
-          </p>
+          <h3><Text>{"Veri ve Gizlilik Talepleri"}</Text></h3>
+          <p><Text>{"Gizlilik, veri silme veya uygulamanın veri kullanımına ilişkin bir talebiniz varsa e-posta konu satırına “"}</Text><Text>{app.name}</Text><Text>{" - Gizlilik Talebi” yazın. Talebin anlaşılması için gerekli olmayan hassas bilgileri mesajınıza eklemeyin."}</Text></p>
 
-          <h3>Destek Mesajına Neleri Eklemelisiniz?</h3>
+          <h3><Text>{"Destek Mesajına Neleri Eklemelisiniz?"}</Text></h3>
           <ul>
-            <li>iPhone/iPad/Mac modeli</li>
-            <li>iOS, iPadOS veya macOS sürümü</li>
-            <li>{app.name} uygulama sürümü ve mümkünse build numarası</li>
-            <li>Sorunun hangi ekranda oluştuğu</li>
-            <li>Sorunu tekrar oluşturmak için izlenen adımlar</li>
-            <li>Ekranda görünen hata mesajının tam metni</li>
-            <li>Mümkünse kişisel bilgi içermeyen ekran görüntüsü</li>
+            <li><Text>{"iPhone/iPad/Mac modeli"}</Text></li>
+            <li><Text>{"iOS, iPadOS veya macOS sürümü"}</Text></li>
+            <li><Text>{app.name}</Text><Text>{" uygulama sürümü ve mümkünse build numarası"}</Text></li>
+            <li><Text>{"Sorunun hangi ekranda oluştuğu"}</Text></li>
+            <li><Text>{"Sorunu tekrar oluşturmak için izlenen adımlar"}</Text></li>
+            <li><Text>{"Ekranda görünen hata mesajının tam metni"}</Text></li>
+            <li><Text>{"Mümkünse kişisel bilgi içermeyen ekran görüntüsü"}</Text></li>
           </ul>
 
-          <h3>İletişim</h3>
-          <p>
-            Destek talepleri için{" "}
-            <a href={`mailto:hello@saybir.net?subject=${encodeURIComponent(app.name + " Destek")}`}>
-              hello@saybir.net
-            </a>{" "}
-            adresini kullanabilirsiniz.
-          </p>
+          <h3><Text>{"İletişim"}</Text></h3>
+          <p><Text>{"Destek talepleri için"}</Text>{" "}
+            <a href={`mailto:hello@saybir.net?subject=${encodeURIComponent(app.name + " Destek")}`}><Text>{"hello@saybir.net"}</Text></a>{" "}<Text>{"adresini kullanabilirsiniz."}</Text></p>
 
           <div className={styles.actions}>
-            <Link href={`/apps/${app.slug}/privacy`}>Gizlilik Politikası</Link>
-            <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">
-              Apple Standart EULA
-            </a>
-            <Link href={`/apps/${app.slug}`}>Resmî Uygulama Sayfası</Link>
+            <Link href={`/apps/${app.slug}/privacy`}><Text>{"Gizlilik Politikası"}</Text></Link>
+            <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"><Text>{"Apple Standart EULA"}</Text></a>
+            <Link href={`/apps/${app.slug}`}><Text>{"Resmî Uygulama Sayfası"}</Text></Link>
           </div>
         </section>
       </main>

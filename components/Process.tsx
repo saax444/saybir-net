@@ -1,3 +1,4 @@
+import Text from "@/components/Text";
 import "./Process.css";
 
 const steps = [
@@ -12,19 +13,17 @@ export default function Process() {
     <section className="process" id="surec">
       <div className="container">
         <div className="section-head">
-          <span className="section-kicker">Çalışma Süreci</span>
-          <h2 className="section-title">Şeffaf, ölçülebilir ve sonuç odaklı ilerleyiş.</h2>
-          <p className="section-copy">
-            Her projede kapsamı netleştirir, doğru planı çıkarır ve ürünü kontrollü biçimde yayına alırım.
-          </p>
+          <span className="section-kicker"><Text>{"Çalışma Süreci"}</Text></span>
+          <h2 className="section-title"><Text>{"Şeffaf, ölçülebilir ve sonuç odaklı ilerleyiş."}</Text></h2>
+          <p className="section-copy"><Text>{"Her projede kapsamı netleştirir, doğru planı çıkarır ve ürünü kontrollü biçimde yayına alırım."}</Text></p>
         </div>
 
         <div className="process-grid">
           {steps.map(([number, title, text]) => (
             <article key={number}>
               <span>{number}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
+              <h3><Text>{title}</Text></h3>
+              <p><Text>{text}</Text></p>
             </article>
           ))}
         </div>

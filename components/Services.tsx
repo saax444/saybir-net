@@ -1,3 +1,4 @@
+import Text from "@/components/Text";
 import "./Services.css";
 
 const services = [
@@ -24,19 +25,17 @@ export default function Services() {
     <section className="services" id="hizmetler">
       <div className="container services-layout">
         <div className="services-intro">
-          <span className="section-kicker">Hizmetler</span>
-          <h2>İşinizi dijitalde ileri taşıyan çözümler.</h2>
-          <p>
-            Fikir aşamasından canlı ürüne kadar tüm geliştirme sürecini tek bir yapı içinde yönetiyorum.
-          </p>
+          <span className="section-kicker"><Text>{"Hizmetler"}</Text></span>
+          <h2><Text>{"İşinizi dijitalde ileri taşıyan çözümler."}</Text></h2>
+          <p><Text>{"Fikir aşamasından canlı ürüne kadar tüm geliştirme sürecini tek bir yapı içinde yönetiyorum."}</Text></p>
         </div>
 
         <div className="services-grid">
           {services.map((service, index) => (
             <article key={service.title}>
               <span>0{index + 1}</span>
-              <h3>{service.title}</h3>
-              <p>{service.text}</p>
+              <h3><Text>{service.title}</Text></h3>
+              <p><Text>{service.text}</Text></p>
             </article>
           ))}
         </div>

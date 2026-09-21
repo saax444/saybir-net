@@ -1,3 +1,5 @@
+import PageTitle from "@/components/PageTitle";
+import Text from "@/components/Text";
 import type { Metadata } from "next";
 import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
@@ -15,48 +17,37 @@ export default function HushloomPage() {
       <nav className={styles.nav}>
         <div className={styles.navInner}>
           <BrandLogo /><PreferenceControls/>
-          <Link className={styles.back} href="/#uygulamalar">← Tüm uygulamalar</Link>
+          <Link className={styles.back} href="/#koleksiyon"><Text>{"← Tüm uygulamalar"}</Text></Link>
         </div>
       </nav>
 
-      <main className={styles.main}>
+      <PageTitle title="Hushloom"/><main className={styles.main}>
         <section className={styles.hero} style={{"--accent":"78 119 255"} as React.CSSProperties}>
-          <img className={styles.icon} src="/apps/hushloom.png" alt="Hushloom uygulama ikonu" />
+          <img className={styles.icon} src="/apps/hushloom.png" alt="Hushloom" />
           <div>
-            <span className={styles.kicker}>Sağlık ve Fitness</span>
-            <h1>Hushloom</h1>
-            <p>
-              Yağmur, şömine, rüzgâr, fırtına, orman, okyanus ve diğer gerçek ortam seslerini
-              katmanlayarak uyku, dinlenme ve odaklanma için kendi ambiyansınızı oluşturun.
-            </p>
+            <span className={styles.kicker}><Text>{"Sağlık ve Fitness"}</Text></span>
+            <h1><Text>{"Hushloom"}</Text></h1>
+            <p><Text>{"Yağmur, şömine, rüzgâr, fırtına, orman, okyanus ve diğer gerçek ortam seslerini katmanlayarak uyku, dinlenme ve odaklanma için kendi ambiyansınızı oluşturun."}</Text></p>
             <div className={styles.meta}>
-              <span>Sürüm 1.0</span>
-              <span>iOS</span>
-              <span>Free + Premium</span>
+              <span><Text>{"Sürüm 1.0"}</Text></span>
+              <span><Text>{"iOS"}</Text></span>
+              <span><Text>{"Free + Premium"}</Text></span>
             </div>
             <div className={styles.actions}>
-              <Link className={styles.secondary} href="/apps/hushloom/support">Destek</Link>
-              <Link className={styles.secondary} href="/apps/hushloom/privacy">Gizlilik</Link>
-              <Link className={styles.secondary} href="/apps/hushloom/terms">Kullanım Koşulları</Link>
+              <Link className={styles.secondary} href="/apps/hushloom/support"><Text>{"Destek"}</Text></Link>
+              <Link className={styles.secondary} href="/apps/hushloom/privacy"><Text>{"Gizlilik"}</Text></Link>
+              <Link className={styles.secondary} href="/apps/hushloom/terms"><Text>{"Kullanım Koşulları"}</Text></Link>
             </div>
           </div>
         </section>
 
         <section className={styles.content}>
-          <h2>Gerçek seslerle kişisel ambiyans</h2>
-          <p>
-            Hushloom, farklı ambiyans seslerini keşfetmenize, ortam kayıtlarını aynı anda
-            çalmanıza, her katmanın ses seviyesini ayrı ayrı ayarlamanıza ve bir zamanlayıcıyla ambiyanslar oluşturmanıza
-            yardımcı olur. Ücretsiz sürümde aynı anda en fazla üç ses ve en fazla bir saatlik
-            oturum kullanılabilir. Premium sürüm reklamsız kullanım, daha fazla katman ve 24 saate
-            kadar zamanlayıcı sunar.
-          </p>
-          <h3>İletişim</h3>
-          <p>
-            Hushloom ile ilgili destek ve gizlilik talepleri için{" "}
-            <a href="mailto:hello@saybir.net?subject=Hushloom%20Destek">hello@saybir.net</a>
-            {" "}adresini kullanabilirsiniz.
-          </p>
+          <h2><Text>{"Gerçek seslerle kişisel ambiyans"}</Text></h2>
+          <p><Text>{"Hushloom, farklı ambiyans seslerini keşfetmenize, ortam kayıtlarını aynı anda çalmanıza, her katmanın ses seviyesini ayrı ayrı ayarlamanıza ve bir zamanlayıcıyla ambiyanslar oluşturmanıza yardımcı olur. Ücretsiz sürümde aynı anda en fazla üç ses ve en fazla bir saatlik oturum kullanılabilir. Premium sürüm reklamsız kullanım, daha fazla katman ve 24 saate kadar zamanlayıcı sunar."}</Text></p>
+          <h3><Text>{"İletişim"}</Text></h3>
+          <p><Text>{"Hushloom ile ilgili destek ve gizlilik talepleri için"}</Text>{" "}
+            <a href="mailto:hello@saybir.net?subject=Hushloom%20Destek"><Text>{"hello@saybir.net"}</Text></a>
+            {" "}<Text>{"adresini kullanabilirsiniz."}</Text></p>
         </section>
       </main>
     </div>

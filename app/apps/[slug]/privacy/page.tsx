@@ -1,3 +1,5 @@
+import PageTitle from "@/components/PageTitle";
+import Text from "@/components/Text";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -272,7 +274,7 @@ const privacyBySlug: Record<string, PrivacyConfig> = {
       },
     ],
   },
-  "melody-map": {
+  "melodymap": {
     name: "Melody Map",
     summary: "müzik keşfi ve müzikle ilişkili deneyimler sunan bir iOS uygulamasıdır.",
     sections: [
@@ -570,96 +572,54 @@ export default async function PrivacyPage({
       <nav className={styles.nav}>
         <div className={styles.navInner}>
           <BrandLogo /><PreferenceControls/>
-          <Link className={styles.back} href={`/apps/${app.slug}`}>← {app.name}</Link>
+          <Link className={styles.back} href={`/apps/${app.slug}`}>← <Text>{app.name}</Text></Link>
         </div>
       </nav>
 
-      <main className={styles.main}>
+      <PageTitle name={app.name} title="Gizlilik Politikası"/><main className={styles.main}>
         <section className={styles.content}>
-          <span className={styles.kicker}>Gizlilik</span>
-          <h1>{app.name} Gizlilik Politikası</h1>
-          <p><strong>Son güncelleme:</strong> 16 Ağustos 2026</p>
+          <span className={styles.kicker}><Text>{"Gizlilik"}</Text></span>
+          <h1><Text>{app.name}</Text><Text>{" Gizlilik Politikası"}</Text></h1>
+          <p><strong><Text>{"Son güncelleme:"}</Text></strong><Text>{" 16 Ağustos 2026"}</Text></p>
 
-          <h3>1. Genel Bakış</h3>
-          <p>
-            {config
-              ? `${config.name}, ${config.summary}`
-              : `${app.name}, sunduğu özelliklerin çalışması için gerekli verileri ve izinleri kullanır.`}
-          </p>
-          <p>
-            Bu politika, uygulamanın hangi bilgileri kullanabileceğini, bu bilgilerin neden
-            gerekli olduğunu, üçüncü taraf hizmetlerin rolünü ve kullanıcıların gizlilik
-            tercihlerini nasıl yönetebileceğini açıklamak amacıyla hazırlanmıştır.
-          </p>
+          <h3><Text>{"1. Genel Bakış"}</Text></h3>
+          <p>{config ? <>{config.name} <Text>{config.summary}</Text></> : <>{app.name} <Text>{"sunduğu özelliklerin çalışması için gerekli verileri ve izinleri kullanır."}</Text></>}</p>
+          <p><Text>{"Bu politika, uygulamanın hangi bilgileri kullanabileceğini, bu bilgilerin neden gerekli olduğunu, üçüncü taraf hizmetlerin rolünü ve kullanıcıların gizlilik tercihlerini nasıl yönetebileceğini açıklamak amacıyla hazırlanmıştır."}</Text></p>
 
           {config?.sections.map((section, index) => (
             <section key={section.title}>
-              <h3>{index + 2}. {section.title}</h3>
+              <h3>{index + 2}. <Text>{section.title}</Text></h3>
               {section.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+                <p key={paragraph}><Text>{paragraph}</Text></p>
               ))}
             </section>
           ))}
 
-          <h3>{(config?.sections.length ?? 0) + 2}. Üçüncü Taraf Hizmetler</h3>
-          <p>
-            Uygulamanın kullandığı Apple hizmetleri, reklam ağları, kimlik doğrulama
-            sağlayıcıları, içerik servisleri veya diğer üçüncü taraf SDK'ların kendi
-            gizlilik politikaları ve veri işleme uygulamaları bulunabilir. Bu sağlayıcılar
-            üzerinden işlenen bilgiler ilgili sağlayıcının koşullarına tabidir.
-          </p>
+          <h3><Text>{(config?.sections.length ?? 0) + 2}</Text><Text>{". Üçüncü Taraf Hizmetler"}</Text></h3>
+          <p><Text>{"Uygulamanın kullandığı Apple hizmetleri, reklam ağları, kimlik doğrulama sağlayıcıları, içerik servisleri veya diğer üçüncü taraf SDK'ların kendi gizlilik politikaları ve veri işleme uygulamaları bulunabilir. Bu sağlayıcılar üzerinden işlenen bilgiler ilgili sağlayıcının koşullarına tabidir."}</Text></p>
 
-          <h3>{(config?.sections.length ?? 0) + 3}. Veri Saklama ve Silme</h3>
-          <p>
-            Yalnızca cihaz üzerinde saklanan uygulama verileri, desteklenen uygulama içi
-            silme seçenekleri kullanılarak veya uygulama cihazdan kaldırılarak silinebilir.
-            Bir özellik sunucu tabanlı hesap veya hizmet kullanıyorsa veri silme talebi
-            için hello@saybir.net adresinden iletişime geçebilirsiniz. Yasal veya güvenlik
-            gerekçeleriyle saklanması zorunlu bilgiler varsa ilgili yükümlülükler uygulanır.
-          </p>
+          <h3><Text>{(config?.sections.length ?? 0) + 3}</Text><Text>{". Veri Saklama ve Silme"}</Text></h3>
+          <p><Text>{"Yalnızca cihaz üzerinde saklanan uygulama verileri, desteklenen uygulama içi silme seçenekleri kullanılarak veya uygulama cihazdan kaldırılarak silinebilir. Bir özellik sunucu tabanlı hesap veya hizmet kullanıyorsa veri silme talebi için hello@saybir.net adresinden iletişime geçebilirsiniz. Yasal veya güvenlik gerekçeleriyle saklanması zorunlu bilgiler varsa ilgili yükümlülükler uygulanır."}</Text></p>
 
-          <h3>{(config?.sections.length ?? 0) + 4}. İzinleri ve Onayı Geri Çekme</h3>
-          <p>
-            Konum, bildirim, kamera, fotoğraf, sağlık, takip veya diğer sistem izinleri
-            iOS/iPadOS/macOS Ayarlar veya Sistem Ayarları üzerinden değiştirilebilir.
-            Bir iznin kapatılması yalnızca o izne ihtiyaç duyan özelliğin çalışmasını
-            etkileyebilir.
-          </p>
+          <h3><Text>{(config?.sections.length ?? 0) + 4}</Text><Text>{". İzinleri ve Onayı Geri Çekme"}</Text></h3>
+          <p><Text>{"Konum, bildirim, kamera, fotoğraf, sağlık, takip veya diğer sistem izinleri iOS/iPadOS/macOS Ayarlar veya Sistem Ayarları üzerinden değiştirilebilir. Bir iznin kapatılması yalnızca o izne ihtiyaç duyan özelliğin çalışmasını etkileyebilir."}</Text></p>
 
-          <h3>{(config?.sections.length ?? 0) + 5}. Veri Güvenliği</h3>
-          <p>
-            Uygulama, özelliklerin sağlanması için gerekli veri miktarını sınırlamayı ve
-            Apple platformlarının sunduğu güvenlik mekanizmalarından yararlanmayı amaçlar.
-            İnternet üzerinden veri aktaran üçüncü taraf hizmetlerin güvenliği ayrıca
-            ilgili hizmet sağlayıcıların teknik ve organizasyonel önlemlerine tabidir.
-          </p>
+          <h3><Text>{(config?.sections.length ?? 0) + 5}</Text><Text>{". Veri Güvenliği"}</Text></h3>
+          <p><Text>{"Uygulama, özelliklerin sağlanması için gerekli veri miktarını sınırlamayı ve Apple platformlarının sunduğu güvenlik mekanizmalarından yararlanmayı amaçlar. İnternet üzerinden veri aktaran üçüncü taraf hizmetlerin güvenliği ayrıca ilgili hizmet sağlayıcıların teknik ve organizasyonel önlemlerine tabidir."}</Text></p>
 
-          <h3>{(config?.sections.length ?? 0) + 6}. Çocukların Gizliliği</h3>
-          <p>
-            Uygulama özellikle çocuklardan bilerek kişisel bilgi toplamayı amaçlamaz.
-            Bir ebeveyn veya yasal temsilci, bir çocuğa ait kişisel bilginin uygunsuz
-            şekilde işlendiğini düşünüyorsa bizimle iletişime geçebilir.
-          </p>
+          <h3><Text>{(config?.sections.length ?? 0) + 6}</Text><Text>{". Çocukların Gizliliği"}</Text></h3>
+          <p><Text>{"Uygulama özellikle çocuklardan bilerek kişisel bilgi toplamayı amaçlamaz. Bir ebeveyn veya yasal temsilci, bir çocuğa ait kişisel bilginin uygunsuz şekilde işlendiğini düşünüyorsa bizimle iletişime geçebilir."}</Text></p>
 
-          <h3>{(config?.sections.length ?? 0) + 7}. Politika Değişiklikleri</h3>
-          <p>
-            Uygulamanın özellikleri, kullandığı hizmetler veya yasal gereklilikler
-            değiştiğinde bu gizlilik politikası güncellenebilir. Güncel metin her zaman
-            bu sayfada yayımlanır.
-          </p>
+          <h3><Text>{(config?.sections.length ?? 0) + 7}</Text><Text>{". Politika Değişiklikleri"}</Text></h3>
+          <p><Text>{"Uygulamanın özellikleri, kullandığı hizmetler veya yasal gereklilikler değiştiğinde bu gizlilik politikası güncellenebilir. Güncel metin her zaman bu sayfada yayımlanır."}</Text></p>
 
-          <h3>{(config?.sections.length ?? 0) + 8}. İletişim</h3>
-          <p>
-            Gizlilik, veri silme veya uygulamanın veri kullanımıyla ilgili sorular için{" "}
-            <a href="mailto:hello@saybir.net">hello@saybir.net</a> adresinden iletişime
-            geçebilirsiniz.
-          </p>
+          <h3><Text>{(config?.sections.length ?? 0) + 8}</Text><Text>{". İletişim"}</Text></h3>
+          <p><Text>{"Gizlilik, veri silme veya uygulamanın veri kullanımıyla ilgili sorular için"}</Text>{" "}
+            <a href="mailto:hello@saybir.net"><Text>{"hello@saybir.net"}</Text></a><Text>{" adresinden iletişime geçebilirsiniz."}</Text></p>
 
           <div className={styles.actions}>
-            <Link href={`/apps/${app.slug}/support`}>Destek Sayfası</Link>
-            <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">
-              Apple Standart EULA
-            </a>
+            <Link href={`/apps/${app.slug}/support`}><Text>{"Destek Sayfası"}</Text></Link>
+            <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"><Text>{"Apple Standart EULA"}</Text></a>
           </div>
         </section>
       </main>
