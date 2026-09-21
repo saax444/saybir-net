@@ -1,12 +1,5 @@
 "use client";
 import { useSitePreferences } from "./SitePreferences";
-import { useSceneProgress } from "./useSceneProgress";
+import { apps } from "@/data/apps";
 import "./Hero.css";
-export default function Hero(){
- const ref=useSceneProgress();const{lang}=useSitePreferences();const tr=lang==="tr";
- return <section ref={ref} className="opening" id="top"><div className="opening__sticky">
- <div className="opening__rule" aria-hidden="true"/><div className="opening__edition"><span>{tr?"BAĞIMSIZ YAZILIM STÜDYOSU":"INDEPENDENT SOFTWARE STUDIO"}</span><span>iOS / macOS / Android</span></div>
- <div className="opening__title"><span className="opening__eyebrow">{tr?"FİKİRDEN HAYATA.":"FROM IDEA TO LIFE."}</span><h1>SAYBIR</h1><div className="opening__intro"><p>{tr?"İyi düşünülmüş.\nÖzenle geliştirilmiş.":"Thoughtfully designed.\nCarefully engineered."}</p><p>{tr?"Gündelik hayatın bir parçası olan bağımsız uygulamalar tasarlıyor ve geliştiriyorum.":"I design and build independent apps that become part of everyday life."}</p></div></div>
- <div className="opening__bottom"><span>DESIGN + ENGINEERING</span><a href="#uygulamalar">{tr?"UYGULAMALARI KEŞFET":"EXPLORE THE APPS"} <span>↓</span></a></div>
- </div></section>
-}
+export default function Hero(){const{lang}=useSitePreferences();const tr=lang==="tr";return <section className="opening" id="top"><div className="opening__surface" aria-hidden="true"/><div className="opening__meta"><span>{tr?"BAĞIMSIZ TASARIM & YAZILIM":"INDEPENDENT DESIGN & SOFTWARE"}</span><span>iOS · macOS · Android</span></div><div className="opening__body"><span className="opening__eyebrow">SAYBIR — {tr?"DİJİTAL ÜRÜN STÜDYOSU":"DIGITAL PRODUCT STUDIO"}</span><h1>{tr?<>Fikirden<br/><em>ilk dokunuşa.</em></>:<>From an idea<br/><em>to the first touch.</em></>}</h1><div className="opening__notes"><p>{tr?"Gündelik hayat için bağımsız uygulamalar.\nHer ayrıntısında tasarım, her adımında yazılım.":"Independent apps for everyday life.\nDesign in every detail. Engineering in every step."}</p><a href="#uygulamalar"><span>{tr?"Ürünleri keşfet":"Explore the work"}</span><b>↘</b></a></div></div><div className="opening__end"><span>01 / {tr?"STÜDYO":"STUDIO"}</span><span><b>{String(apps.length).padStart(2,"0")}</b> {tr?"BAĞIMSIZ UYGULAMA":"INDEPENDENT APPS"}</span><span>{tr?"AŞAĞIDA HİKÂYELERİ VAR":"THE STORIES CONTINUE BELOW"} ↓</span></div></section>}

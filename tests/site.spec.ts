@@ -132,7 +132,7 @@ test("unknown app and unknown page return a translated 404", async ({ page }) =>
 test("every app has a product chapter and the opening stays studio-focused", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator(".opening img")).toHaveCount(0);
-  await expect(page.locator(".opening h1")).toHaveText("SAYBIR");
+  await expect(page.locator(".opening h1")).toContainText("Fikirden");
   await expect(page.locator(".story")).toHaveCount(apps.length);
   for (const app of apps) {
     await expect(page.locator(`#story-${app.slug} h2`)).toHaveText(app.name);
@@ -140,4 +140,16 @@ test("every app has a product chapter and the opening stays studio-focused", asy
     await expect(page.locator(`.product-index a[href="#story-${app.slug}"]`)).toHaveCount(1);
   }
   await expect(page.locator('img[src*="landscape"]')).toHaveCount(0);
+});
+
+test("product entrance reveals the product details and can be followed", async ({ page }) => {
+  await page.goto("/#story-bold-block-arcade");
+  const scene = page.locator("#story-bold-block-arcade");
+  await expect(scene.locator(".story__copy")).toBeHidden();
+  await scene.getByRole("button", { name: "İÇERİ GİR" }).click();
+  await expect(scene.locator(".story__copy")).toBeVisible();
+  await expect(scene.locator(".story__opening")).toBeHidden();
+  await scene.getByRole("link", { name: "Ürünü keşfet" }).click();
+  await expect(page).toHaveURL(/\/apps\/bold-block-arcade$/);
+  await expect(page.locator("h1")).toHaveText("Bold Block Arcade");
 });
