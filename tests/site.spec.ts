@@ -148,7 +148,7 @@ test("every product is selectable in the 3D theatre", async ({ page }) => {
 test("product screens, keyboard dismissal, pause and product navigation work", async ({ page }) => {
   await page.goto("/#story-bold-block-arcade");
   await expect(page.locator(".work-caption h2")).toHaveText("Bold Block Arcade");
-  await page.getByRole("button", { name: "Hareketi durdur" }).click();
+  await page.locator(".work-toolbar").getByRole("button", { name: "Hareketi durdur" }).click();
   await expect(page.getByRole("button", { name: "Hareketi başlat" })).toHaveAttribute("aria-pressed", "true");
   await page.getByRole("button", { name: "Uygulama ekranları", exact: false }).click();
   const dialog=page.getByRole("dialog", { name: "Uygulama ekranları" });
@@ -169,7 +169,7 @@ test("product information remains usable without WebGL", async ({ page }) => {
     } as typeof original;
   });
   await page.goto("/#story-retro-snake");
-  await expect(page.locator(".world-fallback")).toBeVisible();
+  await expect(page.locator(".work-stage .world-fallback")).toBeVisible();
   await expect(page.locator(".work-caption h2")).toHaveText("Retro Snake");
   await expect(page.locator(".work-actions a")).toHaveAttribute("href", "/apps/retro-snake");
 });

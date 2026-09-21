@@ -22,6 +22,12 @@ function makeProduct(slug: string, m: Palette) {
   function line(points:number[][],radius=.065,material:THREE.Material=m.silver){return mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p)),false,"centripetal"),80,radius,12,false),material);}
   function coin(r:number,h:number,x:number,y:number,z:number,material:THREE.Material=m.silver){return mesh(new THREE.CylinderGeometry(r,r,h,64),material,x,y,z);}
   switch(slug) {
+    case "studio": {
+      const ribbon=mesh(new THREE.TorusKnotGeometry(1.15,.24,240,32,2,3),m.silver,0,.2,0);
+      ribbon.rotation.set(.4,.2,-.4);
+      animations.push(t=>{ribbon.rotation.y=.2+t*.085;ribbon.rotation.z=-.4+Math.sin(t*.18)*.12;ribbon.position.y=.2+Math.sin(t*.6)*.09});
+      break;
+    }
     case "retro-snake": {
       box(4.7,.18,4.7,0,-.9,0,m.black);
       for(let x=-2;x<=2;x+=.5)for(let z=-2;z<=2;z+=.5) box(.47,.045,.47,x,-.785,z,(Math.round((x+z)*2)%2===0)?m.black:m.glass);
@@ -110,7 +116,7 @@ export default function ProductWorld({slug,paused}:{slug:string;paused:boolean})
     const m:Palette={silver:new THREE.MeshPhysicalMaterial({color:0xc9cbd0,metalness:.95,roughness:.2,clearcoat:1}),ivory:new THREE.MeshPhysicalMaterial({color:0xe8e6df,metalness:.12,roughness:.24,clearcoat:1}),black:new THREE.MeshPhysicalMaterial({color:light?0x1b1f24:0x191d22,metalness:.6,roughness:.24,clearcoat:1}),glass:new THREE.MeshPhysicalMaterial({color:light?0x71757a:0x343b44,metalness:.85,roughness:.18,clearcoat:1})};
     const product=makeProduct(slug,m);scene.add(product.root);
     const floor=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.MeshStandardMaterial({color:light?0xdedbd3:0x020304,roughness:.84,metalness:0}));floor.rotation.x=-Math.PI/2;floor.position.y=-1.35;floor.receiveShadow=true;scene.add(floor);
-    const key=new THREE.SpotLight(0xffffff,100,35,.5,.65,1.5);key.position.set(-4,8,5);key.castShadow=true;key.shadow.mapSize.set(1024,1024);key.shadow.bias=-.0004;scene.add(key);
+    const key=new THREE.SpotLight(0xffffff,100,35,.5,.65,1.5);key.position.set(-4,8,5);key.castShadow=true;key.shadow.mapSize.set(1024,1024);key.shadow.bias=-.0004;key.shadow.normalBias=.025;scene.add(key);
     const rim=new THREE.SpotLight(0xdce6ff,65,30,.6,.7,1.5);rim.position.set(4,5,-4);scene.add(rim);scene.add(new THREE.HemisphereLight(0xffffff,0x30343c,.3));
     const camera=new THREE.PerspectiveCamera(34,1,.1,100);let progress=0;let px=0,py=0;let rx=0,ry=0;let visible=true;let frame=0;let elapsed=0;let previous=0;let rendered=false;let contextLost=false;
     const reduced=matchMedia("(prefers-reduced-motion: reduce)");
@@ -122,6 +128,6 @@ export default function ProductWorld({slug,paused}:{slug:string;paused:boolean})
     const lost=(e:Event)=>{e.preventDefault();contextLost=true;setFailed(true)};renderer.domElement.addEventListener("webglcontextlost",lost);
     return()=>{cancelAnimationFrame(frame);observer.disconnect();visibility.disconnect();removeEventListener("scroll",scroll);host.removeEventListener("pointermove",pointer);host.removeEventListener("pointerleave",leave);renderer.domElement.removeEventListener("webglcontextlost",lost);scene.traverse(o=>{if(o instanceof THREE.Mesh)o.geometry.dispose()});Object.values(m).forEach(mat=>mat.dispose());(floor.material as THREE.Material).dispose();env.dispose();pmrem.dispose();renderer.dispose();renderer.forceContextLoss();renderer.domElement.remove();};
   },[slug,theme]);
-  const app=apps.find(x=>x.slug===slug)!;
-  return <div className="product-world" ref={container} role="img" aria-label={lang==="tr"?`${app.name} için özgün üç boyutlu ürün sahnesi`:`Original three-dimensional product scene for ${app.name}`} data-world={slug}>{failed&&<div className="world-fallback"><img src={app.image} alt="" width="96" height="96"/><span>{app.name}</span><p>{lang==="tr"?"Ürün bilgilerini ve ekranlarını aşağıda inceleyebilirsin.":"Explore the product details and screenshots below."}</p></div>}</div>;
+  const app=apps.find(x=>x.slug===slug) ?? {name:"SAYBIR",image:""};
+  return <div className={slug==="studio"?"opening-world":"product-world"} ref={container} role="img" aria-label={lang==="tr"?`${app.name} için özgün üç boyutlu ürün sahnesi`:`Original three-dimensional product scene for ${app.name}`} data-world={slug}>{failed&&<div className="world-fallback">{app.image&&<img src={app.image} alt="" width="96" height="96"/>}<span>{app.name}</span><p>{lang==="tr"?"Ürün bilgilerini ve ekranlarını aşağıda inceleyebilirsin.":"Explore the product details and screenshots below."}</p></div>}</div>;
 }
