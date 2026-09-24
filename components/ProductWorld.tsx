@@ -9,7 +9,9 @@ import { apps } from "@/data/apps";
 
 type Palette = { silver: THREE.MeshPhysicalMaterial; ivory: THREE.MeshPhysicalMaterial; black: THREE.MeshPhysicalMaterial; glass: THREE.MeshPhysicalMaterial };
 
-function makeProduct(slug: string, m: Palette) {
+function makeProduct(slug: string, m: Palette, invalidate: () => void) {
+  const textures: THREE.Texture[] = [];
+  const extraMaterials: THREE.Material[] = [];
   const root = new THREE.Group();
   const animations: Array<(time: number) => void> = [];
   function mesh(geo: THREE.BufferGeometry, material: THREE.Material, x=0,y=0,z=0) {
@@ -23,12 +25,19 @@ function makeProduct(slug: string, m: Palette) {
   function coin(r:number,h:number,x:number,y:number,z:number,material:THREE.Material=m.silver){return mesh(new THREE.CylinderGeometry(r,r,h,64),material,x,y,z);}
   switch(slug) {
     case "studio": {
-      const outline=new THREE.Shape();
-      const points=[[-1.2,1.6],[1.2,1.6],[1.2,1],[-.6,1],[-.6,.3],[1.2,.3],[1.2,-1.6],[-1.2,-1.6],[-1.2,-1],[.6,-1],[.6,-.3],[-1.2,-.3]];
-      points.forEach(([x,y],i)=>i===0?outline.moveTo(x,y):outline.lineTo(x,y));outline.closePath();
-      const monogram=mesh(new THREE.ExtrudeGeometry(outline,{depth:.38,bevelEnabled:true,bevelSegments:5,steps:1,bevelSize:.055,bevelThickness:.055}),m.silver,0,.45,-.19);
-      monogram.rotation.set(0,-.25,-.08);monogram.scale.setScalar(.88);
-      animations.push(t=>{monogram.rotation.y=-.25+Math.sin(t*.22)*.18;monogram.position.y=.45+Math.sin(t*.5)*.045});
+      mesh(new RoundedBoxGeometry(2.06,4.12,.22,8,.1),m.silver,0,.65,0);
+      mesh(new RoundedBoxGeometry(1.99,4.05,.23,8,.1),m.black,0,.65,.02);
+      const texture=new THREE.TextureLoader().load("/studio/app-library.webp",invalidate);
+      texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=8;textures.push(texture);
+      const screenMaterial=new THREE.MeshBasicMaterial({map:texture,toneMapped:false});extraMaterials.push(screenMaterial);
+      const screenShape=new THREE.Shape();const w=1.88,h=3.76,r=.14;
+      screenShape.moveTo(-w/2+r,-h/2);screenShape.lineTo(w/2-r,-h/2);screenShape.quadraticCurveTo(w/2,-h/2,w/2,-h/2+r);screenShape.lineTo(w/2,h/2-r);screenShape.quadraticCurveTo(w/2,h/2,w/2-r,h/2);screenShape.lineTo(-w/2+r,h/2);screenShape.quadraticCurveTo(-w/2,h/2,-w/2,h/2-r);screenShape.lineTo(-w/2,-h/2+r);screenShape.quadraticCurveTo(-w/2,-h/2,-w/2+r,-h/2);
+      const geometry=new THREE.ShapeGeometry(screenShape,24);const pos=geometry.attributes.position;const uv=geometry.attributes.uv;for(let i=0;i<pos.count;i++)uv.setXY(i,(pos.getX(i)+w/2)/w,(pos.getY(i)+h/2)/h);
+      mesh(geometry,screenMaterial,0,.65,.146);
+      box(.56,.115,.025,0,2.405,.17,m.black);
+      box(.045,.38,.11,1.044,1.05,0,m.silver);box(.045,.28,.11,-1.044,1.38,0,m.silver);box(.045,.28,.11,-1.044,.99,0,m.silver);
+      root.rotation.z=-.07;root.scale.setScalar(.88);
+      animations.push(t=>{root.position.y=Math.sin(t*.5)*.045});
       break;
     }
     case "retro-snake": {
@@ -98,7 +107,7 @@ function makeProduct(slug: string, m: Palette) {
       sphere(.42,0,.1,0,m.silver);for(let i=0;i<7;i++){const r=ring(.7+i*.22,.035,0,0,0,i%2?m.silver:m.ivory);r.rotation.x=Math.PI/2;animations.push(t=>{r.position.y=Math.sin(t*.9-i*.5)*.25;r.scale.setScalar(1+Math.sin(t*.5-i*.2)*.04)})}
     }
   }
-  return { root, tick:(t:number)=>animations.forEach(fn=>fn(t)) };
+  return { root, dispose:()=>{textures.forEach(t=>t.dispose());extraMaterials.forEach(m=>m.dispose());}, tick:(t:number)=>animations.forEach(fn=>fn(t)) };
 }
 
 export default function ProductWorld({slug,paused}:{slug:string;paused:boolean}) {
@@ -117,7 +126,7 @@ export default function ProductWorld({slug,paused}:{slug:string;paused:boolean})
     const scene=new THREE.Scene();scene.background=new THREE.Color(light?0xe9e7e1:0x080a0c);scene.fog=new THREE.Fog(light?0xe9e7e1:0x080a0c,14,35);
     const pmrem=new THREE.PMREMGenerator(renderer);const room=new RoomEnvironment();const env=pmrem.fromScene(room,.04);scene.environment=env.texture;scene.environmentIntensity=light?.75:.45;room.dispose();
     const m:Palette={silver:new THREE.MeshPhysicalMaterial({color:0xc9cbd0,metalness:.95,roughness:.2,clearcoat:1}),ivory:new THREE.MeshPhysicalMaterial({color:0xe8e6df,metalness:.12,roughness:.24,clearcoat:1}),black:new THREE.MeshPhysicalMaterial({color:light?0x1b1f24:0x191d22,metalness:.6,roughness:.24,clearcoat:1}),glass:new THREE.MeshPhysicalMaterial({color:light?0x71757a:0x343b44,metalness:.85,roughness:.18,clearcoat:1})};
-    const product=makeProduct(slug,m);scene.add(product.root);
+    const product=makeProduct(slug,m,()=>{rendered=false});scene.add(product.root);
     const floor=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.MeshStandardMaterial({color:light?0xdedbd3:0x020304,roughness:.84,metalness:0}));floor.rotation.x=-Math.PI/2;floor.position.y=-1.35;floor.receiveShadow=true;scene.add(floor);
     const key=new THREE.SpotLight(0xffffff,100,35,.5,.65,1.5);key.position.set(-4,8,5);key.castShadow=true;key.shadow.mapSize.set(1024,1024);key.shadow.bias=-.0004;key.shadow.normalBias=.025;scene.add(key);
     const rim=new THREE.SpotLight(0xdce6ff,65,30,.6,.7,1.5);rim.position.set(4,5,-4);scene.add(rim);scene.add(new THREE.HemisphereLight(0xffffff,0x30343c,.3));
@@ -129,7 +138,7 @@ export default function ProductWorld({slug,paused}:{slug:string;paused:boolean})
     const scroll=()=>{const el=host.closest(".work-theatre");if(!el)return;const r=el.getBoundingClientRect();progress=Math.max(0,Math.min(1,-r.top/Math.max(1,r.height-innerHeight)));rendered=false};addEventListener("scroll",scroll,{passive:true});
     const tick=(now:number)=>{frame=requestAnimationFrame(tick);const delta=Math.min(.04,(now-previous)/1000);previous=now;if(!visible||document.hidden||contextLost)return;const still=reduced.matches||pauseRef.current;if(still&&rendered)return;if(!still)elapsed+=delta;rx+=(px-rx)*.035;ry+=(py-ry)*.035;const narrow=camera.aspect<.85;const angle=.45+(still?0:Math.sin(elapsed*.13)*.1+rx*.18)+progress*.35;const distance=(narrow?10.9:8.6)-progress*.85;camera.position.set(Math.sin(angle)*distance,3.35+(still?0:ry*.6)-progress*.3,Math.cos(angle)*distance);camera.lookAt(0,slug==="retro-snake"?-.65:.05,0);product.root.rotation.y=still?0:Math.sin(elapsed*.2)*.035;product.tick(still?0:elapsed);renderer.render(scene,camera);rendered=true;host.dataset.rendered="true";};resize();scroll();frame=requestAnimationFrame(tick);
     const lost=(e:Event)=>{e.preventDefault();contextLost=true;setFailed(true)};renderer.domElement.addEventListener("webglcontextlost",lost);
-    return()=>{cancelAnimationFrame(frame);observer.disconnect();visibility.disconnect();removeEventListener("scroll",scroll);host.removeEventListener("pointermove",pointer);host.removeEventListener("pointerleave",leave);renderer.domElement.removeEventListener("webglcontextlost",lost);scene.traverse(o=>{if(o instanceof THREE.Mesh)o.geometry.dispose()});Object.values(m).forEach(mat=>mat.dispose());(floor.material as THREE.Material).dispose();env.dispose();pmrem.dispose();renderer.dispose();renderer.forceContextLoss();renderer.domElement.remove();};
+    return()=>{cancelAnimationFrame(frame);product.dispose();observer.disconnect();visibility.disconnect();removeEventListener("scroll",scroll);host.removeEventListener("pointermove",pointer);host.removeEventListener("pointerleave",leave);renderer.domElement.removeEventListener("webglcontextlost",lost);scene.traverse(o=>{if(o instanceof THREE.Mesh)o.geometry.dispose()});Object.values(m).forEach(mat=>mat.dispose());(floor.material as THREE.Material).dispose();env.dispose();pmrem.dispose();renderer.dispose();renderer.forceContextLoss();renderer.domElement.remove();};
   },[slug,theme]);
   const app=apps.find(x=>x.slug===slug) ?? {name:"SAYBIR",image:""};
   return <div className={slug==="studio"?"opening-world":"product-world"} ref={container} role="img" aria-label={lang==="tr"?`${app.name} için özgün üç boyutlu ürün sahnesi`:`Original three-dimensional product scene for ${app.name}`} data-world={slug}>{failed&&<div className="world-fallback">{app.image&&<img src={app.image} alt="" width="96" height="96"/>}<span>{app.name}</span><p>{lang==="tr"?"Ürün bilgilerini ve ekranlarını aşağıda inceleyebilirsin.":"Explore the product details and screenshots below."}</p></div>}</div>;
