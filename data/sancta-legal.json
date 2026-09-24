@@ -1,0 +1,73 @@
+{
+  "privacy": {
+    "title": "Sancta Gizlilik Politikası",
+    "sections": [
+      [
+        "Kapsam",
+        "Sancta, Aziz Ahmet Saybir (SAYBIR) tarafından sunulan bir iOS dua ve tefekkür uygulamasıdır. İletişim: hello@saybir.net. Bu politika Google AdMob reklamları dahil mevcut uygulamayı açıklar."
+      ],
+      [
+        "Cihazdaki kayıtlar",
+        "Tamamlanan dua sayısı, son dua tarihi ve görünüm tercihleri cihazdaki uygulama alanında saklanır. Sancta bu kayıtları geliştiriciye göndermez ve reklam hedefleme parametresi olarak kullanmaz. Hesap veya bulut eşitleme yoktur. Cihaz yedekleri Apple tarafından ayrıca yönetilebilir."
+      ],
+      [
+        "Reklamlar",
+        "Google AdMob banner ve geçiş reklamları sunar. SDK; reklam sunumu, ölçüm ve kötüye kullanımın önlenmesi için IP adresi, IP üzerinden yaklaşık konum, cihaz veya uygulama tanımlayıcıları, reklam etkileşimleri ve tanılama/performans verilerini işleyebilir. Sancta hassas konum, kişiler, kamera veya mikrofon erişimi istemez."
+      ],
+      [
+        "Tercihler",
+        "Gereken bölgelerde reklam isteğinden önce Google izin formu gösterilir. Sunulan tercihler You → Advertising privacy choices bölümünden değiştirilebilir. İzin vermemek dua işlevlerini engellemez. Bu sürüm App Tracking Transparency izni istemez ve izinsiz IDFA erişimi yapmaz."
+      ],
+      [
+        "Destek ve saklama",
+        "E-posta gönderirseniz adresinizi ve gönderdiğiniz bilgileri destek amacıyla işleriz. Gizli dua veya itiraf ayrıntılarını göndermeyin. Yazışmalar destek ve geçerli yükümlülükler için gerektiği süre saklanır. Uygulamayı silmek yerel kayıtları kaldırır; yedekler ve Google kayıtları ilgili sağlayıcının kontrollerine ve saklama politikasına tabidir."
+      ],
+      [
+        "Haklarınız",
+        "Bulunduğunuz yere göre elimizdeki kişisel verilere erişme, düzeltme, silme, işlemeye itiraz etme, izni geri çekme veya yetkili veri koruma kurumuna başvurma haklarınız olabilir. Taleplerinizi hello@saybir.net adresine iletin. Google reklam verilerini farklı ülkelerde işleyebilir; güvenceler ve kontroller için Google gizlilik politikasına bakın."
+      ],
+      [
+        "Çocuklar ve değişiklikler",
+        "Sancta genel kitleye yöneliktir ve özellikle çocukları hedeflemez. Bir çocuğun bize kişisel bilgi gönderdiğini düşünüyorsanız silme için iletişime geçin. Politika değişiklikleri güncellenmiş tarihle burada yayımlanır."
+      ]
+    ]
+  },
+  "terms": {
+    "title": "Sancta Kullanım Şartları",
+    "sections": [
+      [
+        "Hizmet",
+        "Sancta kişisel dua metinleri ve tefekkür rehberleri sunar. Uygulama geliştirme aşamasındadır; bu sürümde tam Katolik Kutsal Kitabı, günlük litürjik takvim ve abonelik bulunmaz."
+      ],
+      [
+        "Kullanım ve içerik",
+        "Uygulamayı hukuka uygun kullanın ve fikrî mülkiyet haklarına saygı gösterin. Özgün dua metinleri resmî litürjik metin değildir; cemaat, din görevlisi, sakrament veya pastoral rehberliğin yerini almaz. Belirli bir manevi sonuç taahhüt edilmez. Kutsal Kitap çevirileri uygun kullanım hakları sağlandıktan sonra sunulacaktır."
+      ],
+      [
+        "Reklamlar ve dış hizmetler",
+        "Uygulama Google AdMob reklamları gösterebilir. Reklamlar tavsiye veya onay anlamına gelmez. Dış sitelerin kendi şartları ve gizlilik politikaları vardır. Bu sürümde satın alma veya abonelik sunulmaz. Gelecekteki ücretli özelliklerin fiyatları ve koşulları satın alma öncesinde gösterilmelidir."
+      ],
+      [
+        "Erişilebilirlik ve sorumluluk",
+        "Özellikler değişebilir; kesintisiz veya hatasız çalışma garanti edilmez. İlerleme kayıtlarınız önemliyse ayrıca kayıt tutun. Bu şartlar kanunen kaldırılamayan sorumlulukları veya tüketici haklarını ortadan kaldırmaz."
+      ],
+      [
+        "Lisans ve iletişim",
+        "App Store dağıtımında, mağazada özel bir lisans sunulmadıkça Apple Standart EULA geçerlidir. Bu hizmet şartları zorunlu hakların yerine geçmez. Kullanımı sonlandırmak için uygulamayı kullanmayı bırakıp silebilirsiniz. Sorular: hello@saybir.net."
+      ]
+    ]
+  },
+  "support": {
+    "title": "Sancta Destek",
+    "sections": [
+      [
+        "İletişim",
+        "iOS sürümü, Sancta sürümü ve sorunu oluşturan adımlarla hello@saybir.net adresine yazabilirsiniz. Gizli manevi veya kişisel bilgilerinizi göndermeyin."
+      ],
+      [
+        "Mevcut durum",
+        "Sancta geliştirme aşamasındadır. Henüz herkese açık App Store indirme bağlantısı yoktur. Dua ilerlemesi cihazda saklanır; Kutsal Kitap bölümü lisanslı içerik bekleyen bir önizlemedir."
+      ]
+    ]
+  }
+}

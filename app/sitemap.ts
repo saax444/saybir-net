@@ -9,9 +9,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       { url: `https://saybir.net/apps/${app.slug}/privacy`, lastModified: new Date(), priority: 0.6 },
     ];
 
-    if (app.slug === "hushloom") {
+    if (app.slug === "hushloom" || app.slug === "sancta") {
       pages.push({
-        url: "https://saybir.net/apps/hushloom/terms",
+        url: `https://saybir.net/apps/${app.slug}/terms`,
         lastModified: new Date(),
         priority: 0.6,
       });

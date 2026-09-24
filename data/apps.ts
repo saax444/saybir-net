@@ -5,7 +5,7 @@ export type AppInfo = {
   accent: string;
   category: string;
   description: string;
-  status: "App Store’da" | "İncelemede" | "Ücretsiz + Premium";
+  status: "Geliştirme aşamasında" | "App Store’da" | "İncelemede" | "Ücretsiz + Premium";
   appStoreUrl?: string;
   version?: string;
 };
@@ -244,6 +244,7 @@ export const apps: AppInfo[] = [
     description: "Yağmur, ateş, rüzgâr, fırtına, orman ve diğer gerçek ambiyansları karıştırarak kişisel uyku ve odak ortamları oluşturun.",
     status: "Ücretsiz + Premium",
   },
+  { slug: "sancta", name: "Sancta", image: "/apps/sancta.svg", accent: "182 155 104", category: "Dua ve Tefekkür", description: "Günlük dua, kısa tefekkür rehberleri ve cihazda saklanan kişisel ilerleme.", status: "Geliştirme aşamasında", version: "1.0" },
 ];
 
 export function getApp(slug: string) {
