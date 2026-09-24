@@ -16,3 +16,10 @@ html[data-theme="light"] .opening{background:#e9e7e1}html[data-theme="light"] .o
 .opening__lower a{border-bottom:1px solid var(--text);transition:gap .3s,color .3s}.opening__lower a:hover{gap:75px}
 .opening__label{letter-spacing:.2em}.opening__footer{padding-top:24px}
 @media(max-width:700px){.opening-world{left:-8%;right:-8%;top:75px;bottom:auto;height:365px}.opening{padding-top:400px;min-height:880px}.opening h1{font-size:10.4vw}.opening__label{letter-spacing:.13em}}
+
+/* Product-led opening: actual applications, confident and high-contrast type. */
+.opening h1{font-weight:750;font-size:clamp(46px,5.1vw,80px);letter-spacing:-.045em;line-height:1.1}
+.opening h1 span{color:#f4f4f5}.opening__label{font-size:11px;font-weight:650;color:#cbd0d9;letter-spacing:.12em}
+.opening__lower p{font-size:16px;line-height:1.8;color:#d0d4dc;max-width:375px}.opening__lower a{font-size:14px;font-weight:700;max-width:300px}.opening__footer{font-size:10px;color:#b9bec8}.opening__motion{font-size:11px;color:#cbd0d9}
+html[data-theme="light"] .opening h1 span{color:#171719}html[data-theme="light"] .opening__label,html[data-theme="light"] .opening__lower p,html[data-theme="light"] .opening__footer,html[data-theme="light"] .opening__motion{color:#414754}
+@media(max-width:700px){.opening h1{font-size:10.2vw;font-weight:750}.opening__label{font-size:10px}.opening__lower p{font-size:15px}.opening__footer{font-size:8px}.opening__motion{font-size:10px}.opening-world{top:70px;height:340px}.opening{padding-top:390px;min-height:900px}}

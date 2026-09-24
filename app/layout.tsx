@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "@fontsource-variable/manrope";
 import "./globals.css";
 import { SitePreferences } from "@/components/SitePreferences";
 import { preferenceScript } from "@/data/preference-script";

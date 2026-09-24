@@ -25,19 +25,21 @@ function makeProduct(slug: string, m: Palette, invalidate: () => void) {
   function coin(r:number,h:number,x:number,y:number,z:number,material:THREE.Material=m.silver){return mesh(new THREE.CylinderGeometry(r,r,h,64),material,x,y,z);}
   switch(slug) {
     case "studio": {
-      mesh(new RoundedBoxGeometry(2.06,4.12,.22,8,.1),m.silver,0,.65,0);
-      mesh(new RoundedBoxGeometry(1.99,4.05,.23,8,.1),m.black,0,.65,.02);
-      const texture=new THREE.TextureLoader().load("/studio/app-library.webp",invalidate);
-      texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=8;textures.push(texture);
-      const screenMaterial=new THREE.MeshBasicMaterial({map:texture,toneMapped:false});extraMaterials.push(screenMaterial);
-      const screenShape=new THREE.Shape();const w=1.88,h=3.76,r=.14;
-      screenShape.moveTo(-w/2+r,-h/2);screenShape.lineTo(w/2-r,-h/2);screenShape.quadraticCurveTo(w/2,-h/2,w/2,-h/2+r);screenShape.lineTo(w/2,h/2-r);screenShape.quadraticCurveTo(w/2,h/2,w/2-r,h/2);screenShape.lineTo(-w/2+r,h/2);screenShape.quadraticCurveTo(-w/2,h/2,-w/2,h/2-r);screenShape.lineTo(-w/2,-h/2+r);screenShape.quadraticCurveTo(-w/2,-h/2,-w/2+r,-h/2);
-      const geometry=new THREE.ShapeGeometry(screenShape,24);const pos=geometry.attributes.position;const uv=geometry.attributes.uv;for(let i=0;i<pos.count;i++)uv.setXY(i,(pos.getX(i)+w/2)/w,(pos.getY(i)+h/2)/h);
-      mesh(geometry,screenMaterial,0,.65,.146);
-      box(.56,.115,.025,0,2.405,.17,m.black);
-      box(.045,.38,.11,1.044,1.05,0,m.silver);box(.045,.28,.11,-1.044,1.38,0,m.silver);box(.045,.28,.11,-1.044,.99,0,m.silver);
-      root.rotation.z=-.07;root.scale.setScalar(.88);
-      animations.push(t=>{root.position.y=Math.sin(t*.5)*.045});
+      apps.forEach((app,i)=>{
+        const column=i%3,row=Math.floor(i/3);
+        const x=(column-1)*1.03,y=2.25-row*.73,z=Math.sin(row*.7+column)*.22;
+        const tile=new THREE.Group();root.add(tile);
+        const backing=box(.72,.72,.12,0,0,0,m.black);root.remove(backing);tile.add(backing);
+        const texture=new THREE.TextureLoader().load(app.image,invalidate);texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=8;textures.push(texture);
+        const material=new THREE.MeshBasicMaterial({map:texture,toneMapped:false});extraMaterials.push(material);
+        const shape=new THREE.Shape();const half=.34,r=.09;
+        shape.moveTo(-half+r,-half);shape.lineTo(half-r,-half);shape.quadraticCurveTo(half,-half,half,-half+r);shape.lineTo(half,half-r);shape.quadraticCurveTo(half,half,half-r,half);shape.lineTo(-half+r,half);shape.quadraticCurveTo(-half,half,-half,half-r);shape.lineTo(-half,-half+r);shape.quadraticCurveTo(-half,-half,-half+r,-half);
+        const geometry=new THREE.ShapeGeometry(shape,16);const pos=geometry.attributes.position;const uv=geometry.attributes.uv;for(let j=0;j<pos.count;j++)uv.setXY(j,(pos.getX(j)+half)/(half*2),(pos.getY(j)+half)/(half*2));
+        const face=mesh(geometry,material,0,0,.066);root.remove(face);tile.add(face);
+        tile.position.set(x,y,z);tile.rotation.z=-.07;
+        animations.push(t=>{tile.position.y=y+Math.sin(t*.55+i*.36)*.045;tile.position.z=z+Math.sin(t*.35+i*.5)*.07});
+      });
+      root.scale.setScalar(.8);root.position.y=.35;
       break;
     }
     case "retro-snake": {
