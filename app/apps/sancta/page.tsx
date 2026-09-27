@@ -15,7 +15,7 @@ export default function Page() {
      <div className={styles.actions}><Link href="/apps/sancta/privacy"><Text>Gizlilik</Text></Link><Link href="/apps/sancta/terms"><Text>Kullanım Koşulları</Text></Link><Link href="/apps/sancta/support"><Text>Destek</Text></Link></div>
     </div>
    </section>
-   <section className={styles.content}><h2><Text>Sessiz bir an. Küçük bir başlangıç.</Text></h2><p><Text>Sabah, akşam ve barış için özgün dualar; kısa bir Rosary rehberi ve tamamlanan dua sayacı.</Text></p><h3><Text>Mevcut sürüm</Text></h3><p><Text>Tam Kutsal Kitap metni henüz sunulmuyor; lisanslı içerik entegrasyonu bekleniyor. Uygulama henüz App Store’da yayımlanmadı.</Text></p><a href="/app-ads.txt"><Text>Reklam yayıncı kaydı</Text></a></section>
+   <section className={styles.content}><h2><Text>Sessiz bir an. Küçük bir başlangıç.</Text></h2><p><Text>Sabah, akşam ve barış için özgün dualar; kısa bir Rosary rehberi ve tamamlanan dua sayacı.</Text></p><h3><Text>Mevcut sürüm</Text></h3><p><Text>Kamu malı Douay–Rheims 1899 çevirisinin 73 kitabı çevrimdışı okunabilir. Bölüm geçişi, yazı boyutu ve kaldığın yerden devam etme özellikleri sunulur. Uygulama henüz App Store’da yayımlanmadı.</Text></p><a href="/app-ads.txt"><Text>Reklam yayıncı kaydı</Text></a></section>
   </main>
  </div>;
 }
