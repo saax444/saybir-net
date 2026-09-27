@@ -96,7 +96,15 @@ function makeProduct(slug: string, m: Palette, invalidate: () => void) {
       sphere(1.15,0,0,0,m.ivory);for(const x of[-.77,.77]){const ear=mesh(new THREE.ConeGeometry(.6,1.2,3),m.ivory,x,1.02,0);ear.rotation.y=Math.PI/2;ear.rotation.z=x*.3;sphere(.095,x*.57,.15,1.04,m.black)}mesh(new THREE.ConeGeometry(.14,.18,3),m.black,0,-.22,1.14).rotation.z=Math.PI;for(const side of[-1,1])for(let i=0;i<3;i++)line([[side*.55,-.3,1],[side*1.5,-.22-i*.15,.9]],.012,m.black);break;
     }
     case "ezan-vakti": {
-      const crescent=mesh(new THREE.TorusGeometry(1.25,.2,24,100,Math.PI*1.55),m.ivory);crescent.rotation.z=.23*Math.PI;const star=mesh(new THREE.OctahedronGeometry(.38),m.silver,.9,.7,0);animations.push(t=>star.rotation.y=t*.3);break;
+      const crescentShape=new THREE.Shape();
+      crescentShape.absarc(0,0,1.35,Math.PI*.32,Math.PI*1.68,false);
+      crescentShape.quadraticCurveTo(-.55,0,Math.cos(Math.PI*.32)*1.35,Math.sin(Math.PI*.32)*1.35);
+      const crescent=mesh(new THREE.ExtrudeGeometry(crescentShape,{depth:.16,bevelEnabled:true,bevelThickness:.045,bevelSize:.035,bevelSegments:4,steps:1,curveSegments:64}),m.ivory,-.15,.25,0);
+      crescent.rotation.z=-.12;
+      const starShape=new THREE.Shape();for(let i=0;i<10;i++){const a=Math.PI/2+i*Math.PI/5,r=i%2?.16:.36;const x=Math.cos(a)*r,y=Math.sin(a)*r;if(i===0)starShape.moveTo(x,y);else starShape.lineTo(x,y)}starShape.closePath();
+      mesh(new THREE.ExtrudeGeometry(starShape,{depth:.1,bevelEnabled:true,bevelThickness:.025,bevelSize:.018,bevelSegments:3}),m.silver,.65,.58,.1);
+      for(let i=0;i<33;i++){const a=i/33*Math.PI*2;sphere(.055,Math.cos(a)*1.15,-1.15,Math.sin(a)*.75,m.silver)}
+      break;
     }
     case "usenme-yap": {
       box(2.65,3,.22,0,0,0,m.black);for(let i=0;i<3;i++){box(.85,.045,.04,.25,.75-i*.7,.14,m.silver);line([[-.95,.77-i*.7,.16],[-.8,.62-i*.7,.16],[-.55,.94-i*.7,.16]],.055,m.ivory)}break;
@@ -119,6 +127,57 @@ function makeProduct(slug: string, m: Palette, invalidate: () => void) {
       sphere(.42,0,.1,0,m.silver);for(let i=0;i<7;i++){const r=ring(.7+i*.22,.035,0,0,0,i%2?m.silver:m.ivory);r.rotation.x=Math.PI/2;animations.push(t=>{r.position.y=Math.sin(t*.9-i*.5)*.25;r.scale.setScalar(1+Math.sin(t*.5-i*.2)*.04)})}
     }
   }
+  // Small, product-specific details remain part of the same shared stage.
+  switch(slug) {
+    case "retro-snake":
+      for(const x of [-2.28,2.28])for(const z of [-2.28,2.28])sphere(.035,x,-.78,z,m.silver);
+      box(.07,.18,.07,-1.25,-.04,-1.25,m.black);break;
+    case "bold-block-arcade":
+      for(let i=0;i<5;i++){const b=box(.13,.13,.13,(i-2)*.65,-1.05,.65,m.silver);b.rotation.z=Math.PI/4}break;
+    case "history":
+      box(4.3,.16,2.6,0,-1.18,0,m.ivory);box(3.8,.08,2.2,0,1.58,0,m.silver);break;
+    case "velomate":
+      line([[.1,-.1,0],[.35,-.35,.15],[.6,-.35,.15]],.035,m.black);
+      line([[.85,1.5,0],[1.05,1.63,0],[1.25,1.58,0],[1.3,1.38,0]],.035,m.black);
+      for(const x of [-1.5,1.5])ring(.89,.013,x,-.1,.04,m.ivory);break;
+    case "melodymap":
+      line([[1.95,-.8,.2],[1.95,1.15,.2],[1.05,1.25,.18],[.7,.8,.18]],.055);
+      box(.19,.3,.12,.7,.74,.18,m.ivory);break;
+    case "ne-secsem":
+      for(let i=0;i<3;i++){const x=(i-1)*1.25;for(let j=0;j<4;j++)box(.09,.09,.03,x-.64,-.65+j*.4,.1,m.silver)}
+      line([[-.13,.05,.16],[.22,.28,.16],[-.13,.5,.16],[-.13,.05,.16]],.035,m.black);break;
+    case "carsave-ai":
+      for(const z of [-.77,.77]){box(.55,.32,.03,.45,.22,z,m.glass);box(.5,.32,.03,-.4,.22,z,m.glass);box(.2,.035,.035,-.2,-.04,z,m.ivory)}
+      for(let i=0;i<5;i++)box(.025,.035,.85,1.915,-.52+i*.06,0,m.black);break;
+    case "vibelens":
+      ring(.65,.06,1.15,.65,.8,m.silver);line([[1.6,.2,.8],[2,-.25,.8]],.085,m.black);break;
+    case "hilock":
+      for(const x of [-.82,.82])for(const y of [-.95,.44]){sphere(.035,x,y,.39,m.silver)}
+      ring(.32,.018,0,-.25,.395,m.silver);break;
+    case "yemekolay":
+      for(const r of [1.48,1.62]){const edge=ring(r,.015,0,-.635,0,m.silver);edge.rotation.x=Math.PI/2}
+      line([[-2,-.64,-.65],[-2,-.64,1]],.045,m.ivory);for(let i=0;i<3;i++)line([[-2+(i-1)*.09,-.64,-.9],[-2+(i-1)*.09,-.64,-.45]],.022,m.silver);break;
+    case "oduyorum":
+      for(let i=0;i<4;i++){const rim=ring(.43,.015,(i-1.5)*1.05,-.95+(2+i*2)*.155+.075,0,m.black);rim.rotation.x=Math.PI/2}
+      line([[-1.7,-.1,-.7],[-.6,.25,-.7],[.4,.8,-.7],[1.6,1.4,-.7]],.04,m.ivory);break;
+    case "ref-ref-ref":
+      for(let i=0;i<12;i++){const a=i/12*Math.PI*2;const tick=box(.04,.15,.08,Math.cos(a)*2,Math.sin(a)*2,-1.2,m.ivory);tick.rotation.z=a-Math.PI/2}break;
+    case "kedilik":
+      for(const side of [-1,1]){const inner=mesh(new THREE.ConeGeometry(.3,.6,3),m.glass,side*.78,1.12,.24);inner.rotation.y=Math.PI/2;inner.rotation.z=side*.23}
+      line([[0,-.28,1.14],[0,-.42,1.12],[-.2,-.49,1.09]],.018,m.black);line([[0,-.42,1.12],[.2,-.49,1.09]],.018,m.black);break;
+    case "usenme-yap":
+      box(1,.24,.12,0,1.4,.18,m.silver);for(let i=0;i<3;i++)box(.58,.018,.03,.13,.59-i*.7,.14,m.glass);break;
+    case "tartarot":
+      for(let i=0;i<3;i++){const x=(i-1)*1.05,z=.13-Math.abs(i-1)*.3;for(const dy of [-1.1,1.1])mesh(new THREE.OctahedronGeometry(.065),i===1?m.black:m.ivory,x,dy,z)}
+      for(let k=0;k<12;k++){const a=k/12*Math.PI*2;sphere(.018,Math.cos(a)*.53,.2+Math.sin(a)*.53,.12,m.black)}break;
+    case "sancta":
+      for(const side of [-1,1])for(let j=0;j<5;j++)box(1.42,.008,.018,side*.78,-1.01+j*.023,.21,m.silver);
+      line([[.08,.95,.3],[.08,-.85,.32],[.18,-1.3,.4]],.025,m.black);break;
+    case "susadim":
+      for(let i=0;i<6;i++){const a=i*2.4;sphere(.045+i*.01,Math.cos(a)*1.3,-.65+i*.32,Math.sin(a)*.5,m.ivory)}break;
+    case "hushloom":
+      for(let i=0;i<3;i++){const pebble=sphere(.42-i*.08,-1.45+i*.35,-1.05+i*.14,.6,m.black);pebble.scale.set(1,.5,.75)}break;
+  }
   return { root, dispose:()=>{textures.forEach(t=>t.dispose());extraMaterials.forEach(m=>m.dispose());}, tick:(t:number)=>animations.forEach(fn=>fn(t)) };
 }
 
@@ -133,14 +192,14 @@ export default function ProductWorld({slug,paused}:{slug:string;paused:boolean})
     try{renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:"high-performance"});}catch{setFailed(true);return;}
     setFailed(false);host.dataset.rendered="false";
     const light=theme==="light";
-    renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=light?1.05:1.3;renderer.setClearColor(light?0xe9e7e1:0x080a0c);host.appendChild(renderer.domElement);
+    renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=light?1.05:1.3;renderer.setClearColor(light?0xe9e7e1:0x080a0c);host.appendChild(renderer.domElement);
     renderer.domElement.setAttribute("aria-hidden","true");
     const scene=new THREE.Scene();scene.background=new THREE.Color(light?0xe9e7e1:0x080a0c);scene.fog=new THREE.Fog(light?0xe9e7e1:0x080a0c,14,35);
     const pmrem=new THREE.PMREMGenerator(renderer);const room=new RoomEnvironment();const env=pmrem.fromScene(room,.04);scene.environment=env.texture;scene.environmentIntensity=light?.75:.45;room.dispose();
     const m:Palette={silver:new THREE.MeshPhysicalMaterial({color:0xc9cbd0,metalness:.95,roughness:.2,clearcoat:1}),ivory:new THREE.MeshPhysicalMaterial({color:0xe8e6df,metalness:.12,roughness:.24,clearcoat:1}),black:new THREE.MeshPhysicalMaterial({color:light?0x1b1f24:0x191d22,metalness:.6,roughness:.24,clearcoat:1}),glass:new THREE.MeshPhysicalMaterial({color:light?0x71757a:0x343b44,metalness:.85,roughness:.18,clearcoat:1})};
     const product=makeProduct(slug,m,()=>{rendered=false});scene.add(product.root);
     const floor=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.MeshStandardMaterial({color:light?0xdedbd3:0x020304,roughness:.84,metalness:0}));floor.rotation.x=-Math.PI/2;floor.position.y=-1.35;floor.receiveShadow=true;scene.add(floor);
-    const key=new THREE.SpotLight(0xffffff,100,35,.5,.65,1.5);key.position.set(-4,8,5);key.castShadow=true;key.shadow.mapSize.set(1024,1024);key.shadow.bias=-.0004;key.shadow.normalBias=.025;scene.add(key);
+    const key=new THREE.SpotLight(0xffffff,100,35,.5,.65,1.5);key.position.set(-4,8,5);key.castShadow=true;key.shadow.mapSize.set(2048,2048);key.shadow.radius=4;key.shadow.bias=-.0004;key.shadow.normalBias=.025;scene.add(key);
     const rim=new THREE.SpotLight(0xdce6ff,65,30,.6,.7,1.5);rim.position.set(4,5,-4);scene.add(rim);scene.add(new THREE.HemisphereLight(0xffffff,0x30343c,.3));
     const camera=new THREE.PerspectiveCamera(34,1,.1,100);let progress=0;let px=0,py=0;let rx=0,ry=0;let visible=true;let frame=0;let elapsed=0;let previous=0;let rendered=false;let contextLost=false;
     const reduced=matchMedia("(prefers-reduced-motion: reduce)");
