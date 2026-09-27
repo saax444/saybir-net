@@ -26,8 +26,10 @@ function makeProduct(slug: string, m: Palette, invalidate: () => void) {
   switch(slug) {
     case "studio": {
       apps.forEach((app,i)=>{
-        const column=i%3,row=Math.floor(i/3);
-        const x=(column-1)*1.03,y=2.25-row*.73,z=Math.sin(row*.7+column)*.22;
+        const columns=apps.length>18?4:3;
+        const column=i%columns,row=Math.floor(i/columns);
+        const remaining=apps.length-row*columns;const offset=remaining<columns?(columns-remaining)/2:0;
+        const x=(column+offset-(columns-1)/2)*.94,y=2.25-row*.73,z=Math.sin(row*.7+column)*.22;
         const tile=new THREE.Group();root.add(tile);
         const backing=box(.72,.72,.12,0,0,0,m.black);root.remove(backing);tile.add(backing);
         const texture=new THREE.TextureLoader().load(app.image,invalidate);texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=8;textures.push(texture);
@@ -101,6 +103,14 @@ function makeProduct(slug: string, m: Palette, invalidate: () => void) {
     }
     case "tartarot": {
       for(let i=0;i<3;i++){const card=box(1.7,2.7,.12,(i-1)*1.05,0,-Math.abs(i-1)*.3,i===1?m.ivory:m.black);card.rotation.z=(i-1)*-.18;const emblem=ring(.37,.035,(i-1)*1.05,.2,.11-Math.abs(i-1)*.3,i===1?m.black:m.silver);emblem.rotation.z=(i-1)*-.18;sphere(.1,(i-1)*1.05,-.6,.1-Math.abs(i-1)*.3,i===1?m.black:m.silver)}break;
+    }
+    case "sancta": {
+      for(const side of [-1,1]) {
+        const cover=box(1.6,2.3,.17,side*.8,0,0,m.black);cover.rotation.y=side*.13;
+        const pages=box(1.5,2.15,.16,side*.78,.02,.14,m.ivory);pages.rotation.y=side*.13;
+        for(let row=0;row<7;row++)box(row===6?.65:1.08,.018,.015,side*.78,.68-row*.2,.3,m.silver);
+      }
+      box(.08,2.2,.08,0,0,.22,m.silver);root.rotation.x=-.12;break;
     }
     case "susadim": {
       const points=[new THREE.Vector2(0,-1.2),new THREE.Vector2(.55,-1.1),new THREE.Vector2(.9,-.7),new THREE.Vector2(1,-.2),new THREE.Vector2(.85,.35),new THREE.Vector2(.5,.9),new THREE.Vector2(.2,1.45),new THREE.Vector2(0,1.85)];mesh(new THREE.LatheGeometry(points,80),m.silver);for(let i=0;i<3;i++){const r=ring(1.1+i*.38,.025,0,-1.25,0,m.ivory);r.rotation.x=Math.PI/2}break;

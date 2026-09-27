@@ -3,8 +3,8 @@ import { apps } from "../data/apps";
 import english from "../data/en.json";
 import turkish from "../data/tr.json";
 
-const routes = ["/", ...apps.flatMap(app => ["", "/support", "/privacy"].map(suffix => `/apps/${app.slug}${suffix}`)), "/apps/hushloom/terms", ...["terms", "eula", "purchases"].map(section => `/apps/retro-snake/${section}`)];
-const knownRoutes = new Set(routes);
+const routes = ["/", ...apps.flatMap(app => ["", "/support", "/privacy"].map(suffix => `/apps/${app.slug}${suffix}`)), "/apps/hushloom/terms", "/apps/sancta/terms", ...["terms", "eula", "purchases"].map(section => `/apps/retro-snake/${section}`)];
+const knownRoutes = new Set([...routes, "/app-ads.txt"]);
 const names = apps.map(app => app.name).concat("Ezan Vakti: Namaz ve Kıble").sort((a,b) => b.length-a.length);
 
 for (const lang of ["tr", "en"] as const) for (const theme of ["dark", "light"] as const) {
@@ -95,7 +95,7 @@ test("reduced motion keeps the full catalog accessible without a long film", asy
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   expect(await page.locator(".work-stage").evaluate(el => getComputedStyle(el).position)).toBe("relative");
-  await expect(page.locator(".catalog-card")).toHaveCount(18);
+  await expect(page.locator(".catalog-card")).toHaveCount(apps.length);
 });
 
 test("invalid preferences and unavailable storage do not break the site", async ({ browser }) => {
