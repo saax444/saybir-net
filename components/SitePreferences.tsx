@@ -52,6 +52,6 @@ export function PreferenceControls() {
     : (theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
   return <div className="pref-controls" role="group" aria-label={lang === "tr" ? "Dil ve tema" : "Language and theme"}>
     <button type="button" onClick={() => setLang(lang === "tr" ? "en" : "tr")} aria-label={languageLabel} title={languageLabel}>{lang.toUpperCase()}</button>
-    <button type="button" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label={themeLabel} title={themeLabel} aria-pressed={theme === "light"}><span aria-hidden="true">{theme === "dark" ? "☀" : "☾"}</span></button>
+    <button className="theme-toggle" type="button" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label={themeLabel} title={themeLabel} aria-pressed={theme === "light"}><span aria-hidden="true">{theme === "dark" ? "☀" : "☾"}</span><span>{theme === "dark" ? "Light" : "Dark"}</span></button>
   </div>;
 }
