@@ -615,7 +615,6 @@
   "App Store dağıtımında, mağazada özel bir lisans sunulmadıkça Apple Standart EULA geçerlidir. Bu hizmet şartları zorunlu hakların yerine geçmez. Kullanımı sonlandırmak için uygulamayı kullanmayı bırakıp silebilirsiniz. Sorular: hello@saybir.net.": "For distribution through the App Store, Apple's Standard EULA applies unless a custom EULA is supplied there. These service terms supplement, rather than replace, applicable mandatory rights. Stop using and delete the app if you wish to end use. Questions: hello@saybir.net.",
   "iOS sürümü, Sancta sürümü ve sorunu oluşturan adımlarla hello@saybir.net adresine yazabilirsiniz. Gizli manevi veya kişisel bilgilerinizi göndermeyin.": "Email hello@saybir.net with your iOS version, Sancta version and steps to reproduce the issue. Please do not send confidential spiritual or personal information.",
   "Mevcut durum": "Current availability",
-  "Sancta geliştirme aşamasındadır. Henüz herkese açık App Store indirme bağlantısı yoktur. Dua ilerlemesi cihazda saklanır; Kutsal Kitap bölümü lisanslı içerik bekleyen bir önizlemedir.": "Sancta is in development. There is no public App Store download link yet. Prayer progress is stored locally; the Bible section is a preview awaiting licensed content.",
   "Geliştirme aşamasında": "In development",
   "Dua ve Tefekkür": "Prayer and Reflection",
   "Günlük dua, kısa tefekkür rehberleri ve cihazda saklanan kişisel ilerleme.": "Daily prayer, short reflection guides, and progress stored on your device.",
@@ -623,10 +622,11 @@
   "Sancta, günlük yaşamda dua ve tefekküre yer açmak için geliştirilen bir iPhone ve iPad uygulamasıdır.": "Sancta is an iPhone and iPad app in development, designed to make room for prayer and reflection in everyday life.",
   "Sabah, akşam ve barış için özgün dualar; kısa bir Rosary rehberi ve tamamlanan dua sayacı.": "Original morning, evening and peace prayers, a short Rosary guide, and a completed prayer counter.",
   "Mevcut sürüm": "Current version",
-  "Tam Kutsal Kitap metni henüz sunulmuyor; lisanslı içerik entegrasyonu bekleniyor. Uygulama henüz App Store’da yayımlanmadı.": "The full Bible text is not available yet; licensed content integration is pending. The app has not yet been published on the App Store.",
   "24 Eylül 2026": "September 24, 2026",
   "Reklam yayıncı kaydı": "Advertising publisher record",
   "Sancta Gizlilik Politikası": "Sancta Privacy Policy",
   "Sancta Kullanım Şartları": "Sancta Terms of Use",
-  "Sancta Destek": "Sancta Support"
+  "Sancta Destek": "Sancta Support",
+  "Kamu malı Douay–Rheims 1899 çevirisinin 73 kitabı çevrimdışı okunabilir. Bölüm geçişi, yazı boyutu ve kaldığın yerden devam etme özellikleri sunulur. Uygulama henüz App Store’da yayımlanmadı.": "Read all 73 books of the public-domain Douay–Rheims 1899 translation offline. Browse chapters, adjust text size, and continue where you left off. The app has not yet been published on the App Store.",
+  "Sancta yayın hazırlığı aşamasındadır. Henüz herkese açık App Store indirme bağlantısı yoktur. Dua ilerlemesi ve son okunan bölüm cihazda saklanır. Kutsal Kitap, kamu malı İngilizce Douay–Rheims 1899 metnini çevrimdışı sunar; metin kaynağı eBible.org’dur.": "Sancta is being prepared for release. There is no public App Store download link yet. Prayer progress and the last-read chapter are stored on your device. The Bible offers the public-domain English Douay–Rheims 1899 text offline, courtesy of eBible.org."
 }
