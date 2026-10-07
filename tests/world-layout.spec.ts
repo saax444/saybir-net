@@ -17,13 +17,12 @@ for (const [width,height,theme,lang] of [[320,740,'dark','tr'],[390,844,'dark','
  });
 }
 
-for(const width of [390,1440]) test(`opening sculpture ${width}`,async({page})=>{
+for(const width of [390,1440]) test(`opening product showcase ${width}`,async({page})=>{
  await page.setViewportSize({width,height:900});
  await page.goto('/');
- await expect(page.locator('.opening-world')).toHaveAttribute('data-rendered','true');
+ await expect(page.locator('.opening__screens img')).toHaveCount(3);
  await expect(page.locator('.opening h1')).toBeVisible();
- await page.locator('.opening__motion').click();
- await expect(page.locator('.opening__motion')).toHaveAttribute('aria-pressed','true');
+ await expect(page.locator('.opening__lower a')).toHaveAttribute('href','#uygulamalar');
  await page.locator('.opening').screenshot({path:`../../outputs/polished-opening-${width}.png`,animations:'disabled'});
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });

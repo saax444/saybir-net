@@ -129,8 +129,8 @@ test("unknown app and unknown page return a translated 404", async ({ page }) =>
 test("every product is selectable in the 3D theatre", async ({ page }) => {
   test.setTimeout(90_000);
   await page.goto("/#uygulamalar");
-  await expect(page.locator(".opening img")).toHaveCount(0);
-  await expect(page.locator(".opening h1")).toContainText("Dijital fikirler.");
+  await expect(page.locator(".opening img")).toHaveCount(3);
+  await expect(page.locator(".opening h1")).toContainText("Hayata dokunan");
   for (const app of apps) {
     await page.locator(".work-toolbar").getByRole("button", { name: "Tüm uygulamalar" }).click();
     await expect(page.getByRole("dialog", { name: "Uygulama seç" })).toBeVisible();

@@ -124,7 +124,26 @@ function makeProduct(slug: string, m: Palette, invalidate: () => void) {
       const points=[new THREE.Vector2(0,-1.2),new THREE.Vector2(.55,-1.1),new THREE.Vector2(.9,-.7),new THREE.Vector2(1,-.2),new THREE.Vector2(.85,.35),new THREE.Vector2(.5,.9),new THREE.Vector2(.2,1.45),new THREE.Vector2(0,1.85)];mesh(new THREE.LatheGeometry(points,80),m.silver);for(let i=0;i<3;i++){const r=ring(1.1+i*.38,.025,0,-1.25,0,m.ivory);r.rotation.x=Math.PI/2}break;
     }
     default: {
-      sphere(.42,0,.1,0,m.silver);for(let i=0;i<7;i++){const r=ring(.7+i*.22,.035,0,0,0,i%2?m.silver:m.ivory);r.rotation.x=Math.PI/2;animations.push(t=>{r.position.y=Math.sin(t*.9-i*.5)*.25;r.scale.setScalar(1+Math.sin(t*.5-i*.2)*.04)})}
+      // A tactile audio object for Hushloom, with inset drivers and a woven grille.
+      box(2.45,2.85,.85,0,.1,0,m.black);
+      box(2.26,2.64,.06,0,.1,.45,m.glass);
+      for(const [y,r] of [[-.35,.72],[.95,.27]]) {
+        const driver=coin(r,.045,0,y,.5,m.black);driver.rotation.x=Math.PI/2;
+        ring(r*.91,.025,0,y,.54,m.silver);
+        const cone=sphere(r*.68,0,y,.53,m.black);cone.scale.z=.22;
+        const cap=sphere(r*.24,0,y,.61,m.silver);cap.scale.z=.4;
+      }
+      const grillePositions: THREE.Vector3[]=[];
+      for(let row=0;row<27;row++)for(let col=0;col<23;col++) {
+        const x=(col-11)*.09,y=-1.07+row*.09;
+        if(Math.hypot(x,y+.35)<.79||Math.hypot(x,y-.95)<.34)continue;
+        grillePositions.push(new THREE.Vector3(x,y,.49));
+      }
+      const grille=new THREE.InstancedMesh(new THREE.SphereGeometry(.009,6,4),m.ivory,grillePositions.length);
+      grillePositions.forEach((position,i)=>grille.setMatrixAt(i,new THREE.Matrix4().makeTranslation(position)));root.add(grille);
+      box(.7,.04,.15,0,1.55,0,m.silver);
+      for(const x of [-.8,.8])box(.27,.12,.5,x,-1.36,0,m.black);
+      break;
     }
   }
   // Small, product-specific details remain part of the same shared stage.
@@ -175,8 +194,7 @@ function makeProduct(slug: string, m: Palette, invalidate: () => void) {
       line([[.08,.95,.3],[.08,-.85,.32],[.18,-1.3,.4]],.025,m.black);break;
     case "susadim":
       for(let i=0;i<6;i++){const a=i*2.4;sphere(.045+i*.01,Math.cos(a)*1.3,-.65+i*.32,Math.sin(a)*.5,m.ivory)}break;
-    case "hushloom":
-      for(let i=0;i<3;i++){const pebble=sphere(.42-i*.08,-1.45+i*.35,-1.05+i*.14,.6,m.black);pebble.scale.set(1,.5,.75)}break;
+
   }
   return { root, dispose:()=>{textures.forEach(t=>t.dispose());extraMaterials.forEach(m=>m.dispose());}, tick:(t:number)=>animations.forEach(fn=>fn(t)) };
 }
@@ -196,7 +214,7 @@ export default function ProductWorld({slug,paused}:{slug:string;paused:boolean})
     renderer.domElement.setAttribute("aria-hidden","true");
     const scene=new THREE.Scene();scene.background=new THREE.Color(light?0xf4f4f5:0x080a0c);scene.fog=new THREE.Fog(light?0xf4f4f5:0x080a0c,14,35);
     const pmrem=new THREE.PMREMGenerator(renderer);const room=new RoomEnvironment();const env=pmrem.fromScene(room,.04);scene.environment=env.texture;scene.environmentIntensity=light?.75:.45;room.dispose();
-    const m:Palette={silver:new THREE.MeshPhysicalMaterial({color:light?0x979da6:0xc9cbd0,metalness:.95,roughness:light?.28:.2,clearcoat:1}),ivory:new THREE.MeshPhysicalMaterial({color:light?0xd8dce2:0xe8e6df,metalness:.12,roughness:.24,clearcoat:1}),black:new THREE.MeshPhysicalMaterial({color:light?0x1b1f24:0x191d22,metalness:.6,roughness:.24,clearcoat:1}),glass:new THREE.MeshPhysicalMaterial({color:light?0x71757a:0x343b44,metalness:.85,roughness:.18,clearcoat:1})};
+    const m:Palette={silver:new THREE.MeshPhysicalMaterial({color:light?0x979da6:0xc9cbd0,metalness:.72,roughness:.38,clearcoat:.25}),ivory:new THREE.MeshPhysicalMaterial({color:light?0xd8dce2:0xe8e6df,metalness:.04,roughness:.48,clearcoat:.1}),black:new THREE.MeshPhysicalMaterial({color:light?0x1b1f24:0x191d22,metalness:.25,roughness:.4,clearcoat:.15}),glass:new THREE.MeshPhysicalMaterial({color:light?0x71757a:0x343b44,metalness:.85,roughness:.18,clearcoat:1})};
     const product=makeProduct(slug,m,()=>{rendered=false});scene.add(product.root);
     const floor=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.MeshStandardMaterial({color:light?0xe7e8eb:0x020304,roughness:.84,metalness:0}));floor.rotation.x=-Math.PI/2;floor.position.y=-1.35;floor.receiveShadow=true;scene.add(floor);
     const key=new THREE.SpotLight(0xffffff,100,35,.5,.65,1.5);key.position.set(-4,8,5);key.castShadow=true;key.shadow.mapSize.set(2048,2048);key.shadow.radius=4;key.shadow.bias=-.0004;key.shadow.normalBias=.025;scene.add(key);
