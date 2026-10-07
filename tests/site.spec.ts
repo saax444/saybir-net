@@ -25,7 +25,7 @@ for (const lang of ["tr", "en"] as const) for (const theme of ["dark", "light"] 
       await expect(page.locator("h1")).toHaveCount(1);
       expect((await page.locator("main").innerText()).length).toBeGreaterThan(70);
       const background = await page.locator("body").evaluate(el => getComputedStyle(el).backgroundColor);
-      expect(background).toBe(theme === "dark" ? "rgb(3, 3, 4)" : "rgb(250, 250, 250)");
+      expect(background).toBe(theme === "dark" ? "rgb(16, 18, 17)" : "rgb(243, 241, 233)");
       const nodes = await page.locator("body").evaluate(el => {
         const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); const text: string[] = [];
         while (walker.nextNode()) { const n=walker.currentNode; if (!n.parentElement?.closest("script,style")) text.push(n.textContent?.replace(/\s+/g," ").trim() ?? ""); }
@@ -129,14 +129,18 @@ test("unknown app and unknown page return a translated 404", async ({ page }) =>
 test("every product is selectable in the 3D theatre", async ({ page }) => {
   test.setTimeout(90_000);
   await page.goto("/#uygulamalar");
-  await expect(page.locator(".opening img")).toHaveCount(3);
-  await expect(page.locator(".opening h1")).toContainText("Hayata dokunan");
+  await expect(page.locator(".opening img")).toHaveCount(4);
+  await expect(page.locator(".opening h1")).toContainText("Gündelik hayat.");
   for (const app of apps) {
     await page.locator(".work-toolbar").getByRole("button", { name: "Tüm uygulamalar" }).click();
     await expect(page.getByRole("dialog", { name: "Uygulama seç" })).toBeVisible();
     await page.locator(".work-index-grid").getByRole("button", { name: new RegExp(app.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) }).click();
     await expect(page.locator(".work-caption h2")).toHaveText(app.name);
     await expect(page.locator(".work-actions a")).toHaveAttribute("href", `/apps/${app.slug}`);
+    if(await page.locator(".work-view-toggle").count()){
+      await expect(page.locator(".work-product-visual img").first()).toBeVisible();
+      await page.locator(".work-view-toggle").click();
+    }
     await expect(page.locator(".product-world")).toHaveAttribute("data-world", app.slug);
     await expect(page.locator(".product-world canvas")).toHaveCount(1);
     await expect(page.locator(".product-world")).toHaveAttribute("data-rendered", "true");
@@ -148,6 +152,7 @@ test("every product is selectable in the 3D theatre", async ({ page }) => {
 test("product screens, keyboard dismissal, pause and product navigation work", async ({ page }) => {
   await page.goto("/#story-bold-block-arcade");
   await expect(page.locator(".work-caption h2")).toHaveText("Bold Block Arcade");
+  await page.getByRole("button", {name:"3D",exact:true}).click();
   await page.locator(".work-toolbar").getByRole("button", { name: "Hareketi durdur" }).click();
   await expect(page.getByRole("button", { name: "Hareketi başlat" })).toHaveAttribute("aria-pressed", "true");
   await page.getByRole("button", { name: "Uygulama ekranları", exact: false }).click();

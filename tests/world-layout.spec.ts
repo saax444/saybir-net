@@ -20,7 +20,7 @@ for (const [width,height,theme,lang] of [[320,740,'dark','tr'],[390,844,'dark','
 for(const width of [390,1440]) test(`opening product showcase ${width}`,async({page})=>{
  await page.setViewportSize({width,height:900});
  await page.goto('/');
- await expect(page.locator('.opening__screens img')).toHaveCount(3);
+ await expect(page.locator('.opening__screens img')).toHaveCount(4);
  await expect(page.locator('.opening h1')).toBeVisible();
  await expect(page.locator('.opening__lower a')).toHaveAttribute('href','#uygulamalar');
  await page.locator('.opening').screenshot({path:`../../outputs/polished-opening-${width}.png`,animations:'disabled'});

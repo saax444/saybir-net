@@ -1,20 +1,14 @@
 "use client";
 import Image from "next/image";
-import { apps } from "@/data/apps";
 import { useSitePreferences } from "./SitePreferences";
 import "./Hero.css";
+const featured=[{slug:"velomate",name:"VeloMate"},{slug:"yemekolay",name:"Yemekolay"},{slug:"susadim",name:"Susadım"},{slug:"hilock",name:"HiLock"}];
 export default function Hero(){
- const {lang}=useSitePreferences();const tr=lang==="tr";
+ const{lang}=useSitePreferences();const tr=lang==="tr";
  return <section className="opening" id="top">
-  <div className="opening__copy"><div className="opening__label"><i/>{tr?"BAĞIMSIZ YAZILIM STÜDYOSU":"INDEPENDENT SOFTWARE STUDIO"}</div>
-  <h1>{tr?<>Hayata dokunan<br/><span>dijital deneyimler.</span></>:<>Digital experiences.<br/><span>Made for real life.</span></>}</h1>
-  <div className="opening__lower"><p>{tr?"Günlük hayatı kolaylaştıran, merak uyandıran ve kullanmaktan keyif alınan uygulamalar tasarlıyorum.":"I design apps that make everyday life easier, spark curiosity and feel good to use."}</p><a href="#uygulamalar"><span>{tr?"Uygulamaları keşfet":"Explore the apps"}</span><b>↗</b></a></div>
-  <div className="opening__note">iOS <span>·</span> macOS <span>·</span> Android</div></div>
-  <div className="opening__showcase" aria-label={tr?"SAYBIR uygulamalarından gerçek ekranlar":"Real screens from SAYBIR apps"}>
-   <div className="opening__showcase-label"><span>{tr?"TASARLANDI. GELİŞTİRİLDİ. YAYINLANDI.":"DESIGNED. BUILT. RELEASED."}</span><span>01 — 03</span></div>
-   <div className="opening__screens">{["velomate","yemekolay","susadim"].map((slug,i)=><a key={slug} href={`#story-${slug}`} aria-label={apps.find(a=>a.slug===slug)?.name}><Image src={`/films/${slug}-0.webp`} alt={`${apps.find(a=>a.slug===slug)?.name}`} width={960} height={2078} priority={i===1} sizes="(max-width:700px) 34vw, 18vw"/></a>)}</div>
-   <div className="opening__showcase-footer"><span>VeloMate / Yemekolay / Susadım</span><span>↗</span></div>
-  </div>
-  <div className="opening__footer"><span>SAYBIR — {tr?"FİKİRDEN DENEYİME":"FROM IDEA TO EXPERIENCE"}</span><span>{apps.length} {tr?"BAĞIMSIZ ÜRÜN":"INDEPENDENT PRODUCTS"}</span></div>
+  <div className="opening__intro"><span className="opening__label">SAYBIR — {tr?"BAĞIMSIZ DİJİTAL STÜDYO":"INDEPENDENT DIGITAL STUDIO"}</span><span className="opening__edition">iOS / macOS / Android</span></div>
+  <div className="opening__headline"><h1>{tr?<>Gündelik hayat.<br/><span>Biraz daha iyi.</span></>:<>Everyday life.<br/><span>A little better.</span></>}</h1><div className="opening__lower"><p>{tr?"İyi düşünülmüş fikirler. Kullanmayı seveceğin uygulamalar. Her ayrıntısında bağımsız bir bakış.":"Thoughtful ideas. Apps you’ll love to use. An independent perspective in every detail."}</p><a href="#uygulamalar"><span>{tr?"İşleri keşfet":"Explore the work"}</span><b>↓</b></a></div></div>
+  <div className="opening__screens">{featured.map((app,i)=><a key={app.slug} href={`#story-${app.slug}`} aria-label={app.name} className={`opening__project opening__project--${i}`}><div className="opening__project-top"><span>0{i+1} / {app.name}</span><b>↗</b></div><div className="opening__image"><Image src={`/films/${app.slug}-0.webp`} alt={app.name} width={960} height={2078} priority={i<2} sizes="(max-width:700px) 50vw,25vw"/></div></a>)}</div>
+  <div className="opening__footer"><span>{tr?"FİKİRDEN EKRANA. ÖZENLE.":"FROM IDEA TO SCREEN. WITH CARE."}</span><span>{tr?"KAYDIR VE KEŞFET":"SCROLL TO EXPLORE"} ↓</span></div>
  </section>
 }

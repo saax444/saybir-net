@@ -40,3 +40,7 @@ html[data-theme="light"] .work-category{color:#454b55}
 
 .pref-controls .theme-toggle{display:flex;align-items:center;justify-content:center;gap:8px;padding-inline:12px;font-weight:650}
 .pref-controls .theme-toggle:focus-visible{outline:2px solid var(--text);outline-offset:4px}
+/* Studio palette: ink, paper and clear typographic hierarchy. */
+:root{--bg:#101211;--bg2:#191c1a;--surface:#202420;--text:#f1f0e9;--muted:#b8bcb4;--dim:#999e96;--line:rgba(240,240,230,.16);--nav-bg:#101211f5}
+html[data-theme="light"]{--bg:#f3f1e9;--bg2:#e9e7dd;--surface:#fcfbf7;--text:#20271f;--muted:#596052;--dim:#686e61;--line:rgba(32,39,31,.2);--nav-bg:#f3f1e9f5}
+.catalog-card h3{font-weight:650}.section-title,.services-intro h2,.contact-panel h2{font-weight:600;letter-spacing:-.055em}.catalog{background:var(--bg)}.catalog-grid{column-gap:60px}.catalog-card{padding:32px 0}.catalog-card img{width:64px;height:64px;border-radius:15px}.catalog-card h3{font-size:28px}.catalog-card p{font-size:13px}.catalog-card:hover{padding-left:0}.catalog-card:hover h3{text-decoration:underline;text-underline-offset:6px}.services-grid h3{font-weight:650}.contact-panel{border-bottom:0}.contact-email{background:var(--text);color:var(--bg);border:0}.contact-email:after{color:inherit}html[data-theme="light"] .catalog-card img{filter:none}
