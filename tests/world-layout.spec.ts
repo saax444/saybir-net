@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { apps } from '../data/apps';
 for (const [width,height,theme,lang] of [[320,740,'dark','tr'],[390,844,'dark','tr'],[768,1024,'light','en'],[1440,900,'light','en']] as const) {
- test(`3D layout ${width} ${theme}`,async({page})=>{
+ test(`cinematic layout ${width} ${theme}`,async({page})=>{
  await page.setViewportSize({width,height});
  await page.emulateMedia({reducedMotion:'reduce'});
  await page.addInitScript(({theme,lang})=>{localStorage.setItem('saybir-theme',theme);localStorage.setItem('saybir-lang',lang);},{theme,lang});

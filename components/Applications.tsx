@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
-import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Text from "./Text";
@@ -10,18 +9,13 @@ import screens from "@/data/product-screens.json";
 import { useSitePreferences } from "./SitePreferences";
 import "./Applications.css";
 
-const ProductWorld=dynamic(()=>import("./ProductWorld"),{ssr:false,loading:()=> <div className="world-loading" aria-hidden="true"><i/></div>});
-
 export default function Applications(){
  const{lang}=useSitePreferences();const tr=lang==="tr";
- const[showWorld,setShowWorld]=useState(false);
- const[active,setActive]=useState(0),[indexOpen,setIndexOpen]=useState(false),[paused,setPaused]=useState(false),[ready,setReady]=useState(false),[showScreens,setShowScreens]=useState(false);
+ const[active,setActive]=useState(0),[indexOpen,setIndexOpen]=useState(false),[paused,setPaused]=useState(false),[showScreens,setShowScreens]=useState(false);
  const section=useRef<HTMLElement>(null),indexButton=useRef<HTMLButtonElement>(null);
- const tones=["#c4ccba","#d2bfd6","#dfcfb9","#c4ccba","#c4bfd5","#c5c1d2","#dfd0ab","#c4cdd2","#c5c1d2","#e2cbb5","#c4cfbf","#d3bfd2","#dfc5b8","#c5cfbc","#c8c1d5","#d3c5b5","#b7c9d4","#c7c8bc","#dbd4c3"];
  const app=apps[active];const images=(screens as Record<string,string[]>)[app.slug]??[];
- useEffect(()=>{const el=section.current;if(!el)return;const observer=new IntersectionObserver(([e])=>{if(e.isIntersecting){setReady(true);observer.disconnect()}},{rootMargin:"500px"});observer.observe(el);return()=>observer.disconnect()},[]);
- useEffect(()=>{const hash=()=>{const slug=location.hash.replace("#story-","");const i=apps.findIndex(a=>a.slug===slug);if(i>=0){setActive(i);setShowWorld(false);setShowScreens(false);setIndexOpen(false);setReady(true);section.current?.scrollIntoView({behavior:"instant"})}};hash();addEventListener("hashchange",hash);return()=>removeEventListener("hashchange",hash)},[]);
- function choose(i:number){const next=(i+apps.length)%apps.length;setActive(next);setShowWorld(false);setIndexOpen(false);setShowScreens(false);if(indexOpen)indexButton.current?.focus();history.replaceState(null,"",`#story-${apps[next].slug}`)}
+ useEffect(()=>{const hash=()=>{const slug=location.hash.replace("#story-","");const i=apps.findIndex(a=>a.slug===slug);if(i>=0){setActive(i);setShowScreens(false);setIndexOpen(false);section.current?.scrollIntoView({behavior:"instant"})}};hash();addEventListener("hashchange",hash);return()=>removeEventListener("hashchange",hash)},[]);
+ function choose(i:number){const next=(i+apps.length)%apps.length;setActive(next);setIndexOpen(false);setShowScreens(false);if(indexOpen)indexButton.current?.focus();history.replaceState(null,"",`#story-${apps[next].slug}`)}
  useEffect(()=>{
    if(!indexOpen&&!showScreens)return;
    const panel=document.getElementById(indexOpen?"work-index":"work-screens");
@@ -33,15 +27,15 @@ export default function Applications(){
    };addEventListener("keydown",keyboard);return()=>removeEventListener("keydown",keyboard);
  },[indexOpen,showScreens]);
  return <section className="work-theatre" id="uygulamalar" ref={section} aria-label={tr?"Uygulama deneyimleri":"App experiences"}>
-  <div className="work-heading"><span>{tr?"SEÇİLİ İŞLER / 01":"SELECTED WORK / 01"}</span><h2>{tr?<>Her ihtimale<br/>bir uygulama.</>:<>An app for<br/>every possibility.</>}</h2><p>{tr?"Oyun, üretkenlik ve günlük yaşam. Her biri farklı bir ihtiyaca, aynı özenle.":"Play, productivity and everyday life. Different needs, the same attention to detail."}</p></div>
-  <div className="work-stage" style={{"--product-tone":tones[active%tones.length]} as CSSProperties}>
-   <div className="work-color-field" aria-hidden="true"><span>{String(active+1).padStart(2,"0")}</span></div>
-   {ready&&showWorld?<ProductWorld slug={app.slug} paused={paused}/>:<div className={`work-product-visual ${app.slug==="ne-secsem"?"work-product-visual--excerpt":""}`} key={`visual-${app.slug}`}>{!images.length&&<div className="work-brand-art"><Image src={app.image} alt={app.name} width={256} height={256}/><span>{app.name}</span></div>}{images.slice(0,2).map((src,i)=><Image key={src} src={src} alt={`${app.name} — ${tr?"ekran":"screen"} ${i+1}`} width={960} height={2078} sizes="(max-width:800px) 45vw,22vw"/>)}</div>}
+  <div className="work-stage" data-paused={paused}>
+   <div className="work-light" aria-hidden="true"/>
+   <div className={`work-product-visual ${images.length?"":"work-product-visual--icon"} ${["ne-secsem","vibelens"].includes(app.slug)?"work-product-visual--excerpt":""}`} key={`visual-${app.slug}`}>
+    <div className="work-float"><Image src={images[0]??app.image} alt={images.length?`${app.name} — ${tr?"uygulama ekranı":"app screen"}`:app.name} width={images.length?960:256} height={images.length?2078:256} sizes="(max-width:800px) 65vw,30vw"/></div>
+   </div>
    <div className="work-vignette" aria-hidden="true"/>
-   <header className="work-toolbar"><span>SAYBIR / {tr?"ÜRÜN DÜNYALARI":"PRODUCT WORLDS"}</span><div>{<button type="button" className="work-view-toggle" onClick={()=>setShowWorld(!showWorld)} aria-pressed={showWorld}>{showWorld?(tr?"Vitrine dön":"Showcase"):"3D"}</button>}<button hidden={!showWorld} type="button" onClick={()=>setPaused(!paused)} aria-pressed={paused}>{paused?(tr?"Hareketi başlat":"Play motion"):(tr?"Hareketi durdur":"Pause motion")}</button><button ref={indexButton} type="button" aria-expanded={indexOpen} aria-controls="work-index" onClick={()=>setIndexOpen(!indexOpen)}>{tr?"Tüm uygulamalar":"All apps"} <b>{indexOpen?"−":"+"}</b></button></div></header>
+   <header className="work-toolbar"><span>SAYBIR / {tr?"ÜRÜN DÜNYALARI":"PRODUCT WORLDS"}</span><div><button type="button" onClick={()=>setPaused(!paused)} aria-pressed={paused}>{paused?(tr?"Hareketi başlat":"Play motion"):(tr?"Hareketi durdur":"Pause motion")}</button><button ref={indexButton} type="button" aria-expanded={indexOpen} aria-controls="work-index" onClick={()=>setIndexOpen(!indexOpen)}>{tr?"Tüm uygulamalar":"All apps"} <b>{indexOpen?"−":"+"}</b></button></div></header>
    <div className="work-selector"><button type="button" onClick={()=>choose(active-1)} aria-label={tr?"Önceki uygulama":"Previous app"}>←</button><span>{String(active+1).padStart(2,"0")} <i>/ {apps.length}</i></span><button type="button" onClick={()=>choose(active+1)} aria-label={tr?"Sonraki uygulama":"Next app"}>→</button></div>
    <div className="work-caption" key={`caption-${app.slug}`} aria-live="polite"><span className="work-category"><Text>{app.category}</Text> — {tr?"BAĞIMSIZ ÜRÜN":"INDEPENDENT PRODUCT"}</span><h2>{app.name}</h2><div className="work-description"><p><Text>{app.description}</Text></p><div className="work-actions"><Link href={`/apps/${app.slug}`}>{tr?"Ürünü keşfet":"Explore product"} ↗</Link>{images.length>0&&<button type="button" onClick={()=>setShowScreens(!showScreens)} aria-expanded={showScreens} aria-controls="work-screens">{showScreens?(tr?"Ekranları kapat":"Close screens"):(tr?"Uygulama ekranları":"App screens")} {showScreens?"−":"+"}</button>}</div></div></div>
-   <div className="work-bottom"><span>{showWorld?(tr?"ÜRÜNDEN İLHAM ALAN 3D SAHNE":"3D SCENE INSPIRED BY THE PRODUCT"):(images.length?(tr?"GERÇEK UYGULAMA EKRANLARI":"ACTUAL APP SCREENS"):(tr?"SAYBIR KOLEKSİYONU":"SAYBIR COLLECTION"))}</span><span>{tr?"BAKIŞ AÇISINI DEĞİŞTİRMEK İÇİN KAYDIR":"SCROLL TO CHANGE THE PERSPECTIVE"} ↓</span></div>
    <div id="work-index" className="work-index" role="dialog" aria-modal="true" aria-label={tr?"Uygulama seç":"Choose an app"} hidden={!indexOpen}><div className="work-index-heading"><span>{tr?"BİR DÜNYA SEÇ":"CHOOSE A WORLD"}</span><button type="button" onClick={()=>{setIndexOpen(false);indexButton.current?.focus()}}>{tr?"Kapat":"Close"} ×</button></div><div className="work-index-grid">{apps.map((a,i)=><button type="button" key={a.slug} onClick={()=>choose(i)} aria-pressed={i===active}><small>{String(i+1).padStart(2,"0")}</small><span>{a.name}</span><b>↗</b></button>)}</div></div>
    <div className="work-screens" id="work-screens" role="dialog" aria-modal="true" aria-label={tr?"Uygulama ekranları":"App screens"} hidden={!showScreens}><div><span>{app.name} / {tr?"GERÇEK UYGULAMA EKRANLARI":"ACTUAL APP SCREENS"}</span><button type="button" onClick={()=>setShowScreens(false)}>{tr?"Kapat":"Close"} ×</button></div><div className="work-screen-strip">{images.map((src,i)=><Image key={src} src={src} width={960} height={2078} alt={`${app.name} — ${tr?"ekran":"screen"} ${i+1}`} sizes="(max-width:700px) 60vw,25vw"/>)}</div></div>
   </div>

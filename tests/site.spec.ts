@@ -126,7 +126,7 @@ test("unknown app and unknown page return a translated 404", async ({ page }) =>
   }
 });
 
-test("every product is selectable in the 3D theatre", async ({ page }) => {
+test("every product is selectable in the cinematic showcase", async ({ page }) => {
   test.setTimeout(90_000);
   await page.goto("/#uygulamalar");
   await expect(page.locator(".opening img")).toHaveCount(4);
@@ -137,14 +137,11 @@ test("every product is selectable in the 3D theatre", async ({ page }) => {
     await page.locator(".work-index-grid").getByRole("button", { name: new RegExp(app.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) }).click();
     await expect(page.locator(".work-caption h2")).toHaveText(app.name);
     await expect(page.locator(".work-actions a")).toHaveAttribute("href", `/apps/${app.slug}`);
-    if(await page.locator(".work-view-toggle").count()){
-      await expect(page.locator(".work-product-visual")).toHaveCount(1);
-      await expect(page.locator(".work-product-visual img").first()).toBeVisible();
-      await page.locator(".work-view-toggle").click();
-    }
-    await expect(page.locator(".product-world")).toHaveAttribute("data-world", app.slug);
-    await expect(page.locator(".product-world canvas")).toHaveCount(1);
-    await expect(page.locator(".product-world")).toHaveAttribute("data-rendered", "true");
+    await expect(page.locator(".work-product-visual")).toHaveCount(1);
+    await expect(page.locator(".work-product-visual img")).toHaveCount(1);
+    await expect(page.locator(".work-product-visual img")).toBeVisible();
+    await page.locator(".work-product-visual img").evaluate((img: HTMLImageElement) => img.decode());
+    expect(await page.locator(".work-float").evaluate(el => el.getBoundingClientRect().height <= el.parentElement!.getBoundingClientRect().height + 1)).toBe(true);
     await page.screenshot({ path: `../../outputs/world-${app.slug}.png`, animations: "disabled" });
     await expect(page.locator(".world-fallback")).toHaveCount(0);
   }
@@ -153,7 +150,6 @@ test("every product is selectable in the 3D theatre", async ({ page }) => {
 test("product screens, keyboard dismissal, pause and product navigation work", async ({ page }) => {
   await page.goto("/#story-bold-block-arcade");
   await expect(page.locator(".work-caption h2")).toHaveText("Bold Block Arcade");
-  await page.getByRole("button", {name:"3D",exact:true}).click();
   await page.locator(".work-toolbar").getByRole("button", { name: "Hareketi durdur" }).click();
   await expect(page.getByRole("button", { name: "Hareketi başlat" })).toHaveAttribute("aria-pressed", "true");
   await page.getByRole("button", { name: "Uygulama ekranları", exact: false }).click();
@@ -175,8 +171,8 @@ test("product information remains usable without WebGL", async ({ page }) => {
     } as typeof original;
   });
   await page.goto("/#story-retro-snake");
-  await page.getByRole("button",{name:"3D",exact:true}).click();
-  await expect(page.locator(".work-stage .world-fallback")).toBeVisible();
+  await expect(page.locator(".work-product-visual img")).toBeVisible();
+  await expect(page.locator(".work-stage canvas")).toHaveCount(0);
   await expect(page.locator(".work-caption h2")).toHaveText("Retro Snake");
   await expect(page.locator(".work-actions a")).toHaveAttribute("href", "/apps/retro-snake");
 });
