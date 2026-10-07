@@ -138,6 +138,7 @@ test("every product is selectable in the 3D theatre", async ({ page }) => {
     await expect(page.locator(".work-caption h2")).toHaveText(app.name);
     await expect(page.locator(".work-actions a")).toHaveAttribute("href", `/apps/${app.slug}`);
     if(await page.locator(".work-view-toggle").count()){
+      await expect(page.locator(".work-product-visual")).toHaveCount(1);
       await expect(page.locator(".work-product-visual img").first()).toBeVisible();
       await page.locator(".work-view-toggle").click();
     }
@@ -174,6 +175,7 @@ test("product information remains usable without WebGL", async ({ page }) => {
     } as typeof original;
   });
   await page.goto("/#story-retro-snake");
+  await page.getByRole("button",{name:"3D",exact:true}).click();
   await expect(page.locator(".work-stage .world-fallback")).toBeVisible();
   await expect(page.locator(".work-caption h2")).toHaveText("Retro Snake");
   await expect(page.locator(".work-actions a")).toHaveAttribute("href", "/apps/retro-snake");
