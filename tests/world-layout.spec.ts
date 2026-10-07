@@ -26,3 +26,19 @@ for(const width of [390,1440]) test(`opening product showcase ${width}`,async({p
  await page.locator('.opening').screenshot({path:`../../outputs/polished-opening-${width}.png`,animations:'disabled'});
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
+
+test('scroll changes the product camera and pause keeps it still',async({page})=>{
+ await page.setViewportSize({width:1440,height:900});
+ await page.goto('/#story-kedilik');
+ const scene=page.locator('.work-stage');
+ await expect(scene).toBeVisible();
+ const camera=()=>page.locator('.work-float').evaluate(el=>getComputedStyle(el).transform);
+ const before=await camera();
+ await page.evaluate(()=>{const el=document.querySelector<HTMLElement>('.work-theatre')!;scrollTo({top:scrollY+el.getBoundingClientRect().top+(el.offsetHeight-innerHeight)*.8,behavior:'instant'})});
+ await expect.poll(camera).not.toBe(before);
+ expect(await scene.evaluate(el=>Math.abs(el.getBoundingClientRect().top))).toBeLessThan(2);
+ await page.getByRole('button',{name:'Hareketi durdur',exact:true}).click();
+ const paused=await camera();
+ await page.mouse.wheel(0,-150);
+ await expect.poll(camera).toBe(paused);
+});
