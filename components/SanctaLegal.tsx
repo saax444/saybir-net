@@ -10,7 +10,7 @@ export default function SanctaLegal({ section }: { section: keyof typeof content
  return <div className={styles.page}>
   <nav className={styles.nav}><div className={styles.navInner}><BrandLogo/><PreferenceControls/><Link className={styles.back} href="/apps/sancta">← Sancta</Link></div></nav>
   <PageTitle title={doc.title}/><main className={styles.main}><article className={styles.content}>
-   <h1><Text>{doc.title}</Text></h1><p><Text>24 Eylül 2026</Text></p>
+   <h1><Text>{doc.title}</Text></h1><p><Text>7 Ekim 2026</Text></p>
    {doc.sections.map(([title,body])=><section key={title}><h2><Text>{title}</Text></h2><p><Text>{body}</Text></p></section>)}
    <p><a href="mailto:hello@saybir.net">hello@saybir.net</a></p>
    <div className={styles.actions}>
