@@ -36,7 +36,7 @@ export function makeRealisticProduct(slug:string) {
   box(.16,.06,1.4,steel,-2,-1.31,.48);for(let i=0;i<4;i++)box(.026,.04,.5,steel,-2+(i-1.5)*.052,-1.31,-.45);box(.21,.04,.1,steel,-2,-1.31,-.18);
   const napkin=box(.9,.08,2.5,paper,2.08,-1.3,0);napkin.rotation.y=-.08;box(.11,.055,2,steel,2.08,-1.23,0);
  }else if(slug==='susadim'){
-  const glass=mat(0xffffff,.07,0,{transmission:.98,thickness:.12,ior:1.48,transparent:true,opacity:1});const water=mat(0x82b9c6,.08,0,{transmission:.6,thickness:1.3,ior:1.333,transparent:true,opacity:.65});
+  const glass=mat(0xffffff,.07,0,{transmission:.98,thickness:.12,ior:1.48,transparent:true,opacity:1});const water=mat(0xb0d5df,.16,0,{clearcoat:1,clearcoatRoughness:.05});
   lathe([[.52,0],[.6,.08],[.6,2.2],[.5,2.45],[.28,2.65],[.28,2.96],[.23,2.96],[.23,2.63],[.53,2.25],[.53,.12],[.52,0]],glass,-.4,-1.25,0);
   cylinder(.52,1.82,water,-.4,-.22,0);cylinder(.3,.28,steel,-.4,1.8,0);for(let i=0;i<8;i++){const r=ring(.3,.009,rubber,-.4,1.69+i*.026,0);r.rotation.x=Math.PI/2}
   for(let i=0;i<30;i++){const a=i*2.4;const b=ball(.022+(i%3)*.007,glass,-.4+Math.cos(a)*.602,-1+i*.077,Math.sin(a)*.602);b.scale.y=1.3}
