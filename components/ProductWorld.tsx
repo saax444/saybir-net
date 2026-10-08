@@ -5,11 +5,13 @@ import * as THREE from "three";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
 import { useSitePreferences } from "./SitePreferences";
+import { makeRealisticProduct } from "./RealisticProducts";
 import { apps } from "@/data/apps";
 
 type Palette = { silver: THREE.MeshPhysicalMaterial; ivory: THREE.MeshPhysicalMaterial; black: THREE.MeshPhysicalMaterial; glass: THREE.MeshPhysicalMaterial };
 
 function makeProduct(slug: string, m: Palette, invalidate: () => void) {
+  const physical=makeRealisticProduct(slug);if(physical)return physical;
   const textures: THREE.Texture[] = [];
   const extraMaterials: THREE.Material[] = [];
   const root = new THREE.Group();
@@ -63,8 +65,14 @@ function makeProduct(slug: string, m: Palette, invalidate: () => void) {
       const roof=mesh(new THREE.ConeGeometry(2.4,.8,3),m.ivory,0,2.1,0);roof.rotation.y=Math.PI/2;roof.scale.z=.55;root.scale.setScalar(.85);break;
     }
     case "velomate": {
-      for(const x of[-1.5,1.5]){ring(.93,.055,x,-.1,0,m.black);ring(.83,.018,x,-.1,0);for(let k=0;k<14;k++){const a=k/14*Math.PI*2;line([[x,-.1,0],[x+Math.sin(a)*.82,-.1+Math.cos(a)*.82,0]],.008)}sphere(.13,x,-.1,0)}
-      line([[-1.5,-.1,0],[-.6,1.2,0],[.1,-.1,0],[-1.5,-.1,0]],.055);line([[-.6,1.2,0],[.9,1.2,0],[.1,-.1,0]],.055);line([[1.5,-.1,0],[.85,1.5,0],[1.1,1.6,0]],.055);box(.65,.08,.2,-.65,1.35,0,m.black);ring(.22,.04,.1,-.1,0);break;
+      const strut=(a:number[],b:number[],r:number,material:THREE.Material=m.silver)=>{const start=new THREE.Vector3(...a),end=new THREE.Vector3(...b);const o=mesh(new THREE.CylinderGeometry(r,r,start.distanceTo(end),16),material);o.position.copy(start).add(end).multiplyScalar(.5);o.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),end.sub(start).normalize());return o};
+      for(const x of[-1.5,1.5]){ring(.93,.065,x,-.1,0,m.black);ring(.83,.023,x,-.1,0);for(let k=0;k<28;k++){const a=k/28*Math.PI*2;strut([x,-.1,k%2?.06:-.06],[x+Math.sin(a)*.82,-.1+Math.cos(a)*.82,0],.006)}sphere(.09,x,-.1,0)}
+      const rear=[-1.5,-.1,0],seat=[-.6,1.05,0],crank=[.1,-.1,0],head=[.95,1.08,0],front=[1.5,-.1,0];
+      for(const [a,b] of [[rear,seat],[seat,crank],[crank,rear],[seat,head],[head,crank],[head,front]])strut(a,b,.052);
+      strut(seat,[-.68,1.4,0],.03,m.black);const saddle=box(.65,.095,.24,-.68,1.42,0,m.black);saddle.rotation.z=-.035;
+      strut(head,[.88,1.49,0],.03);strut([.88,1.49,0],[1.1,1.49,0],.035);ring(.22,.018,.1,-.1,.05);ring(.1,.015,-1.5,-.1,.05);
+      line([[-1.5,0,.05],[.1,.12,.05],[.32,-.1,.05],[.1,-.32,.05],[-1.5,-.2,.05],[-1.6,-.1,.05],[-1.5,0,.05]],.01,m.black);
+      box(.24,.035,.14,.6,-.35,.15,m.black);break;
     }
     case "melodymap": {
       const disc=coin(1.65,.16,0,0,0,m.black);disc.rotation.x=Math.PI/2;for(let i=0;i<18;i++)ring(.5+i*.061,.006,0,0,.09,m.silver);const label=coin(.45,.02,0,0,.095,m.ivory);label.rotation.x=Math.PI/2;ring(.085,.02,0,0,.13,m.black);
@@ -225,7 +233,7 @@ export default function ProductWorld({slug,paused}:{slug:string;paused:boolean})
     const visibility=new IntersectionObserver(([e])=>{visible=e.isIntersecting;rendered=false;},{rootMargin:"100px"});visibility.observe(host);
     const pointer=(e:PointerEvent)=>{const r=host.getBoundingClientRect();px=(e.clientX-r.left)/r.width-.5;py=(e.clientY-r.top)/r.height-.5;};host.addEventListener("pointermove",pointer);const leave=()=>{px=0;py=0};host.addEventListener("pointerleave",leave);
     const scroll=()=>{if(pauseRef.current||reduced.matches)return;const el=host.closest(".work-theatre");if(!el)return;const r=el.getBoundingClientRect();progress=Math.max(0,Math.min(1,-r.top/Math.max(1,r.height-innerHeight)));rendered=false};addEventListener("scroll",scroll,{passive:true});
-    const tick=(now:number)=>{frame=requestAnimationFrame(tick);const delta=Math.min(.04,(now-previous)/1000);previous=now;if(!visible||document.hidden||contextLost)return;const still=reduced.matches||pauseRef.current;if(still&&rendered)return;if(!still)elapsed+=delta;rx+=(px-rx)*.035;ry+=(py-ry)*.035;const narrow=camera.aspect<.85;const angle=.15+(still?0:Math.sin(elapsed*.13)*.1+rx*.18)+progress*.65;const distance=(narrow?11.5:8.8)-progress*1.8;camera.position.set(Math.sin(angle)*distance,3.35+(still?0:ry*.6)-progress*.3,Math.cos(angle)*distance);camera.lookAt(0,slug==="retro-snake"?-.65:.05,0);product.root.rotation.y=still?0:Math.sin(elapsed*.2)*.035;product.tick(still?0:elapsed);renderer.render(scene,camera);rendered=true;host.dataset.rendered="true";};resize();scroll();frame=requestAnimationFrame(tick);
+    const tick=(now:number)=>{frame=requestAnimationFrame(tick);const delta=Math.min(.04,(now-previous)/1000);previous=now;if(!visible||document.hidden||contextLost)return;const still=reduced.matches||pauseRef.current;if(still&&rendered)return;if(!still)elapsed+=delta;rx+=(px-rx)*.035;ry+=(py-ry)*.035;const narrow=camera.aspect<.85;const angle=.15+(still?0:Math.sin(elapsed*.13)*.1+rx*.18)+progress*.65;const distance=(narrow?11.5:8.8)-progress*1.8;const tabletop=["yemekolay","melodymap","kedilik","sancta","usenme-yap","ezan-vakti"].includes(slug);camera.position.set(Math.sin(angle)*distance,(tabletop?6.4:3.35)+(still?0:ry*.6)-progress*.3,Math.cos(angle)*distance);camera.lookAt(0,tabletop?-.65:slug==="retro-snake"?-.65:.05,0);product.root.rotation.y=still?0:Math.sin(elapsed*.2)*.035;product.tick(still?0:elapsed);renderer.render(scene,camera);rendered=true;host.dataset.rendered="true";};resize();scroll();frame=requestAnimationFrame(tick);
     const lost=(e:Event)=>{e.preventDefault();contextLost=true;setFailed(true)};renderer.domElement.addEventListener("webglcontextlost",lost);
     return()=>{cancelAnimationFrame(frame);product.dispose();observer.disconnect();visibility.disconnect();removeEventListener("scroll",scroll);host.removeEventListener("pointermove",pointer);host.removeEventListener("pointerleave",leave);renderer.domElement.removeEventListener("webglcontextlost",lost);scene.traverse(o=>{if(o instanceof THREE.Mesh)o.geometry.dispose()});Object.values(m).forEach(mat=>mat.dispose());(floor.material as THREE.Material).dispose();env.dispose();pmrem.dispose();renderer.dispose();renderer.forceContextLoss();renderer.domElement.remove();};
   },[slug,theme]);
