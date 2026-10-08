@@ -1,14 +1,18 @@
 "use client";
 import Image from "next/image";
+import { useEffect, useRef } from "react";
+import { apps } from "@/data/apps";
 import { useSitePreferences } from "./SitePreferences";
 import "./Hero.css";
-const featured=[{slug:"velomate",name:"VeloMate"},{slug:"yemekolay",name:"Yemekolay"},{slug:"susadim",name:"Susadım"},{slug:"hilock",name:"HiLock"}];
+const featured=["hushloom","kedilik","velomate","hilock","yemekolay","susadim","tartarot","vibelens","history"];
 export default function Hero(){
- const{lang}=useSitePreferences();const tr=lang==="tr";
- return <section className="opening" id="top">
-  <div className="opening__intro"><span className="opening__label">SAYBIR — {tr?"BAĞIMSIZ DİJİTAL STÜDYO":"INDEPENDENT DIGITAL STUDIO"}</span><span className="opening__edition">iOS / macOS / Android</span></div>
-  <div className="opening__headline"><h1>{tr?<>Gündelik hayat.<br/><span>Biraz daha iyi.</span></>:<>Everyday life.<br/><span>A little better.</span></>}</h1><div className="opening__lower"><p>{tr?"İyi düşünülmüş fikirler. Kullanmayı seveceğin uygulamalar. Her ayrıntısında bağımsız bir bakış.":"Thoughtful ideas. Apps you’ll love to use. An independent perspective in every detail."}</p><a href="#uygulamalar"><span>{tr?"İşleri keşfet":"Explore the work"}</span><b>↓</b></a></div></div>
-  <div className="opening__screens">{featured.map((app,i)=><a key={app.slug} href={`#story-${app.slug}`} aria-label={app.name} className={`opening__project opening__project--${i}`}><div className="opening__project-top"><span>0{i+1} / {app.name}</span><b>↗</b></div><div className="opening__image"><Image src={`/films/${app.slug}-0.webp`} alt={app.name} width={960} height={2078} priority={i<2} sizes="(max-width:700px) 50vw,25vw"/></div></a>)}</div>
-  <div className="opening__footer"><span>{tr?"FİKİRDEN EKRANA. ÖZENLE.":"FROM IDEA TO SCREEN. WITH CARE."}</span><span>{tr?"KAYDIR VE KEŞFET":"SCROLL TO EXPLORE"} ↓</span></div>
+ const {lang}=useSitePreferences();const tr=lang==="tr";const root=useRef<HTMLElement>(null);
+ useEffect(()=>{let frame=0;const media=matchMedia('(prefers-reduced-motion: reduce)');const update=()=>{frame=0;const el=root.current;if(el)el.style.setProperty('--hero-scroll',String(media.matches?0:Math.min(1,Math.max(0,-el.getBoundingClientRect().top/innerHeight))))};const scroll=()=>{if(!frame)frame=requestAnimationFrame(update)};addEventListener('scroll',scroll,{passive:true});return()=>{removeEventListener('scroll',scroll);cancelAnimationFrame(frame)}},[]);
+ return <section className="opening" id="top" ref={root}>
+  <div className="opening__ambient" aria-hidden="true"/>
+  <div className="opening__intro"><span><i/> {tr?"BAĞIMSIZ TASARIM & YAZILIM":"INDEPENDENT DESIGN & SOFTWARE"}</span><span>VOL. 01 / {apps.length} {tr?"UYGULAMA":"APPS"}</span></div>
+  <div className="opening__headline"><p className="opening__eyebrow">SAYBIR STUDIO — 01</p><h1>{tr?<>Bir fikir.<br/>Bir başka<br/><em>dünya.</em></>:<>One idea.<br/>Another<br/><em>world.</em></>}</h1><div className="opening__lower"><p>{tr?"Hayatın içinden fikirleri, kendi dünyası olan dijital deneyimlere dönüştürüyorum.":"Turning ideas from everyday life into digital experiences with a world of their own."}</p><a href="#uygulamalar"><span>{tr?"Dünyaları keşfet":"Explore the worlds"}</span><b>↘</b></a></div></div>
+  <div className="opening__gallery" aria-label={tr?"Uygulama koleksiyonu":"App collection"}><div className="opening__orbit">{featured.map((slug,i)=>{const app=apps.find(a=>a.slug===slug)!;return <a className={`opening__tile opening__tile--${i}`} href={`#story-${slug}`} key={slug} aria-label={app.name}><Image src={app.image} alt="" width={256} height={256} priority={i<5} sizes="(max-width:700px) 25vw,15vw"/><span>{app.name}<b>↗</b></span></a>})}</div></div>
+  <div className="opening__footer"><span>{String(apps.length).padStart(2,'0')} {tr?"UYGULAMA. TEK BİR BAKIŞ AÇISI.":"APPS. ONE INDEPENDENT PERSPECTIVE."}</span><span>iOS / macOS / Android</span><a href="#uygulamalar">{tr?"KAYDIR":"SCROLL"} <b>↓</b></a></div>
  </section>
 }

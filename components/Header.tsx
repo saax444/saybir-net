@@ -25,7 +25,7 @@ export default function Header() {
   }, [open]);
   return <header className="site-header" ref={header}>
     <div className="container header-inner">
-      <a className="cinematic-logo" href="#top" aria-label="SAYBIR"><span className="logo-mark">S</span><strong>SAYBIR</strong></a>
+      <a className="cinematic-logo" href="#top" aria-label="SAYBIR"><strong>SAYBIR</strong></a>
       <PreferenceControls />
       <button ref={toggle} type="button" className="menu-toggle" aria-label={tr ? (open ? "Menüyü kapat" : "Menüyü aç") : (open ? "Close menu" : "Open menu")} aria-expanded={open} aria-controls="site-navigation" onClick={() => setOpen(!open)}><span /><span /></button>
       <nav id="site-navigation" aria-label={tr ? "Ana menü" : "Main navigation"} className={open ? "nav nav-open" : "nav"} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget as Node)) setOpen(false); }}>
