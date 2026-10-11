@@ -145,15 +145,16 @@ test("every product is selectable in the cinematic showcase", async ({ page }) =
   }
 });
 
-test("product screens, keyboard dismissal, pause and product navigation work", async ({ page }) => {
+test("product index, keyboard dismissal, pause and product navigation work", async ({ page }) => {
   await page.goto("/#story-bold-block-arcade");
   await expect(page.locator(".work-caption h2")).toHaveText("Bold Block Arcade");
   await page.locator(".work-toolbar").getByRole("button", { name: "Hareketi durdur" }).click();
   await expect(page.getByRole("button", { name: "Hareketi başlat" })).toHaveAttribute("aria-pressed", "true");
-  await page.getByRole("button", { name: "Uygulama ekranları", exact: false }).click();
-  const dialog=page.getByRole("dialog", { name: "Uygulama ekranları" });
+  await page.getByRole("button", { name: "Tüm uygulamalar", exact: false }).click();
+  const dialog=page.getByRole("dialog", { name: "Uygulama seç" });
   await expect(dialog).toBeVisible();
-  await expect(dialog.locator("img")).toHaveCount(3);
+  await expect(dialog.locator(".work-index-grid button")).toHaveCount(apps.length);
+  await expect(page.locator(".work-stage img[src*=films]")).toHaveCount(0);
   await page.keyboard.press("Escape");
   await expect(dialog).toBeHidden();
   await page.getByRole("link", { name: "Ürünü keşfet" }).click();
