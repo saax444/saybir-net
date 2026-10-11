@@ -3,7 +3,7 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
 
 /** Physical still lifes, in metres relative to the shared studio stage. */
 export function makeRealisticProduct(slug:string) {
- const supported=['yemekolay','susadim','kedilik','carsave-ai','vibelens','ne-secsem','oduyorum','usenme-yap','tartarot','sancta','melodymap','ezan-vakti','hilock'];
+ const supported=['yemekolay','susadim','kedilik','carsave-ai','vibelens','ne-secsem','oduyorum','usenme-yap','tartarot','sancta','melodymap','ezan-vakti','hilock','retro-snake','bold-block-arcade','history','ref-ref-ref'];
  if(!supported.includes(slug))return null;
  const root=new THREE.Group();const materials:THREE.Material[]=[];const textures:THREE.Texture[]=[];
  function texture(kind:'grain'|'paper'|'wood'|'card',color:string){
@@ -24,7 +24,45 @@ export function makeRealisticProduct(slug:string) {
  const tube=(points:number[][],r:number,m:THREE.Material)=>mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p))),48,r,10,false),m);
  function screws(x:number,y:number,z:number){const s=cylinder(.034,.015,steel,x,y,z);s.rotation.x=Math.PI/2;box(.036,.005,.004,rubber,x,y,z+.01)}
  function book(x=0,z=0,cross=true){box(2.65,.13,3.35,leather,x,-1.05,z);box(2.5,.32,3.16,paper,x,-.83,z);for(let i=0;i<17;i++)box(2.49,.005,3.12,mat(0xbcb3a2,.9),x,-.98+i*.018,z);box(2.65,.1,3.35,leather,x,-.61,z);if(cross){box(.06,.025,2.45,brass,x,-.548,z);box(.72,.025,.06,brass,x,-.547,z-.3)}}
- if(slug==='yemekolay'){
+ if(slug==='retro-snake'){
+  const shell=mat(0xc8c6b9,.62);const bezel=mat(0x41474a,.64);const buttons=mat(0x713b49,.45);
+  box(2.65,3.5,.48,shell,0,.42,0,.2);box(2.29,1.78,.055,bezel,0,1.06,.267,.12);
+  const screen=document.createElement('canvas');screen.width=screen.height=256;const c=screen.getContext('2d')!;
+  c.fillStyle='#89976a';c.fillRect(0,0,256,256);c.fillStyle='#7d8b61';for(let y=0;y<16;y++)for(let x=0;x<16;x++)c.fillRect(x*16+1,y*16+1,14,14);
+  c.fillStyle='#293b28';for(const [x,y] of [[3,10],[4,10],[5,10],[6,10],[7,10],[7,9],[7,8],[8,8],[9,8],[10,8],[10,7]])c.fillRect(x*16+2,y*16+2,12,12);c.fillRect(4*16+3,4*16+3,10,10);
+  const display=new THREE.CanvasTexture(screen);display.colorSpace=THREE.SRGBColorSpace;display.magFilter=THREE.NearestFilter;textures.push(display);
+  mesh(new THREE.PlaneGeometry(1.64,1.38),mat(0xffffff,.8,0,{map:display}),0,1.05,.3);
+  box(.28,.87,.09,rubber,-.69,-.33,.29);box(.87,.28,.095,rubber,-.69,-.33,.3);
+  for(const [x,y] of [[.58,-.44],[.99,-.17]]){const key=cylinder(.18,.095,buttons,x,y,.32);key.rotation.x=Math.PI/2}
+  for(const x of[-.21,.22]){const button=box(.3,.09,.045,bezel,x,-.87,.28);button.rotation.z=.18}
+  for(let i=0;i<5;i++)box(.022,.3,.015,bezel,.63+i*.1,-.91,.248,.006);
+  for(const x of[-1.11,1.11])screws(x,1.96,.25);root.scale.setScalar(.85);root.position.y=-.22;
+ }else if(slug==='bold-block-arcade'){
+  box(3.8,.25,3.8,wood,0,-1.2,0,.09);box(3.49,.035,3.49,rubber,0,-1.057,0,.02);
+  const pigments=[0x718a86,0xbd9762,0x806f91,0xb16f58].map(color=>mat(color,.38,0,{clearcoat:.35}));
+  const pieces=[[[0,0],[1,0],[2,0],[1,1]],[[0,1],[0,2],[1,2],[2,2]],[[3,0],[3,1],[3,2],[4,2]],[[1,3],[2,3],[3,3],[3,4]]];
+  for(let z=0;z<5;z++)for(let x=0;x<5;x++)box(.61,.013,.61,mat(0x333637,.82),(x-2)*.65,-1.032,(z-2)*.65,.02);
+  pieces.forEach((piece,i)=>piece.forEach(([x,z])=>box(.61,.23,.61,pigments[i],(x-2)*.65,-.91,(z-2)*.65,.05)));
+  for(const x of[-1.7,1.7])for(const z of[-1.7,1.7]){const pin=cylinder(.035,.014,brass,x,-1.067,z);}
+ }else if(slug==='history'){
+  // An archival volume and a brass hourglass, with a continuous glass neck.
+  book(-.7,.25,false);root.children.forEach(o=>{o.scale.multiplyScalar(.68);o.position.multiplyScalar(.68);o.position.y-=.55});
+  const x=1.05;const crystal=mat(0xebe8dc,.09,0,{transmission:.94,thickness:.08,ior:1.45});const sand=mat(0xc2a06c,.96);
+  for(const y of[-1.22,1.56]){cylinder(.79,.14,wood,x,y,0);cylinder(.69,.03,brass,x,y+(y<0?.09:-.09),0)}
+  for(let i=0;i<4;i++){const a=Math.PI/4+i*Math.PI/2;cylinder(.035,2.64,brass,x+Math.cos(a)*.66,.17,Math.sin(a)*.66)}
+  lathe([[.5,0],[.57,.18],[.5,.63],[.15,1.12],[.055,1.27],[.15,1.42],[.5,1.91],[.57,2.36],[.5,2.54]],crystal,x,-1.09,0);
+  cylinder(.44,.12,sand,x,-1.02,0);mesh(new THREE.ConeGeometry(.44,.51,48),sand,x,-.76,0);cylinder(.015,.87,sand,x,-.12,0);
+  lathe([[0,0],[.22,0],[.47,.38],[0,.38]],sand,x,.71,0);
+ }else if(slug==='ref-ref-ref'){
+  const face=mat(0xeee8db,.72);const ink=mat(0x292d2e,.65);const red=mat(0x9c493b,.45);
+  const body=cylinder(1.27,.32,steel,0,.2,0);body.rotation.x=Math.PI/2;const dial=cylinder(1.13,.025,face,0,.2,.175);dial.rotation.x=Math.PI/2;ring(1.19,.045,steel,0,.2,.2);
+  for(let i=0;i<60;i++){const a=i*Math.PI/30;const mark=box(i%5===0?.025:.012,i%5===0?.16:.07,.01,ink,Math.sin(a)*.99,.2+Math.cos(a)*.99,.195,.002);mark.rotation.z=-a}
+  const hand=box(.025,1.07,.015,red,.26,.52,.218,.004);hand.rotation.z=-.68;const short=box(.05,.61,.018,ink,-.18,.36,.225,.008);short.rotation.z=.86;
+  const hub=cylinder(.07,.026,steel,0,.2,.24);hub.rotation.x=Math.PI/2;box(.35,.17,.23,steel,0,1.61,0);cylinder(.18,.24,steel,0,1.83,0);
+  const loop=ring(.31,.035,steel,0,1.76,-.12);box(.22,.16,.19,rubber,.89,1.25,0);
+  root.children.forEach(o=>{o.position.y-=.26});
+  tube([[-.55,-1.14,-.05],[-1.18,-1.28,.4],[-1.85,-1.27,.65],[-2.08,-1.25,.1],[-1.5,-1.28,-.3],[-.8,-1.22,-.1]],.035,leather);
+ }else if(slug==='yemekolay'){
   const pasta=mat(0xffffff,.77,0,{map:texture('grain','#c99440')});const tomato=mat(0xb82b14,.46,0,{clearcoat:.25});const green=mat(0x42642c,.5,0,{side:THREE.DoubleSide});
   lathe([[0,0],[.9,0],[1.15,.05],[1.6,.2],[1.78,.28],[1.84,.31],[1.86,.27],[1.75,.22],[1.3,-.06],[.75,-.12],[0,-.12]],ceramic,0,-1.2,0);
   const noodle=new THREE.LatheGeometry([[.07,-.23],[.12,-.23],[.12,.23],[.07,.23],[.07,-.23]].map(([x,y])=>new THREE.Vector2(x,y)),20);
@@ -72,10 +110,15 @@ export function makeRealisticProduct(slug:string) {
   box(2.36,1.42,.035,mat(0x607579,.5,.4),.12,.6,.05,.08);box(.36,.3,.02,brass,-.55,.9,.08,.04);for(let i=0;i<4;i++)box(.18,.026,.015,paper,-.5+i*.36,-.03,.082,.003);
   for(let i=0;i<6;i++){cylinder(.38,.065,brass,1.6,-1.2+i*.068,.55);const r=ring(.31,.009,steel,1.6,-1.165+i*.068,.55);r.rotation.x=Math.PI/2}
  }else if(slug==='usenme-yap'||slug==='sancta'){
-  book();if(slug==='usenme-yap'){
+  book(0,0,slug==='sancta');if(slug==='usenme-yap'){
    box(2.42,.015,3.1,paper,0,-.547,0);for(let i=0;i<6;i++){box(1.5,.007,.014,mat(0x8c8982,.8),.2,-.535,-1.05+i*.37);box(.15,.007,.15,mat(0xa5ad9a,.8),-.9,-.534,-1.05+i*.37)}
    const pen=cylinder(.06,2.5,steel,1.65,-.95,0);pen.rotation.x=Math.PI/2;const tip=mesh(new THREE.ConeGeometry(.06,.24,24),brass,1.65,-.95,1.36);tip.rotation.x=Math.PI/2;
-  }else{const bookmark=box(.23,.012,.75,mat(0x6e2528,.8),.67,-.55,1.7);}
+  }else{
+   box(.23,.012,.75,mat(0x6e2528,.8),.67,-.78,1.7);
+   for(const x of[-1.2,1.2])for(let i=0;i<33;i++)box(.018,.009,.027,brass,x,-.554,-1.48+i*.091,.002);
+   for(const z of[-1.48,1.48])for(let i=0;i<27;i++)box(.027,.009,.018,brass,-1.17+i*.09,-.554,z,.002);
+   for(const z of[-1.16,-.65,.65,1.16])box(.025,.39,.07,leather,-1.325,-.83,z,.015);
+  }
  }else if(slug==='tartarot'){
   const face=mat(0xffffff,.9,0,{map:texture('card','#243131')});
   for(let i=0;i<3;i++){const card=box(1.5,2.7,.04,paper,(i-1)*1.13,.15,-Math.abs(i-1)*.15,.03);card.rotation.z=(i-1)*-.14;const image=mesh(new THREE.PlaneGeometry(1.43,2.63),face,(i-1)*1.13,.15,.023-Math.abs(i-1)*.15);image.rotation.z=(i-1)*-.14}
@@ -85,6 +128,7 @@ export function makeRealisticProduct(slug:string) {
  }else if(slug==='melodymap'){
   box(3.8,.42,3,wood,0,-1.01,0,.08);box(3.6,.06,2.8,rubber,0,-.77,0);cylinder(1.24,.07,rubber,-.3,-.7,0);for(let i=0;i<45;i++){const r=ring(.35+i*.019,.003,mat(0x28282a,.4,.15),-.3,-.66,0);r.rotation.x=Math.PI/2}cylinder(.35,.015,paper,-.3,-.646,0);cylinder(.045,.13,steel,-.3,-.59,0);tube([[1.35,-.7,-.9],[1.35,-.38,-.9],[.95,-.35,.3],[.5,-.42,.8]],.035,steel);box(.18,.08,.25,rubber,.5,-.43,.8,.025);cylinder(.11,.05,steel,-1.5,-.7,1.1);
  }
- if(['kedilik','melodymap','sancta','usenme-yap'].includes(slug))root.position.y=-.13;
+ if(['kedilik','melodymap'].includes(slug))root.position.y=-.13;
+ if(['sancta','usenme-yap'].includes(slug))root.position.y=-.235;
  return {root,dispose:()=>{textures.forEach(t=>t.dispose());materials.forEach(m=>m.dispose())},tick:()=>{}};
 }
