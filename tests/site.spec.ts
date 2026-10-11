@@ -137,8 +137,9 @@ test("every product is selectable in the cinematic showcase", async ({ page }) =
     await page.locator(".work-index-grid").getByRole("button", { name: new RegExp(app.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) }).click();
     await expect(page.locator(".work-caption h2")).toHaveText(app.name);
     await expect(page.locator(".work-actions a")).toHaveAttribute("href", `/apps/${app.slug}`);
-    await expect(page.locator(`.product-world[data-world="${app.slug}"]`)).toHaveAttribute("data-rendered","true");
-    await expect(page.locator(".product-world canvas")).toHaveCount(1);
+    await expect(page.locator(`.product-artwork[data-world="${app.slug}"]`)).toBeVisible();
+    await expect.poll(()=>page.locator(".product-artwork img").evaluateAll(images=>images.every(image=>(image as HTMLImageElement).complete&&(image as HTMLImageElement).naturalWidth>0))).toBe(true);
+    await expect(page.locator(".product-artwork img").first()).toBeVisible();
     await page.screenshot({ path: `../../outputs/world-${app.slug}.png`, animations: "disabled" });
     await expect(page.locator(".world-fallback")).toHaveCount(0);
   }
@@ -168,7 +169,7 @@ test("product information remains usable without WebGL", async ({ page }) => {
     } as typeof original;
   });
   await page.goto("/#story-retro-snake");
-  await expect(page.locator(".world-fallback img")).toBeVisible();
+  await expect(page.locator(".artwork-identity img")).toBeVisible();
   await expect(page.locator(".work-stage canvas")).toHaveCount(0);
   await expect(page.locator(".work-caption h2")).toHaveText("Retro Snake");
   await expect(page.locator(".work-actions a")).toHaveAttribute("href", "/apps/retro-snake");

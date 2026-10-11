@@ -6,7 +6,7 @@ for (const [width,height,theme,lang] of [[320,740,'dark','tr'],[390,844,'dark','
  await page.emulateMedia({reducedMotion:'reduce'});
  await page.addInitScript(({theme,lang})=>{localStorage.setItem('saybir-theme',theme);localStorage.setItem('saybir-lang',lang);},{theme,lang});
  await page.goto('/#story-hushloom');
- await expect(page.locator('.product-world')).toHaveAttribute('data-rendered','true');
+ await expect(page.locator('.product-artwork')).toBeVisible();
  await page.locator('.work-stage').screenshot({path:`../../outputs/world-layout-${width}.png`});
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  await expect(page.locator('.work-actions a')).toBeVisible();
@@ -27,22 +27,22 @@ for(const width of [390,1440]) test(`opening product showcase ${width}`,async({p
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
 
-test('scroll changes the product camera and pause keeps it still',async({page})=>{
+test('scroll moves the artwork and pause keeps it still',async({page})=>{
  await page.setViewportSize({width:1440,height:900});
  await page.goto('/#story-kedilik');
  const scene=page.locator('.work-stage');
- await expect(page.locator('.product-world')).toHaveAttribute('data-rendered','true');
+ await expect(page.locator('.product-artwork')).toBeVisible();
  await page.waitForTimeout(1400);
- const canvas=page.locator('.product-world canvas');
- const before=await canvas.screenshot();
+ const canvas=page.locator('.artwork-composition');
+ const before=await canvas.evaluate(el=>getComputedStyle(el).transform);
  await page.evaluate(()=>{const el=document.querySelector<HTMLElement>('.work-theatre')!;scrollTo({top:scrollY+el.getBoundingClientRect().top+(el.offsetHeight-innerHeight)*.8,behavior:'instant'})});
  await page.waitForTimeout(150);
- expect((await canvas.screenshot()).equals(before)).toBe(false);
+ expect(await canvas.evaluate(el=>getComputedStyle(el).transform)).not.toBe(before);
  expect(await scene.evaluate(el=>Math.abs(el.getBoundingClientRect().top))).toBeLessThan(2);
  await page.getByRole('button',{name:'Hareketi durdur',exact:true}).click();
  await page.waitForTimeout(100);
- const paused=await canvas.screenshot();
+ const paused=await canvas.evaluate(el=>getComputedStyle(el).transform);
  await page.mouse.wheel(0,-150);
  await page.waitForTimeout(250);
- expect((await canvas.screenshot()).equals(paused)).toBe(true);
+ expect(await canvas.evaluate(el=>getComputedStyle(el).transform)).toBe(paused);
 });

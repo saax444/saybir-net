@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
+import ProductArtwork from "./ProductArtwork";
 import Image from "next/image";
 import Text from "./Text";
 import { apps } from "@/data/apps";
@@ -10,7 +10,7 @@ import screens from "@/data/product-screens.json";
 import { useSitePreferences } from "./SitePreferences";
 import "./Applications.css";
 
-const ProductWorld=dynamic(()=>import("./ProductWorld"),{ssr:false});
+
 export default function Applications(){
  const{lang}=useSitePreferences();const tr=lang==="tr";
  const[active,setActive]=useState(apps.findIndex(a=>a.slug==="velomate")),[indexOpen,setIndexOpen]=useState(false),[paused,setPaused]=useState(false),[showScreens,setShowScreens]=useState(false);
@@ -34,10 +34,10 @@ export default function Applications(){
  return <section className="work-theatre" id="uygulamalar" ref={section} aria-label={tr?"Uygulama deneyimleri":"App experiences"}>
   <div className="work-stage" data-paused={paused}>
    <div className="work-scene" key={`scene-${app.slug}`}>
-    {ready?<ProductWorld slug={app.slug} paused={paused||indexOpen||showScreens}/>:<div className="world-loading"><Image src={app.image} alt="" width={120} height={120}/></div>}
+    {ready?<ProductArtwork slug={app.slug} paused={paused||indexOpen||showScreens}/>:<div className="world-loading"><Image src={app.image} alt="" width={120} height={120}/></div>}
    </div>
    <div className="work-vignette" aria-hidden="true"/>
-   <div className="work-edition" aria-hidden="true"><span>{tr?"DİJİTAL OBJELER":"DIGITAL OBJECTS"}</span><b>{String(active+1).padStart(2,"0")}</b><span>SAYBIR STUDIO</span></div>
+   <div className="work-edition" aria-hidden="true"><span>{tr?"UYGULAMALAR":"APPLICATIONS"}</span><b>{String(active+1).padStart(2,"0")}</b><span>SAYBIR STUDIO</span></div>
    <header className="work-toolbar"><span>02 / {tr?"ÜRÜN DÜNYALARI":"PRODUCT WORLDS"}</span><div><button type="button" onClick={()=>setPaused(!paused)} aria-pressed={paused}>{paused?(tr?"Hareketi başlat":"Play motion"):(tr?"Hareketi durdur":"Pause motion")}</button><button ref={indexButton} type="button" aria-expanded={indexOpen} aria-controls="work-index" onClick={()=>setIndexOpen(!indexOpen)}>{tr?"Tüm uygulamalar":"All apps"} <b>{indexOpen?"−":"+"}</b></button></div></header>
    <div className="work-selector"><button type="button" onClick={()=>choose(active-1)} aria-label={tr?"Önceki uygulama":"Previous app"}>←</button><span>{String(active+1).padStart(2,"0")} <i>/ {apps.length}</i></span><button type="button" onClick={()=>choose(active+1)} aria-label={tr?"Sonraki uygulama":"Next app"}>→</button></div>
    <div className="work-filmstrip" ref={filmstrip} aria-label={tr?"Ürün sahneleri":"Product scenes"}>{apps.map((a,i)=><button key={a.slug} type="button" onClick={()=>choose(i)} aria-label={a.name} aria-pressed={active===i}><Image src={a.image} alt="" width={40} height={40}/><span>{a.name}</span></button>)}</div>

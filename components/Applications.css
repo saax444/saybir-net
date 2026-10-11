@@ -14,3 +14,30 @@
 html[data-theme=light] .work-index,html[data-theme=light] .work-screens{background:#f2f1edf5;color:var(--text)}html[data-theme=light] .work-index-grid>button{border-color:var(--line)}.work-index-grid>button[aria-pressed=true]{color:var(--text);font-weight:700}
 @media(max-width:800px){.work-theatre{height:calc(max(940px,100svh) + 45svh)}.work-stage{min-height:940px;height:100svh}.work-toolbar{top:20px;left:6vw;right:6vw;font-size:8px}.work-toolbar>div{gap:10px}.work-toolbar b{margin-left:10px}.work-toolbar button{font-size:9px}.work-toolbar>span{max-width:100px;line-height:1.8}.work-edition{top:110px;left:6vw;gap:12px}.work-edition b{font-size:52px}.work-edition span{font-size:7px}.work-edition span:last-child{display:none}.product-world{inset:90px 0 auto;height:410px;mask-image:linear-gradient(0deg,transparent,#000 15%,#000 85%,transparent)}.work-vignette{background:linear-gradient(0deg,var(--bg),transparent 42%)}.work-caption{left:6vw;right:6vw;max-width:none;bottom:210px}.work-stage .work-caption h2{font-size:clamp(40px,11vw,64px);margin:13px 0 18px}.work-description p{font-size:13px;line-height:1.7;max-width:400px}.work-actions{margin-top:18px;gap:24px}.work-selector{right:6vw;bottom:123px;gap:20px}.work-selector button{width:44px;height:44px}.work-filmstrip{bottom:15px;left:6vw;right:6vw;gap:5px;padding-top:14px}.work-filmstrip button{min-width:52px;padding:6px}.work-filmstrip img{width:34px;height:34px;border-radius:9px}.work-index{inset:8px;padding:24px}.work-index-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 18px}.work-index-grid>button{padding:20px 0;gap:10px}.work-index-grid span{font-size:14px}.work-screen-strip{justify-content:flex-start;gap:15px}.work-screen-strip img{height:60svh}.work-screens{inset:8px;padding:20px}.work-screens>div:first-child>span{max-width:65%;line-height:1.7}}
 @media(prefers-reduced-motion:reduce){.work-theatre{height:auto}.work-stage{position:relative}.work-scene,.work-caption{animation:none}}
+
+/* Product photography layout: the published app artwork is the subject. */
+.work-scene{animation:artwork-reveal .85s cubic-bezier(.2,.7,.2,1) both}
+.work-vignette{background:linear-gradient(90deg,var(--bg) 5%,transparent 55%);z-index:0}
+.product-artwork{position:absolute;inset:105px 4vw 155px 43%;overflow:hidden;border:1px solid var(--line);background:color-mix(in srgb,var(--bg) 92%,rgb(var(--product-accent)));--travel:0px;--zoom:1}
+.artwork-light{position:absolute;inset:0;background:radial-gradient(ellipse at 65% 45%,rgb(var(--product-accent)/.25),transparent 70%);pointer-events:none}
+.artwork-composition{position:absolute;inset:0;transform:translateY(calc(var(--travel)*-1)) scale(var(--zoom));transform-origin:50% 45%;will-change:transform}
+.artwork-prints{position:absolute;inset:0;transform:rotate(-9deg)}
+.artwork-print{position:absolute;margin:0;width:42%;height:auto;border-radius:9px;overflow:hidden;box-shadow:0 25px 65px #0005,0 1px 0 #ffffff40;border:1px solid #ffffff26;background:#101216}
+.artwork-print img{display:block;width:100%;height:auto}
+.artwork-print--0{left:9%;top:7%;z-index:2}
+.artwork-print--1{left:56%;top:-19%;z-index:1}
+.artwork-print--2{left:56%;top:82%;z-index:1}
+.artwork-note{position:absolute;bottom:0;left:0;right:0;padding:22px 24px;display:flex;justify-content:space-between;font-size:8px;letter-spacing:.16em;color:var(--text);background:linear-gradient(0deg,var(--bg),transparent);z-index:3}
+.artwork-identity{height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px;position:relative}
+.artwork-identity img{width:clamp(140px,19vw,270px);height:auto;border-radius:23%;box-shadow:0 30px 80px #0004;z-index:1}
+.artwork-identity>span{font-size:32px;letter-spacing:-.045em;font-weight:600;z-index:1}.artwork-identity small{font-size:8px;letter-spacing:.18em;color:var(--muted);z-index:1}
+.artwork-identity-ring{position:absolute;width:85%;aspect-ratio:1;border:1px solid var(--line);border-radius:50%}.artwork-identity-ring:after{content:"";position:absolute;inset:12%;border:1px solid var(--line);border-radius:50%}
+.work-caption{max-width:36%;bottom:195px}.work-stage .work-caption h2{font-size:clamp(46px,6.1vw,92px);letter-spacing:-.06em}.work-description p{font-size:15px;color:var(--text);opacity:.78;max-width:350px}
+.work-selector{bottom:167px;right:5vw;transform:translateY(100%)}.work-filmstrip{bottom:15px;padding-top:16px}.work-edition{top:130px}.work-edition b{font-size:45px}.work-edition span:last-child{display:none}
+@keyframes artwork-reveal{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:800px){
+ .product-artwork{inset:100px 6vw auto;height:350px;border-radius:2px}.artwork-print{width:43%;border-radius:5px}.artwork-print--0{top:10%;left:8%}.artwork-print--1{top:-20%;left:56%}.artwork-print--2{top:90%;left:56%}.artwork-note{padding:17px 14px;font-size:7px}.artwork-identity{gap:13px}.artwork-identity img{width:155px}.artwork-identity>span{font-size:25px}.artwork-identity-ring{width:75%}.work-edition{display:none}.work-caption{max-width:none;bottom:205px}.work-stage .work-caption h2{font-size:clamp(38px,10vw,62px)}.work-description p{font-size:13px}.work-selector{bottom:118px;transform:none}.work-filmstrip{bottom:15px}.work-vignette{display:none}
+}
+@media(prefers-reduced-motion:reduce){.work-scene{animation:none}.artwork-composition{transform:none;will-change:auto}}
+.single-screen .artwork-print--0{width:52%;left:24%;top:7%}
+@media(max-width:800px){.single-screen .artwork-print--0{width:49%;left:25.5%;top:7%}}
