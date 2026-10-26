@@ -1,3 +1,4 @@
+import { appMetadata } from "@/data/seo";
 import PageTitle from "@/components/PageTitle";
 import Text from "@/components/Text";
 import type { Metadata } from "next";
@@ -553,8 +554,7 @@ const privacyBySlug: Record<string, PrivacyConfig> = {
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const app = getApp((await params).slug);
-  return app ? { title: `${app.name} Gizlilik Politikası — SAYBIR`, description: `${app.name} gizlilik, veri kullanımı ve kullanıcı tercihleri.` } : {};
+  return appMetadata((await params).slug, "privacy");
 }
 
 export default async function PrivacyPage({

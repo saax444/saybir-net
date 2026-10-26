@@ -1,3 +1,4 @@
+import { appMetadata } from "@/data/seo";
 import PageTitle from "@/components/PageTitle";
 import Text from "@/components/Text";
 import type { Metadata } from "next";
@@ -6,10 +7,7 @@ import BrandLogo from "@/components/BrandLogo";
 import { PreferenceControls } from "@/components/SitePreferences";
 import styles from "../../[slug]/app-page.module.css";
 
-export const metadata: Metadata = {
-  title: "Hushloom Destek — saybir.net",
-  description: "Hushloom teknik destek ve yardım sayfası.",
-};
+export const metadata = appMetadata("hushloom", "support");
 
 export default function HushloomSupportPage() {
   return (

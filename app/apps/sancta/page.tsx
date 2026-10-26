@@ -1,10 +1,11 @@
+import { appMetadata } from "@/data/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
 import Text from "@/components/Text";
 import { PreferenceControls } from "@/components/SitePreferences";
 import styles from "../[slug]/app-page.module.css";
-export const metadata: Metadata = {title: "Sancta — SAYBIR", description: "Sancta: prayer and reflection for iPhone and iPad. In development.", alternates: {canonical: "/apps/sancta"}};
+export const metadata = appMetadata("sancta");
 export default function Page() {
  return <div className={styles.page}>
   <nav className={styles.nav}><div className={styles.navInner}><BrandLogo/><PreferenceControls/><Link className={styles.back} href="/#koleksiyon"><Text>← Tüm uygulamalar</Text></Link></div></nav>

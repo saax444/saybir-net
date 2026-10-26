@@ -1,3 +1,4 @@
+import { appMetadata } from "@/data/seo";
 import PageTitle from "@/components/PageTitle";
 import Text from "@/components/Text";
 import type { Metadata } from "next";
@@ -191,8 +192,7 @@ const supportBySlug: Record<string, SupportConfig> = {
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const app = getApp((await params).slug);
-  return app ? { title: `${app.name} Destek — SAYBIR`, description: `${app.name} teknik destek, yardım ve iletişim sayfası.` } : {};
+  return appMetadata((await params).slug, "support");
 }
 
 export default async function SupportPage({

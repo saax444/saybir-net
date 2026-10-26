@@ -1,3 +1,4 @@
+import { appMetadata } from "@/data/seo";
 import RetroSnakeLegal from "@/components/RetroSnakeLegal";
-export const metadata = { title: "Retro Snake · Gizlilik Politikası" };
+export const metadata = appMetadata("retro-snake", "privacy");
 export default function Page() { return <RetroSnakeLegal documentID="privacy" />; }

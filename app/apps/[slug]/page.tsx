@@ -1,3 +1,4 @@
+import { appMetadata } from "@/data/seo";
 import ProductGallery from "@/components/ProductGallery";
 import PageTitle from "@/components/PageTitle";
 import Text from "@/components/Text";
@@ -12,8 +13,7 @@ import styles from "./app-page.module.css";
 export function generateStaticParams() { return apps.map((app) => ({ slug: app.slug })); }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const app = getApp((await params).slug);
-  return app ? { title: `${app.name} — SAYBIR`, description: app.description } : {};
+  return appMetadata((await params).slug);
 }
 
 export default async function AppPage({ params }: { params: Promise<{ slug: string }> }) {

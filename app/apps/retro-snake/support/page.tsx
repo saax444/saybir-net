@@ -1,10 +1,11 @@
+import { appMetadata } from "@/data/seo";
 import PageTitle from "@/components/PageTitle";
 import Text from "@/components/Text";
 import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
 import { PreferenceControls } from "@/components/SitePreferences";
 import styles from "../../[slug]/app-page.module.css";
-export const metadata = {title:"Retro Snake · Destek"};
+export const metadata = appMetadata("retro-snake", "support");
 const topics = [
   ["Kontroller ve oyun kuralları", "Yılan yatay giderken başının üstüne veya altına; dikey giderken soluna veya sağına dokunarak dönün. Her yem bölüm hedefine 1 ekler. Tek yenilemeyen engel türü taştır; taşlar ve taş duvarlar turu bitirir. 11. bölümden itibaren düz duvarlar başlar, ileri bölümlerde uzar ve çoğalır. Kenara veya kendi gövdenize çarpmak da turu bitirir."],
   ["Canlar ve antrenman", "Normal oyunda çarpışma bir can götürür. En fazla 5 can bulunur. İsteğe bağlı ödüllü reklam tamamlanıp doğrulandığında canlar 5’e tamamlanır. Antrenman can tüketmez; bölüm ilerlemesi ve kalıcı ödül kazandırmaz."],
